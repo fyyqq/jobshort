@@ -1,6 +1,5 @@
-# jobshort-app
 
-## Jobshort - Online Service Marketplace
+# Jobshort - Online Service Marketplace
 
 Jobshort is a web-based application that aims to facilitate freelancers in selling their services to buyers. This application is built using HTML, CSS, JavaScript, Bootstrap, PHP, and Laravel.
 
