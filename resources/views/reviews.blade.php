@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row mx-0 mt-4">
             <div class="col-md-9 col-12 mt-3">
-                <div class="shadow-sm px-1 row mx-0 mb-3 p-3" style="background-color: #fff;">
+                <div class="shadow-sm border rounded px-1 row mx-0 mb-3 p-3">
                     <a href="{{ route('jobs', $service->slug) }}" class="text-decoration-none d-flex align-items-start justify-content-start gap-4 border-bottom pb-3">
                         <div class="rounded border" style="height: 150px; width: 200px; overflow: hidden;">
                             @foreach (explode(',', $service->image) as $key => $image)

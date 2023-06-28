@@ -212,7 +212,7 @@
                         </div>
                         <div class="px-3 position-absolute w-100" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
                             <div class="d-flex align-items-center justify-content-center gap-1" style="flex-flow: 1;">
-                                <form action="{{ route('payment') }}" method="post">
+                                <form action="{{ route('pay') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="amount" value="{{ $service->price }}">
                                     <button type="submit" class="btn btn-dark">
@@ -228,7 +228,7 @@
                                     @if ($rejectOrCompleted)
                                         <input type="hidden" id="service_id" value="{{ $service->id }}">
                                         {{-- <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button> --}}
-                                        <a href="" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
+                                        <a href="{{ route('payment', $service->slug) }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
                                         <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                                     @elseif ($pendingOrApproved)
                                         @if ($userOrder->status === 'pending')

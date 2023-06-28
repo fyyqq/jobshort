@@ -40,7 +40,7 @@ Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('cat
 Route::get('/chatify/{id}', [ChatifyController::class, 'index'])->name('chatify.user');;
 
 // Payment
-Route::post('/pay', [PaymentController::class, 'pay'])->name('payment');
+Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
 Route::get('/success', [PaymentController::class, 'success'])->name('payment_success');
 Route::get('/error', [PaymentController::class, 'error'])->name('payment_error');
 
@@ -61,6 +61,7 @@ Route::prefix('services')->group(function() {
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::get('/{slug}', [HomeController::class, 'showService'])->name('jobs');
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
+    Route::get('/payment/{slug}', [PaymentController::class, 'index'])->name('payment');
 });
 
 Route::prefix('account')->middleware(['auth'])->group(function() {
