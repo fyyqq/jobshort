@@ -82,7 +82,7 @@
         <div class="mt-4" style="height: max-content;">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
-                    <div class="py-3 px-4 border rounded-3 d-flex align-items-center justify-content-between" style="background-color: #fff;">
+                    <div class="py-3 px-4 border rounded-3 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
                                 <img src="{{ asset('images/' . $service->freelancer->image) }}" alt="" class="w-100 h-100" style="object-fit: cover">
@@ -151,7 +151,7 @@
                         </div>
                         <div class="mt-3 d-grid" style="row-gap: 6px;">
                             @foreach ($reviews as $review)
-                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border" style="background-color: #fff;">
+                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border">
                                     <div class="mx-3">
                                         <div class="rounded-circle border" style="height: 45px; width: 45px; overflow: hidden;">
                                             <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;">
@@ -205,7 +205,7 @@
                     </div>
                 </div>
                 <div class="col-5 ps-3 pe-0 d-md-flex d-none justify-content-center align-items-start position-relative">
-                    <div class="border shadow-sm rounded-3" style="height: 450px; background-color: #fff; position: sticky; top: 100px; width: 90%;">
+                    <div class="border shadow-sm rounded-3" style="height: 450px; position: sticky; top: 100px; width: 90%;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-end">
                             <h1 class="h5 mb-0 text-dark">RM {{ $service->price }}</h1>
                             <small class="text-muted ms-2">per service</small>
@@ -397,7 +397,7 @@
                         <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
                     </div>
                 </div>
-                <div class="item bg-dark d-flex align-items-center justify-content-center flex-column rounded-3 border border-primary" style="height: 290px; width: 350px; overflow: hidden; background-color: #fff;">
+                <div class="item bg-dark d-flex align-items-center justify-content-center flex-column rounded-3 border border-primary" style="height: 290px; width: 350px; overflow: hidden;">
                     <h1 class="h6 text-light">See More Product Similiar</h1>
                     <a href="" class="btn btn-sm btn-primary col-3">See More</a>
                 </div>
