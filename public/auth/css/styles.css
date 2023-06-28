@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+/* Auth */
+
+.auth-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.auth-container .img-side, 
+.auth-container .login-side {
+    width: 100%;
+    height: 100%;
+}
+
+.auth-container .img-side {
+    position: relative;
+}
+
+.auth-container .img-side a {
+    position: absolute;
+    top: 20px;
+    left: 45px;
+    font-size: 20px;
+    z-index: 999;
+}
+
+input[type="password"] , #password {
+    padding-right: 42px;
+}
+
+.auth-container .img-side .content {
+    height: 100%;
+}
+
+.auth-container .img-side img {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.auth-container .login-side .form-login {
+    height: max-content;
+    width: 32vw;
+    min-width: 400px;
+    z-index: 999;
+    background-color: #fff;
+}
+
+.fa-eye, .fa-eye-slash {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+.auth-container .login-side .form-login .content {
+    height: 30%;
+    display: grid;
+    place-items: center;
+}
+
+.auth-container .login-side .form-login .content img {
+    width: 90px;
+}
+
+.auth-container .login-side .form-login form label {
+    font-size: 13.5px;
+}
+
+.auth-container .login-side .form-login form .form-control {
+    border-radius: 5px;
+    border: 1.5px solid gainsboro;
+    height: 38px;
+    color: rgb(74, 74, 74);
+    letter-spacing: .5px;
+}
+
+.auth-container .login-side .form-login form .form-control:focus {
+    border: 1.5px solid #43a3ec;
+}
+
+.auth-container .login-side .form-login form button {
+    background-color: #43a3ec;
+    letter-spacing: .7px;
+    font-weight: 600;
+    font-size: 13.5px;
+    transition: background-color .3s ease;
+    padding: 8px 0;
+}
+
+.auth-container .login-side .form-login form button:hover {
+    background-color: #439de1;
+}
+
+@media (max-width: 850px) {
+    .auth-container .login-side {
+        position: absolute;
+        left: 0;
+    }
+    .auth-container .login-side .form-login {
+        min-width: 500px;
+    }
+    .auth-container .login-side .form-login form .form-control {
+        height: 45px;
+    }
+    .auth-container .login-side .form-login .content img {
+        width: 120px;
+    }
+
+    .auth-container .login-side .form-login form label {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    /* @media (max-width: 576px) { */
+        .auth-container .img-side a {
+            display: none;
+        }
+        .auth-container .login-side .form-login {
+            min-width: 400px;
+        }
+        .auth-container .login-side .form-login {
+            width: 100%;
+            height: 100%;
+        }
+        .auth-container .img-side {
+            overflow: hidden;
+        }
+        .auth-container .login-side .form-login .content img {
+            width: 90px;
+        }
+
+        .auth-container .login-side .form-login form label {
+            font-size: 13.5px;
+        }
+    }
+
+@media (max-width: 400px) {}

@@ -1,0 +1,66 @@
+[
+    {
+        "id": "1",
+        "name": "Home Repairs",
+        "slug": "home-repairs",
+        "about": "Assist with daily household tasks such as cleaning, laundry, ironing, and garden maintenance",
+        "icon": "fa-solid fa-house",
+        "image": "home-repair.jpg"
+    },
+    {
+        "id": "2",
+        "name": "Cleaning and Organization",
+        "slug": "cleaning-and-organization",
+        "about": "Skilled in home repairs and renovations, ready to help with painting, furniture repairs, and electrical installations.",
+        "icon": "fa-solid fa-broom",
+        "image": "cleaning.jpeg"
+    },
+    {
+        "id": "3",
+        "name": "Shopping and Delivery",
+        "slug": "shopping-and-delivery",
+        "about": "Available to help with the delivery and pickup of items, documents, or packages from various locations as requested.",
+        "icon": "fa-solid fa-truck-fast",
+        "image": "delivery.jpg"
+    },
+    {
+        "id": "4",
+        "name": "Beauty and Wellness",
+        "slug": "beauty-and-wellness",
+        "about": "Provide beauty and personal care services such as haircuts, massages, facials, and manicures/pedicures.",
+        "icon": "fa-solid fa-spa",
+        "image": "spa.jpg"
+    },
+    {
+        "id": "5",
+        "name": "Childcare Services",
+        "slug": "childcare-services",
+        "about": "Offer pickup services for children from school or extracurricular activities, along with supervision and assistance with homework.",
+        "icon": "fa-solid fa-children",
+        "image": "children.png"
+    },
+    {
+        "id": "6",
+        "name": "Food Preparation",
+        "slug": "food-preparation",
+        "about": "Provide catering or food delivery services for special events, as well as preparing healthy meals or meal prepping.",
+        "icon": "fa-solid fa-file",
+        "image": "food_preperation.jpg"
+    },
+    {
+        "id": "7",
+        "name": "Administrative Support",
+        "slug": "administrative-support",
+        "about": "Skilled in administrative tasks such as document filing, time management, writing, and content editing.",
+        "icon": "fa-solid fa-user",
+        "image": ""
+    },
+    {
+        "id": "8",
+        "name": "Healthcare Services",
+        "slug": "healthcare-services",
+        "about": "Offer companionship and care for patients in need of assistance during hospital visits, elderly care, and post-operative recovery.",
+        "icon": "fa-solid fa-user",
+        "image": "healthcare.jpg"
+    }
+]

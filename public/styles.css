@@ -1,0 +1,455 @@
+/* 
+    <md = phone view
+    md> = desktop view
+*/
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+:root {
+    --primary-color: #2891e1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Lato', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* 
+#phone-view {
+    display: none;
+    gap: 20px;
+} */
+
+#mobile-navbar {
+    z-index: 999;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+
+#mobile-navbar #apply {
+    display: none;
+}
+
+#chat {
+    position: fixed; 
+    bottom: 30px;
+    right: 25px;
+    height: 55px;
+    width: 55px;
+    background-color: var(--primary-color);
+    display: grid;
+    place-items: center;
+    z-index: 999;
+}
+
+.fa-message {
+    color: var(--primary-color);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    font-size: 14px;
+}
+
+.fa-heart.unwishlist {
+    display: none;
+}
+
+i.fa-bell {
+    cursor: pointer;
+}
+
+i.fa-heart {
+    /* color: var(--primary-color); */
+    color: red;
+    cursor: pointer;
+}
+
+i.fa-heart:hover {
+    cursor: pointer;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.owl-carousel .item {
+    height: 45px;
+    /* width: 12vw; */
+    width: max-content;
+    /* min-width: 190px; */
+    background-color: #fff;
+}
+
+.owl-carousel .owl-dots {
+    display: none;
+}
+
+/* Profile */
+
+.profile {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: max-content;
+    column-gap: 20px;
+    position: relative;
+}
+
+.profile .popup-form {
+    height: max-content;
+    z-index: 990;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    background-color: rgba(24, 24, 24, 0.699);
+    transform: translateX(-50%);
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.profile .popup-form .modal-dialog {
+    border-radius: 10px;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.profile .sidebar, .profile .profile-content {
+    height: max-content;
+}
+
+.profile .sidebar {
+    background-color: #fff;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    width: 26%;
+    position: relative;
+}
+
+.profile .sidebar .list-group .list-group-item .active {
+    color: var(--primary-color);
+}
+
+.profile .sidebar .list-group #profile-dropdown-menu {
+    margin-top: 4px;
+    height: max-content;
+}
+
+.profile  .profile-content {
+    width: 72%;
+    height: 100%;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    position: relative;
+}
+
+.row .form-control {
+    border-radius: unset;
+    border: none;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
+    letter-spacing: .2px;
+    transition: all .1s ease-in-out;
+}
+
+.profile .profile-content .form-floating #country {
+    position: relative;
+}
+
+.row .form-floating .form-control {
+    padding-top: 28px;
+}
+
+.row .form-floating textarea {
+    transform: translateY(7px);
+}
+
+.row #state option, 
+.row #city option {
+    font-size: 15px;
+}
+
+.row .suggestion-list {
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    transform: translateX(-50%);
+    background-color: white;
+    list-style: none;
+    padding-left: 0px;
+    z-index: 990;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    display: none;
+}
+
+.row .suggestion-list li {
+    padding: 8px 0px 8px 10px;
+    border-bottom: 1px solid gainsboro;
+    font-size: 14px;
+    color: #444;
+    letter-spacing: .2px;
+    cursor: pointer;
+}
+
+.row .suggestion-list li:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.row .form-control {
+    transform: translateY(3px);
+}
+
+.row .form-control:focus {
+    border-bottom: 2px solid #2891e1;
+}
+
+.profile .profile-content label {
+    font-size: 13.5px;
+}
+
+/* .profile .profile-content #profile-img { */
+.row #profile-img {
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.row .fa-xmark {
+    border: 1px solid transparent;
+    height: 25px;
+    width: 25px;
+    display: grid;
+    place-items: center;
+}
+
+.row .fa-xmark:hover {
+    border: 1px solid grey;
+    transition: border .1s ease-in;
+}
+
+.row #employer-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: .2px;
+    opacity: 0;
+}
+
+
+.sidebar .profile-picture {
+    /* position: relative; */
+    overflow: hidden;
+    /* width: 40%; */
+    /* width: 5vw;
+    height: 5vw;
+    min-width: 40px; */
+}
+
+.sidebar .profile-info {
+    width: 60%;
+}
+
+.sidebar .profile-info p {
+    font-size: 14.5px;
+    color: #333;
+}
+.sidebar .profile-info .email {
+    font-size: 14.5px;
+}
+
+.sidebar .profile-info .fa-pen-to-square {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.sidebar .list-group-item {
+    border-bottom: unset;
+    padding-bottom: 2px;
+}
+
+.sidebar .list-group-item a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #444;
+}
+
+#user_profile {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.detail-image {
+    cursor: pointer;
+}
+
+.detail-image:nth-child(4) {
+    position: relative;
+}
+
+.detail-image:nth-child(4)::after {
+    font-family: "FontAwesome";
+    content: "\f302";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(34, 34, 34, 0.559);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 25px;
+}
+
+#service-gallery-container {
+    grid-template-columns: repeat(2, 1fr); gap: 6px; overflow: hidden;
+}
+
+#gallery-img {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+}
+
+@media (max-width: 1120px) {
+    .profile .sidebar {
+        width: 27%;
+        min-width: 21%;
+    }
+    
+    .profile .profile-content {
+        width: 70%;
+        min-width: 67%;
+    }
+    .sidebar .profile-info p {
+        font-size: 13px;
+    }
+    .sidebar .profile-info .email {
+        font-size: 12px;
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 1000px) {
+    .profile .sidebar {
+        width: 30%;
+    }
+    .profile .profile-content {
+        width: 65%;
+    }
+}
+
+@media (max-width: 850px) {
+    .container-lg #side-jobs {
+        display: none;
+    }
+    .profile {
+        padding: 0;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        column-gap: unset;
+    }
+    .profile .sidebar {
+        width: 100%;
+        border-radius: unset;
+    }
+    .profile .profile-content {
+        border-radius: unset;
+        width: 100%;
+    }
+    .sidebar .profile-picture {
+        /* width: 150px;
+        height: 150px; */
+    }
+    .sidebar .profile-info {
+        width: 100%;
+        margin-left: 20px;
+    }
+    .sidebar .list-group {
+        display: flex;
+        flex-direction: row;
+    }
+    .sidebar .list-group .list-group-item {
+        padding: 12px 15px;
+    }
+    .sidebar .profile-info p {
+        font-size: 16px;
+    }
+    .sidebar .profile-info .email {
+        font-size: 12px;
+    }
+    .profile .popup-form {
+        padding: 0;
+        height: 100%;
+    }
+    .profile .popup-form .modal-dialog {
+        border-radius: 0px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: max-content;
+        border-radius: 10px;
+        background-color: #fff;
+        margin: 0px;
+    }
+    .profile .sidebar .list-group {
+        overflow-x: scroll;
+    }
+} 
+
+@media (max-width: 767px) {
+    #mobile-navbar {
+        display: grid;
+        height: 75px;
+        border-top: 1px solid gainsboro;
+    }
+    #chat {
+        display: none;
+    }
+    #user_profile {
+        width: 70px;
+        height: 70px;
+    }
+    #service-gallery-container {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* .owl-carousel .item {
+        height: 45px;
+    } */
+}
