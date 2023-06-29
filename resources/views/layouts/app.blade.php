@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="{{ asset('styles.css') }}">
         {{-- Izitoast --}}
         <link rel="stylesheet" href="{{ asset('izitoast/iziToast.min.css') }}">
+        {{-- MDB --}}
+        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet"/> --}}
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
@@ -43,6 +45,7 @@
                 @yield('content')
             </main>
             <div class="shadow-sm" id="mobile-navbar">
+                {{-- Normal Page --}}
                 <div class="row mx-0 {{ Route::currentRouteName() === 'jobs' ? 'd-none' : 'd-flex' }} align-items-center justify-content-around" id="main">
                     <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
@@ -66,6 +69,7 @@
                         @endif
                     </a>
                 </div>
+                {{-- Service Page --}}
                 <div class="row mx-0 {{ Route::currentRouteName() === 'jobs' ? 'd-flex' : 'd-none' }}" id="apply">
                     <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
                         <div class="d-flex align-items-center justify-content-center">
@@ -78,13 +82,14 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://kit.fontawesome.com/5e539df1ae.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script> --}}
         <script src="{{ asset('script.js') }}"></script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid pb-5 px-sm-5 px-0">
+    <div class="container-xl pb-5">
         <div class="my-4 ps-3">
             <h1 class="h4 text-dark">{{ $service->title }}</h1>
             <div class="d-flex align-items-center justify-content-between">
@@ -25,54 +25,63 @@
                 </div>
             </div>
         </div>
-        <div class="d-grid mt-3 rounded-3" id="service-gallery-container">
-            <div class="">
-                <div class="position-relative bg-dark d-flex align-items-center justify-content-center" style="height: 400px;">
-                    @if ($service->video != 'null')
-                        <a>
-                            <video src="{{ asset('videos/' . $service->video . '#t=5') }}" class="card-img-top"></video>
-                        </a>
-                        <div data-fancybox href="#myVideo"  class="position-absolute left-0 top-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(43, 43, 43, 0.404); cursor: pointer;">
-                            <i class="fa-solid fa-play text-light" style="font-size: 40px;"></i>
-                        </div>
-                    @else
+        <div class="d-grid mt-3 rounded-3" id="service-gallery-container" style="overflow: hidden;">
+            <div class="d-md-none d-block">
+                <div id="carouselMDExample" class="carousel slide carousel-fade">
+                    <div class="carousel-inner mb-5 bg-dark shadow-1-strong rounded-3" style="height: 300px; overflow: hidden;">
                         @foreach (explode(',', $service->image) as $key => $value)
-                            @if ($key === 0)
-                                <a href="{{ asset('images/' . $value) }}" class="detail-image w-100 h-100" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
-                                </a>
-                            @endif
+                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                <img src="{{ asset('images/' . $value) }}" class="d-block w-100" style="object-fit: cover;">
+                            </div>
                         @endforeach
-                        {{-- <div class="d-flex align-items-center justify-content-between flex-column">
-                            <i class="fa-solid fa-play text-light" style="font-size: 22px;"></i>
-                            <small class="mb-0 text-light mt-3">User Doesn't Post Video</small>
-                        </div> --}}
-                    @endif
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselMDExample"
+                      data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselMDExample"
+                      data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                    <div class="carousel-indicators" style="margin-bottom: -20px;">
+                        @foreach (explode(',', $service->image) as $key => $value)
+                            <button type="button" class="{{ $key === 0 ? 'active' : '' }}" data-bs-target="#carouselMDExample" data-bs-slide-to="{{ $key }}" style="width: 100px;">
+                                <img class="d-block w-100 shadow-1-strong rounded img-fluid" src="{{ asset('images/'. $value) }}" style="height: 50px; object-fit: cover;">
+                            </button>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-            <div class="" style="height: {{ $service->video != 'null' ? 'auto' : '400px'; }};">
-                <div class="d-md-grid d-none {{ $service->video != 'null' ? '' : 'h-100 w-100'; }}" id="gallery-img">
+            <div class="d-md-block d-none">
+                <div class="position-relative bg-dark d-flex align-items-center justify-content-center" style="height: 400px;">
+                    @foreach (explode(',', $service->image) as $key => $value)
+                        @if ($key === 0)
+                            <a href="{{ asset('images/' . $value) }}" class="w-100 detail-image" style="height: auto; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
+                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            <div class="" style="height 400px;">
+                <div class="d-md-grid d-none h-100 w-100" id="gallery-img">
                     {{-- Display --}}
                     @foreach (explode(',', $service->image) as $key => $value)
-                        @if ($service->video != 'null')
-                            @if ($key < 4)
-                                <a href="{{ asset('images/' . $value) }}" class="detail-image" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
-                                </a>
-                            @endif
-                        @else
-                            @if ($key >= 1 && $key < 4)
-                                <a href="{{ asset('images/' . $value) }}" class="detail-image" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
-                                </a>
-                            @endif
+                        @if ($key >= 1 && $key < 5)
+                            <a href="{{ asset('images/' . $value) }}" class="detail-image" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
+                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
+                            </a>
                         @endif
                     @endforeach
                 </div>
                 <div class="d-none">
                     {{-- All Images --}}
                     @foreach (explode(',', $service->image) as $key => $value)
-                        @if ($key > 3)
+                        @if ($key > 4)
                             <a href="{{ asset('images/' . $value) }}" class="fancybox detail-image" data-fancybox="gallery"></a>
                         @endif
                     @endforeach

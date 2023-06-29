@@ -1,5 +1,4 @@
 console.log("%c" + "Jobshort", "color: #2891e1; font-size: 60px; font-weight: bold;");
-console.log('A Place To Help Your Work On Everywhere And Anytime');
 
 $('.owl-carousel').owlCarousel({
     margin: 10,
@@ -28,7 +27,6 @@ $(document).ready(function() {
 
     $(".fancybox").fancybox();
     
-    // Inisialisasi tombol prev dan next
     $(".fancybox-prev").click(function() {
         $.fancybox.prev();
     });
@@ -36,9 +34,10 @@ $(document).ready(function() {
     $(".fancybox-next").click(function() {
         $.fancybox.next();
     });
-      
 });
 
+
+  
 
 function jobSearch() {
     const keyword = document.getElementById('searchbar').value;
