@@ -30,21 +30,25 @@
                 <div id="carouselMDExample" class="carousel slide carousel-fade">
                     <div class="carousel-inner mb-5 bg-dark shadow-1-strong rounded-3" style="height: 300px; overflow: hidden;">
                         @foreach (explode(',', $service->image) as $key => $value)
-                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" data-fancybox="gallery-phone" data-src="{{ asset('images/' . $value) }}">
                                 <img src="{{ asset('images/' . $value) }}" class="d-block w-100" style="object-fit: cover;">
                             </div>
+                        @endforeach
+                    </div>
+                    <div class="d-none">
+                        {{-- All Images --}}
+                        @foreach (explode(',', $service->image) as $key => $value)
+                            @if ($key > 4)
+                                <a href="{{ asset('images/' . $value) }}" class="fancybox detail-image" data-fancybox="gallery-phonne"></a>
+                            @endif
                         @endforeach
                     </div>
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselMDExample"
                       data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselMDExample"
                       data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
                     </button>
 
                     <div class="carousel-indicators" style="margin-bottom: -20px;">
