@@ -55,8 +55,13 @@ a:hover {
     z-index: 999;
 }
 
+.fa-ellipsis-vertical {
+    cursor: pointer;
+}
+
 .fa-message {
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,

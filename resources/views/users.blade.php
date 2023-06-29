@@ -3,31 +3,40 @@
 @section('content')
     <div class="container-lg">
         <div class="row d-flex align-items-start justify-content-between flex-md-row flex-column" style="height: max-content">
-            <div class="col-md-4 col-12 rounded-3 shadow-sm px-4 py-4 border" style="background-color: #fff; position: sticky; top: 90px;">
-                <div class="pb-4 pt-3 d-flex align-items-center justify-content-center flex-column border-bottom">
-                    <div class="d-flex align-items-center justify-content-center flex-column">
-                        <div class="rounded-circle" style="height: 100px; width: 100px; overflow: hidden;">
-                            <img src="{{ asset('images/6464bec7bc92d.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
+            <div class="col-md-4 col-12 rounded-3 shadow-md px-4 pb-4 border-bottom">
+                <div class="border-bottom py-4 d-flex align-items-center justify-content-start">
+                    <div class="w-100 d-flex align-items-center justify-content-start gap-4 position-relative">
+                        <div class="rounded-3" style="height: 80px; width: 80px; overflow: hidden;">
+                            <img src="{{ asset('images/' . $freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
                         </div>
-                        <div class="mt-2 text-center">
-                            <p class="mb-0 text-dark">{{ $data->name }}</p>
-                            <small class="text-muted">{{ $data->user->roles === 2 ? 'Employer' : '' }}</small>
+                        <div class="">
+                            <p class="fw-bold text-dark mb-0">{{ $freelancer->name }}</p>
+                            <small class="text-muted" style="font-size: 14px;">{{ $freelancer->user->email }}</small>
+                            {{-- <a href="mailto:{{ $freelancer->user->email }}" class="text-muted text-decoration-none" style="font-size: 13.5px;">{{ $freelancer->user->email }}</a> --}}
+                        </div>
+                        <div class="dropdown position-absolute" style="top: 0px; right: 0px;">
+                            <i class="fa-solid fa-ellipsis-vertical p-1" data-bs-toggle="dropdown"></i>
+                            <div class="dropdown-menu dropdown-menu-start p-0">
+                                <li class="dropdown-item py-2">
+                                    <div class="d-flex align-items-center justify-content-start gap-3">
+                                        <input type="hidden" id="user_id" value="{{ Auth::id() }}">
+                                        <input type="hidden" id="freelancer_id" value="{{ $freelancer->id }}">
+                                        <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px;"></i>
+                                        <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
+                                        <small class="text-muted">Notification</small>
+                                    </div>
+                                </li>
+                                <li class="dropdown-item py-2">
+                                    <div class="d-flex align-items-center justify-content-start gap-3">
+                                        <i class="fa-regular fa-message text-dark"></i>
+                                        <small class="text-muted">Message</small>
+                                    </div>
+                                </li>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-4 pb-2">
-                    <div class="row mt-4 mx-0 d-flex align-items-center justify-content-start">
-                        <div class="col-2">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                        </div>
-                        <div class="col-10">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ Str::ucfirst($data->employer_type) }}</small>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row mt-4 mx-0 d-flex align-items-center justify-content-start">
                         <div class="col-2">
                             <div class="d-flex align-items-center justify-content-center">
@@ -36,7 +45,31 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ count($data->job) }} Jobs</small>
+                                <small class="text-muted">{{ count($freelancer->service) }} Services</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 mx-0 d-flex align-items-center justify-content-start">
+                        <div class="col-2">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <small class="text-muted">4.0 Stars</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 mx-0 d-flex align-items-center justify-content-start">
+                        <div class="col-2">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <small class="text-muted">{{ $freelancer->country }}</small>
                             </div>
                         </div>
                     </div>
@@ -48,67 +81,65 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">Joined at {{ $data->created_at->diffForHumans() }}</small>
+                                <small class="text-muted">Joined in {{ $freelancer->created_at->format('d M Y') }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 col-12 px-4 pt-0 pb-4 px-0">
+            <div class="col-md-8 col-12 px-4 pt-0 pb-4 px-0 border-md-top border-none">
                 <div class="row mx-0 d-flex align-items-center justify-content-center flex-column">
-                    <div class="col-4 w-100 border mb-md-3 mb-0" style="background-color: #fff; height: max-content;">
+                    <div class="col-4 w-100 border-bottom mb-md-3 mb-0" style=" height: max-content;">
                         <div class="px-3 py-4">
-                            <h1 class="h5 text-dark fw-bold">About Me</h1>
-                            <div class="mt-4 row mx-0">
-                                <div class="mb-3 d-flex align-items-center justify-content-start col-6" style="column-gap: 20px;">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <p class="text-muted mb-0">{{ $data->country }}</p>
-                                </div>
-                                <div class="mb-3 d-flex align-items-center justify-content-start col-6" style="column-gap: 20px;">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <p class="text-muted mb-0">{{ $data->city . ' , ' . $data->state }}</p>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center col-6" style="column-gap: 20px;">
-                                    <i class="fa-solid fa-map-pin"></i>
-                                    <p class="text-muted mb-0">{{ $data->address }}</p>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <small class="text-muted">{{ $data->about ?? 'No About Me Yet.' }}</small>
+                            <h1 class="h4 text-dark fw-bold">About {{ $freelancer->name }}</h1>
+                            <div class="mt-3">
+                                <small class="text-muted">{{ $freelancer->about ?? 'No About Me Yet.' }}</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-8 w-100 px-0" style="height: max-content;">
-                        <div class="d-flex align-items-center justify-content-start border py-3" style="background-color: #fff;">
+                        <div class="d-none align-items-center justify-content-start border py-3" style="">
                             <ul class="navbar-nav d-flex flex-row">
                                 <li class="px-4 border-end" style="cursor: pointer;">All</li>
                                 <li class="px-4" style="cursor: pointer;">Ratings</li>
                             </ul>
                         </div>
                         <div class="py-3">
-                            <div class="row mx-0 d-flex justify-content-center align-items-center" style="row-gap: 15px;">
-                                @foreach ($data->job as $job)
-                                    <div class="col-12">
-                                        <a href="{{ route('jobs', $job->slug) }}" class="text-decoration-none position-relative d-block border rounded-3 py-3 px-3 " style="height: max-content; background-color:#fff; cursor: pointer;">
-                                            <div class="d-flex align-items-center pe-5 w-100 justify-content-between">
-                                                <h1 class="h6 mb-1 fw-bold text-dark" style="font-size: 17px;">{{ Str::limit($job->title, 55) }}</h1>
-                                                <i class="{{ (Auth::check() && count(auth()->user()->wishlist->where('id', $job->id)) == 1) ? 'fa-solid' : 'fa-regular' }} fa-heart position-absolute" style="top: 15px; right: 20px; font-size: 16px;"></i>
-                                                <input type="hidden" name="" value="{{ $job->slug }}">
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-start mb-0" style="column-gap: 8px;">
-                                                <p class="text-muted mb-0">{{ $data->name }}</p>
-                                            </div>
-                                            <p class="text-muted mb-2">{{ $data->city .' , '. $data->state }}</p>
-                                            <div class="d-flex align-items-center justify-content-start mb-3" style="column-gap: 5px;">
-                                                <span class="badge rounded-1 text-muted border px-2">RM {{ $job->salary }}</span>
-                                                <span class="badge rounded-1 text-muted border px-2">{{ $job->type }}</span>
-                                                <span class="badge rounded-1 text-muted border px-2">{{ $job->category }}</span>
-                                            </div>
-                                            <div class="">
-                                                <small class="text-muted">{{ Str::limit($job->description, 150) }}</small>
-                                            </div>
-                                            <div class="w-100 text-end">
-                                                <small class="text-muted text-end" style="font-size: 13px;">Posted {{ $job->created_at->diffForHumans() }}</small>
+                            <div class="row mx-0 d-flex justify-content-start align-items-center" style="row-gap: 10px;">
+                                @foreach ($freelancer->service as $service)
+                                    <div class="col-sm-6 col-12 px-sm-3">
+                                        <a href="{{ route('jobs', $service->slug) }}" class="text-decoration-none">
+                                            <div class="d-flex align-items-center justify-content-center flex-column">
+                                                <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                                    @foreach (explode(',', $service->image) as $key => $image)
+                                                        @if ($key === 0)
+                                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                        @endif
+                                                    @endforeach
+                                                    @if (!auth()->check())
+                                                        <a href="{{ route('login') }}" class="text-decoration-none">
+                                                            <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                        </a>
+                                                    @else
+                                                        <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                        <input type="hidden" value="{{ $service->id }}">
+                                                        <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                    @endif
+                                                </div>
+                                                <div class="p-2 w-100">
+                                                    <div class="d-flex align-items-start justify-content-between">
+                                                        <p class="mb-0 text-dark" style="width: 95%;">{{ Str::limit($service->title, 15) }}</p>
+                                                        <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
+                                                            <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
+                                                            <small class="me-2 text-dark" style="font-size: 13.5px;">4.5</small>
+                                                        </div>
+                                                    </div>
+                                                    <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
+                                                    <div class="mt-2 d-flex">
+                                                        <small class="mb-0 text-dark">{{ 'RM' . $service->price }}</small>
+                                                        <small class="mb-0 ms-1 text-muted">per service</small>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </a>
                                     </div>

@@ -42,17 +42,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function jobs(Request $request, string $slug) 
-    {
-        if ($request->ajax()) {
-            return view('detail-job', [
-                // "data" => Job::where('slug', $slug)->first()
-            ]);
-        }
-
-        return redirect()->route('home');
-    }
-
     public function login()
     {
         return view('homepage');

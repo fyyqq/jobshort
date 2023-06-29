@@ -31,7 +31,7 @@ Auth::routes();
 // Chatify::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/users/{name:employer}', [ProfileController::class, 'user'])->name('users');
+Route::get('/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
 Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
 Route::get('/{slug}', [HomeController::class, 'jobs']);
 Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');

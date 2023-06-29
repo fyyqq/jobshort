@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\Employee;
 use App\Models\Application;
 use App\Models\Employer;
+use App\Models\Freelancer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-
-use function PHPUnit\Framework\fileExists;
 
 class ProfileController extends Controller
 {
@@ -26,7 +23,7 @@ class ProfileController extends Controller
 
     public function user(string $name) {
         return view('users', [
-            // 'data' => Employer::where('name', $name)->first()
+            'freelancer' => Freelancer::where('name', $name)->first()
         ]);
     }
 

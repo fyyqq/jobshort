@@ -11,7 +11,7 @@
         </a>
         @if (Route::currentRouteName() != 'home')
             <a class="navbar-brand d-md-none d-block py-2 px-3" style="cursor: pointer;" onclick="return goToPreviousPage()">
-                <i class="fa-solid fa-chevron-left text-muted"></i>
+                <i class="fa-solid fa-chevron-left text-muted" style="font-size: 16.5px;"></i>
             </a>
         @else
             <a class="navbar-brand d-md-none d-block" href="{{ route('home') }}">
@@ -46,17 +46,17 @@
                         </li>
                     @endif
                 @endguest
+                <li class="nav-item dropdown d-flex align-items-center">
+                    <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
+                        <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
+                        @if (count(auth()->user()->notification) > 0)
+                            <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -8px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification) }}</span>
+                        @endif
+                    </a>
+                </li>
             </ul>
         </div>
-        <div class="d-flex align-items-center justify-content-center gap-4">
-            <li class="nav-item dropdown d-flex align-items-center">
-                <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
-                    <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
-                    @if (count(auth()->user()->notification) > 0)
-                        <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -8px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification) }}</span>
-                    @endif
-                </a>
-            </li>
+        <div class="d-flex align-items-center justify-content-center ms-4">
             <li class="nav-item dropdown d-flex align-items-center">
                 <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 42px; width: 42px;">
                     <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;">

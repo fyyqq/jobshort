@@ -300,8 +300,8 @@
                 <div class="d-flex align-items-center justify-content-center">
                     <i class="fa-solid fa-comment text-muted" style="font-size: 18px;"></i>
                 </div>
-                <div class="d-flex align-items-end jusitfy-content-center gap-3">
-                    <p class="mb-0 text-dark">{{ 'RM' . $service->price }}</p>
+                <div class="d-flex align-items-center jusitfy-content-center gap-3">
+                    <h1 class="h5 mb-0 text-dark">{{ 'RM' . $service->price }}</h1>
                     <button type="button" class="w-100 btn text-light px-4" style="background-color: #2891e1;" data-bs-toggle="modal" data-bs-target="#orderModal">Order</button>
                 </div>
             </div>
