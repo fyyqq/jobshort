@@ -36,8 +36,9 @@ $(document).ready(function() {
     });
 });
 
-
-  
+function goToPreviousPage() {
+    window.history.back();
+}
 
 function jobSearch() {
     const keyword = document.getElementById('searchbar').value;

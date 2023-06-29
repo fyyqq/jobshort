@@ -44,9 +44,9 @@
             <main class="pb-5" style="margin-top: 100px;">
                 @yield('content')
             </main>
-            <div class="shadow-sm" id="mobile-navbar">
-                {{-- Normal Page --}}
-                <div class="row mx-0 {{ Route::currentRouteName() === 'jobs' ? 'd-none' : 'd-flex' }} align-items-center justify-content-around" id="main">
+            {{-- Mobile Navbar --}}
+            <div class="shadow-sm {{ Route::currentRouteName() != 'jobs' ? 'd-grid' : 'd-none' }} " id="mobile-navbar">
+                <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
                     <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
                     </a>
@@ -68,17 +68,6 @@
                             <i class="fa-regular fa-user text-muted" style="font-size: 19px;"></i>
                         @endif
                     </a>
-                </div>
-                {{-- Service Page --}}
-                <div class="row mx-0 {{ Route::currentRouteName() === 'jobs' ? 'd-flex' : 'd-none' }}" id="apply">
-                    <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-comment text-muted" style="font-size: 18px;"></i>
-                        </div>
-                        <div class="">
-                            <button type="button" class="w-100 btn text-light px-4" style="background-color: #2891e1;" data-bs-toggle="modal" data-bs-target="#orderModal">Order</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

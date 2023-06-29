@@ -28,13 +28,16 @@
         <div class="d-grid mt-3 rounded-3" id="service-gallery-container" style="overflow: hidden;">
             <div class="d-md-none d-block">
                 <div id="carouselMDExample" class="carousel slide carousel-fade">
-                    <div class="carousel-inner mb-5 bg-dark shadow-1-strong rounded-3" style="height: 300px; overflow: hidden;">
+                    <div class="carousel-inner bg-dark mb-4 shadow-1-strong rounded-3" id="service-img-mobile" style="overflow: hidden;">
                         @foreach (explode(',', $service->image) as $key => $value)
                             <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" data-fancybox="gallery-phone" data-src="{{ asset('images/' . $value) }}">
-                                <img src="{{ asset('images/' . $value) }}" class="d-block w-100" style="object-fit: cover;">
+                                <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                                    <img src="{{ asset('images/' . $value) }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                </div>
                             </div>
                         @endforeach
                     </div>
+                    
                     <div class="d-none">
                         {{-- All Images --}}
                         @foreach (explode(',', $service->image) as $key => $value)
@@ -46,16 +49,18 @@
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselMDExample"
                       data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Prev</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselMDExample"
-                      data-bs-slide="next">
+                    data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
 
-                    <div class="carousel-indicators" style="margin-bottom: -20px;">
+                    <div class="carousel-indicators" style="margin-bottom: -35px;">
                         @foreach (explode(',', $service->image) as $key => $value)
-                            <button type="button" class="{{ $key === 0 ? 'active' : '' }}" data-bs-target="#carouselMDExample" data-bs-slide-to="{{ $key }}" style="width: 100px;">
-                                <img class="d-block w-100 shadow-1-strong rounded img-fluid" src="{{ asset('images/'. $value) }}" style="height: 50px; object-fit: cover;">
-                            </button>
+                            <button type="button" data-bs-target="#carouselMDExample" data-bs-slide-to="{{ $key }}" class="bg-dark rounded-circle {{ $key === 0 ? 'active' : '' }}" style="height: 7px; width: 7px;"></button>
                         @endforeach
                     </div>
                 </div>
@@ -95,9 +100,9 @@
         <div class="mt-4" style="height: max-content;">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
-                    <div class="py-3 px-4 border rounded-3 d-flex align-items-center justify-content-between">
+                    <div class="py-md-3 py-2 px-md-4 px-3 border rounded-3 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
+                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-n one rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
                                 <img src="{{ asset('images/' . $service->freelancer->image) }}" alt="" class="w-100 h-100" style="object-fit: cover">
                             </a>
                             <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none">
@@ -111,11 +116,9 @@
                             <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    <div class="my-4 px-md-0 px-2">
                         <h1 class="text-dark mb-3 h5">About this</h1>
-                        <div class="ps-2 pe-4">
-                            <small class="text-muted d-block mb-2">@for ($i = 1; $i <= 5; $i++) &nbsp; @endfor {{ $service->description }}</small>
-                            <small class="text-muted d-block mb-2">@for ($i = 1; $i <= 5; $i++) &nbsp; @endfor {{ $service->description }}</small>
+                        <div class="">
                             <small class="text-muted d-block mb-2">@for ($i = 1; $i <= 5; $i++) &nbsp; @endfor {{ $service->description }}</small>
                         </div>
                     </div>
@@ -194,7 +197,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="mt-3 pt-3 {{ count($reviews) < 1 ? 'border-none' : 'border-top' }} w-100 text-center">
+                            <div class="mt-2 w-100 text-center">
                                 <a href="{{ route('reviews', $service->slug) }}" class="text-decoration-none fw-bold {{ count($reviews) < 1 ? 'd-none' : '' }}" style="color: #2891e1">See More <i class="ms-2 fa-solid fa-chevron-right" style="font-size: 14px;"></i></a>
                             </div>
                         </div>
@@ -225,13 +228,13 @@
                         </div>
                         <div class="px-3 position-absolute w-100" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
                             <div class="d-flex align-items-center justify-content-center gap-1" style="flex-flow: 1;">
-                                <form action="{{ route('pay') }}" method="post">
+                                {{-- <form action="{{ route('pay') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="amount" value="{{ $service->price }}">
-                                    <button type="submit" class="btn btn-dark">
+                                    <input type="hidden" name="amount" value="{{ $service->price }}"> --}}
+                                    <a href="{{ route('chatify') }}" class="btn btn-dark">
                                         <i class="fa-regular fa-message text-light" style="font-size: 15px;"></i>
-                                    </button>
-                                </form>
+                                    </a>
+                                {{-- </form> --}}
                                 <div class="w-100">
                                     <?php
                                         $userOrder = auth()->user()->order->where('service_id', $service->id)->sortByDesc('created_at')->first();
@@ -240,8 +243,8 @@
                                     ?>
                                     @if ($rejectOrCompleted)
                                         <input type="hidden" id="service_id" value="{{ $service->id }}">
-                                        {{-- <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button> --}}
-                                        <a href="{{ route('payment', $service->slug) }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
+                                        <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
+                                        {{-- <a href="{{ route('payment', $service->slug) }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a> --}}
                                         <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                                     @elseif ($pendingOrApproved)
                                         @if ($userOrder->status === 'pending')
@@ -261,156 +264,26 @@
                 </div>
             </div>
         </div>
-        <div class="py-4">
+        <div class="py-4 mt-4 border-top">
             <p class="mb-0 text-center text-dark">Similiar Product</p>
         </div>
         <div class="w-100">
             <div class="owl-carousel owl-theme">
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
+                @for ($i = 0; $i < 5; $i++)
+                    <div class="item rounded-3" id="similiar-product">
+                        <div class="border" style="height: 70%;">
+                            <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
                         </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
+                        <div class="border px-3 py-2" style="height: 30%;">
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
+                                <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
+                            </div>
+                            <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
                         </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
                     </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item rounded-3" style="height: 290px; width: 350px; overflow: hidden;">
-                    <div class="border" style="height: 70%;">
-                        <img src="{{ asset('images/64887eb279f0e.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="border px-3 py-2" style="height: 30%;">
-                        <div class="d-flex align-items-center justify-content-between w-100">
-                            <p class="mb-0 text-dark">Lorem, ipsum dolor</p>
-                            <i class="fa-solid fa-star" style="font-size: 13.2px"></i>
-                        </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang, Selangor</small>
-                    </div>
-                </div>
-                <div class="item bg-dark d-flex align-items-center justify-content-center flex-column rounded-3 border border-primary" style="height: 290px; width: 350px; overflow: hidden;">
+                @endfor
+                <div class="item bg-dark d-flex align-items-center justify-content-center flex-column rounded-3 border border-primary" id="similiar_product" style="height: 290px; width: 350px; overflow: hidden;">
                     <h1 class="h6 text-light">See More Product Similiar</h1>
                     <a href="" class="btn btn-sm btn-primary col-3">See More</a>
                 </div>
@@ -418,3 +291,18 @@
         </div>
     </div>
 @endsection
+    
+{{-- Mobile Navbar --}}
+<div class="shadow-sm" id="mobile-navbar">
+    <div class="row mx-0 {{ Route::currentRouteName() === 'jobs' ? 'd-flex' : 'd-none' }}" id="apply">
+        <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
+            <div class="d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-comment text-muted" style="font-size: 18px;"></i>
+            </div>
+            <div class="d-flex align-items-end jusitfy-content-center gap-3">
+                <p class="mb-0 text-dark">{{ 'RM' . $service->price }}</p>
+                <button type="button" class="w-100 btn text-light px-4" style="background-color: #2891e1;" data-bs-toggle="modal" data-bs-target="#orderModal">Order</button>
+            </div>
+        </div>
+    </div>
+</div>

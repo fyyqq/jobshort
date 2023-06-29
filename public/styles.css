@@ -346,6 +346,12 @@ input[type=number] {
     gap: 6px;
 }
 
+#similiar-product {
+    height: 290px; 
+    width: 350px; 
+    overflow: hidden;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;
@@ -446,14 +452,21 @@ input[type=number] {
         width: 70px;
         height: 70px;
     }
+    #service-img-mobile {
+        height: 320px;
+    }
     #service-gallery-container {
         grid-template-columns: 1fr;
         gap: 6px;
     }
+    #similiar-product {
+        height: 250px; 
+        width: 300px; 
+    }
 }
 
 @media (max-width: 576px) {
-    /* .owl-carousel .item {
-        height: 45px;
-    } */
+    #service-img-mobile {
+        height: 250px;
+    }
 }
