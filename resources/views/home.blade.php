@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="container-xl">
-        <div class="row mx-0" style="row-gap: 25px;">
+        <div class="row mx-0" style="row-gap: 18px;">
             @foreach ($services as $service)
                 <div class="col-lg-4 col-sm-6 col-12 px-md-3">
                     <a href="{{ route('jobs', $service->slug) }}" class="text-decoration-none">

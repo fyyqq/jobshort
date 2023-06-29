@@ -231,7 +231,7 @@
                                 {{-- <form action="{{ route('pay') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="amount" value="{{ $service->price }}"> --}}
-                                    <a href="{{ route('chatify') }}" class="btn btn-dark">
+                                    <a href="{{ route('chatify') }}" class="btn btn-dark py-2">
                                         <i class="fa-regular fa-message text-light" style="font-size: 15px;"></i>
                                     </a>
                                 {{-- </form> --}}

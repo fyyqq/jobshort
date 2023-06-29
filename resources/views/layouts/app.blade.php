@@ -37,9 +37,9 @@
     </style>
     <body>
         <div id="app" class="position-relative">
-            <a href="/chatify" class="text-decoration-none badge rounded-circle" id="chat" >
+            {{-- <a href="/chatify" class="text-decoration-none badge rounded-circle" id="chat" >
                 <span class="material-symbols-outlined" style="font-size: 22px;">forum</span>
-            </a>
+            </a> --}}
             @include('shortcuts.navbar')
             <main class="pb-5" style="margin-top: 100px;">
                 @yield('content')
@@ -72,15 +72,22 @@
                     </div>
                 </div>
             </div>
+            @include('shortcuts.footer')
         </div>
+        {{-- iziToast --}}
         <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>
+        {{-- Jquery --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- Font Awesome --}}
         <script src="https://kit.fontawesome.com/5e539df1ae.js" crossorigin="anonymous"></script>
+        {{-- Bootstrap --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        {{-- Owl Carousel --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- Fancybox --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        {{-- Sweetalert --}}
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
-        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script> --}}
         <script src="{{ asset('script.js') }}"></script>
     </body>
 </html>
