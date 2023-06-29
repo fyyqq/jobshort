@@ -47,7 +47,6 @@ class ServicesController extends Controller
         $freelancer = Freelancer::where('user_id', Auth::id())->first();
 
         $validateStore = $request->validate([
-            'video' => ['mimes:mp4'],
             'images.*' => ['image', 'mimes:png,jpg,jpeg', 'required'],
             'title' => 'required',
             'category' => 'required',
@@ -66,19 +65,11 @@ class ServicesController extends Controller
             $imagePaths = null;
         }
 
-        if ($request->hasFile('video')) {
-            $videoPath = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
-            $request->file('video')->move(public_path('videos'), $videoPath);
-        } else {
-            $videoPath = 'null';
-        }
-        
         $slug = $freelancer->id . uniqid();
 
         $service = new Service();
         $service->freelancer_id = $freelancer->id;
         $service->image = implode(',', $imagePaths);
-        $service->video = $videoPath;
         $service->title = $validateStore['title'];
         $service->slug = strtolower($slug);
         $service->description = $request->input('description');

@@ -17,10 +17,6 @@
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Gallery :</label>
                             <div class="mt-2 w-100 d-flex align-items-center justify-content-start">
                                 <div class="me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden;">
-                                    <input type="file" name="video" id="profile-img" accept=".mp4">
-                                    <i class="fa-solid fa-video" style="font-size: 18px;"></i>
-                                </div>
-                                <div class="me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden;">
                                     <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
                                     <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return autoImage(this)">
                                     <i class="fa-solid fa-image" style="font-size: 18px;"></i>
