@@ -45,29 +45,31 @@
                 @yield('content')
             </main>
             {{-- Mobile Navbar --}}
-            <div class="shadow-sm {{ Route::currentRouteName() != 'jobs' ? 'd-grid' : 'd-none' }} " id="mobile-navbar">
-                <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
-                    <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
-                    </a>
-                    <a href="{{ route('profile.saved-jobs') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                        <i class="fa-regular text-muted fa-heart" style="font-size: 19px;"></i>
-                    </a>
-                    <a href="" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                        <div class="position-relative">
-                            @if (Auth::check() && count(auth()->user()->notification) < 1)
-                                <span class="badge rounded-circle position-absolute d-flex align-items-center justify-content-center m-0 p-0" style="top: -7px; right: -5px; font-size: 11.5px; height: 15.5px; width: 15.5px; background-color: #2891e1;">{{ count(auth()->user()->notification) }}</span>
+            <div class="shadow-sm {{ Route::currentRouteName() === 'jobs' ? 'd-none' : 'd-block' }}">
+                <div class="" id="mobile-navbar">
+                    <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
+                        <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
+                        </a>
+                        <a href="{{ route('profile.saved-jobs') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
+                            <i class="fa-regular text-muted fa-heart" style="font-size: 19px;"></i>
+                        </a>
+                        <a href="" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
+                            <div class="position-relative">
+                                @if (Auth::check() && count(auth()->user()->notification) < 1)
+                                    <span class="badge rounded-circle position-absolute d-flex align-items-center justify-content-center m-0 p-0" style="top: -7px; right: -5px; font-size: 11.5px; height: 15.5px; width: 15.5px; background-color: #2891e1;">{{ count(auth()->user()->notification) }}</span>
+                                @endif
+                                <i class="fa-regular text-muted fa-bell" style="font-size: 19px;"></i>
+                            </div>
+                        </a>
+                        <a href="{{ route('profile.main') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
+                            @if (Route::currentRouteName() === 'profile.main')
+                                <i class="fa-solid fa-user text-dark" style="font-size: 19px;"></i>
+                            @else
+                                <i class="fa-regular fa-user text-muted" style="font-size: 19px;"></i>
                             @endif
-                            <i class="fa-regular text-muted fa-bell" style="font-size: 19px;"></i>
-                        </div>
-                    </a>
-                    <a href="{{ route('profile.main') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                        @if (Route::currentRouteName() === 'profile.main')
-                            <i class="fa-solid fa-user text-dark" style="font-size: 19px;"></i>
-                        @else
-                            <i class="fa-regular fa-user text-muted" style="font-size: 19px;"></i>
-                        @endif
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

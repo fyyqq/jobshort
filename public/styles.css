@@ -27,7 +27,7 @@ a:hover {
     text-decoration: none;
 }
 
-/* 
+/*
 #phone-view {
     display: none;
     gap: 20px;
@@ -40,10 +40,6 @@ a:hover {
     position: fixed;
     bottom: 0;
     left: 0;
-    display: none;
-}
-
-#mobile-navbar #apply {
     display: none;
 }
 
