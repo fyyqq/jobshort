@@ -45,52 +45,57 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
+                @else
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
+                            <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
+                            @if (Auth::check() && count(auth()->user()->notification) > 0)
+                                <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -8px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification) }}</span>
+                            @endif
+                        </a>
+                    </li>
                 @endguest
-                <li class="nav-item dropdown d-flex align-items-center">
-                    <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
-                        <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
-                        @if (count(auth()->user()->notification) > 0)
-                            <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -8px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification) }}</span>
-                        @endif
-                    </a>
-                </li>
             </ul>
         </div>
-        <div class="d-flex align-items-center justify-content-center ms-4">
-            <li class="nav-item dropdown d-flex align-items-center">
-                <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 42px; width: 42px;">
-                    <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;">
-                </span>
-                <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-138px, 5px); width: 180px;">
-                    <li>
-                        <a class="dropdown-item py-2" href="{{ route('profile.main') }}">Profile</a>
-                    </li>
-                    @if (auth()->user()->roles == '1')
+        @auth
+            <div class="d-flex align-items-center justify-content-center ms-4">
+                <li class="nav-item dropdown d-flex align-items-center">
+                    <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 42px; width: 42px;">
+                        @if (Auth::check())
+                            <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;">
+                        @endif
+                    </span>
+                    <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-138px, 5px); width: 180px;">
                         <li>
-                            <a class="dropdown-item py-2" href="{{ route('employer.main') }}">Freelancer</a>
+                            <a class="dropdown-item py-2" href="{{ route('profile.main') }}">Profile</a>
                         </li>
-                    @endif
-                    <li>
-                        <span class="dropdown-item pt-2 pb-1" href="#">
-                            <div class="ps-0 form-check form-switch d-flex justify-content-between flex-row-reverse">
-                                <input class="form-check-input shadow-none" type="checkbox" id="darkmode">
-                                <label for="darkmode" class="text-start">Dark Mode</label>
-                            </div>
-                        </span>
-                    </li>
-                    <li>
-                        <a class="dropdown-item py-2 row mx-0" href="">Settings</a>
-                    </li>
-                    <div class="dropdown-divider my-0"></div>
-                    <li>
-                        <a class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </div>
+                        {{-- @if (auth()->user()->roles == '1')
+                            <li>
+                                <a class="dropdown-item py-2" href="{{ route('employer.main') }}">Freelancer</a>
+                            </li>
+                        @endif --}}
+                        <li>
+                            <span class="dropdown-item pt-2 pb-1" href="#">
+                                <div class="ps-0 form-check form-switch d-flex justify-content-between flex-row-reverse">
+                                    <input class="form-check-input shadow-none" type="checkbox" id="darkmode">
+                                    <label for="darkmode" class="text-start">Dark Mode</label>
+                                </div>
+                            </span>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 row mx-0" href="">Settings</a>
+                        </li>
+                        <div class="dropdown-divider my-0"></div>
+                        <li>
+                            <a class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        @endauth
     </div>
 </nav>
 

@@ -1,66 +1,122 @@
 [
     {
-        "id": "1",
-        "name": "Home Repairs",
-        "slug": "home-repairs",
-        "about": "Assist with daily household tasks such as cleaning, laundry, ironing, and garden maintenance",
-        "icon": "fa-solid fa-house",
-        "image": "home-repair.jpg"
+        "id": 1,
+        "name": "Graphic Design",
+        "slug": "graphic-design",
+        "about": "Provide visual communication through creative design solutions for various mediums such as logos, branding, illustrations, and print materials."
     },
     {
-        "id": "2",
-        "name": "Cleaning and Organization",
-        "slug": "cleaning-and-organization",
-        "about": "Skilled in home repairs and renovations, ready to help with painting, furniture repairs, and electrical installations.",
-        "icon": "fa-solid fa-broom",
-        "image": "cleaning.jpeg"
+        "id": 2,
+        "name": "Web and App Development",
+        "slug": "web-and-app-development",
+        "about": "Build and develop websites and mobile applications using various programming languages, frameworks, and technologies."
     },
     {
-        "id": "3",
-        "name": "Shopping and Delivery",
-        "slug": "shopping-and-delivery",
-        "about": "Available to help with the delivery and pickup of items, documents, or packages from various locations as requested.",
-        "icon": "fa-solid fa-truck-fast",
-        "image": "delivery.jpg"
+        "id": 3,
+        "name": "Writing and Editing",
+        "slug": "writing-and-editing",
+        "about": "Create engaging and informative written content, including articles, blog posts, copywriting, and proofreading/editing services."
     },
     {
-        "id": "4",
-        "name": "Beauty and Wellness",
-        "slug": "beauty-and-wellness",
-        "about": "Provide beauty and personal care services such as haircuts, massages, facials, and manicures/pedicures.",
-        "icon": "fa-solid fa-spa",
-        "image": "spa.jpg"
+        "id": 4,
+        "name": "Translation",
+        "slug": "translation",
+        "about": "Provide accurate and professional translation services for written or spoken content between different languages."
     },
     {
-        "id": "5",
-        "name": "Childcare Services",
-        "slug": "childcare-services",
-        "about": "Offer pickup services for children from school or extracurricular activities, along with supervision and assistance with homework.",
-        "icon": "fa-solid fa-children",
-        "image": "children.png"
+        "id": 5,
+        "name": "Digital Marketing",
+        "slug": "digital-marketing",
+        "about": "Promote brands, products, and services using online marketing strategies such as SEO, social media marketing, email marketing, and PPC advertising."
     },
     {
-        "id": "6",
-        "name": "Food Preparation",
-        "slug": "food-preparation",
-        "about": "Provide catering or food delivery services for special events, as well as preparing healthy meals or meal prepping.",
-        "icon": "fa-solid fa-file",
-        "image": "food_preperation.jpg"
+        "id": 6,
+        "name": "Customer Service",
+        "slug": "customer-service",
+        "about": "Deliver excellent customer support and assistance, handling inquiries, resolving issues, and ensuring customer satisfaction."
     },
     {
-        "id": "7",
-        "name": "Administrative Support",
-        "slug": "administrative-support",
-        "about": "Skilled in administrative tasks such as document filing, time management, writing, and content editing.",
-        "icon": "fa-solid fa-user",
-        "image": ""
+        "id": 7,
+        "name": "Multimedia and Video Production",
+        "slug": "multimedia-and-video-production",
+        "about": "Create visually compelling multimedia content, including videos, animations, motion graphics, and video editing."
     },
     {
-        "id": "8",
-        "name": "Healthcare Services",
-        "slug": "healthcare-services",
-        "about": "Offer companionship and care for patients in need of assistance during hospital visits, elderly care, and post-operative recovery.",
-        "icon": "fa-solid fa-user",
-        "image": "healthcare.jpg"
+        "id": 8,
+        "name": "Administration and Finance",
+        "slug": "administration-and-finance",
+        "about": "Provide administrative support, financial management, bookkeeping, data entry, and other related tasks."
+    },
+    {
+        "id": 9,
+        "name": "Business Consulting",
+        "slug": "business-consulting",
+        "about": "Offer professional advice and expertise in various business areas, such as strategy, marketing, operations, and finance."
+    },
+    {
+        "id": 10,
+        "name": "Technical Skills",
+        "slug": "technical-skills",
+        "about": "Provide specialized technical skills and expertise, including IT support, software development, network administration, and system maintenance."
+    },
+    {
+        "id": 11,
+        "name": "Typing and Data Entry",
+        "slug": "typing-and-data-entry",
+        "about": "Efficiently input and manage data, perform accurate typing tasks, transcription, data processing, and data analysis."
+    },
+    {
+        "id": 12,
+        "name": "Graphics and Illustration",
+        "slug": "graphics-and-illustration",
+        "about": "Create visually appealing graphics and illustrations for various purposes, such as digital artwork, infographics, and icon design."
+    },
+    {
+        "id": 13,
+        "name": "Editing and Proofreading",
+        "slug": "editing-and-proofreading",
+        "about": "Review and revise written content for clarity, grammar, spelling, and style, ensuring high-quality and error-free material."
+    },
+    {
+        "id": 14,
+        "name": "Search Engine Optimization (SEO)",
+        "slug": "search-engine-optimization",
+        "about": "Optimize websites and content to improve visibility and ranking on search engines, increasing organic traffic and online presence."
+    },
+    {
+        "id": 15,
+        "name": "Social Media Marketing",
+        "slug": "social-media-marketing",
+        "about": "Develop and implement social media strategies, manage social media accounts, and create engaging content to enhance brand awareness and engagement."
+    },
+    {
+        "id": 16,
+        "name": "Mobile App Development",
+        "slug": "mobile-app-development",
+        "about": "Create and develop mobile applications for various platforms, ensuring functionality, usability, and user experience."
+    },
+    {
+        "id": 17,
+        "name": "Technical Content Writing",
+        "slug": "technical-content-writing",
+        "about": "Produce informative and specialized content in technical fields, such as software documentation, user manuals, and technical guides."
+    },
+    {
+        "id": 18,
+        "name": "Social Media Management",
+        "slug": "social-media-management",
+        "about": "Manage and optimize social media accounts, create engaging content, implement social media strategies, and analyze performance."
+    },
+    {
+        "id": 19,
+        "name": "E-commerce Development",
+        "slug": "e-commerce-development",
+        "about": "Build and customize online stores, integrate payment gateways, manage product catalogs, and ensure smooth e-commerce functionality."
+    },
+    {
+        "id": 20,
+        "name": "Data Analysis",
+        "slug": "data-analysis",
+        "about": "Analyze and interpret data using statistical methods, generate reports, and provide insights for informed decision-making."
     }
-]
+]  
