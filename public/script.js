@@ -1,4 +1,4 @@
-console.log("%c" + "Jobshort", "color: #2891e1; font-size: 60px; font-weight: bold;");
+console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bold;");
 
 $('.owl-carousel').owlCarousel({
     margin: 10,
@@ -451,14 +451,67 @@ $(document).ready(function() {
         $(this).prev().removeClass('d-none');
     });
 
-    $('.notification-read').each(function(index, value) {
+    $('.read').each(function(index, value) {
         $(value).on('click', function(e) {
             e.preventDefault();
 
-            console.log($(value).siblings('#notification-id').val());
+            $id = $(value).siblings('#notification-id').val();
+            $(value).removeClass('d-block');
+            $(value).addClass('d-none');
+            $(value).prev().removeClass('d-none');
+            $(value).prev().addClass('d-block');
+            
+            $.ajax({
+                url: `/notifications/read/${$id}`,
+                method: 'POST',
+                success: function(res) {
+                    $(value).parent().parent().css('border', 'unset');
+                }, error: function(err) {
+                    console.log(err.responseText);
+                }
+            });
         });
     });
 
+    $('.unread').each(function(index, value) {
+        $(value).on('click', function(e) {
+            e.preventDefault();
+
+            $id = $(value).siblings('#notification-id').val();
+            $(value).removeClass('d-block');
+            $(value).addClass('d-none');
+            $(value).next().removeClass('d-none');
+            $(value).next().addClass('d-block');
+
+            $.ajax({
+                url: `/notifications/unread/${$id}`,
+                method: 'POST',
+                success: function(res) {
+                    $(value).parent().parent().css('border-left', '3px solid #2891e1');
+                }, error: function(err) {
+                    console.log(err.responseText);
+                }
+            });
+        });
+    });
+
+    $('.notification-delete').each(function(index, value) {
+        $(value).on('click', function(e) {
+            e.preventDefault();
+
+            $id = $(value).siblings('#notification-id').val();
+
+            $.ajax({
+                url: `/notifications/delete/${$id}`,
+                method: 'DELETE',
+                success: function(res) {
+                    $(value).parent().parent().remove();
+                }, error: function(err) {
+                    console.log(err.responseText);
+                }
+            });
+        });
+    });
 });
 
 function autoImage(event) {

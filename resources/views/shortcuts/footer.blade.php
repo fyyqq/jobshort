@@ -1,4 +1,4 @@
-<div class="shadow" style="border-top: 2px solid #2891e1;">
+<div class="" style="border-top: 2px solid #2891e1;">
     <footer class="container-lg pt-5 pb-md-0 pb-5 px-md-0 px-3">
         <div class="row">
             <div class="col-6 col-md-2 mb-3">

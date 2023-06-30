@@ -25,8 +25,6 @@
         <link rel="stylesheet" href="{{ asset('styles.css') }}">
         {{-- Izitoast --}}
         <link rel="stylesheet" href="{{ asset('izitoast/iziToast.min.css') }}">
-        {{-- MDB --}}
-        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet"/> --}}
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>

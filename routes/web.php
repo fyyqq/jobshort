@@ -16,6 +16,8 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ServicesController;
+use App\Models\Notification;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +33,17 @@ Auth::routes();
 // Chatify::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/user/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
-Route::get('/notifications', [NotificationController::class, 'index'])->name('notification');
-Route::get('/{slug}', [HomeController::class, 'jobs']);
+Route::get('user/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
+// Route::get('/{slug}', [HomeController::class, 'jobs']);
 Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');
+
+// Notifications
+Route::prefix('notifications')->group(function() {
+    Route::get('/', [NotificationController::class, 'index'])->name('notification');
+    Route::post('/read/{id}', [NotificationController::class, 'read'])->name('notification.read');
+    Route::post('/unread/{id}', [NotificationController::class, 'unread'])->name('notification.read');
+    Route::delete('/delete/{id}', [NotificationController::class, 'destroy'])->name('notification.destroy');
+});
 
 // Chatify
 Route::get('/chatify/{id}', [ChatifyController::class, 'index'])->name('chatify.user');;
@@ -48,7 +57,7 @@ Route::get('/error', [PaymentController::class, 'error'])->name('payment_error')
 Route::post('/saved/{id}', [WishlistController::class, 'store'])->name('saved-job');
 Route::delete('/unsaved/{id}', [WishlistController::class, 'unstore'])->name('unsaved-job');
 
-// Notification
+// Freelancer Notification
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 

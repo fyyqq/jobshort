@@ -19,6 +19,18 @@ class NotificationController extends Controller
         ]);
     }
 
+    public function read(string $id) {
+        $notification = Notification::whereJsonContains('data->id', $id)->first();
+        $notification->read_at = now();
+        $notification->save();
+    }
+
+    public function unread(string $id) {
+        $notification = Notification::whereJsonContains('data->id', $id)->first();
+        $notification->read_at = null;
+        $notification->save();
+    }
+
     public function store(string $user_id, string $freelancer_id) {
         $notify = new Notify();
         $notify->user_id = $user_id;
@@ -29,5 +41,10 @@ class NotificationController extends Controller
     public function unstore(string $user_id, string $freelancer_id) {
         $notify = Notify::where('user_id', $user_id)->where('freelancer_id', $freelancer_id)->first();
         $notify->delete();
+    }
+
+    public function destroy(string $id) {
+        $notification = Notification::whereJsonContains('data->id', $id)->first();
+        $notification->delete();
     }
 }

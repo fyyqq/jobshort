@@ -33,6 +33,16 @@ a:hover {
     gap: 20px;
 } */
 
+.dropdown-list-image {
+    position: relative;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+.dropdown-list-image img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
 #mobile-navbar {
     z-index: 999;
     width: 100%;

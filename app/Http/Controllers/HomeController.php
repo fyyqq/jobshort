@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
 use App\Models\Rating;
 use App\Models\Service;
 use App\Models\Wishlist;
