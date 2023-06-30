@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use App\Models\Service;
-use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

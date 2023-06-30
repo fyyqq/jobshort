@@ -2,9 +2,10 @@
 
 namespace App\Notifications;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class RegisterNotification extends Notification
 {
@@ -41,7 +42,12 @@ class RegisterNotification extends Notification
 
     public function toDatabase(object $notifiable)
     {
+        $uuid = Uuid::uuid4()->toString();
+
         return [
+            "id" => $uuid,
+            "user" => "admin",
+            "image" => "js-logo.jpg",
             "message" => "Welcome to Jobshort!
             We are very happy to have you as a new member of our freelancer community. Jobshort is the perfect place to explore new opportunities, connect with interesting clients, and build an impressive portfolio.
             Join thousands of talented and professional freelancers who have found success through Jobshort. With our user-friendly platform, you can easily find jobs that suit your skills, expand your professional network, and increase your exposure in the freelance world.
@@ -49,9 +55,7 @@ class RegisterNotification extends Notification
             Feel free to contact our support team if you have any questions or need assistance. We are ready to help you every step of your freelance journey at Jobshort.
             Thank you for joining Jobshort! We wish you much success and valuable experience on our platform.
             Good luck,
-            Team Jobshort",
-            "user" => "admin",
-            "image" => "js-logo.jpg"
+            Team Jobshort"
         ];
     }
 

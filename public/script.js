@@ -304,15 +304,11 @@ $(document).ready(function() {
                     title: 'Successfully Order',
                     icon: 'success',
                     position: 'center',
-                    cancelButtonText: 'back',
                     confirmButtonText: 'Check Order',
-                    showCancelButton: true,
                     showCloseButton: true,
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = '/account/profile/orders';
-                    } else if (result.isDismissed) {
-                        window.location.href = window.location.href;
                     }
                 });
             }, error: function(error) {

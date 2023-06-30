@@ -73,8 +73,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // $user->notify(new RegisterNotification());
-        // return $user;
+        Notification::send($user, new RegisterNotification($user));
+
+        return $user;
     }
     
     protected function registered(Request $request, $user)

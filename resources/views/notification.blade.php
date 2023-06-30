@@ -40,11 +40,15 @@
                             <div class="p-3 d-flex align-items-center justify-content-between border-bottom parent-notification" style="{{ $notification->read_at != null ? 'border: unset;' : 'border-left: 3px solid #2891e1;' }} ">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <div class="dropdown-list-image mx-2">
-                                        <img class="rounded-circle" src="{{ asset('images/' . $image) }}" style="object-fit: cover;">
+                                        @if ($user === 'admin')
+                                            <img class="rounded-circle" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
+                                        @else
+                                            <img class="rounded-circle" src="{{ asset('images/' . $image) }}" style="object-fit: cover;">
+                                        @endif
                                     </div>
                                     <div class="font-weight-bold mx-3">
-                                        <small class="text-dark fw-bold d-block mb-0">{{ $user }}</small>
-                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 70) }}</small>
+                                        <small class="text-dark fw-bold d-block mb-0">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
+                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 100) }}</small>
                                     </div>
                                 </div>
                                 <span class="ml-auto mb-0 d-md-flex d-none align-items-center gap-1">

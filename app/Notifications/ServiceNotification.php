@@ -2,11 +2,12 @@
 
 namespace App\Notifications;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notification;
 
-class ServiceNotify extends Notification
+class ServiceNotification extends Notification
 {
     use Queueable;
 
@@ -42,9 +43,15 @@ class ServiceNotify extends Notification
     // }
 
     public function toDatabase(object $notifiable) {
+
+        $uuid = Uuid::uuid4()->toString();
+
         return [
-            "message" => "Congratulations! You've Got a New Freelancer Service
-            Hello" . Auth::user()->name . ",
+            "id" => $uuid,
+            "user" => $this->service->freelancer->name,
+            "image" => $this->service->freelancer->image,
+            "message" => "Congratulations! You've Got a New Freelancer Service from " . $this->service->freelancer->name .
+            " Hello" . Auth::user()->name . ",
             We are happy to let you know that you have successfully secured the services of a talented freelancer on our platform. We want to let you know that the freelancer you choose is ready to meet your needs and deliver exceptional results.
             With this new freelancer service, you can expect:
             High Quality: Our freelancers are experienced and skilled professionals in their field. They will work hard to deliver results that meet or even exceed your expectations.
@@ -54,9 +61,7 @@ class ServiceNotify extends Notification
             Thank you for using our platform. We hope you have an amazing experience with the freelancer you choose. Please feel free to provide feedback about your experience, as it means a lot to us.
             Thank you and happy using freelancer services!
             Greetings,
-            Team Jobshort",
-            "user" => $this->service->freelancer->name,
-            "image" => $this->service->freelancer->image
+            Team Jobshort"
         ];
     }
 

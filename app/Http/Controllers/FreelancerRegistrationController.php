@@ -8,7 +8,7 @@ use App\Models\Freelancer;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class EmployerRegistrationController extends Controller
+class FreelancerRegistrationController extends Controller
 {
     public function index()
     {

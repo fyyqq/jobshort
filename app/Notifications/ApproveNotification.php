@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class OrderNotification extends Notification
+class ApproveNotification extends Notification
 {
     use Queueable;
 
@@ -42,21 +42,19 @@ class OrderNotification extends Notification
     //                 ->line('Thank you for using our application!');
     // }
 
-    public function toDatabase(object $notifiable){
-
+    public function toDatabase(object $notifiable) {
         $uuid =  Uuid::uuid4()->toString();
         return [
             "id" => $uuid,
-            "user" => $notifiable->name,
-            "image" => $notifiable->image,
-            "message" => "Congratulations! You've Received an Order!
-            Dear" . $this->order->freelancer->name . ",
-            We are thrilled to inform you that you have received a new order on our platform. This is a significant milestone in your freelancing journey, and we are excited to see your skills and expertise being recognized by buyers.            
-            Order Details: 
-            Order ID:" . $this->order->id .
-            "Buyer:" . Auth::user()->name . 
-            "Order Date:" . $this->order->created_at->diffForHumans() .
-            "The buyer has placed their trust in your services, and now it's time to showcase your talents and deliver exceptional results. We encourage you to review the order details carefully and promptly get in touch with the buyer to discuss project requirements, timelines, and any other necessary details"
+            "user" => $this->order->freelancer->name,
+            "image" => $this->order->freelancer->image,
+            "message" => "Congratulations! Your Order Has Been Approved by " . $this->order->freelancer->name .
+            "We are happy to inform you that your order has been approved by your chosen freelancer. This is an important stage in your collaboration process.
+            Our freelancer has seen the details of your order and is ready to start work. They have the skills and experience needed to deliver exceptional results.            
+            We appreciate your trust in this freelancer and hope this cooperation goes smoothly. If you have any questions or need to communicate further, do not hesitate to contact the freelancer through our platform.
+            We hope you enjoy this collaborative experience and get satisfactory results from our freelancers. Thank you for choosing our platform to meet your needs.
+            Warm greetings,
+            JobShort Support Team"
         ];
     }
 
@@ -67,8 +65,6 @@ class OrderNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

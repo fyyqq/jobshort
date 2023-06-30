@@ -95,7 +95,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::post('/rating', [RatingController::class, 'store'])->name('employer.rating');
         });
     });
-    Route::prefix('freelancer')->middleware(['auth', 'freelancer'])->group(function() {
+    Route::prefix('freelancer')->middleware(['auth'])->group(function() {
         Route::get('/', [FreelancerController::class, 'index'])->name('employer.main');
         Route::prefix('services')->group(function() {
             Route::get('/', [ServicesController::class, 'index'])->name('employer.jobs');
@@ -131,7 +131,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
     });
 });
 
-Route::prefix('employer_registration')->group(function() {
+Route::prefix('freelancer_registration')->group(function() {
     Route::get('/', [FreelancerRegistrationController::class, 'index'])->name('employer.registration-personal');
     Route::post('/', [FreelancerRegistrationController::class, 'storePersonal'])->name('employer.post-registration');
     Route::put('/', [FreelancerRegistrationController::class, 'updatePersonal'])->name('employer.update-registration');

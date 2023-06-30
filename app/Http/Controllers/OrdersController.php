@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\Freelancer;
-use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
+use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\OrderNotification;
+use App\Notifications\ApproveNotification;
 use Illuminate\Support\Facades\Notification;
 
 class OrdersController extends Controller
@@ -47,7 +50,12 @@ class OrdersController extends Controller
     {
         $order = Order::where('id', $id)->first();
         $order->status = 'approved';
-        $order->save();
+        $orders = $order->save();
+
+        if ($orders) {
+            $user = User::find($order->user_id);
+            Notification::send($user, new ApproveNotification($order));
+        }
     }
     
     public function reject(string $id) 
@@ -75,7 +83,8 @@ class OrdersController extends Controller
             $freelancer = Freelancer::find($freelancer_id);
             Notification::send($freelancer, new OrderNotification($order));
         }
-        
-        return redirect()->back();
+
+        // $notificationCount = NotificationModel::where('notifiable_id', Auth::id())->count();
+        // return $notificationCount;
     }
 }

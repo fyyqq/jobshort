@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Freelancer;
+use App\Models\User;
 use App\Models\Notify;
 use App\Models\Service;
-use App\Models\User;
-use App\Notifications\ServiceNotify;
+use App\Models\Freelancer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\ServiceNotification;
 use Illuminate\Support\Facades\Notification;
 
 class ServicesController extends Controller
@@ -78,14 +78,12 @@ class ServicesController extends Controller
         $saved = $service->save();
 
         if ($saved) {
-            // $slug = strtolower($slug);
             $userNotifies = Notify::where('freelancer_id', $freelancer->id)->get();
             $userIDs = collect($userNotifies)->pluck('user_id')->toArray();
             $users = User::whereIn('id', $userIDs)->get();
-    
-            Notification::send($users, new ServiceNotify($service));
-        }
 
+            Notification::send($users, new ServiceNotification($service));
+        }
 
         return redirect()->route('employer.jobs')->with('success', 'New service has been uploaded');   
     }
