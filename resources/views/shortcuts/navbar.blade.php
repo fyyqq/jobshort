@@ -50,7 +50,7 @@
                         <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
                             <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
                             @if (Auth::check() && count(auth()->user()->notification) > 0)
-                                <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -8px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification) }}</span>
+                                <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -7px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span>
                             @endif
                         </a>
                     </li>

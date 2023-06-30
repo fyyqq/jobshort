@@ -12,7 +12,6 @@
                         <div class="">
                             <p class="fw-bold text-dark mb-0">{{ $freelancer->name }}</p>
                             <small class="text-muted" style="font-size: 14px;">{{ $freelancer->user->email }}</small>
-                            {{-- <a href="mailto:{{ $freelancer->user->email }}" class="text-muted text-decoration-none" style="font-size: 13.5px;">{{ $freelancer->user->email }}</a> --}}
                         </div>
                         <div class="dropdown position-absolute" style="top: 0px; right: 0px;">
                             <i class="fa-solid fa-ellipsis-vertical p-1" data-bs-toggle="dropdown"></i>

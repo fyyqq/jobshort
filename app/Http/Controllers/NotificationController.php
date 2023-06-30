@@ -15,7 +15,7 @@ class NotificationController extends Controller
         $notification = Notification::where('notifiable_id', Auth::id())->latest()->get();
 
         return view('notification', [
-            "notifications" => $notification,
+            "notifications" => $notification
         ]);
     }
 

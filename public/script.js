@@ -450,6 +450,15 @@ $(document).ready(function() {
         });
         $(this).prev().removeClass('d-none');
     });
+
+    $('.notification-read').each(function(index, value) {
+        $(value).on('click', function(e) {
+            e.preventDefault();
+
+            console.log($(value).siblings('#notification-id').val());
+        });
+    });
+
 });
 
 function autoImage(event) {
