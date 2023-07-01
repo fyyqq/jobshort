@@ -15,9 +15,9 @@ class ReviewNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -45,14 +45,15 @@ class ReviewNotification extends Notification
         $uuid =  Uuid::uuid4()->toString();
         return [
             "id" => $uuid,
-            "user" => $this->order->freelancer->name,
-            "image" => $this->order->freelancer->image,
-            "message" => "Congratulations! Your Order Has Been Approved by " . $this->order->freelancer->name .
-            ". We are happy to inform you that your order has been approved by your chosen freelancer. This is an important stage in your collaboration process.
-            Our freelancer has seen the details of your order and is ready to start work. They have the skills and experience needed to deliver exceptional results.            
-            We appreciate your trust in this freelancer and hope this cooperation goes smoothly. If you have any questions or need to communicate further, do not hesitate to contact the freelancer through our platform.
-            We hope you enjoy this collaborative experience and get satisfactory results from our freelancers. Thank you for choosing our platform to meet your needs.
-            Warm greetings,
+            "user" => $this->order->user->name,
+            "image" => $this->order->user->image,
+            "message" => "Congratulations! You Receive Positive Reviews and Ratings from Buyers
+            We are happy to inform you that the buyer has given a positive review and evaluation of the service you provided. This is a remarkable achievement and shows your quality and professionalism in working on this project.
+            Positive reviews and ratings are not only an appreciation for your hard work, but also improve your reputation on our platform. This can attract the attention of potential buyers and help you get more job opportunities in the future.
+            We would like to thank you for your dedication in providing quality service to buyers. Keep innovating and delivering the best results in every project you work on.
+            You can see those reviews and ratings on your profile. Use this feedback as motivation to continue to improve and provide the best experience to buyers in the future.
+            Thank you for your hard work and may success continue to accompany your steps in your freelancing career.
+            Good luck and keep up the great work!
             JobShort Support Team"
         ];
     }

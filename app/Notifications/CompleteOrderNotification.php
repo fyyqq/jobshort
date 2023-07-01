@@ -5,8 +5,6 @@ namespace App\Notifications;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class CompleteOrderNotification extends Notification
 {
@@ -45,9 +43,9 @@ class CompleteOrderNotification extends Notification
         $uuid =  Uuid::uuid4()->toString();
         return [
             "id" => $uuid,
-            "user" => $notifiable->name,
-            "image" => $notifiable->image,
-            "massage" => "Congratulations! Your Order Has Been Completed by the Buyer.
+            "user" => $this->order->user->name,
+            "image" => $this->order->user->image,
+            "message" => "Congratulations! Your Order Has Been Completed by the Buyer.
             We are happy to inform you that the order you made has been completed by the buyer. This is a happy moment because you have completed a job well.
             Buyers have seen your work and are satisfied with what you provide. This is proof of your skill and dedication in working on this project.
             We thank you for your hard work and efforts to provide the best results for buyers. Hopefully this collaboration will bring satisfaction and success for both parties.

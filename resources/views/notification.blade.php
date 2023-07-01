@@ -84,8 +84,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <br />
-                                    {{-- <div class="text-right text-muted pt-1">3d</div> --}}
                                 </span>
                             </div>
                         @endforeach

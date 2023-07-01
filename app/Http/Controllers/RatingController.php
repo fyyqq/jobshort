@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Freelancer;
 use App\Models\Order;
 use App\Models\Rating;
 use App\Models\Service;
+use App\Notifications\ReviewNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class RatingController extends Controller
 {
@@ -47,7 +50,12 @@ class RatingController extends Controller
         $order_id = $request->input('order_id');
         $order = Order::where('id', $order_id)->first();
         $order->rating = true;
-        $order->save();
+        $orders = $order->save();
+
+        if ($orders) {
+            $freelancer = Freelancer::find($order->freelancer_id);
+            Notification::send($freelancer, new ReviewNotification($order));
+        }
 
         return route('profile.applied-completed');
     }
