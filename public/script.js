@@ -461,7 +461,9 @@ $(document).ready(function() {
                 url: `/notifications/read/${$id}`,
                 method: 'POST',
                 success: function(res) {
-                    $(value).parent().parent().css('border', 'unset');
+                    if (res) {
+                        $(value).parent().parent().css('border', 'unset');
+                    }
                 }, error: function(err) {
                     console.log(err.responseText);
                 }
@@ -483,7 +485,9 @@ $(document).ready(function() {
                 url: `/notifications/unread/${$id}`,
                 method: 'POST',
                 success: function(res) {
-                    $(value).parent().parent().css('border-left', '3px solid #2891e1');
+                    if (res) {
+                        $(value).parent().parent().css('border-left', '3px solid #2891e1');
+                    }
                 }, error: function(err) {
                     console.log(err.responseText);
                 }

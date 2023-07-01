@@ -1,22 +1,26 @@
 @extends('profile.layouts.app')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
 @section('profile')
 
-    <header class="px-4 pb-3 border shadow-sm" style="background-color: #fff;">
-        <div class="py-4 ms-2 border-bottom">
-            <h1 class="h5 mb-0 text-dark">My Profile</h1>
+    <header class="box pb-3">
+        <div class="box-title border d-md-block d-none border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+            <h6 class="m-0">Profile</h6>
+        </div>
+        <div class="box-title p-3 mb-2 d-md-none d-block">
+            <h6 class="m-0">Profile</h6>
         </div>
     
         @if (auth()->user()->roles != '0')
-            <form action="{{ route('profile.employee-update') }}" method="POST" class="mt-3" enctype="multipart/form-data">
+            <form action="{{ route('profile.employee-update') }}" method="POST" class="border" enctype="multipart/form-data">
                 @method('PUT')
         @else
-            <form action="{{ route('profile.employee-registration') }}" method="POST" class="mt-3" enctype="multipart/form-data">
+            <form action="{{ route('profile.employee-registration') }}" method="POST" class="border" enctype="multipart/form-data">
         @endif
             @csrf
-            <div class="row mx-0 flex-lg-row flex-column-reverse">
+            <div class="row mx-0 flex-lg-row flex-column-reverse p-3">
                 <div class="col-lg-8 col-12">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control shadow-none @error('name') is-invalid @enderror" style="font-size: 14px;" id="name" name="name" value="{{ old('name') ? old('name') : auth()->user()->name }}" autocomplete="off">
@@ -70,7 +74,7 @@
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea type="text" class="form-control mt-lg-3 mt-2 shadow-none @error('about') is-invalid @enderror" style="font-size: 14px; height: 100px;" id="about" name="about">{{ (auth()->user()->roles != '0') ? old('about', auth()->user()->about) :  old('about') }}</textarea>
+                        <textarea type="text" class="form-control mt-md-3 mt-2 shadow-none @error('about') is-invalid @enderror" style="font-size: 14px; height: 100px;" id="about" name="about">{{ (auth()->user()->roles != '0') ? old('about', auth()->user()->about) :  old('about') }}</textarea>
                         <label class="ps-0 text-dark" for="about">About Me :</label>
                         @error('about')
                             <span class="invalid-feedback" role="alert">
@@ -79,9 +83,9 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-lg-4 col-12 mt-lg-4 mt-2 pb-lg-0 pb-4">
+                <div class="col-lg-4 col-12 mt-lg-4 mt-0 py-lg-0 py-4">
                     <div class="d-flex align-items-center flex-column">
-                        <div class="rounded-circle" style="width: 100px; height: 100px; overflow:hidden;">
+                        <div class="rounded-circle" id="profile-image-form" style="overflow:hidden;">
                             <img src="{{ (auth()->user()->image == null) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->image) }}" class="w-100 h-100 border rounded-circle" style="object-fit: cover;" id="seller_img">
                         </div>
                         <div class="mt-4 position-relative">
@@ -97,9 +101,8 @@
                     </div>
                 </div>
             </div>
-            <div class="text-end mt-3">
-                <a href="{{ route('profile.main') }}" class="btn btn-outline-dark px-3 {{ (auth()->user()->roles == '0') ? 'd-none' : '' }}" style="font-size: 14.5px;">Back to Default</a>
-                <button type="submit" class="btn btn-primary px-3" style="background-color: #2891e1; font-size: 14.5px;"> {{ auth()->user()->roles != '0' ? 'Submit Changes' : 'Submit' }}</button>
+            <div class="text-end mb-3 me-3">
+                <button type="submit" id="btn-profile-form" class="text-light btn btn-sm px-3">{{ auth()->user()->roles != '0' ? 'Save Changes' : 'Save' }}</button>
             </div>
         </form>
     </header>

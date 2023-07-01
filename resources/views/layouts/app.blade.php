@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="{{ asset('styles.css') }}">
         {{-- Izitoast --}}
         <link rel="stylesheet" href="{{ asset('izitoast/iziToast.min.css') }}">
+        {{-- MDB --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
@@ -70,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            @include('shortcuts.footer')
+            {{-- @include('shortcuts.footer') --}}
         </div>
         {{-- iziToast --}}
         <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>

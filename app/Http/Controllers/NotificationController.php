@@ -22,13 +22,25 @@ class NotificationController extends Controller
     public function read(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
         $notification->read_at = now();
-        $notification->save();
-    }
+        $confirm = $notification->save();
 
+        if ($confirm) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public function unread(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
         $notification->read_at = null;
-        $notification->save();
+        $confirm = $notification->save();
+
+        if ($confirm) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function store(string $user_id, string $freelancer_id) {

@@ -4,15 +4,15 @@
     <div class="row mx-0 d-flex justify-content-center align-items-center position-relative" style="gap: 15px; {{ count($orders) < 1 ? ' height: 450px;' : 'max-content' }}">
         @if (count($orders) < 1)
             <div class="position-absolute text-center" style="transform: translateY(-20px);">
-                <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
+                <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>
                 @if (Route::currentRouteName() == 'profile.applied')
-                    <p class="mb-0 text-muted mt-3">No Pending Orders.</p>
+                    <small class="mb-0 text-muted">No Pending Order</small>
                 @elseif (Route::currentRouteName() == 'profile.applied-approved')
-                    <p class="mb-0 text-muted mt-3">No Approved Orders.</p>
+                    <small class="mb-0 text-muted">No Approved Order</small>
                 @elseif (Route::currentRouteName() == 'profile.applied-rejected')
-                    <p class="mb-0 text-muted mt-3">No Rejected Orders.</p>
+                    <small class="mb-0 text-muted">No Rejected Order</small>
                 @elseif (Route::currentRouteName() == 'profile.applied-completed')
-                    <p class="mb-0 text-muted mt-3">No Completed Orders.</p>
+                    <small class="mb-0 text-muted">No Completed Order</small>
                 @endif
             </div>
         @else
@@ -20,16 +20,16 @@
                 <div class="d-flex align-items-center justify-content-start flex-column border rounded" style="background-color:#fff;">
                     <div class="{{ $order->status === 'rejected' ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3 border-bottom">
                         <div class="">
-                            <small class="mb-0 text-dark">Order at {{ $order->created_at->diffForHumans() }}</small>
+                            <small class="mb-0 text-dark" style="font-size: 13px;">Order at {{ $order->created_at->diffForHumans() }}</small>
                         </div>
                         <div class="d-flex align-items-center" style="column-gap: 5px;">
                             @if (Route::currentRouteName() == 'profile.applied')
-                                <button class="btn btn-sm btn-outline-danger reject-btn">Rejected</button>
+                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Rejected</button>
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
                             @elseif (Route::currentRouteName() == 'profile.applied-approved')
-                                <button class="btn btn-sm btn-outline-danger reject-btn">Rejected</button>
+                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Rejected</button>
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
-                                <button class="btn btn-sm btn-dark complete-btn">Completed</button>
+                                <button class="btn btn-sm btn-dark complete-btn" id="order-action-btn">Completed</button>
                             @elseif (Route::currentRouteName() == 'profile.applied-completed')
                                 @if ($order->rating)
                                     <button type="button" class="btn btn-sm btn-success text-light" data-bs-toggle="modal" data-bs-target="#modal_review{{ $order->ratings->id }}">Show Rating<i class="fa-solid fa-chevron-right ms-2" style="font-size: 12px;"></i></button>
@@ -126,7 +126,7 @@
                     </div>
                     <a href="{{ route('jobs', $order->service->slug) }}" class="w-100 py-3 px-3 text-decoration-none position-relative text-dark">
                         <div class="d-flex align-items-start w-100 justify-content-start">
-                            <div class="rounded" style="height: 80px; width: 80px; overflow: hidden;">
+                            <div class="rounded" id="order-profile-img" style="overflow: hidden;">
                                 @foreach (explode(',', $order->service->image) as $key => $value)
                                     @if ($key === 0)
                                         <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;">
@@ -135,7 +135,7 @@
                             </div>
                             <div class="ms-3 d-flex flex-column justify-content-start align-items-start" style="flex-grow: 1;">
                                 <div class="d-flex align-items-center justify-content-between w-100">
-                                    <p class="mb-1">{{ Str::limit($order->service->title, 50) }}</p>
+                                    <p class="mb-1" id="order-profile-title">{{ Str::limit($order->service->title, 50) }}</p>
                                     <div class="">
                                         <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
                                         <input type="hidden" value="{{ $order->service->id }}">
@@ -143,18 +143,18 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
-                                    <span class="badge rounded-1 text-muted border px-2">{{ 'RM' . $order->service->price }}</span>
-                                    <span class="badge rounded-1 text-muted border px-2">{{ $order->service->category }}</span>
+                                    <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ 'RM' . $order->service->price }}</span>
+                                    <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ $order->service->category }}</span>
                                 </div>
-                                <div class="mt-2 w-100 text-md-end text-start">
+                                <div class="mt-2 w-100 text-sm-end text-start">
                                     @if (Route::currentRouteName() == 'profile.applied')
-                                        <span class="badge bg-warning px-2 fw-normal" style="font-size: 13px; padding-bottom: 5px;">{{ $order->status }}</span>
+                                        <span class="badge bg-warning px-2 fw-normal" id="status-order">{{ $order->status }}</span>
                                     @elseif (Route::currentRouteName() == 'profile.applied-approved')
-                                        <span class="badge bg-success px-2 fw-normal" style="font-size: 13px; padding-bottom: 5px;">{{ $order->status }}</span>
+                                        <span class="badge bg-success px-2 fw-normal" id="status-order">{{ $order->status }}</span>
                                     @elseif (Route::currentRouteName() == 'profile.applied-rejected')
-                                        <span class="badge bg-danger px-2 fw-normal" style="font-size: 13px; padding-bottom: 5px;">{{ $order->status }}</span>
+                                        <span class="badge bg-danger px-2 fw-normal" id="status-order">{{ $order->status }}</span>
                                     @elseif (Route::currentRouteName() == 'profile.applied-completed')
-                                        <span class="badge bg-dark px-2 fw-normal" style="font-size: 13px; padding-bottom: 5px;">{{ $order->status }}</span>
+                                        <span class="badge bg-dark px-2 fw-normal" id="status-order">{{ $order->status }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -162,14 +162,14 @@
                     </a>
                     <div class="d-flex align-items-center justify-content-between w-100 p-3 border-top">
                         <div class="d-flex justify-content-start align-items-center flex-row">
-                            <div class="rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
+                            <div class="rounded-circle" id="order-freelancer-profile" style="overflow: hidden;">
                                 <img src="{{ asset('images/' . $order->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
                             </div>
                             <div class="ms-3 d-flex align-items-start justify-content-center flex-column">
                                 <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>
                             </div>
                         </div>
-                        <a href="" class="btn px-3" style="border: 1.5px solid #2891e1">
+                        <a href="" class="btn btn-sm px-3" id="order-chat-btn" style="border: 1.5px solid #2891e1">
                             <i class="fa-solid fa-message py-1"></i>
                         </a>
                     </div>

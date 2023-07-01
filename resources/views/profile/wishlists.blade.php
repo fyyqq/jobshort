@@ -4,49 +4,55 @@
 
 @section('profile')
 
-    <header class="pb-4 border shadow-sm" style="background-color: #fff;">
-        <div class="p-4 border-bottom">
-            <h1 class="h5 mb-1 text-dark">Saved Jobs</h1>
-            <small class="text-muted" style="font-size: 13px;">Saved Your Jobs. If do you want apply sometimes.</small>
+    <header class="pb-4" style="background-color: #fff;">
+        <div class="box-title border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+            <h6 class="m-0">Wishlist</h6>
         </div>
-        <div class="mt-3 px-3">
-            <div class="row mx-0 d-flex justify-content-start align-items-center position-relative" style="gap: 15px; {{ count($wishlists) < 1 ? 'height: 450px;' : 'height: max-content;' }}">
+        <div class="mt-4">
+            <div class="row mx-0 d-flex justify-content-start align-items-center position-relative" style="{{ count($wishlists) < 1 ? 'height: 450px;' : 'height: max-content;' }}">
                 @if (count($wishlists) < 1)
                     <div class="position-absolute text-center" style="transform: translateY(-20px);">
-                        <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
-                        <p class="mb-0 text-muted mt-3">No Jobs Saved Yet.</p>
+                        <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>
+                        <small class="mb-0 text-muted">No Service In Wishlist</small>
                     </div>
                 @else
                     @foreach ($wishlists as $wishlist)
-                        <a href="{{ route('jobs', $wishlist->service->slug) }}" class="text-decoration-none border rounded-3 py-3 px-3 position-relative" style="height: max-content; background-color:#fff; cursor: pointer;">
-                            <div class="d-flex align-items-center pe-5 w-100 justify-content-between">
-                                <h1 class="h6 mb-1 fw-bold text-dark" style="font-size: 17px;">{{ Str::limit($wishlist->service->title, 55) }}</h1>
-                                @if (!auth()->check())
-                                    <a href="{{ route('login') }}" class="text-decoration-none">
-                                        <i class="fa-regular fa-heart position-absolute" style="top: 15px; right: 20px; font-size: 16px;"></i>
-                                    </a>
-                                @else
-                                    <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="top: 15px; right: 20px; font-size: 16px;"></i>
-                                    <input type="hidden" value="{{ $wishlist->service->id }}">
-                                    <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="top: 15px; right: 20px; font-size: 16px;"></i>                                
-                                @endif
-                            </div>
-                            <div class="d-flex align-items-center justify-content-start mb-0" style="column-gap: 8px;">
-                                <p class="text-muted mb-0">{{ $wishlist->service->freelancer->name }}</p>
-                            </div>
-                            <p class="text-muted mb-2">{{ $wishlist->service->freelancer->city .' , '. $wishlist->service->freelancer->state }}</p>
-                            <div class="d-flex align-items-center justify-content-start mb-3" style="column-gap: 5px;">
-                                <span class="badge rounded-1 text-muted border px-2">RM {{ $wishlist->service->salary }}</span>
-                                <span class="badge rounded-1 text-muted border px-2">{{ $wishlist->service->type }}</span>
-                                <span class="badge rounded-1 text-muted border px-2">{{ $wishlist->service->category }}</span>
-                            </div>
-                            <div class="">
-                                <small class="text-muted">{{ Str::limit($wishlist->service->description, 180) }}</small>
-                            </div>
-                            <div class="w-100 text-end mt-3">
-                                <small class="text-muted text-end" style="font-size: 13px;">Posted {{ $wishlist->service->created_at->diffForHumans() }}</small>
-                            </div>
-                        </a>
+                        <div class="col-sm-6 col-12">
+                            <a href="{{ route('jobs', $wishlist->service->slug) }}" class="text-decoration-none">
+                                <div class="d-flex align-items-center justify-content-center flex-column">
+                                    <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                        @foreach (explode(',', $wishlist->service->image) as $key => $image)
+                                            @if ($key === 0)
+                                                <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                            @endif
+                                        @endforeach
+                                        @if (!auth()->check())
+                                            <a href="{{ route('login') }}" class="text-decoration-none">
+                                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                            </a>
+                                        @else
+                                            <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                            <input type="hidden" value="{{ $wishlist->service->id }}">
+                                            <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                        @endif
+                                    </div>
+                                    <div class="p-2 w-100">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <p class="mb-0 text-dark" style="width: 95%;">{{ Str::limit($wishlist->service->title, 35) }}</p>
+                                            <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
+                                                <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
+                                                <small class="me-2 text-dark" style="font-size: 13.5px;">4.5</small>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
+                                        <div class="mt-2 d-flex">
+                                            <small class="mb-0 text-dark">{{ 'RM' . $wishlist->service->price }}</small>
+                                            <small class="mb-0 ms-1 text-muted">per service</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     @endforeach
                 @endif
             </div>

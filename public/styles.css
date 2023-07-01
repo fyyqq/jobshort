@@ -125,36 +125,59 @@ input[type=number] {
     flex-wrap: wrap;
     flex-direction: row;
     height: max-content;
-    column-gap: 20px;
     position: relative;
 }
 
-.profile .popup-form {
-    height: max-content;
-    z-index: 990;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    background-color: rgba(24, 24, 24, 0.699);
-    transform: translateX(-50%);
-    overflow-y: scroll;
-    height: 100%;
+.profile #order-freelancer-profile {
+    height: 45px;
+    width: 45px;
 }
 
-.profile .popup-form .modal-dialog {
-    border-radius: 10px;
-    background-color: #fff;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.profile #order-action-btn {
+    font-size: 13.5px;
 }
-.profile .sidebar, .profile .profile-content {
-    height: max-content;
+
+.profile #order-profile-title {
+    font-size: 14.5px;
+}
+
+.profile #status-order {
+    font-size: 12px;
+    padding-bottom: 6px;
+}
+
+.profile #order-profile-img {
+    height: 80px;
+    width: 80px;
+}
+
+.profile #profile-image-form {
+    width: 100px;
+    height: 100px;
+}
+
+.profile #btn-profile-form {
+    font-size: 14.5px;
+    background-color: var(--primary-color);
+}
+
+.profile #sidebar-icon {
+    font-size: 13px;
+}
+
+.profile #sidebar-link {
+    border-bottom: 1px solid gainsboro;
+}
+
+.profile #sidebar-link:hover {
+    background-color: rgba(238, 238, 238, 0.461);
 }
 
 .profile .sidebar {
     background-color: #fff;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    border: 1px solid gainsboro;
     width: 26%;
     position: relative;
 }
@@ -246,7 +269,6 @@ input[type=number] {
     font-size: 13.5px;
 }
 
-/* .profile .profile-content #profile-img { */
 .row #profile-img {
     border: none;
     position: absolute;
@@ -278,34 +300,8 @@ input[type=number] {
     opacity: 0;
 }
 
-
-.sidebar .profile-picture {
-    /* position: relative; */
-    overflow: hidden;
-    /* width: 40%; */
-    /* width: 5vw;
-    height: 5vw;
-    min-width: 40px; */
-}
-
 .sidebar .profile-info {
     width: 60%;
-}
-
-.sidebar .profile-info p {
-    font-size: 14.5px;
-    color: #333;
-}
-.sidebar .profile-info .email {
-    font-size: 14.5px;
-}
-
-.sidebar .profile-info .fa-pen-to-square {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    font-size: 14px;
-    color: #555;
 }
 
 .sidebar .list-group-item {
@@ -363,6 +359,10 @@ input[type=number] {
     overflow: hidden;
 }
 
+#order-menu-link {
+    font-size: 14px;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;
@@ -372,13 +372,6 @@ input[type=number] {
     .profile .profile-content {
         width: 70%;
         min-width: 67%;
-    }
-    .sidebar .profile-info p {
-        font-size: 13px;
-    }
-    .sidebar .profile-info .email {
-        font-size: 12px;
-        transform: translateY(-10px);
     }
 }
 
@@ -395,7 +388,28 @@ input[type=number] {
     .container-lg #side-jobs {
         display: none;
     }
-    .profile {
+    .profile #profile-image-form {
+        width: 90px;
+        height: 90px;
+    }
+    .profile #btn-profile-form {
+        font-size: 14px;
+    }
+    .profile #order-profile-img {
+        height: 75px;
+        width: 75px;
+    }
+    .profile #order-profile-title {
+        font-size: 14px;
+    }
+    .profile #status-order {
+        font-size: 11.5px;
+        padding-bottom: 6px;
+    }   
+}
+
+@media (max-width: 767px) {
+     .profile {
         padding: 0;
         display: flex;
         flex-wrap: nowrap;
@@ -405,52 +419,12 @@ input[type=number] {
     .profile .sidebar {
         width: 100%;
         border-radius: unset;
+        border: unset;
     }
     .profile .profile-content {
         border-radius: unset;
         width: 100%;
     }
-    .sidebar .profile-picture {
-        /* width: 150px;
-        height: 150px; */
-    }
-    .sidebar .profile-info {
-        width: 100%;
-        margin-left: 20px;
-    }
-    .sidebar .list-group {
-        display: flex;
-        flex-direction: row;
-    }
-    .sidebar .list-group .list-group-item {
-        padding: 12px 15px;
-    }
-    .sidebar .profile-info p {
-        font-size: 16px;
-    }
-    .sidebar .profile-info .email {
-        font-size: 12px;
-    }
-    .profile .popup-form {
-        padding: 0;
-        height: 100%;
-    }
-    .profile .popup-form .modal-dialog {
-        border-radius: 0px;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: max-content;
-        border-radius: 10px;
-        background-color: #fff;
-        margin: 0px;
-    }
-    .profile .sidebar .list-group {
-        overflow-x: scroll;
-    }
-} 
-
-@media (max-width: 767px) {
     #mobile-navbar {
         display: grid;
         height: 75px;
@@ -474,10 +448,50 @@ input[type=number] {
         height: 250px; 
         width: 300px; 
     }
+    .profile #sidebar-icon {
+        font-size: 15px;
+    }
+    .profile #sidebar-link {
+        border: 1px solid gainsboro;
+        border-radius: 10px;
+    }
+    .profile #btn-profile-form {
+        font-size: 13.5px;
+    }
+    .profile #order-freelancer-profile {
+        height: 42px;
+        width: 42px;
+    }
+    .profile #order-profile-title {
+        font-size: 13.5px;
+    }
 }
 
 @media (max-width: 576px) {
     #service-img-mobile {
         height: 250px;
+    }
+    #order-menu-link {
+        font-size: 13px;
+    }
+    .profile #order-profile-img {
+        height: 75px;
+        width: 75px;
+    }
+    .profile #order-action-btn {
+        font-size: 13px;
+    }
+    .profile #order-profile-title {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    #parent-order-menu-link {
+        overflow-x: scroll;
+    }
+    .profile #order-profile-img {
+        height: 65px;
+        width: 65px;
     }
 }

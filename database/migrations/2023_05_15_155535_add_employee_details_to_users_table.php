@@ -17,11 +17,7 @@ return new class extends Migration
             $table->string('birth_date')->after('identification_number')->nullable();
             $table->string('gender')->after('birth_date')->nullable();
             $table->text('about')->after('gender')->nullable();
-            $table->text('address')->after('about')->nullable();
-            $table->string('country')->after('address')->nullable();
-            $table->string('state')->after('country')->nullable();
-            $table->string('city')->after('state')->nullable();
-            $table->integer('postcode')->after('city')->nullable();
+            $table->string('country')->after('about')->nullable();
         });
     }
 
@@ -36,11 +32,7 @@ return new class extends Migration
         $table->dropColumn('birth_date');
         $table->dropColumn('gender');
         $table->dropColumn('about');
-        $table->dropColumn('address');
         $table->dropColumn('country');
-        $table->dropColumn('state');
-        $table->dropColumn('city');
-        $table->dropColumn('postcode');
         });
     }
 };

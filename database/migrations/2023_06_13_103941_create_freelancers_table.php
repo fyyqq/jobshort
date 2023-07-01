@@ -19,11 +19,7 @@ return new class extends Migration
             $table->bigInteger('contact')->nullable();
             $table->text('about')->nullable();
             $table->text('image')->nullable();
-            $table->text('address')->nullable();
             $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
-            $table->integer('postcode')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
