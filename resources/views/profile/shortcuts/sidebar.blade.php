@@ -64,7 +64,7 @@
                 </div>
             </div>
         </li> --}}
-        @if (auth()->user()->roles != 0)
+        {{-- @if (auth()->user()->roles != 0) --}}
             <li class="list-group-item">
                 <div class="row mx-0">
                     <div class="col-1 d-flex align-items-center justify-content-center">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </li>
-        @endif
+        {{-- @endif --}}
         <li class="list-group-item">
             <div class="row mx-0">
                 <div class="col-1 d-flex align-items-center justify-content-center">

@@ -173,10 +173,12 @@ $(document).ready(function() {
             let orderId = ($(value).siblings('#order_id'))[0].value;
 
             $.ajax({
-                url: `/account/freelancer/orders/complete/${orderId}`,
+                url: `/account/profile/orders/complete/${orderId}`,
                 method: 'POST',
                 success: function(res) {
                     console.log(res);
+                }, error: function (err) {
+                    console.error(err);
                 }
             });
         });

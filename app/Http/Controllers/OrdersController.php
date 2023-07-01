@@ -11,6 +11,7 @@ use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\OrderNotification;
 use App\Notifications\ApproveNotification;
+use App\Notifications\CompleteOrderNotification;
 use Illuminate\Support\Facades\Notification;
 
 class OrdersController extends Controller
@@ -69,7 +70,12 @@ class OrdersController extends Controller
     {
         $order = Order::where('id', $id)->first();
         $order->status = 'completed';
-        $order->save();
+        $orders = $order->save();
+
+        if ($orders) {
+            $freelancer = Freelancer::find($order->freelancer_id);
+            Notification::send($freelancer, new CompleteOrderNotification($order));
+        }
     }
 
     public function store(string $service_id, string $freelancer_id) {

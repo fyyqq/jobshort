@@ -4,21 +4,20 @@ namespace App\Notifications;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ApproveNotification extends Notification
+class ReviewNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($order)
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -65,6 +64,8 @@ class ApproveNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 }

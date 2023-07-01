@@ -4,12 +4,11 @@ namespace App\Notifications;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ApproveNotification extends Notification
+class CompleteOrderNotification extends Notification
 {
     use Queueable;
 
@@ -46,14 +45,15 @@ class ApproveNotification extends Notification
         $uuid =  Uuid::uuid4()->toString();
         return [
             "id" => $uuid,
-            "user" => $this->order->freelancer->name,
-            "image" => $this->order->freelancer->image,
-            "message" => "Congratulations! Your Order Has Been Approved by " . $this->order->freelancer->name .
-            ". We are happy to inform you that your order has been approved by your chosen freelancer. This is an important stage in your collaboration process.
-            Our freelancer has seen the details of your order and is ready to start work. They have the skills and experience needed to deliver exceptional results.            
-            We appreciate your trust in this freelancer and hope this cooperation goes smoothly. If you have any questions or need to communicate further, do not hesitate to contact the freelancer through our platform.
-            We hope you enjoy this collaborative experience and get satisfactory results from our freelancers. Thank you for choosing our platform to meet your needs.
-            Warm greetings,
+            "user" => $notifiable->name,
+            "image" => $notifiable->image,
+            "massage" => "Congratulations! Your Order Has Been Completed by the Buyer.
+            We are happy to inform you that the order you made has been completed by the buyer. This is a happy moment because you have completed a job well.
+            Buyers have seen your work and are satisfied with what you provide. This is proof of your skill and dedication in working on this project.
+            We thank you for your hard work and efforts to provide the best results for buyers. Hopefully this collaboration will bring satisfaction and success for both parties.
+            If you have further questions or need to communicate with buyers, do not hesitate to use our platform to interact.
+            Continue to provide the best quality in every job you do. We wish you continued success in your freelancing career.
+            Thank you for your dedication!
             JobShort Support Team"
         ];
     }
@@ -65,6 +65,8 @@ class ApproveNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 }
