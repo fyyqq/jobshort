@@ -169,9 +169,12 @@
                                 <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>
                             </div>
                         </div>
-                        <a href="" class="btn btn-sm px-3" id="order-chat-btn" style="border: 1.5px solid #2891e1">
+                        {{-- <a href="" class="btn btn-sm px-3" id="order-chat-btn" style="background-color: #2891e1;">
                             <i class="fa-solid fa-message py-1"></i>
-                        </a>
+                        </a> --}}
+                        <div class="pe-4">
+                            <i class="fa-solid fa-message text-dark"></i>
+                        </div>
                     </div>
                 </div>
             @endforeach

@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         {{-- CSS --}}
         <link rel="stylesheet" href="{{ asset('employer/styles.css') }}">
-        <link rel="stylesheet" href="{{ asset('employer/calendar/rome.css') }}">
         {{-- Google Icon --}}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         {{-- CSRF Token --}}
@@ -41,7 +40,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
         <script src="{{ asset('employer/script.js') }}"></script>
-        <script src="{{ asset('employer/calendar/popper.min.js') }}"></script>
-        <script src="{{ asset('employer/calendar/rome.js') }}"></script>
     </body>
 </html>

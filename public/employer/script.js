@@ -108,6 +108,31 @@ function deleteSelectedItems() {
     
 }
 
+function autoImage(event) {
+    if (event.files.length > 0) {
+        const fileName = event.files[0];
+
+        const imgTag = event.previousElementSibling;
+        const icon = event.nextElementSibling;
+
+        const xmark = event.nextElementSibling.nextElementSibling;;
+        xmark.classList.remove('d-none');
+        xmark.addEventListener('click', e => {
+            e.preventDefault();
+            imgTag.removeAttribute('src');
+            imgTag.classList.add('d-none');
+            icon.classList.remove('d-none');
+            e.classList.add('d-none');
+        });
+
+        const imageUrl = URL.createObjectURL(fileName);
+        imgTag.src = imageUrl;
+        imgTag.classList.remove('d-none');
+        icon.classList.add('d-none');
+    }
+}
+
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers:
@@ -274,6 +299,13 @@ $(document).ready(function() {
             $(this).addClass('d-none');
         }
     });
+
+    $('#find-service').on('keyup', function() {
+        var val = this.value;
+    });
+
+    $('#price-range').on('click', function(e) {
+        e.preventDefault();
+
+    });
 });
-
-

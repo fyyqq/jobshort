@@ -7,8 +7,8 @@
         <div class="mb-3">
             <div class="d-flex align-items-center justify-content-sm-between justify-content-center flex-sm-row flex-column gap-2">
                 <div class="btn-group border" role="group" style="background-color: #fff;">
-                    <button class="btn border p-0" style="font-size: 13.5px; width: 200px;">
-                        <input type="text" name="" id="" class="px-2 form-control shadow-none p-0 h-100 w-100 border-0" placeholder="Find Service..." style="font-size: 13.5px;">
+                    <button class="btn border p-0" style="font-size: 13.5px; width: 218px;">
+                        <input type="text" name="" id="find-service" class="px-2 form-control shadow-none p-0 h-100 w-100 border-0" placeholder="Find Service..." style="font-size: 13.5px;">
                     </button>
                     <button class="btn border">
                         <i class="mdi mdi-magnify text-muted"></i>
@@ -35,7 +35,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="btn-group border" role="group" style="background-color: #fff;">
+                    <div class="btn-group border" role="group" id="price-range" style="background-color: #fff;">
                         <button class="btn border" style="font-size: 13.5px;">Price Range</button>
                         <button class="btn border">
                             <i class="mdi mdi-unfold-more-horizontal"></i>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                             <small class="text-dark d-lg-block d-none text-break lh-sm">{{ Str::limit($service->title, 30) }}</small>
-                            <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 20) }}</small>
+                            <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 15) }}</small>
                             <small class="mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
                             <div class="d-flex align-items-center justify-content-between mt-2 w-100">
                                 <small class="mb-0 text-dark">${{ $service->price }}</small>
@@ -95,12 +95,15 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                        <small class="mb-0">200</small>
+                        <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
+                            <i class="mdi mdi-text-box-check-outline" style="font-size: 13px;"></i>
+                            <small class="">200</small>
+                        </div>
                     </div>
                     <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
                         <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
                             <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
-                            <small class="text-muted" style="font-size: 13px;">4.0</small>
+                            <small class="">4.0</small>
                         </div>
                     </div>
                     <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
@@ -146,9 +149,9 @@
                 </div>
                 @endforeach
             </div>
-            {{-- <div class="w-100 d-flex align-items-center justify-content-end {{ count($services) < 1 ? 'd-none' : 'd-flex mt-3' }}">
+            <div class="w-100 d-flex align-items-center justify-content-end {{ count($services) < 1 ? 'd-none' : 'd-flex mt-3' }}">
                 <button class="btn btn-md btn-danger px-4" onclick="deleteSelectedItems()">Delete</button>
-            </div> --}}
+            </div>
         </div>
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

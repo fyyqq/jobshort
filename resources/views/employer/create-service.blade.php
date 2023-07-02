@@ -3,31 +3,30 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
 @section('content')
-    <div class="container-employer pt-4 px-4">
-        <div class="content shadow-sm border pb-4" style="background-color: #fff;">
-            <div class="py-4 px-4 shadow-sm border-bottom">
-                <h1 class="h4 text-dark mb-1">Create New Services</h1>
-                <small class="mb-3" style="color: rgba(136, 136, 136, 0.868);">Create a service so that other people can find.</small>
+    <div class="container-employer pt-4 px-lg-4 px-2">
+        <div class="content">
+            <div class="py-lg-3 py-2 px-3 d-sm-block d-none">
+                <h1 class="h4 text-dark mb-0 font-monospace">Create Service</h1>
             </div>
-            <div class="mt-4 ps-5" id="create-jobs">
+            <div class="border shadow-sm mt-4 ps-5 pe-3 py-4" id="create-jobs" style="background-color: #fff;">
                 <form action="{{ route('employer.post-service') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-0 col-12">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Gallery :</label>
-                            <div class="mt-2 w-100 d-flex align-items-center justify-content-start">
+                            <div class="mt-2 w-100 d-flex align-items-center justify-content-start" id="add-image-container" style="overflow-x: scroll;">
                                 <div class="me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden;">
                                     <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
                                     <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return autoImage(this)">
                                     <i class="fa-solid fa-image" style="font-size: 18px;"></i>
-                                    <i class="fa-solid fa-xmark p-1 position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                    <i class="p-1 fa-solid fa-xmark position-absolute d-none bg-light" style="font-size: 13px; top: 0; right: 0;"></i>
                                 </div>
                                 <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
                                 <div id="addImage" class="border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden; cursor: pointer;">
                                     <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mt-2 w-100">
+                            <div class="d-flex align-items-center justify-content-between mt-1 w-100">
                                 <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 13px;">Support <b>MP4</b>, <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
                                 <div id="emailHelp" class="mt-2 w-100 text-end form-text" style="font-size: 13px;"><span id="lengthImg">1</span> / 6 images</div>
                             </div>
