@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
 @section('content')
-    <div class="container-list pt-4 px-lg-4 px-2">
+    <div class="container-employer pt-4 px-lg-4 px-2">
         <div class="content pb-4">
             <div class="py-4 px-4">
                 <h1 class="h4 text-dark mb-0 font-monospace">Services</h1>

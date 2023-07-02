@@ -11,20 +11,34 @@
                         <input type="text" name="" id="" class="px-2 form-control shadow-none p-0 h-100 w-100 border-0" placeholder="Find Service..." style="font-size: 13.5px;">
                     </button>
                     <button class="btn border">
-                        <i class="mdi mdi-magnify"></i>
+                        <i class="mdi mdi-magnify text-muted"></i>
                     </button>
                 </div>
-                <div class="">
-                    <div class="btn-group border" role="group" style="background-color: #fff;">
+                <div class="dropdown">
+                    <div class="btn-group border" data-bs-toggle="dropdown" role="group" style="background-color: #fff;">
                         <button class="btn border px-3" style="font-size: 13.5px;">Sort By</button>
                         <button class="btn border">
                             <i class="mdi mdi-menu-down"></i>
                         </button>
+                        <div class="dropdown-menu dropdown-menu-left py-0">
+                            <button class="dropdown-item py-2" type="button">
+                                <i class="me-2 mdi mdi-format-letter-case"></i>
+                                <small class="text-muted" style="font-size: 12.5px;">Letter</small>
+                            </button>
+                            <button class="dropdown-item py-2" type="button">
+                                <i class="me-2 mdi mdi-text-box-check-outline"></i>
+                                <small class="text-muted" style="font-size: 12.5px;">Top Order</small>
+                            </button>
+                            <button class="dropdown-item py-2" type="button">
+                                <i class="me-2 mdi mdi-star"></i>
+                                <small class="text-muted" style="font-size: 12.5px;">Top Rating</small>
+                            </button>
+                        </div>
                     </div>
                     <div class="btn-group border" role="group" style="background-color: #fff;">
                         <button class="btn border" style="font-size: 13.5px;">Price Range</button>
                         <button class="btn border">
-                            <i class="mdi mdi-menu-down"></i>
+                            <i class="mdi mdi-unfold-more-horizontal"></i>
                         </button>
                     </div>
                 </div>
@@ -37,12 +51,12 @@
                     <small class="mb-0">Service Details</small>
                 </div>
                 <div class="col-2 d-lg-flex d-none align-items-center justify-content-center">
-                    <small class="mb-0">Category</small>
+                    <small class="mb-0">Order</small>
                 </div>
                 <div class="col-2 d-lg-flex d-none align-items-center justify-content-center">
-                    <small class="mb-0">Price</small>
+                    <small class="mb-0">Rating</small>
                 </div>
-                <div class="col-lg-3 col-2 d-flex align-items-center justify-content-center">
+                <div class="col-lg-3 col-2 d-flex align-items-center justify-content-lg-center justify-content-end">
                     <small class="mb-0">Action</small>
                 </div>
             </div>
@@ -53,30 +67,43 @@
                         <input type="checkbox" name="" id="select-jobs">
                         <input type="hidden" name="slug" value="{{ $service->slug }}">
                     </div>
-                    <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3">
-                        <div class="rounded" style="height: 76px; width: 76px; overflow: hidden;">
+                    <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
+                        <div class="rounded" style="height: 75px; width: 110px; overflow: hidden;">
                             @foreach (explode(',', $service->image) as $key => $value)
                                 @if ($key === 0)
                                     <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;">
                                 @endif
                             @endforeach
                         </div>
-                        <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4">
+                        <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                             <small class="text-dark d-lg-block d-none text-break lh-sm">{{ Str::limit($service->title, 30) }}</small>
-                            <small class="text-dark d-lg-none d-block">{{ Str::limit($service->title, 20) }}</small>
-                            <small class="d-lg-none d-block mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
-                            <small class="d-lg-none d-block mb-0 text-dark mt-1">${{ $service->price }}</small>
+                            <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 20) }}</small>
+                            <small class="mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
+                            <div class="d-flex align-items-center justify-content-between mt-2 w-100">
+                                <small class="mb-0 text-dark">${{ $service->price }}</small>
+                                <div class="d-lg-none d-flex">
+                                    <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
+                                        <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
+                                        <small class="text-muted">3.0</small>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
+                                        <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
+                                        <small class="text-muted">15</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                        <span class="badge bg-light border">
-                            <small class="mb-0 text-muted" style="font-size: 11.5px;">{{ $service->category }}</small>
-                        </span>
+                        <small class="mb-0">200</small>
                     </div>
                     <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                        <small class="mb-0">RM {{ $service->price }}</small>
+                        <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
+                            <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
+                            <small class="text-muted" style="font-size: 13px;">4.0</small>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-2 d-flex align-items-center justify-content-center flex-column" style="row-gap: 5px;">
+                    <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
                         <div class="btn-group" role="group">
                             <button style="opacity: 0;">
                                 <form action="{{ route('employer.update-archive-jobs', $service->slug) }}" method="post">

@@ -122,12 +122,12 @@ input[type=number] {
 }
 
 /* Content */
-.container-list {
+.container-employer {
     display: flex;
     justify-content: flex-end;
 }
 
-.container-list .content {
+.container-employer .content {
     width: calc(100% - 235px);
     transition: width .3s ease;
     height: max-content;
@@ -210,11 +210,11 @@ input[type=number] {
 }
 
 @media (max-width: 767px) {
-    .container-list {
+    .container-employer {
         display: flex;
         justify-content: flex-end;
     }
-    .container-list .content {
+    .container-employer .content {
         width: 100%;
     }
     #dashboard-main-detail {
