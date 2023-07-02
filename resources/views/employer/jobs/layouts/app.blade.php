@@ -8,8 +8,9 @@
 @section('content')
     <div class="container-employer pt-4 px-lg-4 px-2">
         <div class="content pb-4">
-            <div class="py-lg-3 py-2 px-3 d-sm-block d-none">
-                <h1 class="h4 text-dark mb-0 font-monospace">Services</h1>
+            <div class="border rounded py-4 px-4" style="background-color: #fff;">
+                <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Services</h1>
+                <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Services</h1>
             </div>
             {{-- <div class="mt-3 shadow-sm rounded border" style="height: 150px; background-color: #fff;">
                 <div class="row mx-0">

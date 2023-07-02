@@ -5,10 +5,11 @@
 @section('content')
 <div class="container-employer pt-4 px-4">
     <div class="content">
-        <div class="p-4 border" style="background-color: #fff;">
-            <h1 class="h4 text-dark mb-1">My Dashboard</h1>
+        <div class="border rounded py-4 px-4" style="background-color: #fff;">
+            <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Dashboard</h1>
+            <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Dashboard</h1>
         </div>
-        <div class="mt-3 py-4 px-2" style="height: 550px;">
+        <div class="mt-3 pt-2" style="height: 550px;">
             <div class="w-100 d-grid gap-2" id="dashboard-main-detail">
                 <span class="shadow-sm border rounded py-3 px-0 d-flex align-items-center justify-content-center" style="background-color: #fff;">
                     <div class="col-4 d-flex justify-content-center">

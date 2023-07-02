@@ -286,7 +286,7 @@ $(document).ready(function() {
             $('#lengthImg')[0].innerText = '';
             $('#lengthImg')[0].innerText = imgLength + 1;
 
-            if (imgLength <= 5) {
+            if (imgLength <= 14) {
                 $('#addImage').removeClass('d-none');
             }
         });
@@ -295,7 +295,7 @@ $(document).ready(function() {
         $('#lengthImg')[0].innerText = '';
         $('#lengthImg')[0].innerText = imgLength + 1;
 
-        if (imgLength >= 5) {
+        if (imgLength >= 14) {
             $(this).addClass('d-none');
         }
     });
