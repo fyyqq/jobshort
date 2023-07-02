@@ -1,6 +1,5 @@
 <div class="sidebar shadow-sm d-md-block d-none">
     <a href="{{ route('home') }}" class="text-decoration-none sidebar-logo py-4 border-bottom d-flex align-items-center justify-content-center">
-        <span class="material-symbols-outlined" style="color: #2891e1;">work</span>
         <img src="{{ asset('brand/jobshort.png') }}" style="width: 82px;">
     </a>
     <span class="material-symbols-outlined rounded-circle border" id="btn_open_close">arrow_right</span>
@@ -11,7 +10,6 @@
             </div>
             <div class="mt-1 ms-3">
                 <h6 class="text-dark mb-0">{{ auth()->user()->freelancer->name }}</h6>
-                <small class="text-muted"><i class="fa-solid fa-user me-1" style="font-size: 12px;"></i>{{ auth()->user()->username }}</small>
             </div>
         </div>
         <span class="material-symbols-outlined" id="profile-icon">arrow_forward_ios</span>

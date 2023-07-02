@@ -69,11 +69,11 @@
                         <li>
                             <a class="dropdown-item py-2" href="{{ route('profile.main') }}">Profile</a>
                         </li>
-                        {{-- @if (auth()->user()->roles == '1')
+                        @if (auth()->user()->roles == '2')
                             <li>
                                 <a class="dropdown-item py-2" href="{{ route('employer.main') }}">Freelancer</a>
                             </li>
-                        @endif --}}
+                        @endif
                         <li>
                             <span class="dropdown-item pt-2 pb-1" href="#">
                                 <div class="ps-0 form-check form-switch d-flex justify-content-between flex-row-reverse">

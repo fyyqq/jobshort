@@ -6,11 +6,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
 @section('content')
-    <div class="container-employer pt-4 px-md-4 px-0">
+    <div class="container-list pt-4 px-lg-4 px-2">
         <div class="content pb-4">
-            <div class="py-4 px-4 shadow-sm rounded border" style="background-color: #fff;">
-                <h1 class="h4 text-dark mb-1">My Jobs</h1>
-                <small class="mb-3" style="color: rgba(136, 136, 136, 0.868);">A place to manage the workbook of the work you create.</small>
+            <div class="py-4 px-4">
+                <h1 class="h4 text-dark mb-0 font-monospace">Services</h1>
             </div>
             {{-- <div class="mt-3 shadow-sm rounded border" style="height: 150px; background-color: #fff;">
                 <div class="row mx-0">
@@ -22,8 +21,8 @@
                 </div>
             </div> --}}
             <div class="mt-3">
-                <div class="mb-3 border-bottom">
-                    <div class="row mx-0 shadow-sm rounded border" style="background-color: #fff;">
+                <div class="mb-3">
+                    {{-- <div class="row mx-0 shadow-sm rounded border" style="background-color: #fff;">
                         <div class="col-2 d-flex align-items-center justify-content-center {{ Route::currentRouteName() === 'employer.jobs' ? 'border-3 border-bottom border-primary fw-bold text-primary' : '' }}">
                             <a href="{{ route('employer.jobs') }}" class="text-dark text-decoration-none py-3">All</a>
                         </div>
@@ -39,7 +38,7 @@
                         <div class="col-2 d-flex align-items-center justify-content-center {{ Route::currentRouteName() === 'employer.archive-jobs' ? 'border-3 border-bottom border-primary fw-bold text-primary' : '' }}">
                             <a href="{{ route('employer.archive-jobs') }}" class="text-dark text-decoration-none py-3">Archived</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 @yield('service-pages')
             </div>

@@ -122,12 +122,12 @@ input[type=number] {
 }
 
 /* Content */
-.container-employer {
+.container-list {
     display: flex;
     justify-content: flex-end;
 }
 
-.container-employer .content {
+.container-list .content {
     width: calc(100% - 235px);
     transition: width .3s ease;
     height: max-content;
@@ -202,18 +202,28 @@ input[type=number] {
     font-size: 12px;
 }
 
+#dashboard-main-detail {
+    grid-template-columns: repeat(4, 1fr);
+}
 
 @media (max-width: 991.5px) {
 }
 
 @media (max-width: 767px) {
-    .container-employer {
+    .container-list {
         display: flex;
         justify-content: flex-end;
     }
-    .container-employer .content {
+    .container-list .content {
         width: 100%;
+    }
+    #dashboard-main-detail {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 576px) {}
+@media (max-width: 576px) {
+    #dashboard-main-detail {
+        grid-template-columns: 1fr;
+    }
+}
