@@ -14,8 +14,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('employer.applicant') }}" style="font-size: 13.8px;">Order</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Jobs</a>
+                <li class="nav-item dropdown" style="cursor: pointer;">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Service</a>
                     <ul class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
                         <li>
                             <a class="dropdown-item py-2" href="{{ route('employer.jobs') }}" style="font-size: 12.5px;">Services</a>
@@ -40,6 +40,9 @@
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-120px, 5px); width: 160px;">
                         <li>
                             <a class="dropdown-item py-2" href="{{ route('employer.profile') }}" style="font-size: 12.5px;">Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ route('profile.main') }}" style="font-size: 12.5px;">Main</a>
                         </li>
                         <li>
                             <span class="dropdown-item pt-2 pb-1" href="#">

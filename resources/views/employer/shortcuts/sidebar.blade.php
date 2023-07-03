@@ -82,7 +82,7 @@
                         <span class="material-symbols-outlined fs-6">arrow_back_ios_new</span>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <p class="mb-0" style="font-size: 14.5px;">Profile Page</p>
+                        <p class="mb-0" style="font-size: 14.5px;">Main</p>
                     </div>
                 </a>
             </li>
