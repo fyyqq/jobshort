@@ -66,10 +66,10 @@
         </div>
         <div class="col-md-5 col-12 px-md-0 px-3">
             <div class="d-flex align-items-center justify-content-start justify-content-md-center flex-column">
-                <div class="rounded-circle" style="width: 100px; height: 100px; overflow:hidden;">
-                    <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100 border rounded-circle" style="object-fit: cover;" id="seller_img">
+                <div class="rounded-3" style="width: 90px; height: 90px; overflow:hidden;">
+                    <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img">
                 </div>
-                <div class="row mx-0 mt-md-4 mt-3 position-relative">
+                <div class="row mx-0 mt-3 position-relative">
                     <input type="text" name="" id="file_text" class="form-control shadow-none border-bottom text-center border-bottom" value="Choose a file...">
                     <i class="fa-solid text-secondary fa-xmark p-1" style="position: absolute; right: 0; top: 10px; font-size: 14px; cursor: pointer; z-index: 999; width: max-content;"></i>
                     <input type="file" name="image" id="employer-img" accept=".png, .jpg, .jpeg" value="{{ $data->image }}" readonly onchange="return freelancerImage(this)">

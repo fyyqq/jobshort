@@ -63,27 +63,12 @@ input[type=number] {
 .sidebar #btn_open_close {
     position: absolute;
     top: 50%;
-    right: -35px;
-    transform: translateY(-50%);
-    background-color: #fff;
-    color: #333;
+    right: -23px;
+    transform: translateY(-50%) rotate(180deg);
+    background-color: #2891e1;
+    color: #fff;
     user-select: none;
     cursor: pointer;
-}
-.sidebar #side-profile:hover #profile-icon {
-    right: 14px;
-    transition: right .3s ease-in-out;
-    user-select: none;
-}
-
-.sidebar #profile-icon {
-    position: absolute;
-    top: 50%;
-    right: 18px;
-    transition: right .3s ease-in-out;
-    font-size: 14px;
-    transform: translateY(-50%);
-    color: rgba(145, 145, 145, 0.806);
 }
 
 .sidebar .link-list .navbar-nav .dropdown-item a {
@@ -109,7 +94,6 @@ input[type=number] {
 .sidebar .link-list .navbar-nav .dropdown-item a.active {
     background-color: #84c9fe2a;
     border-right: 5px solid #2891e1;
-    font-weight: 600;
 }
 
 .sidebar .link-list .navbar-nav .dropdown-item a.active p,
