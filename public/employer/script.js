@@ -315,7 +315,12 @@ $(document).ready(function() {
     $('.delete-service-btn').on('click', function(e) {
         e.preventDefault();
         
-        console.log(e.target);
+        const slug = $(this).siblings('#service-slug').val(); 
+    
+        axios.delete(`/account/freelancer/services/delete/${slug}`).then(function(res) {
+            const data =  res.data;
+            console.log(data);
+        });
     });
 });
 

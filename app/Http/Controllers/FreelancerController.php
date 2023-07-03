@@ -231,13 +231,4 @@ class FreelancerController extends Controller
     public function deletedItems(Request $request) {
         return $request->all();
     }
-
-    public function destroy(string $slug)
-    {
-        $slug = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
-
-        $slug->delete();
-
-        return back()->with('success', 'My Jobs has been deleted');
-    }
 }

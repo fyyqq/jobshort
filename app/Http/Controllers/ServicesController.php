@@ -93,7 +93,7 @@ class ServicesController extends Controller
     }
 
     public function updateArchive(string $slug) {
-        $service = Service::where('slug', $slug)->first();
+        $service = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
         $service->status = "archive";
         $service->save();
 
@@ -215,8 +215,11 @@ class ServicesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $slug = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
+        $slug->delete();
+
+        return 'data has been deleted';
     }
 }
