@@ -108,6 +108,10 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/ongoing', [FreelancerController::class, 'ongoing'])->name('employer.on-jobs');
             Route::get('/complete', [FreelancerController::class, 'complete'])->name('employer.complete-jobs');
             Route::get('/archive', [FreelancerController::class, 'archive'])->name('employer.archive-jobs');
+            // Filter
+            Route::get('/sort-by-normal-price', [ServicesController::class, 'sortByNormal'])->name('employer.normal');
+            Route::get('/sort-by-high-price', [ServicesController::class, 'sortByHighPrice'])->name('employer.filter-high-price');
+            Route::get('/sort-by-low-price', [ServicesController::class, 'sortByLowPrice'])->name('employer.filter-low-price');
         });
         Route::get('/notification', [FreelancerController::class, 'notification'])->name('employer.notification');
         Route::prefix('profile')->group(function() {

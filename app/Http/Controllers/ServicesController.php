@@ -20,10 +20,32 @@ class ServicesController extends Controller
     {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
-  
+        
         return view('employer.jobs.services', [
             "services" => $service
         ]);
+    }
+    
+    // Filter
+    public function sortByNormal() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::where('freelancer_id', $freelancer->id)->latest()->get();
+        
+        return response()->json($services);
+    }
+
+    public function sortByHighPrice() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
+        
+        return response()->json($services);
+    }
+
+    public function sortByLowPrice() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
+        
+        return response()->json($services);
     }
 
     /**
