@@ -92,6 +92,14 @@ class ServicesController extends Controller
         return response()->json($services);
     }
 
+    public function updateArchive(string $slug) {
+        $service = Service::where('slug', $slug)->first();
+        $service->status = "archive";
+        $service->save();
+
+        return 'data has been archived';
+    }
+
     /**
      * Show the form for creating a new resource.
      */

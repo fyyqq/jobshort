@@ -101,7 +101,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/', [ServicesController::class, 'index'])->name('employer.jobs');
             Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('employer.edit-jobs');
             Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('employer.update-jobs');
-            Route::put('/archive/{slug}', [FreelancerController::class, 'updateArchive'])->name('employer.update-archive-jobs');
+            Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('employer.update-archive-jobs');
             Route::delete('/delete/{slug}', [FreelancerController::class, 'destroy'])->name('employer.delete-jobs');
             Route::post('/delete-items', [FreelancerController::class, 'deletedItems'])->name('employer.delete-item-jobs');
             Route::get('/live', [FreelancerController::class, 'live'])->name('employer.live-jobs');

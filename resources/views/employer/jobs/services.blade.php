@@ -116,7 +116,7 @@
                                         <i class="mdi mdi-dots-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                                        <button class="dropdown-item py-2" id="archive-service-btn" type="button">
+                                        <button class="dropdown-item py-2 archive-service-btn" type="button">
                                             <i class="me-2 mdi mdi-archive"></i>
                                             <small class="text-muted" style="font-size: 12.5px;">Archive</small>
                                         </button>
@@ -124,7 +124,8 @@
                                             <i class="me-2 mdi mdi-pencil"></i>
                                             <small class="text-dark">Edit</small>
                                         </a>
-                                        <button class="dropdown-item py-2" id="delete-service-btn" type="button">
+                                        <input type="hidden" value="{{ $service->slug }}" id="service-slug">
+                                        <button class="dropdown-item py-2 delete-service-btn" type="button">
                                             <i class="me-2 mdi mdi-delete"></i>
                                             <small class="text-muted" style="font-size: 12.5px;">Delete</small>
                                         </button>

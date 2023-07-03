@@ -184,14 +184,6 @@ class FreelancerController extends Controller
         return redirect()->route('employer.jobs')->with('success', 'My jobs has been updated'); 
     }
 
-    public function updateArchive(string $slug) {
-        // $job = Job::where('slug', $slug)->first();
-        // $job->status = 'archive';
-        // $job->save();
-
-        return redirect()->route('employer.archive-jobs');
-    }
-
     public function updateProfile(Request $request, string $id) 
     {
         $freelancer = Freelancer::where('user_id', $id)->first();
