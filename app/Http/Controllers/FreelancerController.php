@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\Employee;
 use App\Models\Application;
 use App\Models\Freelancer;
+use App\Models\Notification;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -110,21 +111,9 @@ class FreelancerController extends Controller
 
     public function notification() 
     {
-        return view('employer.notification');
-    }
-
-    public function applicantApproved($id) 
-    {
-        $application = Application::where('id', $id)->first();
-        $application->status = 'approved';
-        $application->save();
-    }
-
-    public function applicantRejected($id) 
-    {
-        $application = Application::where('id', $id)->first();
-        $application->status = 'rejected';
-        $application->save();
+        return view('employer.notification', [
+            "notifications" => Notification::where('notifiable_id', Auth::id())->latest()->get()
+        ]);
     }
 
     public function addService() 

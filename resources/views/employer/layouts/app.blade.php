@@ -30,7 +30,7 @@
         <div id="app">
             @include('employer.shortcuts.navbar')
             @include('employer.shortcuts.sidebar')
-            <main class="pb-5">
+            <main class="pb-md-5 pb-3">
                 @yield('content')
             </main>
         </div>

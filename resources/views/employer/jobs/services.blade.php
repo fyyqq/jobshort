@@ -81,12 +81,12 @@
                             <small class="mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
                             <div class="d-flex align-items-center justify-content-between mt-2 w-100">
                                 <small class="mb-0 text-dark">${{ $service->price }}</small>
-                                <div class="d-lg-none d-flex">
-                                    <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
-                                        <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
+                                <div class="d-lg-none d-flex flex-row-reverse">
+                                    <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
+                                        <i class="fa-solid fa-star text-warning" style="font-size: 12.5px;"></i>
                                         <small class="text-muted">3.0</small>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
+                                    <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
                                         <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
                                         <small class="text-muted">15</small>
                                     </div>

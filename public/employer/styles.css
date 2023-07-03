@@ -216,6 +216,10 @@ input[type=number] {
     font-size: 13px;
 }
 
+#order-menu-link {
+    font-size: 14px;
+}
+
 @media (max-width: 991.5px) {
 }
 
@@ -231,7 +235,7 @@ input[type=number] {
         grid-template-columns: repeat(2, 1fr);
     }
     #order-menu-link {
-        font-size: 14px;
+        font-size: 13.5px;
     }
     #service-order-title {
         font-size: 14px;
@@ -241,6 +245,9 @@ input[type=number] {
     }
     #order-time, #order-status, #order-action {
         font-size: 12.5px;
+    }
+    #notification-username {
+        font-size: 13px;
     }
 }
 
@@ -255,7 +262,7 @@ input[type=number] {
         overflow-x: scroll;
     }
     #order-menu-link {
-        font-size: 14px;
+        font-size: 13px;
     }
     #service-order-title {
         font-size: 13.5px;
@@ -269,5 +276,8 @@ input[type=number] {
     }
     #order-status {
         font-size: 12px;
+    }
+    #notification-username {
+        font-size: 12.5px;
     }
 }

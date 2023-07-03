@@ -12,16 +12,16 @@
                     <a class="nav-link" href="{{ route('employer.main') }}" style="font-size: 13.8px;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('employer.applicant') }}" style="font-size: 13.8px;">Applicant</a>
+                    <a class="nav-link" href="{{ route('employer.applicant') }}" style="font-size: 13.8px;">Order</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Jobs</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
                         <li>
-                            <a class="dropdown-item" href="{{ route('employer.jobs') }}" style="font-size: 13.8px;">My Jobs</a>
+                            <a class="dropdown-item py-2" href="{{ route('employer.jobs') }}" style="font-size: 12.5px;">Services</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('employer.create-service') }}" style="font-size: 13.8px;">Create Jobs</a>
+                            <a class="dropdown-item py-2" href="{{ route('employer.create-service') }}" style="font-size: 12.5px;">Create</a>
                         </li>
                     </ul>
                 </li>

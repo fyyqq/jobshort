@@ -41,7 +41,7 @@
                 <span class="material-symbols-outlined" style="font-size: 22px;">forum</span>
             </a> --}}
             @include('shortcuts.navbar')
-            <main class="pb-5" style="margin-top: 100px;">
+            <main class="pb-md-5 pb-3" style="margin-top: 100px;">
                 @yield('content')
             </main>
             {{-- Mobile Navbar --}}
