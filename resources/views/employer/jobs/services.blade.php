@@ -4,11 +4,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
 @section('service-pages')
-        <div class="mb-3">
+        <div class="">
             <div class="d-flex align-items-center justify-content-sm-between justify-content-center flex-sm-row flex-column gap-2">
                 <div class="btn-group border" role="group" style="background-color: #fff;">
                     <button class="btn border p-0" style="font-size: 13.5px; width: 218px;">
-                        <input type="text" name="" id="find-service" class="px-2 form-control shadow-none p-0 h-100 w-100 border-0" placeholder="Find Service..." style="font-size: 13.5px;">
+                        <input type="text" name="keyword" id="find-service" class="px-2 form-control shadow-none p-0 h-100 w-100 border-0" placeholder="Find Service..." style="font-size: 13.5px;" onkeyup="return searchServices(this)">
                     </button>
                     <button class="btn border">
                         <i class="mdi mdi-magnify text-muted"></i>
@@ -21,43 +21,31 @@
                             <i class="mdi mdi-menu-down"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-left py-0">
-                            <button class="dropdown-item py-2" type="button">
+                            <button class="dropdown-item py-2" type="button" onclick="return sortByOldest(this)">
                                 <i class="me-2 mdi mdi-format-letter-case"></i>
-                                <small class="text-muted" style="font-size: 12.5px;">Letter</small>
+                                <small class="text-muted" style="font-size: 12.5px;">Oldest</small>
                             </button>
-                            <button class="dropdown-item py-2" type="button">
+                            <button class="dropdown-item py-2" type="button" onclick="return sortByTopOrder(this)">
                                 <i class="me-2 mdi mdi-text-box-check-outline"></i>
                                 <small class="text-muted" style="font-size: 12.5px;">Top Order</small>
                             </button>
-                            <button class="dropdown-item py-2" type="button">
+                            <button class="dropdown-item py-2" type="button" onclick="return sortByTopRating(this)">
                                 <i class="me-2 mdi mdi-star"></i>
                                 <small class="text-muted" style="font-size: 12.5px;">Top Rating</small>
                             </button>
                         </div>
                     </div>
-                    <div class="d-none btn-group border" role="group" style="background-color: #fff;">
-                        <button class="btn border" style="font-size: 13.5px;">Price Range</button>
-                        <button class="btn border">
-                            <i class="mdi mdi-menu-down"></i>
-                        </button>
-                    </div>
-                    <div class="btn-group border" role="group" style="background-color: #fff;" onclick="priceRangeTop(this)">
+                    <div class="btn-group border" role="group" style="background-color: #fff;" onclick="return priceRangeTop(this)">
                         <button class="btn border" style="font-size: 13.5px;">Price Range</button>
                         <button class="btn border">
                             <i class="mdi mdi-unfold-more-horizontal"></i>
                         </button>
                     </div>
-                    <div class="d-none btn-group border" role="group" style="background-color: #fff;">
-                        <button class="btn border" style="font-size: 13.5px;">Price Range</button>
-                        <button class="btn border">
-                            <i class="mdi mdi-menu-up"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
-            <div class="row mx-0 py-3 border mb-2 mt-4" style="background-color: #fff;">
+            <div class="row mx-0 py-3 border mb-2 mt-3" style="background-color: #fff;">
                 <div class="col-1 text-center d-flex align-items-center justify-content-center">
-                    <input type="checkbox" name="" id="select-all-jobs" class="" onclick="allJobs()">
+                    <input type="checkbox" name="" id="select-all-jobs" class="" onclick="return allJobs()">
                 </div>
                 <div class="col-lg-4 col-8 d-flex align-items-center justify-content-start">
                     <small class="mb-0">Service Details</small>
@@ -96,11 +84,11 @@
                                     <div class="d-lg-none d-flex flex-row-reverse">
                                         <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
                                             <i class="fa-solid fa-star text-warning" style="font-size: 12.5px;"></i>
-                                            <small class="text-muted">3.0</small>
+                                            <small class="text-muted">{{ $service->rating->max('stars') > 0 ? $service->rating->max('stars').'.0' : '0' }}</small>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
                                             <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
-                                            <small class="text-muted">15</small>
+                                            <small class="text-muted">{{ $service->order->where('status', 'completed')->count() }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -108,27 +96,21 @@
                         </div>
                         <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
                             <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
-                                <i class="mdi mdi-text-box-check-outline" style="font-size: 13px;"></i>
-                                <small class="">200</small>
+                                <i class="mdi mdi-text-box-check-outline" style="font-size: 16px;"></i>
+                                <small class="">{{ $service->order->where('status', 'completed')->count() }}</small>
                             </div>
                         </div>
                         <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
                             <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
                                 <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
-                                <small class="">4.0</small>
+                                <small class="">{{ $service->rating->max('stars') > 0 ? $service->rating->max('stars').'.0' : '0' }}</small>
                             </div>
                         </div>
                         <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
                             <div class="btn-group" role="group">
-                                <button style="opacity: 0;">
-                                    <form action="{{ route('employer.update-archive-jobs', $service->slug) }}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-sm border btn-light px-3 d-md-block d-none">
-                                            <small class="text-dark">Edit</small>
-                                        </button>
-                                    </form>
-                                </button>
+                                <a href="{{ route('employer.edit-jobs', $service->slug) }}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
+                                    <small class="text-dark">Edit</small>
+                                </a>
                                 <div class="btn-group dropdown">
                                     <button type="button" class="border btn btn-light btn-sm" data-bs-toggle="dropdown">
                                         <i class="mdi mdi-dots-vertical"></i>
@@ -138,10 +120,10 @@
                                             <i class="me-2 mdi mdi-archive"></i>
                                             <small class="text-muted" style="font-size: 12.5px;">Archive</small>
                                         </button>
-                                        <button id="edit-service-btn" type="button" class="dropdown-item py-2 d-md-none d-block">
+                                        <a href="{{ route('employer.edit-jobs', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
                                             <i class="me-2 mdi mdi-pencil"></i>
                                             <small class="text-dark">Edit</small>
-                                        </button>
+                                        </a>
                                         <button class="dropdown-item py-2" id="delete-service-btn" type="button">
                                             <i class="me-2 mdi mdi-delete"></i>
                                             <small class="text-muted" style="font-size: 12.5px;">Delete</small>
@@ -154,7 +136,7 @@
                 @endforeach
             </div>
             <div class="w-100 d-flex align-items-center justify-content-end {{ count($services) < 1 ? 'd-none' : 'd-flex mt-3' }}">
-                <button class="btn btn-md btn-danger px-4" onclick="deleteSelectedItems()">Delete</button>
+                <button class="btn btn-md btn-danger px-4" onclick="return deleteSelectedItems()">Delete</button>
             </div>
         </div>
 @endsection

@@ -112,6 +112,12 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/sort-by-normal-price', [ServicesController::class, 'sortByNormal'])->name('employer.normal');
             Route::get('/sort-by-high-price', [ServicesController::class, 'sortByHighPrice'])->name('employer.filter-high-price');
             Route::get('/sort-by-low-price', [ServicesController::class, 'sortByLowPrice'])->name('employer.filter-low-price');
+            // Filter OrderBy
+            Route::get('/sort-by-oldest', [ServicesController::class, 'sortByOldest'])->name('employer.filter-oldest');
+            Route::get('/sort-by-top-order', [ServicesController::class, 'sortByTopOrder'])->name('employer.filter-order');
+            Route::get('/sort-by-top-rating', [ServicesController::class, 'sortByTopRating'])->name('employer.filter-rating');
+            // Filter Search
+            Route::get('/search', [ServicesController::class, 'searchServices'])->name('employer.search-services');
         });
         Route::get('/notification', [FreelancerController::class, 'notification'])->name('employer.notification');
         Route::prefix('profile')->group(function() {

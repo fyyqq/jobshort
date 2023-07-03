@@ -1,4 +1,3 @@
-// const { default: axios } = require("axios");
 
 const open_close_btn = document.getElementById('btn_open_close');
 const sidebar = document.getElementsByClassName('sidebar')[0];
@@ -307,11 +306,49 @@ $(document).ready(function() {
     });
 });
 
+// Filter Search
+function searchServices(event) {
+    const keyword = event.value;
+
+    axios.get('/account/freelancer/services/search', { params: { keyword } })
+    .then(function(res) {
+        const data = res.data;
+        // console.log(data);
+        displayFilteredServices(data);
+    });
+}
+
+// Filter SortBy
+function sortByOldest(event) {
+    axios.get('/account/freelancer/services/sort-by-oldest')
+    .then(function(res) {
+        const data = res.data;
+        displayFilteredServices(data);
+    });
+}
+
+function sortByTopOrder(event) {
+    axios.get('/account/freelancer/services/sort-by-top-order')
+    .then(function(res) {
+        const data = res.data;
+        displayFilteredServices(data);
+    });
+}
+
+function sortByTopRating(event) {
+    axios.get('/account/freelancer/services/sort-by-top-rating')
+    .then(function(res) {
+        const data = res.data;
+        console.log(data);
+        // displayFilteredServices(data);
+    });
+}
+
 // Filter Price
 function priceRangeTop(event) {
 
     event.removeAttribute('onclick');
-    event.setAttribute('onclick', 'priceRangeDown(this)');
+    event.setAttribute('onclick', 'return priceRangeDown(this)');
 
     const filter_icon = event.childNodes[3].childNodes[1];
     filter_icon.classList.remove('mdi-unfold-more-horizontal');
@@ -330,7 +367,7 @@ function priceRangeTop(event) {
 function priceRangeDown(event) {
 
     event.removeAttribute('onclick');
-    event.setAttribute('onclick', 'priceRange(this)');
+    event.setAttribute('onclick', 'return priceRange(this)');
 
     const filter_icon = event.childNodes[3].childNodes[1];
     filter_icon.classList.remove('mdi-unfold-more-horizontal');
@@ -349,7 +386,7 @@ function priceRangeDown(event) {
 function priceRange(event) {
     
     event.removeAttribute('onclick');
-    event.setAttribute('onclick', 'priceRangeTop(this)');
+    event.setAttribute('onclick', 'return priceRangeTop(this)');
     
     const filter_icon = event.childNodes[3].childNodes[1];
     filter_icon.classList.remove('mdi-menu-up');
@@ -370,6 +407,17 @@ function displayFilteredServices(services) {
     parentService.innerHTML = '';
 
     services.forEach(function(service) {
+        let maxStars = 0;
+        service.rating.forEach(function(rating) {
+            if (rating.stars > maxStars) {
+                maxStars = rating.stars;
+            }
+        });
+        if (maxStars > 0) {
+            stars = maxStars + '.0';
+        } else {
+            stars = '0'
+        }
         const serviceElement = document.createElement('div');
         serviceElement.className += 'px-0';
         serviceElement.innerHTML = 
@@ -379,9 +427,9 @@ function displayFilteredServices(services) {
                 <input type="hidden" name="slug" value="${service.slug}">
             </div>
             <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
-                <div class="rounded" style="height: 75px; width: 110px; overflow: hidden;">
+                <a href="/services/${service.slug}" class="rounded" style="height: 75px; width: 110px; overflow: hidden;">
                     <img src="/images/${service.image.split(',')[0]}" class="w-100 h-100" style="object-fit: cover;">
-                </div>
+                </a>
                 <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                     <small class="text-dark d-lg-block d-none text-break lh-sm">${service.title.slice(0, 30)}</small>
                     <small class="text-dark d-lg-none d-block lh-base">${service.title.slice(0, 15)}</small>
@@ -391,11 +439,11 @@ function displayFilteredServices(services) {
                         <div class="d-lg-none d-flex flex-row-reverse">
                             <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
                                 <i class="fa-solid fa-star text-warning" style="font-size: 12.5px;"></i>
-                                <small class="text-muted">3.0</small>
+                                <small class="text-muted">${stars}</small>
                             </div>
                             <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
                                 <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
-                                <small class="text-muted">15</small>
+                                <small class="text-muted">${service.order.filter(order => order.status === 'completed').length}</small>
                             </div>
                         </div>
                     </div>
@@ -403,27 +451,21 @@ function displayFilteredServices(services) {
             </div>
             <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
                 <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
-                    <i class="mdi mdi-text-box-check-outline" style="font-size: 13px;"></i>
-                    <small class="">200</small>
+                    <i class="mdi mdi-text-box-check-outline" style="font-size: 16px;"></i>
+                    <small class="">${service.order.filter(order => order.status === 'completed').length}</small>
                 </div>
             </div>
             <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
                 <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
                     <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
-                    <small class="">4.0</small>
+                    <small class="">${stars}</small>
                 </div>
             </div>
             <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
                 <div class="btn-group" role="group">
-                    <button class="d-none" style="opacity: 0;">
-                        <form action="{{ route('employer.update-archive-jobs', '${service.slug}') }}" method="post">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="btn btn-sm border btn-light px-3 d-md-block d-none">
-                                <small class="text-dark">Edit</small>
-                            </button>
-                        </form>
-                    </button>
+                    <a href="/account/freelancer/services/edit/${service.slug}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
+                        <small class="text-dark">Edit</small>
+                    </a>
                     <div class="btn-group dropdown">
                         <button type="button" class="border btn btn-light btn-sm" data-bs-toggle="dropdown">
                             <i class="mdi mdi-dots-vertical"></i>
@@ -433,10 +475,10 @@ function displayFilteredServices(services) {
                                 <i class="me-2 mdi mdi-archive"></i>
                                 <small class="text-muted" style="font-size: 12.5px;">Archive</small>
                             </button>
-                            <button id="edit-service-btn" type="button" class="dropdown-item py-2 d-md-none d-block">
+                            <a href="/account/freelancer/services/edit/${service.slug}" type="button" class="dropdown-item py-2 d-md-none d-block">
                                 <i class="me-2 mdi mdi-pencil"></i>
                                 <small class="text-dark">Edit</small>
-                            </button>
+                            </a>
                             <button class="dropdown-item py-2" id="delete-service-btn" type="button">
                                 <i class="me-2 mdi mdi-delete"></i>
                                 <small class="text-muted" style="font-size: 12.5px;">Delete</small>

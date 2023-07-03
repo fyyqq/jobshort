@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Notify;
 use App\Models\Service;
 use App\Models\Freelancer;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ServiceNotification;
@@ -25,25 +28,66 @@ class ServicesController extends Controller
             "services" => $service
         ]);
     }
+
+    // Filter Search 
+    public function searchServices(Request $request) {
+        $keyword = $request->query('keyword');
+        
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)
+        ->where('title', 'like', "$keyword%")->get();
+
+        return response()->json($services);
+    }
+
+    // Filter SortBy
+    public function sortByOldest() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::with('order', 'rating')
+        ->where('freelancer_id', $freelancer->id)
+        ->orderBy('id', 'asc')->get();
+        
+        return response()->json($services);
+    }
+
+    public function sortByTopOrder() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::with('order', 'rating')
+        ->where('freelancer_id', $freelancer->id)
+        ->withCount(['order as top_order' => function ($query) {
+            $query->where('status', 'completed');
+        }])->orderByDesc('top_order')->get();
+        
+        return response()->json($services);
+    }
+    
+    public function sortByTopRating() {
+        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)
+        ->orderByDesc('rating->max("stars")')->get();
+        
+        return response()->json($services);
+
+    }
     
     // Filter
     public function sortByNormal() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::where('freelancer_id', $freelancer->id)->latest()->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->latest()->get();
         
         return response()->json($services);
     }
 
     public function sortByHighPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
         
         return response()->json($services);
     }
 
     public function sortByLowPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
         
         return response()->json($services);
     }
