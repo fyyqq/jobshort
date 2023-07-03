@@ -255,9 +255,9 @@ input[type=number] {
     #dashboard-main-detail {
         grid-template-columns: 1fr;
     }
-    /* #add-image-container {
+    #add-image-container {
         overflow-x: scroll;
-    } */
+    }
     #parent-order-menu {
         overflow-x: scroll;
     }

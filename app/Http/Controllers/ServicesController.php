@@ -100,6 +100,13 @@ class ServicesController extends Controller
         return 'data has been archived';
     }
 
+    public function archiveItems(Request $request) {
+        $selected = $request->input('selectedItems');
+        Service::whereIn('slug', $selected)->update(['status' => 'active']);
+
+        return 'data selected has been archived';
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -221,5 +228,12 @@ class ServicesController extends Controller
         $slug->delete();
 
         return 'data has been deleted';
+    }
+
+    public function deletedItems(Request $request) {
+        $selected = $request->input('selectedItems');
+        Service::whereIn('slug', $selected)->delete();
+
+        return 'data selected has been deleted';
     }
 }

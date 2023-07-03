@@ -6,9 +6,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
 @section('content')
-    <div class="container-employer pt-4 px-lg-4 px-2">
+    <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
         <div class="content pb-4">
-            <div class="border rounded py-4 px-4" style="background-color: #fff;">
+            <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
+                <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
                 <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Services</h1>
                 <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Services</h1>
             </div>

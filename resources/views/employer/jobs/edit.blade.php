@@ -1,13 +1,16 @@
 @extends('employer.layouts.app')
 
 @section('content')
-    <div class="container-employer pt-4 px-4">
-        <div class="content shadow-sm border pb-4">
-            <div class="py-4 px-4 shadow-sm border-bottom">
-                <h1 class="h4 text-dark mb-1">Edit Job Pages</h1>
-                <small class="mb-3" style="color: rgba(136, 136, 136, 0.868);">Edit & Update a job that you have been posting</small>
+    <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
+        <div class="content">
+            <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
+                <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Update Service</h1>
+                <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Update Service</h1>
             </div>
-            <div class="mt-4 ps-5" id="create-jobs">
+            <div class="mt-2 ps-md-5 ps-4 pe-3 py-4 border" id="create-jobs" style="background-color: #fff;">
                 <form action="/account/freelancer/services/update/{{ $service->slug }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -22,7 +25,7 @@
                                         <input type="file" name="video" id="profile-img" accept=".mp4">
                                     @endif
                                 </div>
-                                <div class="d-flex align-items-center justify-content-start">
+                                <div class="d-flex align-items-center justify-content-start" id="add-image-container">
                                     @foreach (explode(',', $service->image) as $key => $value)
                                         <div class="me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden; cursor: pointer;">
                                             @if ($service->image != null)
@@ -47,7 +50,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6 col-12 row mx-0">
+                    <div class="col-lg-8 col-12 row mx-0">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Title :</label>
                             <input type="text" class="form-control shadow-none w-10" id="title" name="title" value="{{ $service->title ?? old('title') }}">
@@ -94,8 +97,8 @@
                             <div id="emailHelp" class="mt-2 form-text" style="font-size: 13.5px;">Change your currency from profile page.</div>
                         </div>
                     </div>
-                    <div class="w-100 text-start">
-                        <button type="submit" class="btn btn-primary px-3">Post A Service</button>
+                    <div class="w-100 text-md-start text-end">
+                        <button type="submit" class="btn btn-sm btn-primary px-3">Update Changes</button>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,3 @@
-
 const open_close_btn = document.getElementById('btn_open_close');
 const sidebar = document.getElementsByClassName('sidebar')[0];
 const sidebarLogo = document.getElementsByClassName('sidebar-logo')[0];
@@ -85,7 +84,6 @@ if (inputText && inputText.nextElementSibling) {
 const checkJobs = document.querySelectorAll('#select-jobs');
 
 function allJobs() {
-    console.log(checkJobs);
     const checkAllJobs = document.getElementById('select-all-jobs');
     if (checkAllJobs.checked) {
         checkJobs.forEach(element => {
@@ -106,7 +104,24 @@ function deleteSelectedItems() {
         }
     });
 
-    
+    axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
+    .then(function(res) {
+        console.log(res.data);
+    });
+}
+
+function archiveSelectedItems() {
+    var selectedItems = [];
+    checkJobs.forEach(element => {
+        if (element.checked) {
+            selectedItems.push(element.nextElementSibling.value);
+        }
+    });
+
+    axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
+    .then(function(res) {
+        console.log(res.data);
+    });
 }
 
 function autoImage(event) {
@@ -331,7 +346,6 @@ function searchServices(event) {
     axios.get('/account/freelancer/services/search', { params: { keyword } })
     .then(function(res) {
         const data = res.data;
-        // console.log(data);
         displayFilteredServices(data);
     });
 }
@@ -510,4 +524,9 @@ function displayFilteredServices(services) {
         parentService.appendChild(serviceElement);
     });
 
+}
+
+
+function goToPreviousPage() {
+    window.history.back();
 }

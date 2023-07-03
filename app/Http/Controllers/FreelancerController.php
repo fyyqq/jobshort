@@ -228,7 +228,4 @@ class FreelancerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function deletedItems(Request $request) {
-        return $request->all();
-    }
 }

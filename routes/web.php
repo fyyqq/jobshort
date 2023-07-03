@@ -102,8 +102,9 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('employer.edit-jobs');
             Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('employer.update-jobs');
             Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('employer.update-archive-jobs');
+            Route::post('/archive-items', [ServicesController::class, 'archiveItems'])->name('employer.archive-item-jobs');
             Route::delete('/delete/{slug}', [ServicesController::class, 'destroy'])->name('employer.delete-jobs');
-            Route::post('/delete-items', [FreelancerController::class, 'deletedItems'])->name('employer.delete-item-jobs');
+            Route::post('/delete-items', [ServicesController::class, 'deletedItems'])->name('employer.delete-item-jobs');
             Route::get('/live', [FreelancerController::class, 'live'])->name('employer.live-jobs');
             Route::get('/ongoing', [FreelancerController::class, 'ongoing'])->name('employer.on-jobs');
             Route::get('/complete', [FreelancerController::class, 'complete'])->name('employer.complete-jobs');
