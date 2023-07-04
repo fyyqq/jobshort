@@ -21,28 +21,28 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return view('employer.applicant.pending', [ 
+        return view('freelancer.order.pending', [ 
             "orders" => Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'pending')->get()
         ]);
     }
     
     public function approved()
     {
-        return view('employer.applicant.pending', [ 
+        return view('freelancer.order.pending', [ 
             "orders" => Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'approved')->get()
         ]);
     }
     
     public function rejected()
     {
-        return view('employer.applicant.pending', [ 
+        return view('freelancer.order.pending', [ 
             "orders" => Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'rejected')->get()
         ]);
     }
     
     public function completed()
     {
-        return view('employer.applicant.pending', [
+        return view('freelancer.order.pending', [
             "orders" => Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'completed')->get()
         ]);
     }

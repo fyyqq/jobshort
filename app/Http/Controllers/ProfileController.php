@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\Employee;
-use App\Models\Application;
-use App\Models\Employer;
 use App\Models\Freelancer;
 use App\Models\Order;
 use App\Models\User;
@@ -28,34 +25,28 @@ class ProfileController extends Controller
     }
 
     public function applied() {
-        return view('profile.applied.applied', [
+        return view('profile.order.index', [
             "orders" => Order::where('user_id', Auth::id())->where('status', 'pending')->latest()->get()
         ]);
     }
     
     public function approved() {
-        return view('profile.applied.applied', [
+        return view('profile.order.index', [
             "orders" => Order::where('user_id', Auth::id())->where('status', 'approved')->latest()->get()
         ]);
     }
     
     public function rejected() {
-        return view('profile.applied.applied', [
+        return view('profile.order.index', [
             "orders" => Order::where('user_id', Auth::id())->where('status', 'rejected')->latest()->get()
         ]);
     }
     
     public function completed() {
-        return view('profile.applied.applied', [
+        return view('profile.order.index', [
             "orders" => Order::where('user_id', Auth::id())->where('status', 'completed')->latest()->get()
         ]);
     }
-
-    // public function status(string $slug) {
-    //     return view('profile.show-status', [
-    //         "data" => Application::where('slug', $slug)->first()
-    //     ]);
-    // }
 
     public function index()
     {

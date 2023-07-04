@@ -12,81 +12,43 @@ class FreelancerRegistrationController extends Controller
 {
     public function index()
     {
-        return view('employer.registration.personal', [
+        return view('freelancer.registration.personal', [
             'data' => Freelancer::where('user_id', auth()->user()->id)->first()
         ]);
     }
 
-    public function address()
-    {
-        return view('employer.registration.address', [
-            'data' => Freelancer::where('user_id', auth()->user()->id)->first()
-        ]);
-    }
-
-    public function storePersonal(Request $request)
+    public function store(Request $request)
     {
         
         $validateStore = $request->validate([
-            'name' => 'required',
+            'name' => 'unique:freelancers,name',
             'number' => 'required',
-            'contact' => 'required'
-        ]);
-        
-        $employer = new Freelancer();
-        $employer->user_id = Auth::id();
-        $employer->name = $validateStore['name'];
-        $employer->number = $validateStore['number'];
-        $employer->contact = $validateStore['contact'];
-        $employer->save();
-
-        return redirect()->route('employer.registration-address');
-    }
-    
-    public function updatePersonal(Request $request) {
-        
-        $employer = Freelancer::where('user_id', Auth::id())->first();
-        
-        $validateUpdate = $request->validate([
-            'name' => 'required',
-            'number' => 'required',
-            'contact' => 'required'
-        ]);
-        
-        $employer->user_id = Auth::id();
-        $employer->employer_type = $request->input('employer_type');
-        $employer->name = $validateUpdate['name'];
-        $employer->number = $validateUpdate['number'];
-        $employer->contact = $validateUpdate['contact'];
-        $employer->save();
-        
-        return redirect()->route('employer.registration-address');
-    }
-
-    public function storeAddress(Request $request)
-    {
-        $employer = Freelancer::where('user_id', Auth::id())->first();
-
-        $validateStore = $request->validate([
-            'address' => 'required',
+            'contact' => 'required',
             'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'postcode' => 'required'
         ]);
+        
+        if ($request->hasFile('image')) {
+            $imagePath = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('images'), $imagePath);
+        } else {
+            $imagePath = null;
+        }
 
-        $employer->address = $validateStore['address'];
-        $employer->country = $validateStore['country'];
-        $employer->country = $validateStore['country'];
-        $employer->state = $validateStore['state'];
-        $employer->city = $validateStore['city'];
-        $employer->postcode = $validateStore['postcode'];
-        $employer->save();
+        $freelancer = new Freelancer();
+        $freelancer->user_id = Auth::id();
+        $freelancer->name = $validateStore['name'];
+        $freelancer->number = $validateStore['number'];
+        $freelancer->contact = $validateStore['contact'];
+        $freelancer->country = $validateStore['country'];
+        $freelancer->image = $imagePath;
+        $registration_confirmation = $freelancer->save();
 
-        $user = User::where('id', Auth::id())->first();
-        $user->roles = '2';
-        $user->save();
+        if ($registration_confirmation) {
+            $user = User::find(Auth::id());
+            $user->roles = 2;
+            $user->save();
+        }
 
-        return redirect()->route('employer');
+        return redirect()->route('freelancer.main');
     }
 }

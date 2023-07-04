@@ -49,6 +49,22 @@
                 </div>
             </div>
             <div class="row mx-0">
+                <div class="row d-flex align-items-center justify-content-center mb-4">
+                    <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start">
+                        <small class="text-muted" id="name-title">Country</small>
+                    </div>
+                    <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
+                        <input type="text" class="form-control country-input shadow-none @error('country') is-invalid @enderror" style="font-size: 14px;" id="location" name="country" autocomplete="off" value="{{ $data->country }}">
+                    @error('country')
+                        <span class="invalid-feedback" role="alert">
+                            <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                        </span>
+                    @enderror
+                    <ul class="suggestion-list col-sm-6 col-12"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0">
                 <div class="row d-flex align-items-start justify-content-center mb-4">
                     <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start" style="transform: translateY(8px);">
                         <small class="text-muted" id="name-title">About Me</small>

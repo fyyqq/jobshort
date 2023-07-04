@@ -75,7 +75,7 @@
                 @if (count($data) > 0)
                     <div class="d-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
                         @foreach ($data as $key => $service)
-                            <a href="{{ route('jobs', $service->slug) }}" class="text-decoration-none">
+                            <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center flex-column">
                                     <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $image)

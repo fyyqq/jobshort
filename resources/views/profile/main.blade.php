@@ -14,17 +14,17 @@
         </div>
     
         @if (auth()->user()->roles != '0')
-            <form action="{{ route('profile.freelancer-update') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.update') }}" method="POST" class="border" enctype="multipart/form-data">
                 @method('PUT')
         @else
-            <form action="{{ route('profile.freelancer-registration') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.registration') }}" method="POST" class="border" enctype="multipart/form-data">
         @endif
             @csrf
             <div class="row mx-0 flex-lg-row flex-column-reverse p-3">
                 <div class="col-lg-8 col-12">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control shadow-none @error('name') is-invalid @enderror" style="font-size: 13.5px;" id="name" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="off">
-                        <label class="ps-0 text-dark" for="name">Name :</label>
+                        <label class="ps-0 text-dark" for="name">Username :</label>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>

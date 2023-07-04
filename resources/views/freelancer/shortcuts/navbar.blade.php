@@ -18,7 +18,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Service</a>
                     <ul class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
                         <li>
-                            <a class="dropdown-item py-2" href="{{ route('freelancer.jobs') }}" style="font-size: 12.5px;">Services</a>
+                            <a class="dropdown-item py-2" href="{{ route('freelancer.services') }}" style="font-size: 12.5px;">Services</a>
                         </li>
                         <li>
                             <a class="dropdown-item py-2" href="{{ route('freelancer.create-service') }}" style="font-size: 12.5px;">Create</a>

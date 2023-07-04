@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('freelancers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('name')->nullable();
-            $table->bigInteger('number')->nullable();
-            $table->bigInteger('contact')->nullable();
+            $table->string('name')->unique();
+            $table->bigInteger('number');
+            $table->bigInteger('contact');
             $table->text('about')->nullable();
             $table->text('image')->nullable();
-            $table->string('country')->nullable();
+            $table->string('country');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

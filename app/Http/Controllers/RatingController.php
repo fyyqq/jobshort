@@ -22,7 +22,7 @@ class RatingController extends Controller
     }
 
     public function view(string $slug) {
-        return view('employer.applicant.ratings', [
+        return view('freelancer.applicant.ratings', [
             "data" => Order::where('slug', $slug)->first()
         ]);
     }

@@ -1,4 +1,4 @@
-@extends('freelancer.applicant.layouts.app')
+@extends('freelancer.order.layouts.app')
 
 @section('pages')
     <div class="row mx-0 d-flex justify-content-center align-items-center position-relative" style="row-gap: 10px; {{ count($orders) < 1 ? 'height: 500px;' : 'height: max-content;' }}">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="w-100 py-3 px-3 text-decoration-none position-relative border-top border-bottom">
-                        <a href="{{ route('jobs', $order->service->slug) }}" class="text-decoration-none d-flex align-items-start w-100 justify-content-start text-dark">
+                        <a href="{{ route('services', $order->service->slug) }}" class="text-decoration-none d-flex align-items-start w-100 justify-content-start text-dark">
                             <div class="rounded" style="height: 80px; width: 80px; overflow: hidden;">
                                 @foreach (explode(',', $order->service->image) as $key => $value)
                                     @if ($key === 0)

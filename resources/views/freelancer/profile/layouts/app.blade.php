@@ -28,10 +28,6 @@
                             <a href="{{ route('freelancer.profile') }}" class="btn p-3 rounded-0" id="order-menu-link">Personal</a>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
-                        <li class="position-relative {{ Route::currentRouteName() === 'freelancer.profile-address' ? 'border-bottom border-2 border-primary' : '' }}">
-                            <a href="{{ route('freelancer.profile-address') }}" class="btn p-3 rounded-0" id="order-menu-link">Address</a>
-                            <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
-                        </li>
                         <li class="position-relative">
                             <a href="" class="btn p-3 rounded-0" id="order-menu-link">Account</a>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>

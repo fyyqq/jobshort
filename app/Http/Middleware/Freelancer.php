@@ -15,10 +15,10 @@ class Freelancer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->roles == '1') {
+        if ($request->user() && $request->user()->roles == '2') {
             return $next($request);
         } else {
-            return redirect()->route('home');
+            return redirect()->route('freelancer.registration');
         }
     }
 }

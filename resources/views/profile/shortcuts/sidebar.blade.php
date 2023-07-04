@@ -28,16 +28,29 @@
                 </div>
             </a>
         </li>
-        <li class="nav-item w-100">
-            <a href="{{ route('freelancer.main') }}" class="{{ Route::currentRouteName() === 'employer.main' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="freelancer">
-                <div class="col-md-2 col-none">
-                    <i class="fa-solid fa-user-check" id="sidebar-icon"></i>
-                </div>
-                <div class="col-md-10 d-md-flex d-none">
-                    <small class="" style="font-size: 13.5px;">Freelancer</small>
-                </div>
-            </a>
-        </li>
+        @if (auth()->user()->roles != '2')
+            <li class="nav-item w-100">
+                <a href="{{ route('freelancer.registration') }}" class="{{ Route::currentRouteName() === 'freelancer.registration' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="freelancer">
+                    <div class="col-md-2 col-none">
+                        <i class="fa-solid fa-user-check" id="sidebar-icon"></i>
+                    </div>
+                    <div class="col-md-10 d-md-flex d-none">
+                        <small class="" style="font-size: 13.5px;">Freelancer Registration</small>
+                    </div>
+                </a>
+            </li>
+        @else
+            <li class="nav-item w-100">
+                <a href="{{ route('freelancer.main') }}" class="{{ Route::currentRouteName() === 'freelancer.main' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="freelancer">
+                    <div class="col-md-2 col-none">
+                        <i class="fa-solid fa-user-check" id="sidebar-icon"></i>
+                    </div>
+                    <div class="col-md-10 d-md-flex d-none">
+                        <small class="" style="font-size: 13.5px;">Freelancer</small>
+                    </div>
+                </a>
+            </li>
+        @endif
         <li class="nav-item w-100">
             <a href="{{ route('profile.applied') }}" class="{{ Route::currentRouteName() === 'profile.applied' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="orders">
                 <div class="col-md-2 col-none">

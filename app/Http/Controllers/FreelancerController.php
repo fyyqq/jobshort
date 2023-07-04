@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Job;
-use App\Models\Employer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Middleware\Employee;
-use App\Models\Application;
 use App\Models\Freelancer;
 use App\Models\Notification;
-use App\Models\Service;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class FreelancerController extends Controller
@@ -22,9 +15,7 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        return view('employer.main', [
-            "dataJobs" => Service::where('freelancer_id', auth()->user()->freelancer->id)->get(),
-            // "dataApplicant" => Application::where('freelancer_id', auth()->user()->freelancer->id)->get()
+        return view('freelancer.main', [
         ]);
     }
 
@@ -32,97 +23,24 @@ class FreelancerController extends Controller
     {
         $dataFreelancer = Freelancer::where('user_id', Auth::id())->first();
 
-        return view('employer.profile.profile', [
+        return view('freelancer.profile.profile', [
             "data" => $dataFreelancer
-        ]);
-    }
-
-    public function address() 
-    {
-        $dataEmployer = Freelancer::where('user_id', Auth::id())->first();
-
-        if ($dataEmployer->state != null && $dataEmployer->city != null) {
-            $statePath = file_get_contents(public_path('json/states.json'));
-            $states = json_decode($statePath);
-    
-            $cityPath = file_get_contents(public_path('json/states-cities.json'));
-            $cities = json_decode($cityPath);
-            $citiesOption = $cities;
-            $statesOption = $dataEmployer->state;
-            $findCities = $citiesOption->$statesOption;
-            
-            $filteredStates = array_filter($states, function($state) {
-                $dataEmployer = Freelancer::where('user_id', auth()->user()->id)->first();
-                return $state != $dataEmployer->state;
-            });
-            
-            $filteredCities = array_filter($findCities, function($city) {
-                $dataEmployer = Freelancer::where('user_id', auth()->user()->id)->first();
-                return $city != $dataEmployer->city;
-            });
-        }
-
-        return view('employer.profile.address', [
-            "data" => $dataEmployer,
-            "states" => $filteredStates,
-            "cities" => $filteredCities
-        ]);
-    }
-
-    public function live() 
-    {
-        // $employer = Employer::where('user_id', auth()->user()->id)->first();
-        // $jobs = Job::where('freelancer_id', $freelancer->id)->where('status', 'live')->latest()->get();
-
-        return view('employer.jobs.my-jobs', [
-            // "dataJobs" => $jobs
-        ]);
-    }
-
-    public function ongoing() 
-    {
-        // $employer = Employer::where('user_id', auth()->user()->id)->first();
-        // $jobs = Job::where('freelancer_id', $freelancer->id)->where('status', 'ongoing')->latest()->get();
-
-        return view('employer.jobs.my-jobs', [
-            // "dataJobs" => $jobs
-        ]);
-    }
-
-    public function complete() 
-    {
-        // $employer = Employer::where('user_id', auth()->user()->id)->first();
-        // $jobs = Job::where('freelancer_id', $freelancer->id)->where('status', 'complete')->latest()->get();
-
-        return view('employer.jobs.my-jobs', [
-            // "dataJobs" => $jobs
-        ]);
-    }
-
-    public function archive() 
-    {
-        // $employer = Employer::where('user_id', auth()->user()->id)->first();
-        // $jobs = Job::where('freelancer_id', $freelancer->id)->where('status', 'archive')->latest()->get();
-
-        return view('employer.jobs.my-jobs', [
-            // "dataJobs" => $jobs
         ]);
     }
 
     public function notification() 
     {
-        return view('employer.notification', [
+        return view('freelancer.notification', [
             "notifications" => Notification::where('notifiable_id', Auth::id())->latest()->get()
         ]);
     }
 
     public function addService() 
     {
-        $jobsPath = file_get_contents(public_path('json/category.json'));
-        $data =  json_decode($jobsPath, true);
+        $servicesPath = file_get_contents(public_path('json/category.json'));
+        $data =  json_decode($servicesPath, true);
         
-        return view('employer.add-jobs', [
-            // "data" => Employer::where('user_id', Auth::id())->first(),
+        return view('freelancer.create-service', [
             "categories" => $data 
         ]);
     }
@@ -181,7 +99,7 @@ class FreelancerController extends Controller
         // $jobs->address = $validateUpdate['address'];
         // $jobs->save();
 
-        return redirect()->route('employer.jobs')->with('success', 'My jobs has been updated'); 
+        return redirect()->route('freelancer.services')->with('success', 'My Service has been updated'); 
     }
 
     public function updateProfile(Request $request, string $id) 

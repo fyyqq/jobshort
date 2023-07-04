@@ -18,7 +18,7 @@
                 @else
                     @foreach ($wishlists as $wishlist)
                         <div class="col-sm-6 col-12">
-                            <a href="{{ route('jobs', $wishlist->service->slug) }}" class="text-decoration-none">
+                            <a href="{{ route('services', $wishlist->service->slug) }}" class="text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center flex-column">
                                     <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                         @foreach (explode(',', $wishlist->service->image) as $key => $image)

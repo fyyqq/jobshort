@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -24,7 +23,7 @@ class CategoriesController extends Controller
         return $data;
 
         return view('view-category', [
-            "dataJobs" => $data,
+            "dataServices" => $data,
             "dataCategory" => $filteredCategories
         ]);
     }

@@ -71,7 +71,7 @@
                         </li>
                         @if (auth()->user()->roles == '2')
                             <li>
-                                <a class="dropdown-item py-2" href="{{ route('employer.main') }}" style="font-size: 12.5px;">Freelancer</a>
+                                <a class="dropdown-item py-2" href="{{ route('freelancer.main') }}" style="font-size: 12.5px;">Freelancer</a>
                             </li>
                         @endif
                         <li>

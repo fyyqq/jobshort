@@ -107,7 +107,7 @@
                             <div class="row mx-0 d-flex justify-content-start align-items-center" style="row-gap: 10px;">
                                 @foreach ($freelancer->service as $service)
                                     <div class="col-sm-6 col-12 px-sm-3">
-                                        <a href="{{ route('jobs', $service->slug) }}" class="text-decoration-none">
+                                        <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                                             <div class="d-flex align-items-center justify-content-center flex-column">
                                                 <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                                     @foreach (explode(',', $service->image) as $key => $image)

@@ -27,12 +27,12 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.jobs') }}" class="text-decoration-none d-flex row mx-0 {{ Request::is('account/freelancer/services*') ? 'active' : '' }}">
+                <a href="{{ route('freelancer.services') }}" class="text-decoration-none d-flex row mx-0 {{ Request::is('account/freelancer/services*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">work</span>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <p class="mb-0" style="font-size: 14.5px;">My Service</p>
+                        <p class="mb-0" style="font-size: 14.5px;">Service</p>
                     </div>
                 </a>
             </li>
@@ -42,7 +42,7 @@
                         <span class="material-symbols-outlined" style="font-size: 21px;">add</span>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <p class="mb-0" style="font-size: 14.5px;">Add Service</p>
+                        <p class="mb-0" style="font-size: 14.5px;">Create</p>
                     </div>
                 </a>
             </li>

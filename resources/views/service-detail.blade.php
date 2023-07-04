@@ -176,7 +176,7 @@
                                     <div class="pe-4">
                                         <div class="d-flex align-items-start justify-content-center flex-column">
                                             <div class="w-100 d-flex align-items-start justify-content-start">
-                                                <a href="{{ route('jobs', $review->user->name) }}" class="text-dark text-decoration-none fw-bold" style="font-size: 14px;">{{ $review->user->name }}</a>
+                                                <a href="{{ route('services', $review->user->name) }}" class="text-dark text-decoration-none fw-bold" style="font-size: 14px;">{{ $review->user->name }}</a>
                                             </div>
                                             <div class="w-100 d-flex align-items-center justify-content-between my-1">
                                                 <div class="d-flex align-items-center justify-content-start" style="column-gap: 2px;">
@@ -293,7 +293,7 @@
 @endsection
 
 {{-- Mobile Navbar --}}
-<div class="shadow-sm {{ Route::currentRouteName() === 'jobs' ? 'd-block' : 'd-none' }}">
+<div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-block' : 'd-none' }}">
     <div class="" id="mobile-navbar">
         <div class="row mx-0">
             <div class="d-flex align-items-center justify-content-between ps-4 pe-3">

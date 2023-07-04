@@ -24,7 +24,7 @@ class ServicesController extends Controller
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
         
-        return view('employer.jobs.services', [
+        return view('freelancer.service.index', [
             "services" => $service
         ]);
     }
@@ -112,10 +112,10 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        $jobsPath = file_get_contents(public_path('json/category.json'));
-        $data = json_decode($jobsPath, true);
+        $servicesPath = file_get_contents(public_path('json/category.json'));
+        $data = json_decode($servicesPath, true);
         
-        return view('employer.create-service', [
+        return view('freelancer.create-service', [
             "categories" => $data 
         ]);
     }
@@ -166,7 +166,7 @@ class ServicesController extends Controller
             Notification::send($users, new ServiceNotification($service));
         }
 
-        return redirect()->route('employer.jobs')->with('success', 'New service has been uploaded');   
+        return redirect()->route('freelancer.services')->with('success', 'New service has been uploaded');   
     }
 
     /**
@@ -182,10 +182,10 @@ class ServicesController extends Controller
      */
     public function edit(string $slug)
     {
-        $jobsPath = file_get_contents(public_path('json/category.json'));
-        $services =  json_decode($jobsPath, true);
+        $servicesPath = file_get_contents(public_path('json/category.json'));
+        $services =  json_decode($servicesPath, true);
         
-        return view('employer.jobs.edit', [
+        return view('freelancer.service.edit', [
             "service" => Service::where('slug', $slug)->first(),
             "categories" => $services
         ]);
@@ -216,7 +216,7 @@ class ServicesController extends Controller
         $service->price = $validateUpdate['price'];
         $service->save();
     
-        return redirect()->route('employer.jobs')->with('success', 'My service has been updated'); 
+        return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
     }
 
     /**

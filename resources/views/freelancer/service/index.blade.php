@@ -73,7 +73,7 @@
                                 <input type="hidden" name="slug" value="{{ $service->slug }}">
                             </div>
                             <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
-                                <a href="{{ route('service', $service->slug) }}" class="d-block">
+                                <a href="{{ route('freelancer.services', $service->slug) }}" class="d-block">
                                     <div class="rounded" style="height: 75px; width: 77px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $value)
                                             @if ($key === 0)
@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('freelancer.edit-jobs', $service->slug) }}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
+                                    <a href="{{ route('freelancer.edit-services', $service->slug) }}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
                                         <small class="text-dark">Edit</small>
                                     </a>
                                     <div class="btn-group dropdown">
@@ -127,7 +127,7 @@
                                                 <i class="me-2 mdi mdi-archive"></i>
                                                 <small class="text-muted" style="font-size: 12.5px;">Archive</small>
                                             </button>
-                                            <a href="{{ route('freelancer.edit-jobs', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
+                                            <a href="{{ route('freelancer.edit-services', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
                                                 <i class="me-2 mdi mdi-pencil"></i>
                                                 <small class="text-dark">Edit</small>
                                             </a>

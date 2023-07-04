@@ -77,12 +77,8 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
     Route::get('/', [ProfileController::class, 'account'])->name('my-account');
     Route::prefix('profile')->group(function() {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.main');
-        Route::post('/freelancer-registration', [ProfileController::class, 'store'])->name('profile.freelancer-registration');
-        Route::put('/freelancer-update', [ProfileController::class, 'update'])->name('profile.freelancer-update');
-        Route::put('/freelancer-edit', [ProfileController::class, 'update'])->name('profile.freelancer-edit');
-        Route::get('/address', [AddressController::class, 'index'])->name('profile.address');
-        Route::post('/freelancer-address', [AddressController::class, 'store'])->name('profile.store-address');
-        Route::put('/freelancer-address', [AddressController::class, 'update'])->name('profile.update-address');
+        Route::post('/registration', [ProfileController::class, 'store'])->name('profile.registration');
+        Route::put('/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('profile.saved-services');
         Route::prefix('orders')->group(function() {
             Route::get('/', [ProfileController::class, 'applied'])->name('profile.applied');
@@ -95,7 +91,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::post('/rating', [RatingController::class, 'store'])->name('freelancer.rating');
         });
     });
-    Route::prefix('freelancer')->middleware(['auth'])->group(function() {
+    Route::prefix('freelancer')->middleware(['freelancer'])->group(function() {
         Route::get('/', [FreelancerController::class, 'index'])->name('freelancer.main');
         Route::prefix('services')->group(function() {
             Route::get('/', [ServicesController::class, 'index'])->name('freelancer.services');
@@ -143,12 +139,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
 });
 
 Route::prefix('freelancer_registration')->group(function() {
-    Route::get('/', [FreelancerRegistrationController::class, 'index'])->name('freelancer.registration-personal');
-    Route::post('/', [FreelancerRegistrationController::class, 'storePersonal'])->name('freelancer.post-registration');
-    Route::put('/', [FreelancerRegistrationController::class, 'updatePersonal'])->name('freelancer.update-registration');
-    Route::prefix('/address')->group(function() {
-        Route::get('/', [FreelancerRegistrationController::class, 'address'])->name('freelancer.registration-address');
-        Route::post('/', [FreelancerRegistrationController::class, 'storeAddress'])->name('freelancer.post-address');
-    });
+    Route::get('/', [FreelancerRegistrationController::class, 'index'])->name('freelancer.registration');
+    Route::post('/', [FreelancerRegistrationController::class, 'store'])->name('freelancer.post-registration');
 });
 

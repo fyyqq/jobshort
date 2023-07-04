@@ -21,8 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $jobsPath = file_get_contents(public_path('json/category.json'));
-        $data =  json_decode($jobsPath, true);
+        $servicesPath = file_get_contents(public_path('json/category.json'));
+        $data =  json_decode($servicesPath, true);
 
         return view('home', [
             "services" => Service::all(),

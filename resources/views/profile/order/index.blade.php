@@ -1,4 +1,4 @@
-@extends('profile.applied.layouts.app')
+@extends('profile.order.layouts.app')
 
 @section('pages')
     <div class="row mx-0 d-flex justify-content-center align-items-center position-relative" style="gap: 15px; {{ count($orders) < 1 ? ' height: 450px;' : 'max-content' }}">
@@ -109,12 +109,12 @@
                                                             <input type="text" name="title" class="form-control shadow-none" id="recipient-name">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="review" class="col-form-label">Review :</label>
+                                                            <label for="review" class="col-form-label">Message :</label>
                                                             <textarea name="review" class="form-control shadow-none" id="review"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button id="submit-rating" class="btn btn-primary px-4">Submit</button>
+                                                        <button id="submit-rating" class="btn btn-sm btn-primary px-4">Submit</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -124,7 +124,7 @@
                             @endif
                         </div>
                     </div>
-                    <a href="{{ route('jobs', $order->service->slug) }}" class="w-100 py-3 px-3 text-decoration-none position-relative text-dark">
+                    <a href="{{ route('services', $order->service->slug) }}" class="w-100 py-3 px-3 text-decoration-none position-relative text-dark">
                         <div class="d-flex align-items-start w-100 justify-content-start">
                             <div class="rounded" id="order-profile-img" style="overflow: hidden;">
                                 @foreach (explode(',', $order->service->image) as $key => $value)
