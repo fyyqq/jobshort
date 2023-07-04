@@ -23,7 +23,7 @@
             <div class="row mx-0 flex-lg-row flex-column-reverse p-3">
                 <div class="col-lg-8 col-12">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control shadow-none @error('name') is-invalid @enderror" style="font-size: 14px;" id="name" name="name" value="{{ old('name') ? old('name') : auth()->user()->name }}" autocomplete="off">
+                        <input type="text" class="form-control shadow-none @error('name') is-invalid @enderror" style="font-size: 13.5px;" id="name" name="name" value="{{ old('name', auth()->user()->name) }}" autocomplete="off">
                         <label class="ps-0 text-dark" for="name">Name :</label>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="row mb-2 position-relative">
                         <div class="form-floating mb-3 col-sm-6 col-12">
-                            <input type="number" class="form-control shadow-none @error('identification_number') is-invalid @enderror" style="font-size: 14px;" id="identification_number" name="identification_number" value="{{ (auth()->user()->roles != '0') ? old('identification_number', auth()->user()->identification_number) : old('identification_number') }}" autocomplete="off">
+                            <input type="number" class="form-control shadow-none @error('identification_number') is-invalid @enderror" style="font-size: 13.5px;" id="identification_number" name="identification_number" value="{{ (auth()->user()->roles != '0') ? old('identification_number', auth()->user()->identification_number) : old('identification_number') }}" autocomplete="off">
                             <label class="text-dark" for="identification_number">Identification No :</label>
                             @error('identification_number')
                                 <span class="invalid-feedback" role="alert">
@@ -54,16 +54,24 @@
                     <label class="form-check-label text-muted" style="font-size: 11.5px;">Gender :</label>
                     <div class="d-flex align-items-center justify-content-start mb-2 mt-2" style="column-gap: 15px;">
                         <div class="form-check">
-                            <input class="shadow-none form-check-input" type="radio" name="gender" id="man" value="Man" {{ (auth()->user()->roles != '0') ? old('gender', auth()->user()->gender == "Man") ? 'checked' : '' : old('gender') }}>
-                            <label class="ps-0 text-dark" class="form-label text-muted" for="man" style="font-size: 13px;">Man</label>
+                            @if (auth()->user()->roles != '0')
+                                <input class="shadow-none form-check-input" type="radio" name="gender" id="man" value="Man" {{ auth()->user()->gender == 'Man' ? 'checked' : '' }}>
+                            @else
+                                <input class="shadow-none form-check-input" type="radio" name="gender" id="man" value="Man" {{ old('gender') == 'Man' ? 'checked' : '' }}>
+                            @endif
+                            <label class="ps-0 text-dark" class="form-label text-muted" for="man" style="font-size: 13.5px;">Man</label>
                         </div>
                         <div class="form-check">
-                            <input class="shadow-none form-check-input" type="radio" name="gender" id="woman" value="Woman" {{ (auth()->user()->roles != '0') ? old('gender', auth()->user()->gender == "Woman") ? 'checked' : '' : old('gender') }}>
-                            <label class="ps-0 text-dark" class="form-label text-muted" for="woman" style="font-size: 13px;">Woman</label>
+                            @if (auth()->user()->roles != '0')
+                                <input class="shadow-none form-check-input" type="radio" name="gender" id="woman" value="Woman" {{ old('gender') == "Woman" && auth()->user()->gender == 'Woman' ? 'checked' : '' }}>
+                            @else
+                                <input class="shadow-none form-check-input" type="radio" name="gender" id="woman" value="Woman" {{ old('gender') == 'Woman' ? 'checked' : '' }}>
+                            @endif
+                            <label class="ps-0 text-dark" class="form-label text-muted" for="woman" style="font-size: 13.5px;">Woman</label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea type="text" class="form-control mt-md-3 mt-2 shadow-none @error('about') is-invalid @enderror" style="font-size: 14px; height: 100px;" id="about" name="about">{{ (auth()->user()->roles != '0') ? old('about', auth()->user()->about) :  old('about') }}</textarea>
+                        <textarea type="text" class="form-control mt-md-3 mt-2 shadow-none @error('about') is-invalid @enderror" style="font-size: 13.5px; height: 100px;" id="about" name="about">{{ (auth()->user()->roles != '0') ? old('about', auth()->user()->about) : old('about') }}</textarea>
                         <label class="ps-0 text-dark" for="about">About Me :</label>
                         @error('about')
                             <span class="invalid-feedback" role="alert">
@@ -79,7 +87,7 @@
                         </div>
                         <div class="mt-4 position-relative">
                             <input type="text" name="" id="file_text" class="form-control shadow-none border-bottom text-center border-bottom" value="Choose a file..." style="font-size: 13.5px;">
-                            <i class="fa-solid text-secondary fa-xmark p-1" style="position: absolute; right: 0; top: 10px; font-size: 14px; cursor: pointer; z-index: 999;"></i>
+                            <i class="fa-solid text-secondary fa-xmark p-1" style="position: absolute; right: 0; top: 10px; font-size: 13.5px; cursor: pointer; z-index: 999;"></i>
                             <input type="file" name="image" id="profile-img" accept=".png, .jpg, .jpeg">
                             @error('image')
                                 <span class="invalid-feedback" role="alert">
@@ -91,7 +99,7 @@
                 </div>
             </div>
             <div class="text-end mb-3 me-3">
-                <button type="submit" id="btn-profile-form" class="text-light btn btn-sm px-3" style="font-size: 14px;">{{ auth()->user()->roles != '0' ? 'Save Changes' : 'Save' }}</button>
+                <button type="submit" id="btn-profile-form" class="text-light btn btn-sm px-3" style="font-size: 13.5px;">{{ auth()->user()->roles != '0' ? 'Save Changes' : 'Save' }}</button>
             </div>
         </form>
     </header>

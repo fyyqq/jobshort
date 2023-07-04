@@ -76,7 +76,6 @@ class ProfileController extends Controller
     {        
         $validateStore = $request->validate([
             'name' => ['required'],
-            'username' => ['required', 'unique:users,username'],
             'identification_number' => ['required'],
         ]);
         
@@ -84,17 +83,16 @@ class ProfileController extends Controller
             $imagePath = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('images'), $imagePath);
         } else {
-            $$imagePath = null;
+            $imagePath = null;
         }
 
         $user = User::where('id', auth()->user()->id)->first();
         $user->name = $validateStore['name'];
-        $user->username = $validateStore['username'];
         $user->identification_number = $validateStore['identification_number'];
         $user->birth_date = $request->input('birth_date');
         $user->gender = $request->input('gender');
         $user->about = $request->input('about');
-        $user->image = $imagePath;        
+        $user->image = $imagePath;
         if ($user->roles == '2') {
             $user->roles = '2';
         } elseif ($user->roles == '0') {
@@ -104,7 +102,7 @@ class ProfileController extends Controller
         }
         $user->save();
 
-        return redirect()->route('profile.main')->with('success', 'Employee Registration Successfully');
+        return redirect()->route('profile.main')->with('success', 'Profile Registration Successfully');
     }
 
     /**
@@ -143,9 +141,7 @@ class ProfileController extends Controller
             if (file_exists($imageFile)) {
                 try {
                     unlink($imageFile);
-                } catch (\Exception $e) {
-
-                }
+                } catch (\Exception $e) {}
             }
         } else {
             $imagePath = auth()->user()->image;
