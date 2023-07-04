@@ -28,8 +28,8 @@
     </head>
     <body style="background-color: #f7f7f7;">
         <div id="app">
-            @include('employer.shortcuts.navbar')
-            @include('employer.shortcuts.sidebar')
+            @include('freelancer.shortcuts.navbar')
+            @include('freelancer.shortcuts.sidebar')
             <main class="pb-md-5 pb-3">
                 @yield('content')
             </main>

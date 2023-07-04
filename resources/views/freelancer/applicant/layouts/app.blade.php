@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 @section('content')
 <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
@@ -13,20 +13,20 @@
         <div class="border rounded my-2" style="background-color: #fff;">
             <ul class="navbar-nav px-md-3 px-2" id="parent-order-menu">
                 <div class="d-flex align-items-center justify-content-start">
-                    <li class="position-relative {{ Route::currentRouteName() === 'employer.applicant' ? 'border-bottom border-2 border-primary' : '' }}">
-                        <a href="{{ route('employer.applicant') }}" class="btn p-3 rounded-0" id="order-menu-link">Pending</a>
+                    <li class="position-relative {{ Route::currentRouteName() === 'freelancer.applicant' ? 'border-bottom border-2 border-primary' : '' }}">
+                        <a href="{{ route('freelancer.applicant') }}" class="btn p-3 rounded-0" id="order-menu-link">Pending</a>
                         <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                     </li>
-                    <li class="position-relative {{ Route::currentRouteName() === 'employer.applicant-approved' ? 'border-bottom border-2 border-primary' : '' }}">
-                        <a href="{{ route('employer.applicant-approved') }}" class="btn p-3 rounded-0" id="order-menu-link">Approved</a>
+                    <li class="position-relative {{ Route::currentRouteName() === 'freelancer.applicant-approved' ? 'border-bottom border-2 border-primary' : '' }}">
+                        <a href="{{ route('freelancer.applicant-approved') }}" class="btn p-3 rounded-0" id="order-menu-link">Approved</a>
                         <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                     </li>
-                    <li class="position-relative {{ Route::currentRouteName() === 'employer.applicant-rejected' ? 'border-bottom border-2 border-primary' : '' }}">
-                        <a href="{{ route('employer.applicant-rejected') }}" class="btn p-3 rounded-0" id="order-menu-link">Rejected</a>
+                    <li class="position-relative {{ Route::currentRouteName() === 'freelancer.applicant-rejected' ? 'border-bottom border-2 border-primary' : '' }}">
+                        <a href="{{ route('freelancer.applicant-rejected') }}" class="btn p-3 rounded-0" id="order-menu-link">Rejected</a>
                         <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                     </li>
-                    <li class="position-relative {{ Route::currentRouteName() === 'employer.applicant-completed' ? 'border-bottom border-2 border-primary' : '' }}">
-                        <a href="{{ route('employer.applicant-completed') }}" class="btn p-3 rounded-0" id="order-menu-link">Completed</a>
+                    <li class="position-relative {{ Route::currentRouteName() === 'freelancer.applicant-completed' ? 'border-bottom border-2 border-primary' : '' }}">
+                        <a href="{{ route('freelancer.applicant-completed') }}" class="btn p-3 rounded-0" id="order-menu-link">Completed</a>
                         <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                     </li>
                 </div>

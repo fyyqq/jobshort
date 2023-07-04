@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 @section('content')
     <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
@@ -24,12 +24,12 @@
                 </div> --}}
                 <ul class="navbar-nav px-md-3 px-2 border-bottom shadow-sm" id="parent-order-menu">
                     <div class="d-flex align-items-center justify-content-start">
-                        <li class="position-relative {{ Route::currentRouteName() === 'employer.profile' ? 'border-bottom border-2 border-primary' : '' }}">
-                            <a href="{{ route('employer.profile') }}" class="btn p-3 rounded-0" id="order-menu-link">Personal</a>
+                        <li class="position-relative {{ Route::currentRouteName() === 'freelancer.profile' ? 'border-bottom border-2 border-primary' : '' }}">
+                            <a href="{{ route('freelancer.profile') }}" class="btn p-3 rounded-0" id="order-menu-link">Personal</a>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
-                        <li class="position-relative {{ Route::currentRouteName() === 'employer.profile-address' ? 'border-bottom border-2 border-primary' : '' }}">
-                            <a href="{{ route('employer.profile-address') }}" class="btn p-3 rounded-0" id="order-menu-link">Address</a>
+                        <li class="position-relative {{ Route::currentRouteName() === 'freelancer.profile-address' ? 'border-bottom border-2 border-primary' : '' }}">
+                            <a href="{{ route('freelancer.profile-address') }}" class="btn p-3 rounded-0" id="order-menu-link">Address</a>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
                         <li class="position-relative">
@@ -39,12 +39,12 @@
                     </div>
                 </ul>
                 <div class="px-3">
-                    @if (Route::currentRouteName() === 'employer.profile')
+                    @if (Route::currentRouteName() === 'freelancer.profile')
                         <form action="{{ route('freelancer.profile-update', auth()->user()->freelancer->user_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                     @elseif (Route::currentRouteName() === 'freelancer.profile-address')
-                        <form action="{{ route('employer.address-update', auth()->user()->freelancer->user_id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('freelancer.address-update', auth()->user()->freelancer->user_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                     @endif

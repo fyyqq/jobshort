@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 @section('content')
     <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">

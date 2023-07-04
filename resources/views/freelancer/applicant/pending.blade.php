@@ -1,24 +1,24 @@
-@extends('employer.applicant.layouts.app')
+@extends('freelancer.applicant.layouts.app')
 
 @section('pages')
     <div class="row mx-0 d-flex justify-content-center align-items-center position-relative" style="row-gap: 10px; {{ count($orders) < 1 ? 'height: 500px;' : 'height: max-content;' }}">
         @if (count($orders) < 1)
             <div class="position-absolute text-center" style="transform: translateY(-20px);">
                 <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
-                @if (Route::currentRouteName() == 'employer.applicant')
+                @if (Route::currentRouteName() == 'freelancer.applicant')
                     <p class="mb-0 text-muted mt-3">No Pending Orders.</p>
-                @elseif (Route::currentRouteName() == 'employer.applicant-approved')
+                @elseif (Route::currentRouteName() == 'freelancer.applicant-approved')
                     <p class="mb-0 text-muted mt-3">No Approved Orders.</p>
-                @elseif (Route::currentRouteName() == 'employer.applicant-rejected')
+                @elseif (Route::currentRouteName() == 'freelancer.applicant-rejected')
                     <p class="mb-0 text-muted mt-3">No Rejected Orders.</p>
-                @elseif (Route::currentRouteName() == 'employer.applicant-completed')
+                @elseif (Route::currentRouteName() == 'freelancer.applicant-completed')
                     <p class="mb-0 text-muted mt-3">No Completed Orders.</p>
                 @endif
             </div>
         @else
             @foreach ($orders as $order)
                 <div class="d-flex align-items-center justify-content-start flex-column border rounded px-md-3 px-1" style="background-color:#fff;">
-                    <div class="{{ (Route::currentRouteName() == 'employer.applicant-completed') ? 'd-flex' : 'd-none' }} align-items-center justify-content-between w-100 p-3">
+                    <div class="{{ (Route::currentRouteName() == 'freelancer.applicant-completed') ? 'd-flex' : 'd-none' }} align-items-center justify-content-between w-100 p-3">
                         <div class="">
                             <small class="mb-0 text-dark" id="order-time">Order at {{ $order->created_at->diffForHumans() }}</small>
                         </div>
@@ -59,15 +59,15 @@
                             @endif
                         </div>
                     </div>
-                    <div class="{{ (Route::currentRouteName() == 'employer.applicant-approved' || Route::currentRouteName() == 'employer.applicant-rejected' || Route::currentRouteName() == 'employer.applicant-completed') ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3">
+                    <div class="{{ (Route::currentRouteName() == 'freelancer.applicant-approved' || Route::currentRouteName() == 'freelancer.applicant-rejected' || Route::currentRouteName() == 'freelancer.applicant-completed') ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3">
                         <div class="">
                             <small class="mb-0 text-dark" id="order-time">Order at {{ $order->created_at->diffForHumans() }}</small>
                         </div>
                         <div class="d-flex align-items-center" style="column-gap: 5px;">
-                            @if (Route::currentRouteName() == 'employer.applicant')
+                            @if (Route::currentRouteName() == 'freelancer.applicant')
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
                                 <button class="btn btn-sm btn-success approve-btn" id="order-action">Approved</button>
-                            @elseif (Route::currentRouteName() == 'employer.applicant-rejected')
+                            @elseif (Route::currentRouteName() == 'freelancer.applicant-rejected')
                                 <button class="btn btn-sm btn-success approve-btn" id="order-action">Approved</button>
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
                             @endif
@@ -89,13 +89,13 @@
                                     <span class="badge rounded-1 text-muted border px-2" id="order-category">{{ $order->service->category }}</span>
                                 </div>
                                 <div class="mt-2 w-100 text-md-end text-start">
-                                    @if (Route::currentRouteName() == 'employer.applicant')
+                                    @if (Route::currentRouteName() == 'freelancer.applicant')
                                         <span class="badge bg-warning px-2 fw-normal" id="order-status">{{ $order->status }}</span>
-                                    @elseif (Route::currentRouteName() == 'employer.applicant-approved')
+                                    @elseif (Route::currentRouteName() == 'freelancer.applicant-approved')
                                         <span class="badge bg-success px-2 fw-normal" id="order-status">{{ $order->status }}</span>
-                                    @elseif (Route::currentRouteName() == 'employer.applicant-rejected')
+                                    @elseif (Route::currentRouteName() == 'freelancer.applicant-rejected')
                                         <span class="badge bg-danger px-2 fw-normal" id="order-status">{{ $order->status }}</span>
-                                    @elseif (Route::currentRouteName() == 'employer.applicant-completed')
+                                    @elseif (Route::currentRouteName() == 'freelancer.applicant-completed')
                                         <span class="badge bg-dark px-2 fw-normal" id="order-status">{{ $order->status }}</span>
                                     @endif
                                 </div>

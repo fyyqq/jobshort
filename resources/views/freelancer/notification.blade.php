@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
@@ -16,7 +16,7 @@
                 <div class="box border shadow-sm rounded bg-white mb-3">
                     <div class="d-flex align-items-center justify-content-between px-2 border-bottom">
                         <span class="d-flex align-items-center justify-content-start lh-1 w-100">
-                            <div class="box-title py-3 px-md-4 px-3 {{ Route::currentRouteName() === 'employer.notification' ? 'border-bottom border-2 border-primary' : '' }}">
+                            <div class="box-title py-3 px-md-4 px-3 {{ Route::currentRouteName() === 'freelancer.notification' ? 'border-bottom border-2 border-primary' : '' }}">
                                 <h6 class="m-0" id="order-menu-link">Inbox</h6>
                             </div>
                             <div class="dropdown box-title py-3 ps-md-4 pe-md-3 ps-3 pe-2 d-flex align-items-center justify-content-center gap-1" data-bs-toggle="dropdown" style="cursor: pointer;">

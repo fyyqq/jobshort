@@ -1,4 +1,4 @@
-@extends('employer.profile.layouts.app')
+@extends('freelancer.profile.layouts.app')
 
 @section('pages')
    

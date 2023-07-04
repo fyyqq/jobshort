@@ -3,7 +3,7 @@
         <img src="{{ asset('brand/jobshort.png') }}" style="width: 82px;">
         <span class="material-symbols-outlined rounded-circle border" id="btn_open_close">arrow_right</span>
     </a>
-    <a href="{{ route('employer.profile') }}" id="side-profile" class="text-decoration-none profile d-flex align-items-center justify-content-start border-bottom px-4 py-3 position-relative">
+    <a href="{{ route('freelancer.profile') }}" id="side-profile" class="text-decoration-none profile d-flex align-items-center justify-content-start border-bottom px-4 py-3 position-relative">
         <div class="d-flex align-items-center justify-content-start flex-row">
             <div class="rounded shadow-sm border border-3 border-light" style="height: 50px; width: 50px; overflow: hidden;">
                 <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
@@ -17,7 +17,7 @@
     <div class="link-list">
         <ul class="navbar-nav">
             <li class="dropdown-item">
-                <a href="{{ route('employer.main') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() === 'employer.main' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.main') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() === 'freelancer.main' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">space_dashboard</span>
                     </div>
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('employer.jobs') }}" class="text-decoration-none d-flex row mx-0 {{ Request::is('account/freelancer/services*') ? 'active' : '' }}">
+                <a href="{{ route('freelancer.jobs') }}" class="text-decoration-none d-flex row mx-0 {{ Request::is('account/freelancer/services*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">work</span>
                     </div>
@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('employer.create-service') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'employer.create-service' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.create-service') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.create-service' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">add</span>
                     </div>
@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('employer.applicant') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'employer.applicant' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.applicant') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.applicant' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">clinical_notes</span>
                     </div>
@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('employer.notification') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'employer.notification' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.notification') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.notification' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">notifications</span>
                     </div>
@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('employer.profile') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'employer.profile' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.profile') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.profile' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">account_circle</span>
                     </div>

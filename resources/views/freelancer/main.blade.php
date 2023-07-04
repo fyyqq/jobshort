@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" crossorigin="anonymous">
 

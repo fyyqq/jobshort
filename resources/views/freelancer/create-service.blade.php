@@ -1,4 +1,4 @@
-@extends('employer.layouts.app')
+@extends('freelancer.layouts.app')
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -13,7 +13,7 @@
                 <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Create Service</h1>
             </div>
             <div class="mt-2 ps-md-5 ps-4 pe-3 py-4 border" id="create-jobs" style="background-color: #fff;">
-                <form action="{{ route('employer.post-service') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('freelancer.post-service') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-0 col-12">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">

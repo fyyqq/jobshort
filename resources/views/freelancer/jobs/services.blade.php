@@ -1,4 +1,4 @@
-@extends('employer.jobs.layouts.app')
+@extends('freelancer.jobs.layouts.app')
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('employer.edit-jobs', $service->slug) }}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
+                                    <a href="{{ route('freelancer.edit-jobs', $service->slug) }}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
                                         <small class="text-dark">Edit</small>
                                     </a>
                                     <div class="btn-group dropdown">
@@ -127,7 +127,7 @@
                                                 <i class="me-2 mdi mdi-archive"></i>
                                                 <small class="text-muted" style="font-size: 12.5px;">Archive</small>
                                             </button>
-                                            <a href="{{ route('employer.edit-jobs', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
+                                            <a href="{{ route('freelancer.edit-jobs', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
                                                 <i class="me-2 mdi mdi-pencil"></i>
                                                 <small class="text-dark">Edit</small>
                                             </a>

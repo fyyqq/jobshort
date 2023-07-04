@@ -1,8 +1,8 @@
-@extends('employer.registration.layouts.app')
+@extends('freelancer.registration.layouts.app')
 
 @section('pages')
     
-    <form action="{{ route('employer.post-address') }}" method="post">
+    <form action="{{ route('freelancer.post-address') }}" method="post">
         @csrf
         <div class="col-md-8 col-12 mt-4" id="detail-information" style="height: max-content;">
             <div class="row mx-0" id="individual-form">
@@ -80,7 +80,7 @@
         </div>
         <div class="w-100 py-3 border-top mt-3">
             <div class="d-flex align-items-center justify-content-between">
-                <a href="{{ route('employer.registration') }}" class="btn btn-outline-dark px-4">Prev</a>
+                <a href="{{ route('freelancer.registration') }}" class="btn btn-outline-dark px-4">Prev</a>
                 <button type="submit" class="btn btn-primary px-4">Submit</button>
             </div>
         </div>

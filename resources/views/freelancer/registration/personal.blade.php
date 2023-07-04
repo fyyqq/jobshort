@@ -1,12 +1,12 @@
-@extends('employer.registration.layouts.app')
+@extends('freelancer.registration.layouts.app')
 
 @section('pages')
     {{-- <div class="container-lg mt-3">
         <div class="border shadow pb-4 rounded-3" style="background-color: #fff;">
             <div class="py-4 ms-2 border-bottom">
-                <h1 class="h5 text-center mb-0 text-dark">Employer Registration</h1>
+                <h1 class="h5 text-center mb-0 text-dark">freelancer Registration</h1>
             </div>
-            <form action="{{ route('employer.post-registration') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('freelancer.post-registration') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mx-0 mt-3 px-3">
                     <div class="col-md-3 col-12 mb-md-0 mb-4 border-end">
@@ -148,7 +148,7 @@
         </div>
     </div> --}}
 
-    <form action="{{ (is_null($data) ? route('employer.post-registration') : route('employer.update-registration'))  }}" method="post">
+    <form action="{{ (is_null($data) ? route('freelancer.post-registration') : route('freelancer.update-registration'))  }}" method="post">
         @if (is_null($data))
             @csrf
         @else
@@ -158,16 +158,16 @@
         <div class="col-md-8 col-12 mt-4" id="detail-information" style="height: max-content;">
             <div class="row d-flex align-items-center justify-content-center mb-4">
                 <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start">
-                    <small class="text-muted">Employer Type</small>
+                    <small class="text-muted">Freelancer Type</small>
                 </div>
                 <div class="col-md-8 col-12 mt-md-0 mt-3 d-flex align-items-center justify-content-start">
                     <div class="d-flex align-items-center justify-content-start" style="column-gap: 15px;">
                         <div class="form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="employer_type" id="individual" value="individual" {{ (is_null($data) || $data->employer_type == 'individual') ? 'checked' : '' }}>
+                            <input class="form-check-input shadow-none" type="radio" name="freelancer_type" id="individual" value="individual" {{ (is_null($data) || $data->freelancer_type == 'individual') ? 'checked' : '' }}>
                             <label style="font-size: 14px;" class="form-check-label" for="individual">Individual</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="employer_type" id="company" value="company" {{ ($data && $data->employer_type == 'company') ? 'checked' : '' }}>
+                            <input class="form-check-input shadow-none" type="radio" name="freelancer_type" id="company" value="company" {{ ($data && $data->freelancer_type == 'company') ? 'checked' : '' }}>
                             <label style="font-size: 14px;" class="form-check-label" for="company">Registered Business</label>
                         </div>
                     </div>
