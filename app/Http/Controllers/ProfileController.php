@@ -130,7 +130,6 @@ class ProfileController extends Controller
     {
         $validateStore = $request->validate([
             'name' => ['required'],
-            'username' => ['required'],
             'identification_number' => ['required'],
             'image' => ['image', 'mimes:png,jpg,jpeg', 'max:5048'],
         ]);
@@ -154,7 +153,6 @@ class ProfileController extends Controller
 
         $user = User::where('id', auth()->user()->id)->first();
         $user->name = $validateStore['name'];
-        $user->username = $validateStore['username'];
         $user->identification_number = $validateStore['identification_number'];
         $user->birth_date = $request->input('birth_date');
         $user->gender = $request->input('gender');
@@ -162,7 +160,7 @@ class ProfileController extends Controller
         $user->image = $imagePath;
         $user->save();
 
-        return redirect()->back()->with('success', 'Employee Updated Successfully');
+        return redirect()->back()->with('success', 'Profile Updated Successfully');
     }
 
     /**

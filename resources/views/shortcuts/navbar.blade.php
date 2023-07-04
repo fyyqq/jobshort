@@ -24,9 +24,9 @@
             <!-- Center Side Of Navbar -->
             <form action="{{ route('search') }}" method="get" class="d-md-flex d-none" onsubmit="return jobSearch()">
                 <div class="btn-group" role="group">
-                    <input type="text" name="search" id="searchbar" class="px-3 py-2" placeholder="Search Jobs..." style="width: 300px; border: 1px solid rgb(218, 216, 216); border-top-left-radius: 20px; border-bottom-left-radius: 20px;" value="<?php echo $_GET['search'] ?? '' ?>">
-                    <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid rgb(218, 216, 216);">
-                        <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 15px;"></i>
+                    <input type="text" name="keyword" id="searchbar" class="px-3 py-2 text-muted" placeholder="*Web Developer..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 13px;" value="<?php echo $_GET['keyword'] ?? '' ?>">
+                    <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
+                        <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>
                 </div>
             </form>
@@ -60,34 +60,34 @@
         @auth
             <div class="d-flex align-items-center justify-content-center ms-4">
                 <li class="nav-item dropdown d-flex align-items-center">
-                    <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 42px; width: 42px;">
+                    <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 41px; width: 41px;">
                         @if (Auth::check())
                             <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;">
                         @endif
                     </span>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-138px, 5px); width: 180px;">
                         <li>
-                            <a class="dropdown-item py-2" href="{{ route('profile.main') }}">Profile</a>
+                            <a class="dropdown-item py-2" href="{{ route('profile.main') }}" style="font-size: 12.5px;">Profile</a>
                         </li>
                         @if (auth()->user()->roles == '2')
                             <li>
-                                <a class="dropdown-item py-2" href="{{ route('employer.main') }}">Freelancer</a>
+                                <a class="dropdown-item py-2" href="{{ route('employer.main') }}" style="font-size: 12.5px;">Freelancer</a>
                             </li>
                         @endif
                         <li>
-                            <span class="dropdown-item pt-2 pb-1" href="#">
+                            <span class="dropdown-item pt-2" href="#">
                                 <div class="ps-0 form-check form-switch d-flex justify-content-between flex-row-reverse">
                                     <input class="form-check-input shadow-none" type="checkbox" id="darkmode">
-                                    <label for="darkmode" class="text-start">Dark Mode</label>
+                                    <label for="darkmode" class="text-start" style="font-size: 12.5px;">Dark Mode</label>
                                 </div>
                             </span>
                         </li>
                         <li>
-                            <a class="dropdown-item py-2 row mx-0" href="">Settings</a>
+                            <a class="dropdown-item py-2 row mx-0" href="" style="font-size: 12.5px;">Settings</a>
                         </li>
                         <div class="dropdown-divider my-0"></div>
                         <li>
-                            <a class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            <a class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 12.5px;">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>

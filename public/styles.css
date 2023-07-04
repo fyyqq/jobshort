@@ -33,6 +33,13 @@ a:hover {
     gap: 20px;
 } */
 
+#searchbar {
+    outline: none;
+    border: 1px solid rgb(187, 187, 187);
+    border-right: unset;
+    width: 280px;
+}
+
 .dropdown-list-image {
     position: relative;
     height: 2.5rem;
@@ -382,6 +389,9 @@ input[type=number] {
     .profile .profile-content {
         width: 65%;
     }
+    #searchbar {
+        width: 230px;
+    }
 }
 
 @media (max-width: 850px) {
@@ -405,7 +415,10 @@ input[type=number] {
     .profile #status-order {
         font-size: 11.5px;
         padding-bottom: 6px;
-    }   
+    }
+    #searchbar {
+        width: 220px;
+    }
 }
 
 @media (max-width: 767px) {

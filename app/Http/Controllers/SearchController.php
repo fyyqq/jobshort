@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function index(Request $request) {
-        $search = $request->input('search');
+        $search = $request->input('keyword');
 
         $result = Service::where('title', 'LIKE', '%' . $search . '%')
         ->orWhere('category', 'LIKE', '%' . $search . '%')->get();

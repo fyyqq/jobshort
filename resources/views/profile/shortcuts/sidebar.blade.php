@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-10 col-11 ps-xl-2 ps-3 profile-info d-flex align-items-center justify-content-start">
             <div class="ms-md-3 ms-sm-2 ms-4">
-                <p class="mb-0 fw-bold me-1" style="font-size: 14px;">{{ auth()->user()->name }}</p>
+                <p class="mb-0 fw-bold me-1 lh-sm" style="font-size: 14px;">{{ auth()->user()->name }}</p>
                 <small class="text-muted" style="font-size: 12px;">{{ auth()->user()->email }}</small>
             </div>
         </div>
