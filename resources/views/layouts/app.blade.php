@@ -45,13 +45,13 @@
                 @yield('content')
             </main>
             {{-- Mobile Navbar --}}
-            <div class="shadow-sm {{ Route::currentRouteName() === 'jobs' ? 'd-none' : 'd-block' }}">
+            <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-none' : 'd-block' }}">
                 <div class="" id="mobile-navbar">
                     <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
                         <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
                         </a>
-                        <a href="{{ route('profile.saved-jobs') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
+                        <a href="{{ route('profile.saved-services') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <i class="fa-regular text-muted fa-heart" style="font-size: 19px;"></i>
                         </a>
                         <a href="{{ route('notification') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">

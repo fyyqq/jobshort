@@ -34,7 +34,7 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('user/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
-// Route::get('/{slug}', [HomeController::class, 'jobs']);
+// Route::get('/{slug}', [HomeController::class, 'services']);
 Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');
 
 // Notifications
@@ -54,21 +54,21 @@ Route::get('/success', [PaymentController::class, 'success'])->name('payment_suc
 Route::get('/error', [PaymentController::class, 'error'])->name('payment_error');
 
 // Wishlist
-Route::post('/saved/{id}', [WishlistController::class, 'store'])->name('saved-job');
-Route::delete('/unsaved/{id}', [WishlistController::class, 'unstore'])->name('unsaved-job');
+Route::post('/saved/{id}', [WishlistController::class, 'store'])->name('saved-service');
+Route::delete('/unsaved/{id}', [WishlistController::class, 'unstore'])->name('unsaved-service');
 
 // Freelancer Notification
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 
 Route::prefix('orders')->middleware(['auth'])->group(function() {
-    // Route::get('/{slug}', [OrdersController::class, 'show'])->name('apply-jobs');
-    Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store'])->name('applied-jobs');
+    // Route::get('/{slug}', [OrdersController::class, 'show'])->name('apply-services');
+    Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store'])->name('applied-services');
 });
 
 Route::prefix('services')->group(function() {
     Route::get('/search', [SearchController::class, 'index'])->name('search');
-    Route::get('/{slug}', [HomeController::class, 'showService'])->name('jobs');
+    Route::get('/{slug}', [HomeController::class, 'showService'])->name('services');
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
     Route::get('/payment/{slug}', [PaymentController::class, 'index'])->name('payment');
 });
@@ -77,13 +77,13 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
     Route::get('/', [ProfileController::class, 'account'])->name('my-account');
     Route::prefix('profile')->group(function() {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.main');
-        Route::post('/freelancer-registration', [ProfileController::class, 'store'])->name('profile.employee-registration');
-        Route::put('/freelancer-update', [ProfileController::class, 'update'])->name('profile.employee-update');
-        Route::put('/freelancer-edit', [ProfileController::class, 'update'])->name('profile.employee-edit');
+        Route::post('/freelancer-registration', [ProfileController::class, 'store'])->name('profile.freelancer-registration');
+        Route::put('/freelancer-update', [ProfileController::class, 'update'])->name('profile.freelancer-update');
+        Route::put('/freelancer-edit', [ProfileController::class, 'update'])->name('profile.freelancer-edit');
         Route::get('/address', [AddressController::class, 'index'])->name('profile.address');
         Route::post('/freelancer-address', [AddressController::class, 'store'])->name('profile.store-address');
         Route::put('/freelancer-address', [AddressController::class, 'update'])->name('profile.update-address');
-        Route::get('/wishlist', [WishlistController::class, 'index'])->name('profile.saved-jobs');
+        Route::get('/wishlist', [WishlistController::class, 'index'])->name('profile.saved-services');
         Route::prefix('orders')->group(function() {
             Route::get('/', [ProfileController::class, 'applied'])->name('profile.applied');
             Route::get('/approved', [ProfileController::class, 'approved'])->name('profile.applied-approved');
@@ -98,17 +98,17 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
     Route::prefix('freelancer')->middleware(['auth'])->group(function() {
         Route::get('/', [FreelancerController::class, 'index'])->name('freelancer.main');
         Route::prefix('services')->group(function() {
-            Route::get('/', [ServicesController::class, 'index'])->name('freelancer.jobs');
-            Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('freelancer.edit-jobs');
-            Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('freelancer.update-jobs');
-            Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('freelancer.update-archive-jobs');
-            Route::post('/archive-items', [ServicesController::class, 'archiveItems'])->name('freelancer.archive-item-jobs');
-            Route::delete('/delete/{slug}', [ServicesController::class, 'destroy'])->name('freelancer.delete-jobs');
-            Route::post('/delete-items', [ServicesController::class, 'deletedItems'])->name('freelancer.delete-item-jobs');
-            Route::get('/live', [FreelancerController::class, 'live'])->name('freelancer.live-jobs');
-            Route::get('/ongoing', [FreelancerController::class, 'ongoing'])->name('freelancer.on-jobs');
-            Route::get('/complete', [FreelancerController::class, 'complete'])->name('freelancer.complete-jobs');
-            Route::get('/archive', [FreelancerController::class, 'archive'])->name('freelancer.archive-jobs');
+            Route::get('/', [ServicesController::class, 'index'])->name('freelancer.services');
+            Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('freelancer.edit-services');
+            Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('freelancer.update-services');
+            Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('freelancer.update-archive-services');
+            Route::post('/archive-items', [ServicesController::class, 'archiveItems'])->name('freelancer.archive-item-services');
+            Route::delete('/delete/{slug}', [ServicesController::class, 'destroy'])->name('freelancer.delete-services');
+            Route::post('/delete-items', [ServicesController::class, 'deletedItems'])->name('freelancer.delete-item-services');
+            Route::get('/live', [FreelancerController::class, 'live'])->name('freelancer.live-services');
+            Route::get('/ongoing', [FreelancerController::class, 'ongoing'])->name('freelancer.on-services');
+            Route::get('/complete', [FreelancerController::class, 'complete'])->name('freelancer.complete-services');
+            Route::get('/archive', [FreelancerController::class, 'archive'])->name('freelancer.archive-services');
             // Filter
             Route::get('/sort-by-normal-price', [ServicesController::class, 'sortByNormal'])->name('freelancer.normal');
             Route::get('/sort-by-high-price', [ServicesController::class, 'sortByHighPrice'])->name('freelancer.filter-high-price');

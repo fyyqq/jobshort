@@ -14,10 +14,10 @@
         </div>
     
         @if (auth()->user()->roles != '0')
-            <form action="{{ route('profile.employee-update') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.freelancer-update') }}" method="POST" class="border" enctype="multipart/form-data">
                 @method('PUT')
         @else
-            <form action="{{ route('profile.employee-registration') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.freelancer-registration') }}" method="POST" class="border" enctype="multipart/form-data">
         @endif
             @csrf
             <div class="row mx-0 flex-lg-row flex-column-reverse p-3">

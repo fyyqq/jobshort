@@ -29,7 +29,7 @@
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{{ route('employer.main') }}" class="{{ Route::currentRouteName() === 'employer.main' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="freelancer">
+            <a href="{{ route('freelancer.main') }}" class="{{ Route::currentRouteName() === 'employer.main' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="freelancer">
                 <div class="col-md-2 col-none">
                     <i class="fa-solid fa-user-check" id="sidebar-icon"></i>
                 </div>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li class="nav-item w-100">
-            <a href="{{ route('profile.saved-jobs') }}" class="{{ Route::currentRouteName() === 'profile.saved-jobs' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="wishlist">
+            <a href="{{ route('profile.saved-services') }}" class="{{ Route::currentRouteName() === 'profile.saved-services' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="wishlist">
                 <div class="col-md-2 col-none">
                     <i class="fa-solid fa-heart text-muted" id="sidebar-icon"></i>
                 </div>

@@ -90,9 +90,9 @@ if (inputText && inputText.nextElementSibling) {
 
 const checkJobs = document.querySelectorAll('#select-jobs');
 
-function allJobs() {
-    const checkAllJobs = document.getElementById('select-all-jobs');
-    if (checkAllJobs.checked) {
+function allService() {
+    const checkAllService = document.getElementById('select-all-jobs');
+    if (checkAllService.checked) {
         checkJobs.forEach(element => {
             element.checked = true;
         });
