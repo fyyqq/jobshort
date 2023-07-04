@@ -13,18 +13,10 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('order_id');
-            // $table->unsignedBigInteger('user_id');
-            // $table->unsignedBigInteger('freelancer_id');
-            // $table->unsignedBigInteger('service_id');
             $table->string('images')->nullable();
             $table->tinyInteger('stars');
             $table->string('title')->nullable();
             $table->text('review')->nullable();
-            // $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('freelancer_id')->references('id')->on('freelancers')->onDelete('cascade');
-            // $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
