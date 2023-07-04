@@ -25,12 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('username');
         $table->dropColumn('identification_number');
         $table->dropColumn('birth_date');
         $table->dropColumn('gender');
         $table->dropColumn('about');
-        $table->dropColumn('country');
         });
     }
 };
