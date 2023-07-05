@@ -43,6 +43,7 @@ class FreelancerRegistrationController extends Controller
         $freelancer->number = $validateStore['number'];
         $freelancer->contact = $validateStore['contact'];
         $freelancer->country = $validateStore['country'];
+        $freelancer->skills = $request->input('skills');
         $freelancer->image = $imagePath;
         $registration_confirmation = $freelancer->save();
 

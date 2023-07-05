@@ -9,7 +9,7 @@
                         <small class="text-muted" id="name-title">Name</small>
                     </div>
                     <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
-                        <input type="text" name="name" id="" class="form-control w-100 shadow-none @error('name') is-invalid @enderror" value="{{ $data->name }}">
+                        <input type="text" name="name" id="" class="form-control w-100 shadow-none @error('name') is-invalid @enderror" value="{{ old('name', $data->name) }}">
                         @error('name')
                             <span class="text-danger" role="alert">
                                 <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -24,7 +24,7 @@
                         <small class="text-muted text-end" id="name-title">Identification Number</small>
                     </div>
                     <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
-                        <input type="number" name="number" id="" class="form-control w-100 shadow-none @error('number') is-invalid @enderror" value="{{ $data->number }}">
+                        <input type="number" name="number" id="" class="form-control w-100 shadow-none @error('number') is-invalid @enderror" value="{{ old('number', $data->number) }}">
                         @error('number')
                             <span class="text-danger" role="alert">
                                 <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -39,12 +39,27 @@
                         <small class="text-muted" id="name-title">Phone Number</small>
                     </div>
                     <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
-                        <input type="number" name="contact" id="" class="form-control w-100 shadow-none @error('contact') is-invalid @enderror" value="{{ $data->contact }}">
+                        <input type="number" name="contact" id="" class="form-control w-100 shadow-none @error('contact') is-invalid @enderror" value="{{ old('contact', $data->contact) }}">
                         @error('contact')
                             <span class="text-danger" role="alert">
                                 <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
                             </span>
                         @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0">
+                <div class="row d-flex align-items-center justify-content-center mb-4">
+                    <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start">
+                        <small class="text-muted" id="name-title">Skills</small>
+                    </div>
+                    <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
+                        <select name="skills" id="" class="form-control w-100 shadow-none">
+                            @foreach ($skills as $skill)
+                                <option value="{{ $skill->name }}" {{ $data->skills === $skill->name ? 'selected' : '' }}>{{ ucfirst($skill->name) }}</option>
+                            @endforeach
+                        </select>
+                    <ul class="suggestion-list col-sm-6 col-12"></ul>
                     </div>
                 </div>
             </div>
@@ -70,7 +85,7 @@
                         <small class="text-muted" id="name-title">About Me</small>
                     </div>
                     <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
-                        <textarea type="number" name="about" id="" class="form-control w-100 shadow-none @error('about') is-invalid @enderror" style="height: 150px;">{{ $data->about }}</textarea>
+                        <textarea type="number" name="about" id="" class="form-control w-100 shadow-none @error('about') is-invalid @enderror" style="height: 150px;">{{ old('about', $data->about) }}</textarea>
                         @error('about')
                             <span class="text-danger" role="alert">
                                 <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>

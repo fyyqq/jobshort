@@ -9,8 +9,8 @@
                 <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
             </div>
             <div class="mt-1 pb-1 ms-3 d-flex flex-column justify-content-center">
-                <p class="text-dark mb-0 lh-sm" style="font-size: 15px;">{{ auth()->user()->freelancer->name }}</p>
-                <small class="text-muted" style="font-size: 12.5px">designer</small>
+                <p class="text-dark mb-0 lh-sm" style="font-size: 13.5px;">{{ Str::limit(auth()->user()->freelancer->name, 17) }}</p>
+                <small class="text-muted" style="font-size: 12.5px">{{ Str::limit(strtolower(auth()->user()->freelancer->skills), 15) }}</small>
             </div>
         </div>
     </a>
