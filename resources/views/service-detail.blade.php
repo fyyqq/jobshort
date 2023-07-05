@@ -23,9 +23,9 @@
                             <input type="hidden" value="{{ $service->id }}">
                             <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
                         @else
-                        <a href="{{ route('profile.main') }}" class="text-decoration-none">
-                            <i class="fa-solid fa-heart unwishlist"></i>
-                        </a>
+                            <a href="{{ route('profile.main') }}" class="text-decoration-none">
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
                         @endif
                     </div>
                 </div>

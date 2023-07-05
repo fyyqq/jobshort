@@ -12,8 +12,11 @@ class FreelancerRegistrationController extends Controller
 {
     public function index()
     {
+        $skills_path = file_get_contents(public_path('json/skills.json'));
+        $decode_data = json_decode($skills_path);
+
         return view('freelancer.registration.personal', [
-            'data' => Freelancer::where('user_id', auth()->user()->id)->first()
+            'skills' => $decode_data
         ]);
     }
 

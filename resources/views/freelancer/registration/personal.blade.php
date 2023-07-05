@@ -45,6 +45,24 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row d-flex align-items-center justify-content-center mb-4">
+                        <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start">
+                            <small class="text-muted" id="name-title" style="font-size: 13.5px;">* Skills</small>
+                        </div>
+                        <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
+                            <select name="skills" class="form-control w-100 shadow-none @error('skills') is-invalid @enderror" id="">
+                                <option value="">Choose your skills</option>
+                                @foreach ($skills as $skill)
+                                    <option value="{{ $skill->name }}">{{ ucfirst($skill->name) }}</option>
+                                @endforeach
+                            </select>
+                            @error('skills')
+                                <span class="text-danger" role="alert">
+                                    <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row d-flex align-items-start justify-content-center mb-4">
                         <div class="col-md-4 col-12 d-flex align-items-center justify-content-md-end justify-content-start">
                             <small class="text-muted" style="font-size: 13.5px;">* Country</small>

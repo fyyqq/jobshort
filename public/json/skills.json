@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1, 
+        "name": "programmer" 
+    },
+    {
+        "id": 2, 
+        "name": "designer" 
+    },
+    {
+        "id": 3, 
+        "name": "writer" 
+    },
+    {
+        "id": 4, 
+        "name": "developer" 
+    },
+    {
+        "id": 5, 
+        "name": "photographer" 
+    },
+    {
+        "id": 6, 
+        "name": "marketing" 
+    },
+    {
+        "id": 7, 
+        "name": "illustrator" 
+    },
+    {
+        "id": 8, 
+        "name": "videographer" 
+    },
+    {
+        "id": 9, 
+        "name": "translator" 
+    },
+    {
+        "id": 10,
+        "name": "data analyst" 
+    },
+    {
+        "id": 11,
+        "name": "content writer" 
+    },
+    {
+        "id": 12,
+        "name": "graphic designer" 
+    },
+    {
+        "id": 13,
+        "name": "web developer" 
+    },
+    {
+        "id": 14,
+        "name": "UI/UX designer" 
+    },
+    {
+        "id": 15,
+        "name": "copywriter" 
+    },
+    {
+        "id": 16,
+        "name": "social media manager" 
+    },
+    {
+        "id": 17,
+        "name": "SEO specialist" 
+    },
+    {
+        "id": 18,
+        "name": "video editor" 
+    },
+    {
+        "id": 19,
+        "name": "project manager" 
+    },
+    {
+        "id": 20,
+        "name": "network administrator" 
+    }
+]
+  
