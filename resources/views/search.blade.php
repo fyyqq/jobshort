@@ -75,7 +75,8 @@
                 @if (count($data) > 0)
                     <div class="d-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
                         @foreach ($data as $key => $service)
-                            <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
+                        <div class="">
+                            <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center flex-column">
                                     <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $image)
@@ -109,6 +110,7 @@
                                     </div>
                                 </div>
                             </a>
+                        </div>
                         @endforeach
                     </div>
                 @else
@@ -118,7 +120,7 @@
                             <p>
                                 <a href="https://giphy.com/gifs/greenday-green-day-billie-joe-armstrong-xXsFlH4StljYG5iBvQ"></a>
                             </p>
-                            <h1 class="text-dark mb-0 h5">No Jobs Found !</h1>
+                            <h1 class="text-dark mb-0 h5">No Services Found !</h1>
                         </div>
                     </div>
                 @endif

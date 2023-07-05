@@ -18,9 +18,15 @@
                         <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 13.5px; cursor: pointer;"></i>
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
-                        <input type="hidden" value="{{ $service->id }}">
-                        <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
+                        @if (auth()->check() && auth()->user()->roles != '0')
+                            <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
+                            <input type="hidden" value="{{ $service->id }}">
+                            <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
+                        @else
+                        <a href="{{ route('profile.main') }}" class="text-decoration-none">
+                            <i class="fa-solid fa-heart unwishlist"></i>
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -112,8 +118,14 @@
                         <div class="d-flex align-items-center justify-content-center pe-3">
                             <input type="hidden" id="user_id" value="{{ Auth::id() }}">
                             <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
-                            <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px;"></i>
-                            <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
+                            @if (auth()->check() && auth()->user()->roles != '0')
+                                <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px;"></i>
+                                <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
+                            @else
+                                <a href="{{ route('profile.main') }}" class="text-decoration-none">
+                                    <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
+                                </a>
+                            @endif
                         </div>
                     </div>
                     <div class="my-4 px-md-0 px-2">
@@ -184,7 +196,7 @@
                                                         <i class="fa-solid fa-star text-warning" style="font-size: 12.5px;"></i>
                                                     @endfor
                                                 </div>
-                                                <small class="text-muted" style="font-size: 13.5px;">{{ $review->created_at->diffForHumans() }}</small>
+                                                <small class="text-muted ms-2" style="font-size: 13.5px;">{{ $review->created_at->diffForHumans() }}</small>
                                             </div>
                                             <small class="text-dark">{{ $review->title }}</small>
                                             <div class="my-2 rounded border border-dark" style="height: 65px; width: 65px; overflow: hidden;">
@@ -228,34 +240,45 @@
                         </div>
                         <div class="px-3 position-absolute w-100" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
                             <div class="d-flex align-items-center justify-content-center gap-1" style="flex-flow: 1;">
-                                {{-- <form action="{{ route('pay') }}" method="post">
+                                <form action="{{ route('pay') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="amount" value="{{ $service->price }}"> --}}
+                                    <input type="hidden" name="amount" value="{{ $service->price }}">
                                     <a href="{{ route('chatify') }}" class="btn btn-dark py-2">
                                         <i class="fa-regular fa-message text-light" style="font-size: 15px;"></i>
                                     </a>
-                                {{-- </form> --}}
+                                </form>
                                 <div class="w-100">
-                                    <?php
-                                        $userOrder = auth()->user()->order->where('service_id', $service->id)->sortByDesc('created_at')->first();
-                                        $rejectOrCompleted = $userOrder && in_array($userOrder->status, ['rejected', 'completed']);
-                                        $pendingOrApproved = $userOrder && in_array($userOrder->status, ['pending', 'approved']);
-                                    ?>
-                                    @if ($rejectOrCompleted)
-                                        <input type="hidden" id="service_id" value="{{ $service->id }}">
-                                        <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
-                                        {{-- <a href="{{ route('payment', $service->slug) }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a> --}}
-                                        <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
-                                    @elseif ($pendingOrApproved)
-                                        @if ($userOrder->status === 'pending')
-                                            <a href="{{ route('profile.applied') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Check Your Order</a>
-                                        @elseif ($userOrder->status === 'approved')
-                                            <a href="{{ route('profile.applied-approved') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Check Your Order</a>
+                                    @if (auth()->check())
+                                        <?php
+                                            $userOrder = auth()->user()->order->where('service_id', $service->id)->sortByDesc('created_at')->first();
+                                            $rejectOrCompleted = $userOrder && in_array($userOrder->status, ['rejected', 'completed']);
+                                            $pendingOrApproved = $userOrder && in_array($userOrder->status, ['pending', 'approved']);
+                                        ?>
+                                        @if ($rejectOrCompleted)
+                                            <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                            @if (auth()->check() && auth()->user()->roles != '0')
+                                                <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
+                                            @else
+                                                <a href="{{ route('profile.main') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
+                                            @endif
+                                            <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                                        @elseif ($pendingOrApproved)
+                                            @if ($userOrder->status === 'pending')
+                                                <a href="{{ route('profile.applied') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Check Your Order</a>
+                                            @elseif ($userOrder->status === 'approved')
+                                                <a href="{{ route('profile.applied-approved') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Check Your Order</a>
+                                            @endif
+                                        @else
+                                            <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                            @if (auth()->check() && auth()->user()->roles != '0')
+                                                <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
+                                            @else
+                                                <a href="{{ route('profile.main') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
+                                            @endif
+                                            <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                                         @endif
                                     @else
-                                        <input type="hidden" id="service_id" value="{{ $service->id }}">
-                                        <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
-                                        <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                                        <a href="{{ route('profile.main') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
                                     @endif
                                 </div>
                             </div>
