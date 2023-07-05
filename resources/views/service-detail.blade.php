@@ -18,7 +18,7 @@
                         <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 13.5px; cursor: pointer;"></i>
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
-                        @if (auth()->check() && auth()->user()->roles != '0')
+                        @if (auth()->check())
                             <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
                             <input type="hidden" value="{{ $service->id }}">
                             <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
@@ -118,7 +118,7 @@
                         <div class="d-flex align-items-center justify-content-center pe-3">
                             <input type="hidden" id="user_id" value="{{ Auth::id() }}">
                             <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
-                            @if (auth()->check() && auth()->user()->roles != '0')
+                            @if (auth()->check())
                                 <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px;"></i>
                                 <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
                             @else

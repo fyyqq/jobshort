@@ -10,7 +10,7 @@
             </div>
             <div class="mt-1 pb-1 ms-3 d-flex flex-column justify-content-center">
                 <p class="text-dark mb-0 lh-sm" style="font-size: 13.5px;">{{ Str::limit(auth()->user()->freelancer->name, 17) }}</p>
-                <small class="text-muted" style="font-size: 12.5px">{{ Str::limit(strtolower(auth()->user()->freelancer->skills), 15) }}</small>
+                <small class="text-muted" style="font-size: 12.5px">{{ auth()->user()->freelancer->skills != null ? Str::limit(strtolower(auth()->user()->freelancer->skills), 15) : '' }}</small>
             </div>
         </div>
     </a>
