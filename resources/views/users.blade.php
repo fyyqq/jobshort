@@ -9,26 +9,26 @@
                         <div class="rounded-3" style="height: 80px; width: 80px; overflow: hidden;">
                             <img src="{{ asset('images/' . $freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
                         </div>
-                        <div class="">
-                            <p class="fw-bold text-dark mb-0">{{ $freelancer->name }}</p>
-                            <small class="text-muted" style="font-size: 14px;">{{ $freelancer->user->email }}</small>
+                        <div class="d-flex flex-column align-items-start justify-content-center">
+                            <small class="fw-bold mb-0 lh-1">{{ $freelancer->name }}</small>
+                            <small class="text-muted" style="font-size: 12.5px;">{{ $freelancer->skills }}</small>
                         </div>
                         <div class="dropdown position-absolute" style="top: 0px; right: 0px;">
                             <i class="fa-solid fa-ellipsis-vertical p-1" data-bs-toggle="dropdown"></i>
                             <div class="dropdown-menu dropdown-menu-start p-0">
-                                <li class="dropdown-item py-2">
+                                <li class="dropdown-item py-2 btn">
                                     <div class="d-flex align-items-center justify-content-start gap-3">
                                         <input type="hidden" id="user_id" value="{{ Auth::id() }}">
                                         <input type="hidden" id="freelancer_id" value="{{ $freelancer->id }}">
-                                        <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px;"></i>
-                                        <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px;"></i>
-                                        <small class="text-muted">Notification</small>
+                                        <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 15px;"></i>
+                                        <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 15px;"></i>
+                                        <small class="text-muted" style="font-size: 13px;">Notification</small>
                                     </div>
                                 </li>
-                                <li class="dropdown-item py-2">
+                                <li class="dropdown-item py-2 btn">
                                     <div class="d-flex align-items-center justify-content-start gap-3">
-                                        <i class="fa-regular fa-message text-dark"></i>
-                                        <small class="text-muted">Message</small>
+                                        <i class="fa-regular fa-message text-muted" style="font-size: 13.5px;"></i>
+                                        <small class="text-muted" style="font-size: 13px;">Message</small>
                                     </div>
                                 </li>
                             </div>

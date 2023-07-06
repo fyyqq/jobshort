@@ -111,8 +111,9 @@
                             <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-n one rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
                                 <img src="{{ asset('images/' . $service->freelancer->image) }}" alt="" class="w-100 h-100" style="object-fit: cover">
                             </a>
-                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none">
-                                <small class="text-dark ms-3">{{ $service->freelancer->name }}</small>
+                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
+                                <small class="text-dark ms-3 lh-sm">{{ $service->freelancer->name }}</small>
+                                <small class="text-dark ms-3" style="font-size: 12px;">{{ $service->freelancer->skills }}</small>
                             </a>
                         </div>
                         <div class="d-flex align-items-center justify-content-center pe-3">
@@ -131,7 +132,7 @@
                     <div class="my-4 px-md-0 px-2">
                         <h1 class="text-dark mb-3 h5">About this</h1>
                         <div class="">
-                            <small class="text-muted d-block mb-2">@for ($i = 1; $i <= 5; $i++) &nbsp; @endfor {{ $service->description }}</small>
+                            {{-- <small class="text-muted d-block mb-2 w-50">{{ $service->description }}</small> --}}
                         </div>
                     </div>
                     <div class="pt-3 border-top">

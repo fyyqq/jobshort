@@ -3,14 +3,14 @@
 @section('content')
     <div class="container-lg">
         <div class="row mx-0 position-relative d-flex justify-content-center align-items-top" style="flex-wrap: wrap; column-gap: 20px; height: max-content;">
-            <aside class="px-0 col-md-3 col-12 mb-3 d-md-block d-none">
+            <aside class="px-0 col-md-3 col-12 mb-3 d-md-block d-none" style="background-color: #fff;">
                 <div class="rounded-3 pb-4 border" style="background-color: #fff; position: sticky; top: 100px;">
                     <div class="py-3 border-bottom">
                         <h1 class="text-dark h5 mb-0 text-center" style="font-size: 16px;">Filter Services</h1>
                     </div>
                     <div class="px-4" id="filter-list">
                         <div class="mt-3">
-                            <small class="text-dark mb-0">Time Range :</small>
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Time Range :</small>
                             <div class="form-check my-1">
                                 <input class="form-check-input shadow-none" type="radio" name="order_range" id="latest_order">
                                 <label class="form-check-label" for="latest_order">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <small class="text-dark mb-0">Order Range :</small>
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Order Range :</small>
                             <div class="form-check my-1">
                                 <input class="form-check-input shadow-none" type="radio" name="order_range" id="highest_order">
                                 <label class="form-check-label" for="highest_order">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <small class="text-dark mb-0">Rating Range :</small>
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Rating Range :</small>
                             <div class="form-check my-1">
                                 <input class="form-check-input shadow-none" type="radio" name="rating_range" id="highest_rating">
                                 <label class="form-check-label" for="highest_rating">
@@ -55,27 +55,32 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <small class="text-dark mb-0">Price Range :</small>
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Price Range :</small>
                             <div class="mt-2 d-flex align-items-start justify-content-center flex-column" style="row-gap: 6px;">
-                                <input type="text" class="border py-1 px-3 w-100" placeholder="Min Price" name="" id="" style="font-size: 13px;">
-                                <input type="text" class="border py-1 px-3 w-100" placeholder="Max Price" name="" id="" style="font-size: 13px;">
+                                <input type="text" class="form-control shadow-none border py-1 px-3 w-100" placeholder="Min Price" name="" id="" style="font-size: 13px;">
+                                <input type="text" class="form-control shadow-none border py-1 px-3 w-100" placeholder="Max Price" name="" id="" style="font-size: 13px;">
                             </div>
-                            <div class="mt-2">
+                            <div class="mt-3">
                                 <button class="btn text-light btn-sm w-100" style="background-color: #2891e1; font-size: 13px;">Submit</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </aside>
-            <section class="rounded-3 col-md-8 col-12" style="height: max-content;">
-                <div class="mb-3 mt-2 d-flex align-items-center jusitfy-content-start" style="column-gap: 15px;">
-                    <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 14px;"></i>
-                    <h1 class="mb-0 h6 text-dark fw-bold">{{ count($data) }} "<?php echo $_GET['keyword'] ?>" Services</h1>
+            <section class="rounded-3 col-md-8 col-12 px-0 px-3" style="height: max-content;">
+                <div class="mb-3 mt-2 d-flex align-items-center jusitfy-content-md-start justify-content-between">
+                    <div class="d-flex align-items-center justify-content-start gap-3">
+                        <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 14px;"></i>
+                        <small class="mb-0 text-dark">{{ count($data) }} result "<span class="fw-bold"><?php echo $_GET['keyword'] ?></span>"</small>
+                    </div>
+                    <div class="d-md-none d-flex align-items-center justify-content-end">
+                        <button class="btn btn-light border" style="font-size: 14px;"><i class="fa-solid fa-filter me-2" style="font-size: 13px;"></i>Filter</button>
+                    </div>
                 </div>
                 @if (count($data) > 0)
-                    <div class="d-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                    <div class="row mx-0">
                         @foreach ($data as $key => $service)
-                        <div class="">
+                        <div class="col-sm-6 col-12">
                             <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center flex-column">
                                     <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">

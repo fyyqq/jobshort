@@ -24,7 +24,7 @@
             <!-- Center Side Of Navbar -->
             <form action="{{ route('search') }}" method="get" class="d-md-flex d-none" onsubmit="return jobSearch()">
                 <div class="btn-group" role="group">
-                    <input type="text" name="keyword" id="searchbar" class="px-3 py-2 text-muted" placeholder="*Web Developer..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 13px;" value="<?php echo $_GET['keyword'] ?? '' ?>">
+                    <input type="text" name="keyword" id="searchbar" class="px-3 py-2 text-muted" placeholder="*Web Developer..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>">
                     <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
                         <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>

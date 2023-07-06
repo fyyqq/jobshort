@@ -55,9 +55,16 @@
                     </div>
                     <div class="col-md-8 col-12 d-flex align-items-start justify-content-start flex-column">
                         <select name="skills" id="" class="form-control w-100 shadow-none">
-                            @foreach ($skills as $skill)
-                                <option value="{{ $skill->name }}" {{ $data->skills === $skill->name ? 'selected' : '' }}>{{ ucfirst($skill->name) }}</option>
-                            @endforeach
+                            @if ($data->skills != null)
+                                @foreach ($skills as $skill)
+                                    <option value="{{ $skill->name }}" {{ $data->skills === $skill->name ? 'selected' : '' }}>{{ ucfirst($skill->name) }}</option>
+                                @endforeach
+                            @else
+                                <option value="">Choose your skills</option>
+                                @foreach ($skills as $skill)
+                                    <option value="{{ $skill->name }}" >{{ ucfirst($skill->name) }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     <ul class="suggestion-list col-sm-6 col-12"></ul>
                     </div>
