@@ -538,6 +538,104 @@ function autoImage(event) {
     }
 }
 
+function timeRange(e) {
+    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+    let url = `/services/search`;
+    
+    if (e.getAttribute('id') === 'latest_service') {
+        url += `/latest-service/${searchValue}`;
+    } else if (e.getAttribute('id') === 'oldest_service') {
+        url += `/oldest-service/${searchValue}`;
+    }
+
+    axios.get(url).then(res => {
+        getDataFilter(res.data);
+    }).catch(err => {
+        console.error(err.response.data.message);
+    });
+}
+
+function orderRange(e) {
+    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+    let url = `/services/search`;
+    
+    if (e.getAttribute('id') === 'highest_order') {
+        url += `/highest-order/${searchValue}`;
+    } else if (e.getAttribute('id') === 'lowest_order') {
+        url += `/lowest-order/${searchValue}`;
+    }
+    
+    axios.get(url).then(res => getDataFilter(res.data))
+    .catch(err => console.error(err.response.data.message));
+}
+
+function ratingRange(e) {
+    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+    let url = `/services/search`;
+
+    if (e.getAttribute('id') === 'highest_rating') {
+        url += `/highest-rating/${searchValue}`;
+    } else if (e.getAttribute('id') === 'lowest_rating') {
+        url += `/lowest-rating/${searchValue}`;
+    }
+
+    axios.get(url).then(res => console.log(res.data))
+    .catch(err => console.error(err.response.data.message));
+}
+
+function getDataFilter(services) {
+    const parentService = document.getElementById('display_service');
+    parentService.innerHTML = '';
+    
+    services.forEach(service => {
+        let maxStars = 0;
+        service.rating.forEach(function(rating) {
+            maxStars = rating.stars;
+        });
+        if (maxStars > 0) {
+            stars = maxStars + '.0';
+        } else {
+            stars = '0'
+        }
+        const element = document.createElement('div');
+        element.className += 'col-sm-6 col-12';
+        element.innerHTML = 
+            `<a href="/services/${service.slug}" class="d-block text-decoration-none">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                        <img src="/images/${service.image.split(',')[0]}" class="w-100 h-100" style="object-fit: cover;">
+                        @if (!auth()->check())
+                            <a href="{{ route('login') }}" class="text-decoration-none">
+                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                            </a>
+                        @else
+                            <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                            <input type="hidden" value="{{ $service->id }}">
+                            <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                        @endif
+                    </div>
+                    <div class="p-2 w-100">
+                        <div class="d-flex align-items-start justify-content-between">
+                            <p class="mb-0 text-dark" style="width: 95%;">${service.title.slice(0, 35)}</p>
+                            <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
+                                <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
+                                <small class="me-2 text-dark" style="font-size: 13.5px;">${stars}</small>
+                            </div>
+                        </div>
+                        <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
+                        <div class="mt-2 d-flex">
+                            <small class="mb-0 text-dark">$${service.price}</small>
+                            <small class="mb-0 ms-1 text-muted">per service</small>
+                        </div>
+                    </div>
+                </div>
+            </a>`;
+
+        parentService.appendChild(element);
+    });
+}
+
+
 // fetch('https://restcountries.com/v3.1/all')
 // .then(res => res.json())
 // .then(data => {

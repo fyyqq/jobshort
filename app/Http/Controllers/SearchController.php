@@ -17,4 +17,54 @@ class SearchController extends Controller
             "data" => $result
         ]);
     }
+
+    // Filter
+
+    public function latestService(string $value) {
+        $search = Service::with('rating')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->latest()->get();
+
+        return response()->json($search);
+    }
+
+    public function oldestService(string $value) {
+        $search = Service::with('rating')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('id', 'asc')->get();
+        
+        return response()->json($search);
+    }
+    
+    public function highestOrder(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')
+        ->withCount(['order as top_order' => function($query) {
+            $query->where('status', 'completed');
+        }])->orderByDesc('top_order')->get();
+
+        return response()->json($search);
+    } 
+    
+    public function lowestOrder(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')
+        ->withCount(['order as low_order' => function($query) {
+            $query->where('status', 'completed');
+        }])->orderBy('low_order')->get();
+
+        return response()->json($search);
+    } 
+    
+    public function highestRating(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+
+        return response()->json($search);
+    } 
+    
+    public function lowestRating(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+
+        return response()->json($search);
+    } 
 }

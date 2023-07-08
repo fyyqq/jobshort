@@ -32,9 +32,14 @@ use App\Models\Notification;
 Auth::routes();
 // Chatify::routes();
 
+// Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Users Page
 Route::get('user/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
 // Route::get('/{slug}', [HomeController::class, 'services']);
+
+// Category Page
 Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');
 
 // Notifications
@@ -67,7 +72,16 @@ Route::prefix('orders')->middleware(['auth'])->group(function() {
 });
 
 Route::prefix('services')->group(function() {
-    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::prefix('search')->group(function() {
+        Route::get('/', [SearchController::class, 'index'])->name('search');
+        Route::get('/latest-service/{value}', [SearchController::class, 'latestService']);
+        Route::get('/oldest-service/{value}', [SearchController::class, 'oldestService']);
+        Route::get('/highest-order/{value}', [SearchController::class, 'highestOrder']);
+        Route::get('/lowest-order/{value}', [SearchController::class, 'lowestOrder']);
+        Route::get('/highest-rating/{value}', [SearchController::class, 'highestRating']);
+        Route::get('/lowest-rating/{value}', [SearchController::class, 'lowestRating']);
+    });
+
     Route::get('/{slug}', [HomeController::class, 'showService'])->name('services');
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
     Route::get('/payment/{slug}', [PaymentController::class, 'index'])->name('payment');
