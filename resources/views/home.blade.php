@@ -36,17 +36,17 @@
                                 @endif
                             </div>
                             <div class="p-2 w-100">
-                                <div class="d-flex align-items-start justify-content-between">
-                                    <p class="mb-0 text-dark" style="width: 95%;">{{ Str::limit($service->title, 35) }}</p>
-                                    <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
-                                        <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
-                                        <small class="me-2 text-dark" style="font-size: 13.5px;">4.5</small>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
+                                    <div class="d-flex align-items-center justify-content-end flex-row-reverse">
+                                        <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
+                                        <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
                                     </div>
                                 </div>
-                                <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
-                                <div class="mt-2 d-flex">
-                                    <small class="mb-0 text-dark">{{ 'RM' . $service->price }}</small>
-                                    <small class="mb-0 ms-1 text-muted">per service</small>
+                                <small class="text-muted" style="font-size: 12px;">{{ $service->category }}</small>
+                                <div class="mt-2 d-flex align-items-center justify-content-between">
+                                    <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                    <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
                                 </div>
                             </div>
                         </div>

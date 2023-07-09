@@ -40,6 +40,10 @@ a:hover {
     width: 280px;
 }
 
+#searchbar::placeholder {
+    font-size: 12px;
+}
+
 .dropdown-list-image {
     position: relative;
     height: 2.5rem;

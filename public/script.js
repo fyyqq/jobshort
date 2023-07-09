@@ -539,16 +539,16 @@ function autoImage(event) {
     }
 }
 
-function timeRange(e) {
-    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+function timeRange(element) {
+    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
     
-    if (e.getAttribute('id') === 'latest_service') {
+    if (element.getAttribute('id') === 'latest_service') {
         url += `/latest-service/${searchValue}`;
-        e.setAttribute('checked', 'checked');
-    } else if (e.getAttribute('id') === 'oldest_service') {
+        element.setAttribute('checked', 'checked');
+    } else if (element.getAttribute('id') === 'oldest_service') {
         url += `/oldest-service/${searchValue}`;
-        e.setAttribute('checked', 'checked');
+        element.setAttribute('checked', 'checked');
     }
 
     axios.get(url).then(res => {
@@ -558,34 +558,51 @@ function timeRange(e) {
     });
 }
 
-function orderRange(e) {
-    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+function orderRange(element) {
+    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
     
-    if (e.getAttribute('id') === 'highest_order') {
+    if (element.getAttribute('id') === 'highest_order') {
         url += `/highest-order/${searchValue}`;
-        e.setAttribute('checked', 'checked');
-    } else if (e.getAttribute('id') === 'lowest_order') {
+        element.setAttribute('checked', 'checked');
+    } else if (element.getAttribute('id') === 'lowest_order') {
         url += `/lowest-order/${searchValue}`;
-        e.setAttribute('checked', 'checked');
+        element.setAttribute('checked', 'checked');
     }
     
     axios.get(url).then(res => getDataFilter(res.data))
     .catch(err => console.error(err.response.data.message));
 }
 
-function ratingRange(e) {
-    // var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
-    // let url = `/services/search`;
+function ratingRange(element) {
+    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
+    let url = `/services/search`;
+    
+    if (element.getAttribute('id') === 'highest_rating') {
+        url += `/highest-rating/${searchValue}`;
+        element.setAttribute('checked', 'checked');
+    } else if (element.getAttribute('id') === 'lowest_rating') {
+        url += `/lowest-rating/${searchValue}`;
+        element.setAttribute('checked', 'checked');
+    }
 
-    // if (e.getAttribute('id') === 'highest_rating') {
-    //     url += `/highest-rating/${searchValue}`;
-    // } else if (e.getAttribute('id') === 'lowest_rating') {
-    //     url += `/lowest-rating/${searchValue}`;
-    // }
+    axios.get(url).then(res => console.log(res.data))
+    .catch(err => console.error(err.response.data.message));
+}
 
-    // axios.get(url).then(res => console.log(res.data))
-    // .catch(err => console.error(err.response.data.message));
+function priceRange(element) {
+    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
+    let url = `/services/search`;
+
+    if (element.getAttribute('id') === 'highest_price') {
+        url += `/highest-price/${searchValue}`;
+        element.setAttribute('checked', 'checked');
+    } else if (element.getAttribute('id') === 'lowest_price') {
+        url += `/lowest-price/${searchValue}`;
+        element.setAttribute('checked', 'checked');
+    }
+
+    axios.get(url).then(res => getDataFilter(res.data));
 }
 
 function resetFilter(e) {
@@ -637,8 +654,8 @@ function getDataFilter(services) {
                     <div class="p-2 w-100">
                         <div class="d-flex align-items-start justify-content-between">
                             <p class="mb-0 text-dark" style="width: 95%;">${service.title.slice(0, 35)}</p>
-                            <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
-                                <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
+                            <div class="d-flex align-items-center justify-content-end mt-1 flex-row-reverse">
+                                <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
                                 <small class="me-2 text-dark" style="font-size: 13.5px;">${stars}</small>
                             </div>
                         </div>
@@ -656,25 +673,19 @@ function getDataFilter(services) {
 }
 
 function openFilter(element) {
-    const bottom_navbar = document.getElementById('mobile-navbar');
     const filter_mobile = document.getElementById('filter-mobile-container');
     if (!element.className.includes('open')) {
         element.className += ' open';
-        filter_mobile.style.height = '80%';
-        bottom_navbar.style.display = 'none';
+        filter_mobile.style.height = '75%';
     } else {
         element.classList.remove('open');
         filter_mobile.style.height = '0%';
-        bottom_navbar.style.display = 'grid';
     }
 }
 
 function closeFilter() {
-    const bottom_navbar = document.getElementById('mobile-navbar');
     const filter_mobile = document.getElementById('filter-mobile-container');
-
     filter_mobile.style.height = '0%';
-    bottom_navbar.style.display = 'grid';
 }
 
 // fetch('https://restcountries.com/v3.1/all')

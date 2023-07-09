@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -21,14 +22,14 @@ class SearchController extends Controller
     // Filter
 
     public function latestService(string $value) {
-        $search = Service::with('rating')->where('title', 'LIKE', '%' . $value . '%')
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
         ->orWhere('category', 'LIKE', '%' . $value . '%')->latest()->get();
 
         return response()->json($search);
     }
 
     public function oldestService(string $value) {
-        $search = Service::with('rating')->where('title', 'LIKE', '%' . $value . '%')
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
         ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('id', 'asc')->get();
         
         return response()->json($search);
@@ -55,18 +56,46 @@ class SearchController extends Controller
     } 
     
     public function highestRating(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
-
-        return response()->json($search);
-    } 
-    
-    public function lowestRating(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+        $search = Service::with('rating', 'order')
+        ->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')
+        ->whereHas('rating', function($query) {
+            $query->where('stars', function ($subquery) {
+                $subquery->select(DB::raw('MAX(stars)'))
+                    ->from('ratings');
+            });
+        })->get();
         
         return response()->json($search);
-    } 
+    }
+    
+    public function lowestRating(string $value) {
+        $search = Service::with('rating', 'order')
+        ->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')
+        ->whereHas('rating', function($query) {
+            $query->where('stars', function ($subquery) {
+                $subquery->select(DB::raw('MAX(stars)'))
+                    ->from('ratings');
+            });
+        })->get();
+        
+        return response()->json($search);
+    }
+    
+    public function highestPrice(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('price', 'desc')->get();
+        
+        return response()->json($search);
+    }
+    
+    public function lowestPrice(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('price', 'asc')->get();
+        
+        return response()->json($search);
+    }
     
     public function reset(string $value) {
         $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')

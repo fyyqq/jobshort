@@ -10,7 +10,7 @@
                     <small class="text-muted">|</small>
                     <div class="d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-star" style="font-size: 13.5px;"></i>
-                        <small class="text-muted ms-1">3 out of 5 stars</small>
+                        <small class="text-muted ms-1">{{ $service->rating->max('stars') }} out of 5 stars</small>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 me-3">
@@ -138,6 +138,13 @@
                     <div class="pt-3 border-top">
                         <div class="row mx-0 border-bottom pb-4">
                             <div class="col-4 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                                <p class="mb-0 text-muted">Total Orders</p>
+                                <div class="d-flex jusitfy-content-center flex-column">
+                                    <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
+                                    <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
+                                </div>
+                            </div>
+                            <div class="col-4 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
                                 <p class="mb-0 text-muted">Total Reviews</p>
                                 <div class="d-flex jusitfy-content-center flex-column">
                                     <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($reviews) < 1 ? 'No Review' : count($reviews) }}</h1>
@@ -156,25 +163,6 @@
                                         </div>
                                     </div>
                                     <small class="text-muted" style="font-size: 12.5px;">Average rating on this year</small>
-                                </div>
-                            </div>
-                            <div class="col-4 d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
-                                <div class="w-100 d-flex flex-column-reverse">
-                                    <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-danger" style="font-size: 12px; width: 10%"></div>
-                                    </div>
-                                    <div class="progress mb-1" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-warning" style="font-size: 12px; width: 25%"></div>
-                                    </div>
-                                    <div class="progress mb-1" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-info" style="font-size: 12px; width: 50%"></div>
-                                    </div>
-                                    <div class="progress mb-1" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-primary" style="font-size: 12px; width: 75%"></div>
-                                    </div>
-                                    <div class="progress mb-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar bg-success" style="font-size: 12px; width: 100%"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
