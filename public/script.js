@@ -592,16 +592,14 @@ function resetFilter(e) {
     var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search/reset/${searchValue}`;
 
-    var radios = document.querySelectorAll('input[type="radio"]');
-    radios.forEach(e => {
-        if (e.getAttribute('checked') === 'checked') {
-            e.checked = false;
-        }
-    });
-
     axios.get(url).then(res => {
         getDataFilter(res.data);
-
+        var radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(e => {
+            if (e.getAttribute('checked') === 'checked') {
+                e.checked = false;
+            }
+        });
     }).catch(err => console.error(err));
 }
 
@@ -658,11 +656,25 @@ function getDataFilter(services) {
 }
 
 function openFilter(element) {
-    if (!element.className.includes('active')) {
-        element.className += ' active';
+    const bottom_navbar = document.getElementById('mobile-navbar');
+    const filter_mobile = document.getElementById('filter-mobile-container');
+    if (!element.className.includes('open')) {
+        element.className += ' open';
+        filter_mobile.style.height = '80%';
+        bottom_navbar.style.display = 'none';
     } else {
-        element.classList.remove('active');
+        element.classList.remove('open');
+        filter_mobile.style.height = '0%';
+        bottom_navbar.style.display = 'grid';
     }
+}
+
+function closeFilter() {
+    const bottom_navbar = document.getElementById('mobile-navbar');
+    const filter_mobile = document.getElementById('filter-mobile-container');
+
+    filter_mobile.style.height = '0%';
+    bottom_navbar.style.display = 'grid';
 }
 
 // fetch('https://restcountries.com/v3.1/all')

@@ -374,9 +374,13 @@ input[type=number] {
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 100%;
+    height: 0%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.185);
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    display: none;
+    transition: height .3s ease;
 }
 
 @media (max-width: 1120px) {
@@ -486,6 +490,9 @@ input[type=number] {
     }
     .profile #order-profile-title {
         font-size: 13.5px;
+    }
+    #filter-mobile-container {
+        display: block;
     }
 }
 

@@ -130,7 +130,71 @@
                         </div>
                     </div>
                 @endif
-                <!-- <div class="border" id="filter-mobile-container"></div> -->
+                <div class="shadow-sm border" id="filter-mobile-container">
+                    <div class="w-100 position-relative">
+                        <span class="bg-secondary position-absolute rounded-pill" style="height: 4px; width: 40%; top: 10px; left: 50%; transform: translateX(-50%);"></span>
+                    </div>
+                    <div class="px-4 mt-5" id="filter-list">
+                        <input type="hidden" value="<?php echo $_GET['keyword'] ?>" id="search_value">
+                        <div class="mt-3">
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Time Range :</small>
+                            <div class="form-check my-1">
+                                <input class="form-check-input shadow-none" type="radio" name="time_range" id="latest_service" onclick="return timeRange(this)">
+                                <label class="form-check-label" for="latest_service">
+                                    <small class="text-muted" style="font-size: 13px;">Latest</small>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input shadow-none" type="radio" name="time_range" id="oldest_service" onclick="return timeRange(this)">
+                                <label class="form-check-label" for="oldest_service">
+                                    <small class="text-muted" style="font-size: 13px;">Oldest</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Order Range :</small>
+                            <div class="form-check my-1">
+                                <input class="form-check-input shadow-none" type="radio" name="order_range" id="highest_order" onclick="return orderRange(this)">
+                                <label class="form-check-label" for="highest_order">
+                                    <small class="text-muted" style="font-size: 13px;">Highest</small>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input shadow-none" type="radio" name="order_range" id="lowest_order" onclick="return orderRange(this)">
+                                <label class="form-check-label" for="lowest_order">
+                                    <small class="text-muted" style="font-size: 13px;">Lowest</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Rating Range :</small>
+                            <div class="form-check my-1">
+                                <input class="form-check-input shadow-none" type="radio" name="rating_range" id="highest_rating" onclick="return ratingRange(this)">
+                                <label class="form-check-label" for="highest_rating">
+                                    <small class="text-muted" style="font-size: 13px;">Highest</small>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input shadow-none" type="radio" name="rating_range" id="lowest_rating" onclick="return ratingRange(this)">
+                                <label class="form-check-label" for="lowest_rating">
+                                    <small class="text-muted" style="font-size: 13px;">Lowest</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-dark mb-0" style="font-size: 13.5px;">Price Range :</small>
+                            <div class="mt-2 d-flex align-items-start justify-content-center flex-column" style="row-gap: 6px;">
+                                <input type="text" class="form-control shadow-none border py-1 px-3 w-100" placeholder="Min Price" name="" id="" style="font-size: 13px;">
+                                <input type="text" class="form-control shadow-none border py-1 px-3 w-100" placeholder="Max Price" name="" id="" style="font-size: 13px;">
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn py-2 text-light w-100" style="background-color: #2891e1; font-size: 13px;" onclick="return closeFilter()">Apply</button>
+                                <button class="text-dark btn w-100 border-0 mt-1" style="font-size: 13px;" onclick="return resetFilter(this)">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
