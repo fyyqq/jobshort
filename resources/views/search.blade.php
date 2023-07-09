@@ -62,7 +62,7 @@
                                 <input type="text" class="form-control shadow-none border py-1 px-3 w-100" placeholder="Max Price" name="" id="" style="font-size: 13px;">
                             </div>
                             <div class="mt-3">
-                                <button class="btn text-light btn-sm w-100" style="background-color: #2891e1; font-size: 13px;">Reset</button>
+                                <button class="btn text-light btn-sm w-100" onclick="return resetFilter(this)" style="background-color: #2891e1; font-size: 13px;">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <small class="mb-0 text-dark">{{ count($data) }} result "<span class="fw-bold"><?php echo $_GET['keyword'] ?></span>"</small>
                     </div>
                     <div class="d-md-none d-flex align-items-center justify-content-end">
-                        <button class="btn btn-light border" style="font-size: 14px;"><i class="fa-solid fa-filter me-2" style="font-size: 13px;"></i>Filter</button>
+                        <button class="btn btn-light border" onclick="return openFilter(this)" style="font-size: 14px;"><i class="fa-solid fa-filter me-2" style="font-size: 13px;"></i>Filter</button>
                     </div>
                 </div>
                 @if (count($data) > 0)
@@ -130,6 +130,7 @@
                         </div>
                     </div>
                 @endif
+                <!-- <div class="border" id="filter-mobile-container"></div> -->
             </section>
         </div>
     </div>

@@ -1,3 +1,4 @@
+
 console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bold;");
 
 $('.owl-carousel').owlCarousel({
@@ -544,8 +545,10 @@ function timeRange(e) {
     
     if (e.getAttribute('id') === 'latest_service') {
         url += `/latest-service/${searchValue}`;
+        e.setAttribute('checked', 'checked');
     } else if (e.getAttribute('id') === 'oldest_service') {
         url += `/oldest-service/${searchValue}`;
+        e.setAttribute('checked', 'checked');
     }
 
     axios.get(url).then(res => {
@@ -561,8 +564,10 @@ function orderRange(e) {
     
     if (e.getAttribute('id') === 'highest_order') {
         url += `/highest-order/${searchValue}`;
+        e.setAttribute('checked', 'checked');
     } else if (e.getAttribute('id') === 'lowest_order') {
         url += `/lowest-order/${searchValue}`;
+        e.setAttribute('checked', 'checked');
     }
     
     axios.get(url).then(res => getDataFilter(res.data))
@@ -570,17 +575,34 @@ function orderRange(e) {
 }
 
 function ratingRange(e) {
+    // var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+    // let url = `/services/search`;
+
+    // if (e.getAttribute('id') === 'highest_rating') {
+    //     url += `/highest-rating/${searchValue}`;
+    // } else if (e.getAttribute('id') === 'lowest_rating') {
+    //     url += `/lowest-rating/${searchValue}`;
+    // }
+
+    // axios.get(url).then(res => console.log(res.data))
+    // .catch(err => console.error(err.response.data.message));
+}
+
+function resetFilter(e) {
     var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
-    let url = `/services/search`;
+    let url = `/services/search/reset/${searchValue}`;
 
-    if (e.getAttribute('id') === 'highest_rating') {
-        url += `/highest-rating/${searchValue}`;
-    } else if (e.getAttribute('id') === 'lowest_rating') {
-        url += `/lowest-rating/${searchValue}`;
-    }
+    var radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(e => {
+        if (e.getAttribute('checked') === 'checked') {
+            e.checked = false;
+        }
+    });
 
-    axios.get(url).then(res => console.log(res.data))
-    .catch(err => console.error(err.response.data.message));
+    axios.get(url).then(res => {
+        getDataFilter(res.data);
+
+    }).catch(err => console.error(err));
 }
 
 function getDataFilter(services) {
@@ -635,6 +657,13 @@ function getDataFilter(services) {
     });
 }
 
+function openFilter(element) {
+    if (!element.className.includes('active')) {
+        element.className += ' active';
+    } else {
+        element.classList.remove('active');
+    }
+}
 
 // fetch('https://restcountries.com/v3.1/all')
 // .then(res => res.json())

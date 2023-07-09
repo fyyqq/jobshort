@@ -64,7 +64,14 @@ class SearchController extends Controller
     public function lowestRating(string $value) {
         $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
         ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
-
+        
         return response()->json($search);
     } 
+    
+    public function reset(string $value) {
+        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+
+        return response()->json($search);
+    }
 }

@@ -80,6 +80,7 @@ Route::prefix('services')->group(function() {
         Route::get('/lowest-order/{value}', [SearchController::class, 'lowestOrder']);
         Route::get('/highest-rating/{value}', [SearchController::class, 'highestRating']);
         Route::get('/lowest-rating/{value}', [SearchController::class, 'lowestRating']);
+        Route::get('/reset/{value}', [SearchController::class, 'reset']);
     });
 
     Route::get('/{slug}', [HomeController::class, 'showService'])->name('services');
