@@ -108,8 +108,8 @@
                 <div class="col-md-7 col-12 px-0">
                     <div class="py-md-3 py-2 px-md-4 px-3 border rounded-3 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-n one rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
-                                <img src="{{ asset('images/' . $service->freelancer->image) }}" alt="" class="w-100 h-100" style="object-fit: cover">
+                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none border rounded-circle" style="height: 50px; width: 50px; overflow: hidden;">
+                                <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover">
                             </a>
                             <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
                                 <small class="text-dark ms-3 lh-sm">{{ $service->freelancer->name }}</small>
@@ -129,11 +129,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="my-4 px-md-0 px-2">
-                        <h1 class="text-dark mb-3 h5">About this</h1>
-                        <div class="">
-                            {{-- <small class="text-muted d-block mb-2 w-50">{{ $service->description }}</small> --}}
-                        </div>
+                    <div class="col-md-7 col-12">
+                        <small class="text-muted">{{ $service->description }}</small>
                     </div>
                     <div class="pt-3 border-top">
                         <div class="row mx-0 border-bottom pb-4">
@@ -141,7 +138,7 @@
                                 <p class="mb-0 text-muted">Total Orders</p>
                                 <div class="d-flex jusitfy-content-center flex-column">
                                     <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
-                                    <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
+                                    <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
                                 </div>
                             </div>
                             <div class="col-4 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
@@ -151,15 +148,15 @@
                                     <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
                                 </div>
                             </div>
-                            <div class="col-4 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                            <div class="col-4 d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
                                 <p class="mb-0 text-muted">Average Ratings</p>
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-start mb-1">
                                         <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-0">{{ count($reviews) < 1 ? 'No Review' : $reviews->max('stars') . '.0' }}</h1>
                                         <div class="ms-2">
-                                            @for ($i = 0; $i < $reviews->max('stars'); $i++)
-                                                <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
-                                            @endfor
+                                            <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
+                                            <!-- @for ($i = 0; $i < $reviews->max('stars'); $i++)
+                                            @endfor -->
                                         </div>
                                     </div>
                                     <small class="text-muted" style="font-size: 12.5px;">Average rating on this year</small>
@@ -171,7 +168,7 @@
                                 <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border">
                                     <div class="mx-3">
                                         <div class="rounded-circle border" style="height: 45px; width: 45px; overflow: hidden;">
-                                            <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                            <img src="{{ $review->user->image !== null ? asset('images/' . $review->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
                                         </div>
                                     </div>
                                     <div class="pe-4">
@@ -188,9 +185,11 @@
                                                 <small class="text-muted ms-2" style="font-size: 13.5px;">{{ $review->created_at->diffForHumans() }}</small>
                                             </div>
                                             <small class="text-dark">{{ $review->title }}</small>
-                                            <div class="my-2 rounded border border-dark" style="height: 65px; width: 65px; overflow: hidden;">
-                                                <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;">
-                                            </div>
+                                            @if ($review->image !== null)
+                                                <div class="my-2 rounded border border-dark" style="height: 65px; width: 65px; overflow: hidden;">
+                                                    <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                </div>
+                                            @endif
                                             <div class="">
                                                 <small class="text-muted">{{ Str::limit($review->review, 200) }}</small>
                                             </div>
@@ -199,8 +198,8 @@
                                 </div>
                             @endforeach
                             <div class="mt-2 w-100 text-center">
-                                <a href="{{ route('reviews', $service->slug) }}" class="text-decoration-none fw-bold {{ count($reviews) < 1 ? 'd-none' : '' }}" style="color: #2891e1">See More <i class="ms-2 fa-solid fa-chevron-right" style="font-size: 14px;"></i></a>
-                            </div>
+                                <a href="{{ route('reviews', $service->slug) }}" class="text-decoration-none fw-bold text-muted {{ count($reviews) < 1 ? 'd-none' : '' }}" style="font-size: 13.5px;">See More <i class="ms-2 fa-solid fa-chevron-right"></i></a>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -247,6 +246,7 @@
                                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
                                                 <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
+                                                <a href="{{ route('profile.applied') }}" class="btn px-3 py-2 text-light w-100 d-none" style="background-color: #2891e1;">Check Your Order</a>
                                             @else
                                                 <a href="{{ route('profile.main') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
                                             @endif
@@ -261,6 +261,7 @@
                                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
                                                 <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1;">Place Order</button>
+                                                <a href="{{ route('profile.applied') }}" class="btn px-3 py-2 text-light w-100 d-none" style="background-color: #2891e1;">Check Your Order</a>
                                             @else
                                                 <a href="{{ route('profile.main') }}" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1;">Place Order</a>
                                             @endif

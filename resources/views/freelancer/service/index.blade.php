@@ -73,7 +73,7 @@
                                 <input type="hidden" name="slug" value="{{ $service->slug }}">
                             </div>
                             <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
-                                <a href="{{ route('freelancer.services', $service->slug) }}" class="d-block">
+                                <a href="{{ route('services', $service->slug) }}" class="d-block">
                                     <div class="rounded" style="height: 75px; width: 77px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $value)
                                             @if ($key === 0)

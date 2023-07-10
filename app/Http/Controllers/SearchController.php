@@ -70,16 +70,25 @@ class SearchController extends Controller
     }
     
     public function lowestRating(string $value) {
-        $search = Service::with('rating', 'order')
+        // $search = Service::with('rating', 'order')
+        // ->where('title', 'LIKE', '%' . $value . '%')
+        // ->orWhere('category', 'LIKE', '%' . $value . '%')
+        // ->whereHas('rating', function($query) {
+        //     $query->where('stars', function ($subquery) {
+        //         $subquery->select(DB::raw('MAX(stars)'))
+        //             ->from('ratings');
+        //     });
+        // })->get();
+        $search = Service::with(['rating' => function ($query) {
+            $query->orderBy('stars', 'desc');
+        }, 'order'])
         ->where('title', 'LIKE', '%' . $value . '%')
         ->orWhere('category', 'LIKE', '%' . $value . '%')
-        ->whereHas('rating', function($query) {
-            $query->where('stars', function ($subquery) {
-                $subquery->select(DB::raw('MAX(stars)'))
-                    ->from('ratings');
-            });
-        })->get();
-        
+        ->get()
+        ->sortByDesc(function ($service) {
+            return $service->rating->max('stars');
+        });
+            
         return response()->json($search);
     }
     

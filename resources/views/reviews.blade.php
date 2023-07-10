@@ -32,13 +32,19 @@
                     <div class="w-100 mt-3 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-end justify-content-start gap-1">
                             <h1 class="h4 text-dark mb-0">{{ '$' . $service->price }}</h1>
-                            <small class="text-muted">per service</small>
                         </div>
                         <button class="btn text-light" style="font-size: 15px; background-color: #2891e1;">Place Order</button>
                     </div>
                 </div>
                 {{-- <h1 class="h4 text-dark">Review & Rating</h1> --}}
                 <div class="row mx-0 border-bottom py-4 gap-sm-0 gap-3">
+                    <div class="col-sm-4 col-12 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                        <p class="mb-0 text-muted">Total Orders</p>
+                        <div class="d-flex jusitfy-content-center flex-column">
+                            <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
+                            <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
+                        </div>
+                    </div>
                     <div class="col-sm-4 col-12 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Total Reviews</p>
                         <div class="d-flex jusitfy-content-center flex-column">
@@ -60,25 +66,7 @@
                             <small class="text-muted" style="font-size: 12.5px;">Average rating on this year</small>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-12 d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
-                        <div class="w-100 d-flex flex-column-reverse">
-                            <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-danger" style="font-size: 12px; width: 10%"></div>
-                            </div>
-                            <div class="progress mb-1" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-warning" style="font-size: 12px; width: 25%"></div>
-                            </div>
-                            <div class="progress mb-1" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-info" style="font-size: 12px; width: 50%"></div>
-                            </div>
-                            <div class="progress mb-1" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-primary" style="font-size: 12px; width: 75%"></div>
-                            </div>
-                            <div class="progress mb-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-success" style="font-size: 12px; width: 100%"></div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="gap-3">
                     @foreach ($reviews as $review)
@@ -89,7 +77,7 @@
                                         <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     <div class="d-md-flex d-none align-items-center justify-content-start">
-                                        <p class="text-dark fw-bold">{{ $review->user->name }}</p>
+                                        <p class="text-dark fw-bold mb-0" style="font-size: 13.5px;">{{ $review->user->name }}</p>
                                     </div>
                                 </div>
                             </div>

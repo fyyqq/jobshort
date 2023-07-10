@@ -88,8 +88,10 @@ class OrdersController extends Controller
         if ($orders) {
             $freelancer = Freelancer::find($freelancer_id);
             Notification::send($freelancer, new OrderNotification($order));
+            
+            return true;
         }
-
+        
         // $notificationCount = NotificationModel::where('notifiable_id', Auth::id())->count();
         // return $notificationCount;
     }

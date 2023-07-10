@@ -33,3 +33,7 @@ eye_slash.forEach(e => {
         eye.style.display = 'block';
     });
 });
+
+function goToPreviousPage() {
+    window.history.back();
+}

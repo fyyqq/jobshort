@@ -229,7 +229,6 @@ employer.forEach(element => {
     });
 });
 
-
 $(document).ready(function() {
     $.ajaxSetup({
         headers:
@@ -293,29 +292,38 @@ $(document).ready(function() {
     // Order Services
     $('#order-btn').click(function(e) {
         e.preventDefault();
+        
+        var service_id = $(e.target).siblings('#service_id').val(); // 4
+        var freelancer_id = $(e.target).siblings('#freelancer_id').val();
+        const loader = document.querySelector('.custom-loader');
+        $(loader).css('display', 'block');
 
-        var service_id = e.target.previousElementSibling.value; // 4
-        var freelancer_id = e.target.nextElementSibling.value;
-
-        $.ajax({
-            url: `/orders/${service_id}/${freelancer_id}`,
-            method: 'POST',
-            success: function(res) {
-                Swal.fire({
-                    title: 'Successfully Order',
-                    icon: 'success',
-                    position: 'center',
-                    confirmButtonText: 'Check Order',
-                    showCloseButton: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '/account/profile/orders';
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            $.ajax({
+                url: `/orders/${service_id}/${freelancer_id}`,
+                method: 'POST',
+                success: function(res) {
+                    if (res) {
+                        $(e.target).addClass('d-none');
+                        $(e.target).siblings('.d-none').removeClass('d-none');
+                        Swal.fire({
+                            title: 'Successfully Order',
+                            icon: 'success',
+                            position: 'center',
+                            confirmButtonText: 'Check Order',
+                            showCloseButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/account/profile/orders';
+                            }
+                        });
                     }
-                });
-            }, error: function(error) {
-                console.error(error.responseText);
-            }
-        });
+                }, error: function(error) {
+                    console.error(error.responseText);
+                }
+            });
+        }, 3000);
     });
 
     // $('.jobCategories').each(function(index, value) {
@@ -625,6 +633,14 @@ function getDataFilter(services) {
     parentService.innerHTML = '';
     
     services.forEach(service => {
+
+        let countOrders = 0;
+        service.order.forEach(e => {
+            if (e.status === 'completed') {
+                countOrders++;
+            }
+        });
+
         let maxStars = 0;
         service.rating.forEach(function(rating) {
             maxStars = rating.stars;
@@ -651,18 +667,18 @@ function getDataFilter(services) {
                             <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                         @endif
                     </div>
-                    <div class="p-2 w-100">
-                        <div class="d-flex align-items-start justify-content-between">
-                            <p class="mb-0 text-dark" style="width: 95%;">${service.title.slice(0, 35)}</p>
-                            <div class="d-flex align-items-center justify-content-end mt-1 flex-row-reverse">
+                    <div class="p-2 w-100 mt-1">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">${service.title.slice(0, 35)}</p>
+                            <div class="d-flex align-items-center justify-content-end flex-row-reverse">
                                 <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
-                                <small class="me-2 text-dark" style="font-size: 13.5px;">${stars}</small>
+                                <small class="me-1 text-dark" style="font-size: 13.5px;">${stars}</small>
                             </div>
                         </div>
-                        <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
-                        <div class="mt-2 d-flex">
-                            <small class="mb-0 text-dark">$${service.price}</small>
-                            <small class="mb-0 ms-1 text-muted">per service</small>
+                        <small class="text-muted d-block" style="font-size: 12px;">${service.category}</small>
+                        <div class="mt-2 d-flex align-items-center justify-content-between">
+                            <small class="mb-0 text-dark" style="font-size: 14.5px;">$ ${service.price}</small>
+                            <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>${countOrders}</small>
                         </div>
                     </div>
                 </div>

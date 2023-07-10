@@ -24,9 +24,9 @@
             <main class="">
                 <div class="auth-container">
                     <div class="img-side">
-                        <a href="{{ route('home') }}" class="text-decoration-none text-muted">
+                        <span class="text-muted" onclick="return goToPreviousPage()">
                             <i class="fa-solid fa-arrow-left"></i>
-                        </a>
+                        </span>
                         <img src="{{ asset('brand/wave-blue.png') }}">
                         <div class="content d-none">
                             <img src="{{ asset('brand/iphone-avatar.png') }}" style="width: 250px; height: 400px;">

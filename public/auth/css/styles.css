@@ -30,12 +30,13 @@ body {
     position: relative;
 }
 
-.auth-container .img-side a {
+.auth-container .img-side span {
     position: absolute;
     top: 20px;
     left: 45px;
     font-size: 20px;
     z-index: 999;
+    cursor: pointer;
 }
 
 input[type="password"] , #password {

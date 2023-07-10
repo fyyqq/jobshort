@@ -44,6 +44,10 @@
             <main class="pb-md-5 pb-3" style="margin-top: 100px;">
                 @yield('content')
             </main>
+            {{-- Loader --}}
+            <div class="">
+                <div class="custom-loader"></div>
+            </div>
             {{-- Mobile Navbar --}}
             <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-none' : 'd-block' }}">
                 <div class="" id="mobile-navbar">
@@ -73,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            {{-- @include('shortcuts.footer') --}}
+            @include('shortcuts.footer')
         </div>
         {{-- iziToast --}}
         <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>
