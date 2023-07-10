@@ -23,6 +23,10 @@ a:hover {
     text-decoration: none;
 }
 
+#swal2-title {
+    font-size: 20px;
+}
+
 .custom-loader {
     display: none;
     position: fixed;

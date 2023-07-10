@@ -87,7 +87,7 @@
                         </li>
                         <div class="dropdown-divider my-0"></div>
                         <li>
-                            <a class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 12.5px;">{{ __('Logout') }}</a>
+                            <a class="dropdown-item py-2" id="btn-logout" onclick="event.preventDefault(); return logout()" style="font-size: 12.5px; cursor: pointer;">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -100,3 +100,19 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+<script>
+    function logout() {
+        Swal.fire({
+            title: 'Confirm Logout ?',
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Logout',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>

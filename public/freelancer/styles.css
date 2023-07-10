@@ -7,6 +7,10 @@
     font-family: 'Lato', sans-serif;
 }
 
+#swal2-title {
+    font-size: 20px;
+}
+
 .row #profile-img {
     border: none;
     position: absolute;

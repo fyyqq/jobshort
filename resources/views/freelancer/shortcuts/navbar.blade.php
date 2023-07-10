@@ -35,7 +35,7 @@
                 </a>
                 <li class="nav-item dropdown d-flex align-items-center">
                     <div class="rounded-circle shadow-sm" style="height: 38px; width: 38px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
-                        <img src="{{ is_null(auth()->user()->freelancer->image) ? '' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                        <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
                     </div>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-120px, 5px); width: 160px;">
                         <li>
@@ -57,7 +57,7 @@
                         </li>
                         <div class="dropdown-divider my-0"></div>
                         <li>
-                            <span class="dropdown-item py-2" id="btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 12.5px; cursor: pointer;">{{ __('Logout') }}</span>
+                            <span class="dropdown-item py-2" id="btn-logout" href="" onclick="event.preventDefault(); return logout()" style="font-size: 12.5px; cursor: pointer;">{{ __('Logout') }}</span>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -70,3 +70,20 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+<script>
+    function logout() {
+        Swal.fire({
+            title: 'Confirm Logout ?',
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Logout',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
