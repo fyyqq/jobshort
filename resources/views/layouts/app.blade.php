@@ -35,7 +35,7 @@
             color: #fff;
         }
     </style>
-    <body>
+    <body style="background-color: #f7f7f7;">
         <div id="app" class="position-relative">
             {{-- <a href="/chatify" class="text-decoration-none badge rounded-circle" id="chat" >
                 <span class="material-symbols-outlined" style="font-size: 22px;">forum</span>
