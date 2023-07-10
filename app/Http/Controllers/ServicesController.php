@@ -95,16 +95,20 @@ class ServicesController extends Controller
     public function updateArchive(string $slug) {
         $service = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
         $service->status = "archive";
-        $service->save();
+        $confirmArchive = $service->save();
 
-        return 'data has been archived';
+        if ($confirmArchive) {
+            return true;
+        }
     }
 
     public function archiveItems(Request $request) {
         $selected = $request->input('selectedItems');
-        Service::whereIn('slug', $selected)->update(['status' => 'active']);
+        $confirmArchive = Service::whereIn('slug', $selected)->update(['status' => 'archive']);
 
-        return 'data selected has been archived';
+        if ($confirmArchive) {
+            return true;
+        }
     }
 
     /**
@@ -225,15 +229,19 @@ class ServicesController extends Controller
     public function destroy(string $slug)
     {
         $slug = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
-        $slug->delete();
+        $confirmDelete = $slug->delete();
 
-        return 'data has been deleted';
+        if ($confirmDelete) {
+            return true;
+        }
     }
 
     public function deletedItems(Request $request) {
         $selected = $request->input('selectedItems');
-        Service::whereIn('slug', $selected)->delete();
-
-        return 'data selected has been deleted';
+        $confirmDelete = Service::whereIn('slug', $selected)->delete();
+        
+        if ($confirmDelete) {
+            return true;
+        }
     }
 }

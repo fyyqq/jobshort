@@ -308,7 +308,14 @@ $(document).ready(function() {
                     if (res) {
                         $('.order-btn').addClass('d-none');
                         $('.order-btn').siblings('.d-none').removeClass('d-none');
-                        Swal.fire({
+                        const swalWithBootstrapButtons = Swal.mixin({
+                            customClass: {
+                                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+                            },
+                            buttonsStyling: false
+                        });
+                
+                        swalWithBootstrapButtons.fire({
                             title: 'Successfully Order',
                             icon: 'success',
                             position: 'center',

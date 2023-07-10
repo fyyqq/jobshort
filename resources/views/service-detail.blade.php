@@ -3,7 +3,8 @@
 @section('content')
     <div class="container-xl pb-5">
         <div class="my-4 ps-md-3 ps-1">
-            <h1 class="h4 text-dark">{{ $service->title }}</h1>
+            <h1 class="h4 text-dark d-md-block d-none">{{ $service->title }}</h1>
+            <h1 class="h5 text-dark d-md-none d-block">{{ $service->title }}</h1>
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-2">
                     <small class="text-muted">{{ $service->freelancer->country }}</small>

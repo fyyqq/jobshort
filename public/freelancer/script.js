@@ -104,6 +104,7 @@ function allService() {
 }
 
 function deleteSelectedItems() {
+
     var selectedItems = [];
     checkJobs.forEach(element => {
         if (element.checked) {
@@ -111,44 +112,111 @@ function deleteSelectedItems() {
         }
     });
 
-    axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
-    .then(function(res) {
-        console.log(res.data);
-    });
+    if (selectedItems.length == 0) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'd-none',
+                closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Delete',
+            text: 'Select Items First Before Delete',
+            icon: 'warning',
+            position: 'center',
+            showCloseButton: true,
+        });
+    } else {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+              closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
+                .then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your Selected Items has been Deleted.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    }    
 }
 
 function archiveSelectedItems() {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-sm px-3 py-2 btn-dark',
-        },
-        buttonsStyling: false
-    });
-
-    swalWithBootstrapButtons.fire({
-        title: 'Confirm Archive ?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        position: 'center',
-        confirmButtonText: 'Logout',
-        showCloseButton: true,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.getElementById('logout-form').submit();
+    
+    var selectedItems = [];
+    checkJobs.forEach(element => {
+        if (element.checked) {
+            selectedItems.push(element.nextElementSibling.value);
         }
     });
 
-    // var selectedItems = [];
-    // checkJobs.forEach(element => {
-    //     if (element.checked) {
-    //         selectedItems.push(element.nextElementSibling.value);
-    //     }
-    // });
+    if (selectedItems.length == 0) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'd-none',
+                closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
 
-    // axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
-    // .then(function(res) {
-    //     console.log(res.data);
-    // });
+        swalWithBootstrapButtons.fire({
+            title: 'Archive',
+            text: 'Select Items First Before Archive',
+            icon: 'warning',
+            position: 'center',
+            showCloseButton: true,
+        });
+    } else {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+              closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Archive ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
+                .then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Archived!',
+                            'Your Selected Items has been Archived.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    }    
 }
 
 function autoImage(event) {
@@ -348,9 +416,32 @@ $(document).ready(function() {
 
         const slug = $(this).siblings('#service-slug').val(); 
 
-        axios.put(`/account/freelancer/services/archive/${slug}`).then(function(res) {
-            const data =  res.data;
-            console.log(data);
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Archive ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`/account/freelancer/services/archive/${slug}`).then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Archived!',
+                            'Your Services Has Been Archived.',
+                            'success'
+                        );
+                    }
+                });
+            }
         });
     });
     
@@ -358,11 +449,35 @@ $(document).ready(function() {
         e.preventDefault();
         
         const slug = $(this).siblings('#service-slug').val(); 
-    
-        axios.delete(`/account/freelancer/services/delete/${slug}`).then(function(res) {
-            const data =  res.data;
-            console.log(data);
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Deleted ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/account/freelancer/services/delete/${slug}`).then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your Services Has Been Deleted.',
+                            'success'
+                        );
+                    }
+                });
+            }
         });
+    
     });
 });
 
