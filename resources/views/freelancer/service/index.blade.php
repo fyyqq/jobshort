@@ -43,7 +43,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row mx-0 py-3 border mb-2 mt-3" style="background-color: #fff;">
+            <ul class="nav nav-tabs mt-3">
+                <li class="nav-item">
+                    <a class="nav-link text-dark px-4 active" href="#" style="font-size: 14.5px;">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" style="font-size: 14.5px;">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" style="font-size: 14.5px;">Archive</a>
+                </li>
+            </ul>
+            <div class="row mx-0 py-3 border-end border-start border-bottom mb-2" style="background-color: #fff;">
                 <div class="col-1 text-center d-flex align-items-center justify-content-center">
                     <input type="checkbox" name="" id="select-all-jobs" class="" onclick="return allService()">
                 </div>

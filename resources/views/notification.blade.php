@@ -7,7 +7,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-3 left">
-                <div class="py-3 mb-md-0 mb-2 rounded border">
+                <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
                         <a href="" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0">
                             <i class="mdi mdi-inbox text-dark"></i>
@@ -41,9 +41,9 @@
                                 <div class="d-flex align-items-center justify-content-start">
                                     <div class="dropdown-list-image mx-2">
                                         @if ($user === 'admin')
-                                            <img class="rounded-circle" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
+                                            <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
                                         @else
-                                            <img class="rounded-circle" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
+                                            <img class="rounded-circle border" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
                                         @endif
                                     </div>
                                     <div class="font-weight-bold mx-3">

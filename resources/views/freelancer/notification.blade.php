@@ -24,12 +24,10 @@
                                 <i class="mdi mdi-menu-down"></i>
                                 <div class="dropdown-menu dropdown-menu-left py-0">
                                     <button class="dropdown-item py-3" type="button">
-                                        <i class="me-2 mdi mdi-email"></i>
-                                        <small class="text-muted" style="font-size: 12.5px;">Approved</small>
+                                        <small class="text-dark" style="font-size: 12.5px;">Approved</small>
                                     </button>
                                     <button class="dropdown-item py-3" type="button">
-                                        <i class="me-2 mdi mdi-email"></i>
-                                        <small class="text-muted" style="font-size: 12.5px;">Completed</small>
+                                        <small class="text-dark" style="font-size: 12.5px;">Completed</small>
                                     </button>
                                 </div>
                             </div>
@@ -67,9 +65,9 @@
                                 <div class="d-flex align-items-center justify-content-start">
                                     <div class="dropdown-list-image mx-2">
                                         @if ($user === 'admin')
-                                            <img class="rounded-circle" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover; width: 45px; height: 45px;">
+                                            <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover; width: 45px; height: 45px;">
                                         @else
-                                            <img class="rounded-circle" src="{{ asset('images/' . $image) }}" style="object-fit: cover; width: 45px; height: 45px;">
+                                            <img class="rounded-circle border" src="{{ $image != null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover; width: 45px; height: 45px;">
                                         @endif
                                     </div>
                                     <div class="font-weight-bold mx-3">

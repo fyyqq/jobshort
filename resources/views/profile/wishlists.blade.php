@@ -4,8 +4,8 @@
 
 @section('profile')
 
-    <header class="pb-4" style="background-color: #fff;">
-        <div class="box-title border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+    <header class="pb-4">
+        <div class="box-title border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">
             <h6 class="m-0">Wishlist</h6>
         </div>
         <div class="mt-4">

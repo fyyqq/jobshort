@@ -300,10 +300,12 @@ input[type=number] {
 
 .row .form-control {
     transform: translateY(3px);
+    outline: none;
 }
 
 .row .form-control:focus {
     border-bottom: 2px solid #2891e1;
+    background-color: unset;
 }
 
 .profile .profile-content label {

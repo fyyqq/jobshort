@@ -6,18 +6,18 @@
 @section('profile')
 
     <header class="box pb-3">
-        <div class="box-title border d-md-block d-none border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+        <div class="box-title border d-md-block d-none border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">
             <h6 class="m-0">Profile</h6>
         </div>
-        <div class="box-title p-3 mb-2 d-md-none d-block">
+        <div class="box-title p-3 mb-2 d-md-none d-block" style="background-color: #fff;">
             <h6 class="m-0">Profile</h6>
         </div>
     
         @if (auth()->user()->roles != '0')
-            <form action="{{ route('profile.update') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.update') }}" method="POST" class="border" enctype="multipart/form-data" style="background-color: #fff;">
                 @method('PUT')
         @else
-            <form action="{{ route('profile.registration') }}" method="POST" class="border" enctype="multipart/form-data">
+            <form action="{{ route('profile.registration') }}" method="POST" class="border" enctype="multipart/form-data" style="background-color: #fff;">
         @endif
             @csrf
             <div class="row mx-0 flex-lg-row flex-column-reverse p-3">
