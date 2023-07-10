@@ -45,9 +45,7 @@
                 @yield('content')
             </main>
             {{-- Loader --}}
-            <div class="">
-                <div class="custom-loader"></div>
-            </div>
+            <div class="custom-loader"></div>
             {{-- Mobile Navbar --}}
             <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-none' : 'd-block' }}">
                 <div class="" id="mobile-navbar">

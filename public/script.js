@@ -578,7 +578,10 @@ function autoImage(event) {
     }
 }
 
+const loader = document.querySelector('.custom-loader');
+
 function timeRange(element) {
+    loader.style.display = 'block';
     var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
     
@@ -589,15 +592,19 @@ function timeRange(element) {
         url += `/oldest-service/${searchValue}`;
         element.setAttribute('checked', 'checked');
     }
-
+    
     axios.get(url).then(res => {
-        getDataFilter(res.data);
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data);
+        }, 1500);
     }).catch(err => {
         console.error(err.response.data.message);
     });
 }
 
 function orderRange(element) {
+    loader.style.display = 'block';
     var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
     
@@ -609,11 +616,16 @@ function orderRange(element) {
         element.setAttribute('checked', 'checked');
     }
     
-    axios.get(url).then(res => getDataFilter(res.data))
-    .catch(err => console.error(err.response.data.message));
+    axios.get(url).then(res => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data);
+        }, 1500);
+    }).catch(err => console.error(err.response.data.message));
 }
 
 function ratingRange(element) {
+    loader.style.display = 'block';
     var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
     
@@ -625,11 +637,16 @@ function ratingRange(element) {
         element.setAttribute('checked', 'checked');
     }
 
-    axios.get(url).then(res => console.log(res.data))
-    .catch(err => console.error(err.response.data.message));
+    axios.get(url).then(res =>  {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data);
+        }, 1500);
+    }).catch(err => console.error(err.response.data.message));
 }
 
 function priceRange(element) {
+    loader.style.display = 'block';
     var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
     let url = `/services/search`;
 
@@ -641,7 +658,12 @@ function priceRange(element) {
         element.setAttribute('checked', 'checked');
     }
 
-    axios.get(url).then(res => getDataFilter(res.data));
+    axios.get(url).then(res => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data);
+        }, 1500);
+    }).catch(err => console.error(err.response.data.message));
 }
 
 function resetFilter(e) {

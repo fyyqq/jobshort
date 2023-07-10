@@ -28,6 +28,7 @@
     </head>
     <body style="background-color: #f7f7f7;">
         <div id="app">
+            <div class="custom-loader"></div>
             @include('freelancer.shortcuts.navbar')
             @include('freelancer.shortcuts.sidebar')
             <main class="pb-md-5 pb-3">

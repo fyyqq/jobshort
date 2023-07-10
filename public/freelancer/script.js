@@ -249,26 +249,6 @@ $(document).ready(function() {
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-    
-    // var buttonProfile = $('.profile-employer-btn');
-    // buttonProfile.each(function(index, value) {
-    //     $(value).on('click', function(e) {
-    //         e.preventDefault();
-
-    //         var link = this.getAttribute('href');
-
-    //         $.ajax({
-    //             url: link,
-    //             method: 'GET',
-    //             success: function(response) {
-    //                 $('.form-profile').html(response);
-    //                 history.pushState({}, '', link);
-    //             }, error: function(error) {
-    //                 console.error(error);
-    //             }
-    //         });
-    //     });
-    // });
 
     $('.approve-btn').each(function(index, value) {
         $(value).on('click', function(e) {
@@ -477,49 +457,70 @@ $(document).ready(function() {
                 });
             }
         });
-    
     });
 });
 
+
+const loader = document.querySelector('.custom-loader');
+
 // Filter Search
 function searchServices(event) {
+    
     const keyword = event.value;
+    if (keyword.trim() != '') {
+        $(loader).css('display', 'block');
+    }
 
     axios.get('/account/freelancer/services/search', { params: { keyword } })
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 2000);
     });
 }
 
 // Filter SortBy
 function sortByOldest(event) {
+    $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-oldest')
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
     });
 }
 
 function sortByTopOrder(event) {
+    $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-top-order')
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
     });
 }
 
 function sortByTopRating(event) {
+    $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-top-rating')
     .then(function(res) {
         const data = res.data;
-        console.log(data);
-        // displayFilteredServices(data);
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
     });
 }
 
 // Filter Price
 function priceRangeTop(event) {
+    $(loader).css('display', 'block');
 
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRangeDown(this)');
@@ -531,7 +532,10 @@ function priceRangeTop(event) {
     axios.get('/account/freelancer/services/sort-by-high-price')
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
 
     }).catch(function(error) {
         console.error(error.message);
@@ -539,6 +543,7 @@ function priceRangeTop(event) {
 }
 
 function priceRangeDown(event) {
+    $(loader).css('display', 'block');
 
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRange(this)');
@@ -550,14 +555,17 @@ function priceRangeDown(event) {
     axios.get('/account/freelancer/services/sort-by-low-price')
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
-
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
     }).catch(function(error) {
         console.error(error.message);
     });
 }
 
 function priceRange(event) {
+    $(loader).css('display', 'block');
     
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRangeTop(this)');
@@ -569,8 +577,10 @@ function priceRange(event) {
     axios.get('/account/freelancer/services/sort-by-normal-price')
     .then(function(res) {
         const data = res.data;
-        displayFilteredServices(data);
-    
+        setTimeout(() => {
+            $(loader).css('display', 'none');
+            displayFilteredServices(data);
+        }, 1300);
     }).catch(function(error) {
         console.error(error.message);
     });
