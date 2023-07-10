@@ -6,8 +6,8 @@
             <div class="col-md-4 col-12 rounded-3 shadow-md px-4 pb-4 border-bottom">
                 <div class="border-bottom py-4 d-flex align-items-center justify-content-start">
                     <div class="w-100 d-flex align-items-center justify-content-start gap-4 position-relative">
-                        <div class="rounded-3" style="height: 80px; width: 80px; overflow: hidden;">
-                            <img src="{{ asset('images/' . $freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                        <div class="rounded-3 border" style="height: 80px; width: 80px; overflow: hidden;">
+                            <img src="{{ $freelancer->image !== null ? asset('images/' . $freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
                         </div>
                         <div class="d-flex flex-column align-items-start justify-content-center">
                             <small class="fw-bold mb-0 lh-1">{{ $freelancer->name }}</small>
@@ -20,8 +20,17 @@
                                     <div class="d-flex align-items-center justify-content-start gap-3">
                                         <input type="hidden" id="user_id" value="{{ Auth::id() }}">
                                         <input type="hidden" id="freelancer_id" value="{{ $freelancer->id }}">
-                                        <i class="fa-regular fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 15px;"></i>
-                                        <i class="fa-solid fa-bell text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 15px;"></i>
+                                        @if (auth()->check())
+                                            <i class="mdi mdi-bell-outline text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 15px;"></i>
+                                            <i class="mdi mdi-bell-ring text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 15px;"></i>
+                                        @else
+                                            <form action="{{ route('login') }}" method="get">
+                                                @csrf
+                                                <button type="submit" class="border-0" style="background: unset;">
+                                                    <i class="mdi mdi-bell-outline text-muted" style="font-size: 15px;"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                         <small class="text-muted" style="font-size: 13px;">Notification</small>
                                     </div>
                                 </li>
@@ -44,7 +53,7 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ count($freelancer->service) }} Services</small>
+                                <small class="text-muted">{{ count($freelancer->service) }}</small>
                             </div>
                         </div>
                     </div>

@@ -43,7 +43,7 @@
                                         @if ($user === 'admin')
                                             <img class="rounded-circle" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
                                         @else
-                                            <img class="rounded-circle" src="{{ asset('images/' . $image) }}" style="object-fit: cover;">
+                                            <img class="rounded-circle" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
                                         @endif
                                     </div>
                                     <div class="font-weight-bold mx-3">

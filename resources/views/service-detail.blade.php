@@ -23,8 +23,11 @@
                             <input type="hidden" value="{{ $service->id }}">
                             <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
                         @else
-                            <a href="{{ route('profile.main') }}" class="text-decoration-none">
-                                <i class="fa-regular fa-heart"></i>
+                            <form action="{{ route('login') }}" method="get">
+                                @csrf
+                                <button type="submit" class="border-0" style="background: unset;">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
                             </a>
                         @endif
                     </div>
@@ -123,9 +126,12 @@
                                 <i class="mdi mdi-bell-outline text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 18px; cursor: pointer;"></i>
                                 <i class="mdi mdi-bell-ring text-muted {{ count(auth()->user()->notify->where('freelancer_id', $service->freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 18px; cursor: pointer;"></i>
                             @else
-                                <a href="{{ route('profile.main') }}" class="text-decoration-none">
-                                    <i class="mdi mdi-bell-outline text-muted" style="font-size: 16px;"></i>
-                                </a>
+                                <form action="{{ route('login') }}" method="get">
+                                    @csrf
+                                    <button type="submit" class="border-0" style="background: unset;">
+                                        <i class="mdi mdi-bell-outline text-muted" style="font-size: 17px;"></i>
+                                    </button>
+                                </form>
                             @endif
                         </div>
                     </div>
@@ -239,7 +245,7 @@
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('profile.main') }}" method="get">
+                                                <form action="{{ route('login') }}" method="get">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 </form>
@@ -266,7 +272,7 @@
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('profile.main') }}" method="get">
+                                                <form action="{{ route('login') }}" method="get">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 </form>
@@ -274,7 +280,7 @@
                                             <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                                         @endif
                                     @else
-                                        <form action="{{ route('profile.main') }}" method="get">
+                                        <form action="{{ route('login') }}" method="get">
                                             @csrf
                                             <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
                                         </form>
@@ -310,7 +316,7 @@
                                     <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
                                 </form>
                             @else
-                                <form action="{{ route('profile.main') }}" method="get">
+                                <form action="{{ route('login') }}" method="get">
                                     @csrf
                                     <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Order</button>
                                 </form>
@@ -337,7 +343,7 @@
                                         <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('profile.main') }}" method="get">
+                                    <form action="{{ route('login') }}" method="get">
                                         @csrf
                                         <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Order</button>
                                     </form>
@@ -345,7 +351,7 @@
                             <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                         @endif
                     @else
-                        <form action="{{ route('profile.main') }}" method="get">
+                        <form action="{{ route('login') }}" method="get">
                             @csrf
                             <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
                         </form>

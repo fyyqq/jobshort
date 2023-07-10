@@ -99,9 +99,12 @@
                                                 @endif
                                             @endforeach
                                             @if (!auth()->check())
-                                                <a href="{{ route('login') }}" class="text-decoration-none">
-                                                    <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                                </a>
+                                                <form action="{{ route('login') }}" method="get">
+                                                    @csrf
+                                                    <button type="submit" class="border-0" style="background: unset;">
+                                                        <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                    </button>
+                                                </form>
                                             @else
                                                 <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                                 <input type="hidden" value="{{ $service->id }}">
