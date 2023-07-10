@@ -289,10 +289,11 @@ $(document).ready(function() {
         });
     });
 
+
     // Order Services
-    $('#order-btn').click(function(e) {
+    $('.order-btn').click(function(e) {
         e.preventDefault();
-        
+
         var service_id = $(e.target).siblings('#service_id').val(); // 4
         var freelancer_id = $(e.target).siblings('#freelancer_id').val();
         const loader = document.querySelector('.custom-loader');
@@ -305,8 +306,8 @@ $(document).ready(function() {
                 method: 'POST',
                 success: function(res) {
                     if (res) {
-                        $(e.target).addClass('d-none');
-                        $(e.target).siblings('.d-none').removeClass('d-none');
+                        $('.order-btn').addClass('d-none');
+                        $('.order-btn').siblings('.d-none').removeClass('d-none');
                         Swal.fire({
                             title: 'Successfully Order',
                             icon: 'success',
@@ -349,13 +350,36 @@ $(document).ready(function() {
 
             let orderId = ($(value).siblings('#order_id')).val();
             
-            $.ajax({
-                url: `/account/profile/orders/reject/${orderId}`,
-                method: 'POST',
-                success: function(res) {
-                    console.log(res);
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Cancel Order ?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                position: 'center',
+                confirmButtonText: 'Confirm',
+                showCloseButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/account/profile/orders/reject/${orderId}`,
+                        method: 'POST',
+                        success: function(res) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled!',
+                                'Your Request Will be Notify Soon.',
+                                'success'
+                            );
+                        }
+                    });
                 }
             });
+
         });
     });
 

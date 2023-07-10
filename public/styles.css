@@ -27,6 +27,11 @@ a:hover {
     font-size: 20px;
 }
 
+#swal2-html-container {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
 .custom-loader {
     display: none;
     position: fixed;

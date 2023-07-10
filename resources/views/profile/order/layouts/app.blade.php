@@ -2,10 +2,10 @@
 
 @section('profile')
     <header class="pb-4">
-        <div class="box-title border p-3" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+        <div class="box-title border p-3" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">
             <h6 class="m-0">Orders</h6>
         </div>
-        <div class="border my-2" id="parent-order-menu-link">
+        <div class="border my-2" id="parent-order-menu-link" style="background-color: #fff;">
             <ul class="navbar-nav px-3">
                 <div class="d-flex align-items-center justify-content-start">
                     <li class="position-relative {{ Route::currentRouteName() === 'profile.applied' ? 'border-bottom border-2 border-primary' : '' }}">

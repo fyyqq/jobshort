@@ -118,17 +118,37 @@ function deleteSelectedItems() {
 }
 
 function archiveSelectedItems() {
-    var selectedItems = [];
-    checkJobs.forEach(element => {
-        if (element.checked) {
-            selectedItems.push(element.nextElementSibling.value);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-sm px-3 py-2 btn-dark',
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: 'Confirm Archive ?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        position: 'center',
+        confirmButtonText: 'Logout',
+        showCloseButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('logout-form').submit();
         }
     });
 
-    axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
-    .then(function(res) {
-        console.log(res.data);
-    });
+    // var selectedItems = [];
+    // checkJobs.forEach(element => {
+    //     if (element.checked) {
+    //         selectedItems.push(element.nextElementSibling.value);
+    //     }
+    // });
+
+    // axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
+    // .then(function(res) {
+    //     console.log(res.data);
+    // });
 }
 
 function autoImage(event) {

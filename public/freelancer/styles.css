@@ -11,6 +11,11 @@
     font-size: 20px;
 }
 
+#swal2-html-container {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
 .row #profile-img {
     border: none;
     position: absolute;

@@ -27,27 +27,30 @@
                                             @endif
                                         @endforeach
                                         @if (!auth()->check())
-                                            <a href="{{ route('login') }}" class="text-decoration-none">
-                                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                            </a>
+                                            <form action="{{ route('login') }}" method="get">
+                                                @csrf
+                                                <button type="submit" class="border-0" style="background: unset;">
+                                                    <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                </button>
+                                            </form>
                                         @else
                                             <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                             <input type="hidden" value="{{ $wishlist->service->id }}">
                                             <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                         @endif
                                     </div>
-                                    <div class="p-2 w-100">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="mb-0 text-dark" style="width: 95%;">{{ Str::limit($wishlist->service->title, 35) }}</p>
-                                            <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
-                                                <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
-                                                <small class="me-2 text-dark" style="font-size: 13.5px;">4.5</small>
+                                    <div class="p-2 w-100 mt-1">
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($wishlist->service->title, 35) }}</p>
+                                            <div class="d-flex align-items-center justify-content-end flex-row-reverse">
+                                                <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
+                                                <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $wishlist->service->rating->max('stars') < 1 ? '0' : $wishlist->service->rating->max('stars') . '.0' }}</small>
                                             </div>
                                         </div>
-                                        <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
-                                        <div class="mt-2 d-flex">
-                                            <small class="mb-0 text-dark">{{ 'RM' . $wishlist->service->price }}</small>
-                                            <small class="mb-0 ms-1 text-muted">per service</small>
+                                        <small class="text-muted d-block" style="font-size: 12px;">{{ $wishlist->service->category }}</small>
+                                        <div class="mt-2 d-flex align-items-center justify-content-between">
+                                            <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $wishlist->service->price }}</small>
+                                            <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($wishlist->service->order->where('status', 'completed')) }}</small>
                                         </div>
                                     </div>
                                 </div>

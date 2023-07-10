@@ -24,10 +24,10 @@
                         </div>
                         <div class="d-flex align-items-center" style="column-gap: 5px;">
                             @if (Route::currentRouteName() == 'profile.applied')
-                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Rejected</button>
+                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Cancel</button>
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
                             @elseif (Route::currentRouteName() == 'profile.applied-approved')
-                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Rejected</button>
+                                <button class="btn btn-sm btn-outline-danger reject-btn" id="order-action-btn">Cancel</button>
                                 <input type="hidden" id="order_id" value="{{ $order->id }}">
                                 <button class="btn btn-sm btn-dark complete-btn" id="order-action-btn">Completed</button>
                             @elseif (Route::currentRouteName() == 'profile.applied-completed')
@@ -163,7 +163,7 @@
                     <div class="d-flex align-items-center justify-content-between w-100 p-3 border-top">
                         <div class="d-flex justify-content-start align-items-center flex-row">
                             <div class="rounded-circle" id="order-freelancer-profile" style="overflow: hidden;">
-                                <img src="{{ asset('images/' . $order->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                <img src="{{ $order->freelancer->image !== null ? asset('images/' . $order->freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
                             </div>
                             <div class="ms-3 d-flex align-items-start justify-content-center flex-column">
                                 <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>

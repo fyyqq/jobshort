@@ -74,8 +74,17 @@
 
 <script>
     function logout() {
-        Swal.fire({
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
             title: 'Confirm Logout ?',
+            text: "You won't be able to revert this!",
             icon: 'warning',
             position: 'center',
             confirmButtonText: 'Logout',

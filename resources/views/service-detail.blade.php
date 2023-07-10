@@ -239,7 +239,7 @@
                                         @if ($rejectOrCompleted)
                                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
-                                                <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                                <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 <form action="{{ route('profile.applied') }}" method="get" class="d-none">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
@@ -264,9 +264,10 @@
                                                 </form>
                                             @endif
                                         @else
+                                        // No Order Yet.
                                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
-                                                <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                                <button class="btn px-3 py-2 text-light w-100 non-order" id="order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 <form action="{{ route('profile.applied') }}" method="get" class="d-none">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
@@ -310,7 +311,7 @@
                         @if ($rejectOrCompleted)
                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                             @if (auth()->check() && auth()->user()->roles != '0')
-                                <button type="button" class="w-100 btn btn-sm text-light px-4 py-2" id="order-btn" style="background-color: #2891e1;">Order</button>
+                                <button type="button" class="w-100 btn btn-sm text-light px-4 py-2 order-btn" style="background-color: #2891e1;">Order</button>
                                 <form action="{{ route('profile.applied') }}" method="get" class="d-none">
                                     @csrf
                                     <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
