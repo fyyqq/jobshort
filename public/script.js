@@ -377,11 +377,13 @@ $(document).ready(function() {
                         url: `/account/profile/orders/reject/${orderId}`,
                         method: 'POST',
                         success: function(res) {
-                            swalWithBootstrapButtons.fire(
-                                'Cancelled!',
-                                'Your Request Will be Notify Soon.',
-                                'success'
-                            );
+                            if (res) {
+                                swalWithBootstrapButtons.fire(
+                                    'Cancelled!',
+                                    'Your Request Will be Notify Soon.',
+                                    'success'
+                                );
+                            }
                         }
                     });
                 }
@@ -396,11 +398,35 @@ $(document).ready(function() {
             
             let orderId = ($(value).siblings('#order_id')).val();
 
-            $.ajax({
-                url: `/account/profile/orders/complete/${orderId}`,
-                method: 'POST',
-                success: function(res) {
-                    console.log(res);
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Complete Order ?',
+                text: "Make sure your service has been completed!",
+                icon: 'warning',
+                position: 'center',
+                confirmButtonText: 'Confirm',
+                showCloseButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/account/profile/orders/complete/${orderId}`,
+                        method: 'POST',
+                        success: function(res) {
+                            if (res) {
+                                swalWithBootstrapButtons.fire(
+                                    'Completed!',
+                                    'Your Order Has Been Completed!.',
+                                    'success'
+                                );
+                            }
+                        }
+                    });
                 }
             });
         });
@@ -551,7 +577,7 @@ $(document).ready(function() {
                 }
             });
         });
-    });
+    });  
 });
 
 function autoImage(event) {
@@ -596,7 +622,7 @@ function timeRange(element) {
     axios.get(url).then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data);
+            getDataFilter(res.data, 1);
         }, 1500);
     }).catch(err => {
         console.error(err.response.data.message);
@@ -619,7 +645,7 @@ function orderRange(element) {
     axios.get(url).then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data);
+            getDataFilter(res.data, 1);
         }, 1500);
     }).catch(err => console.error(err.response.data.message));
 }
@@ -640,7 +666,7 @@ function ratingRange(element) {
     axios.get(url).then(res =>  {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data);
+            getDataFilter(res.data, 1);
         }, 1500);
     }).catch(err => console.error(err.response.data.message));
 }
@@ -661,7 +687,7 @@ function priceRange(element) {
     axios.get(url).then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data);
+            getDataFilter(res.data, 1);
         }, 1500);
     }).catch(err => console.error(err.response.data.message));
 }
@@ -671,7 +697,7 @@ function resetFilter(e) {
     let url = `/services/search/reset/${searchValue}`;
 
     axios.get(url).then(res => {
-        getDataFilter(res.data);
+        getDataFilter(res.data, 1);
         var radios = document.querySelectorAll('input[type="radio"]');
         radios.forEach(e => {
             if (e.getAttribute('checked') === 'checked') {
@@ -681,9 +707,44 @@ function resetFilter(e) {
     }).catch(err => console.error(err));
 }
 
-function getDataFilter(services) {
+// users filter
+$(document).ready(function() {
+    $('#select-categories').change(function() {
+        const freelancer_name = $(this).parent().parent().prev().val();
+        $('#select-categories option:selected').each(function() {
+            const category = $(this).val();
+
+            axios.get(`/user/${freelancer_name}/filter-category/${category}`)
+            .then(res => {
+                // getDataFilter(res.data, 2);
+            });
+        });
+    });  
+});
+
+const select = document.getElementById('select-categories');
+select.addEventListener('change', e => {
+    loader.style.display = 'block';
+    const freelancer_name = select.parentElement.parentElement.previousElementSibling.value;
+    const optionSelected = select.options[select.selectedIndex].value;
+
+    axios.get(`/user/${freelancer_name}/filter-category/${optionSelected}`)
+    .then(res => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data, 2);
+        }, 1500);
+    });
+});
+
+function getDataFilter(services, action) {
     const parentService = document.getElementById('display_service');
-    parentService.innerHTML = '';
+    const parentUserService = document.getElementById('display-user-services');
+    if (action == 1) {
+        parentService.innerHTML = '';
+    } else if (action == 2) {
+        parentUserService.innerHTML = '';
+    }
     
     services.forEach(service => {
 
@@ -737,7 +798,11 @@ function getDataFilter(services) {
                 </div>
             </a>`;
 
-        parentService.appendChild(element);
+        if (action == 1) {
+            parentService.appendChild(element);
+        } else if (action == 2) {
+            parentUserService.appendChild(element);
+        }
     });
 }
 

@@ -36,7 +36,10 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Users Page
-Route::get('user/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
+Route::prefix('user')->group(function() {
+    Route::get('/{name:freelancer}', [ProfileController::class, 'user'])->name('users');
+    Route::get('/{name:freelancer}/filter-category/{service:category}', [ProfileController::class, 'category']);
+});
 // Route::get('/{slug}', [HomeController::class, 'services']);
 
 // Category Page
@@ -45,9 +48,10 @@ Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('cat
 // Notifications
 Route::prefix('notifications')->group(function() {
     Route::get('/', [NotificationController::class, 'index'])->name('notification');
-    Route::post('/read/{id}', [NotificationController::class, 'read'])->name('notification.read');
-    Route::post('/unread/{id}', [NotificationController::class, 'unread'])->name('notification.read');
-    Route::delete('/delete/{id}', [NotificationController::class, 'destroy'])->name('notification.destroy');
+    Route::get('/read', [NotificationController::class, 'readPage'])->name('notification.read');
+    Route::post('/read/{id}', [NotificationController::class, 'readMessage']);
+    Route::post('/unread/{id}', [NotificationController::class, 'unreadMessage']);
+    Route::delete('/delete/{id}', [NotificationController::class, 'destroy']);
 });
 
 // Chatify

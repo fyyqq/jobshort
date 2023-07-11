@@ -51,11 +51,13 @@ class OrdersController extends Controller
     {
         $order = Order::where('id', $id)->first();
         $order->status = 'approved';
-        $orders = $order->save();
+        $confirmOrder = $order->save();
 
-        if ($orders) {
+        if ($confirmOrder) {
             $user = User::find($order->user_id);
             Notification::send($user, new ApproveNotification($order));
+
+            return true;
         }
     }
     
@@ -63,18 +65,24 @@ class OrdersController extends Controller
     {
         $order = Order::where('id', $id)->first();
         $order->status = 'rejected';
-        $order->save();
+        $confirmOrder = $order->save();
+
+        if ($confirmOrder) {
+            return true;
+        }
     }
     
     public function complete(string $id) 
     {
         $order = Order::where('id', $id)->first();
         $order->status = 'completed';
-        $orders = $order->save();
+        $confirmOrder = $order->save();
 
-        if ($orders) {
+        if ($confirmOrder) {
             $freelancer = Freelancer::find($order->freelancer_id);
             Notification::send($freelancer, new CompleteOrderNotification($order));
+
+            return true;
         }
     }
 
@@ -83,9 +91,9 @@ class OrdersController extends Controller
         $order->user_id = Auth::id();
         $order->service_id = $service_id;
         $order->freelancer_id = $freelancer_id;
-        $orders = $order->save();
+        $confirmOrder = $order->save();
 
-        if ($orders) {
+        if ($confirmOrder) {
             $freelancer = Freelancer::find($freelancer_id);
             Notification::send($freelancer, new OrderNotification($order));
             

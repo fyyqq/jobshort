@@ -13,10 +13,10 @@
                             <i class="mdi mdi-inbox text-dark"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block d-none text-dark fw-bold" style="font-size: 13.5px;">Inbox</li>
                         </a>
-                        <a href="" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0">
+                        <span class="d-flex align-items-center justify-content-start gap-md-3 gap-0" id="read-link" style="cursor: pointer;">
                             <i class="mdi mdi-email text-dark"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block d-none text-muted" style="font-size: 13.5px;">Read</li>
-                        </a>
+                        </span>
                         <a href="" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0">
                             <i class="mdi mdi-email-open text-dark"></i>
                             <li class="nav-item py-2 d-md-block d-none text-muted" style="font-size: 13.5px;">Unread</li>
@@ -29,7 +29,7 @@
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Recent</h6>
                     </div>
-                    <div class="box-body p-0">
+                    <div class="box-body p-0" id="display-notification">
                         @foreach ($notifications as $notification)
                             <?php 
                                 $message = json_decode($notification->data)->message;

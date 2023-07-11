@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Freelancer;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,17 @@ class ProfileController extends Controller
         return view('users', [
             'freelancer' => Freelancer::where('name', $name)->first()
         ]);
+    }
+    
+    public function category(string $name, string $category) {
+        $freelancer_id = Freelancer::where('name', $name)->first()->id;
+        if ($category === 'all') {
+            $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->get();
+        } else {
+            $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->where('category', $category)->get();
+        }
+
+        return response()->json($service);
     }
 
     public function applied() {

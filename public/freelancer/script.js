@@ -266,40 +266,6 @@ $(document).ready(function() {
         });
     });
 
-    $('.reject-btn').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-            
-            let orderId = ($(value).siblings('#order_id'))[0].value;
-            
-            $.ajax({
-                url: `/account/freelancer/orders/reject/${orderId}`,
-                method: 'POST',
-                success: function(res) {
-                    console.log(res);
-                }
-            });
-        });
-    });
-
-    $('.complete-btn').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-            
-            let orderId = ($(value).siblings('#order_id'))[0].value;
-
-            $.ajax({
-                url: `/account/profile/orders/complete/${orderId}`,
-                method: 'POST',
-                success: function(res) {
-                    console.log(res);
-                }, error: function (err) {
-                    console.error(err);
-                }
-            });
-        });
-    });
-
     // Add Image on Create Service
 
     $('#addImage').click(function(e) {

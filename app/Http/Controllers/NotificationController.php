@@ -19,7 +19,16 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function read(string $id) {
+    public function readPage() {
+        $notification = Notification::where('notifiable_id', Auth::id())->where('read_at', '!=', null)->latest()->get();
+
+        return view('notification-read', [
+            "notifications" => $notification
+        ]);
+    }
+
+
+    public function readMessage(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
         $notification->read_at = now();
         $confirm = $notification->save();
@@ -31,7 +40,7 @@ class NotificationController extends Controller
         }
     }
     
-    public function unread(string $id) {
+    public function unreadMessage(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
         $notification->read_at = null;
         $confirm = $notification->save();

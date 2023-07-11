@@ -1,9 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    #select {
+        overflow: hidden;
+        height: 35px;
+    }
+    select {
+        border-right: 10px solid transparent;
+        font-size: 13px;
+        outline: none;
+        border-color: transparent;
+    }
+    select option {
+        font-size: 14px;
+    }
+</style>
     <div class="container-lg">
         <div class="row d-flex align-items-start justify-content-between flex-md-row flex-column" style="height: max-content">
-            <div class="col-md-4 col-12 rounded-3 shadow-md px-4 pb-4 border-bottom">
+            <div class="col-md-4 col-12 rounded-3 px-4 pb-4 border-bottom">
                 <div class="border-bottom py-4 d-flex align-items-center justify-content-start">
                     <div class="w-100 d-flex align-items-center justify-content-start gap-4 position-relative">
                         <div class="rounded-3 border" style="height: 80px; width: 80px; overflow: hidden;">
@@ -53,7 +68,7 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ count($freelancer->service) }}</small>
+                                <small class="text-muted">{{ count($freelancer->service) }} services</small>
                             </div>
                         </div>
                     </div>
@@ -65,7 +80,7 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">4.0 Stars</small>
+                                <small class="text-muted">{{ $freelancer->rating->max('stars') < 1 ? $freelancer->rating->max('stars')  : $freelancer->rating->max('stars') . '.0' }} stars</small>
                             </div>
                         </div>
                     </div>
@@ -97,25 +112,51 @@
             </div>
             <div class="col-md-8 col-12 px-4 pt-0 pb-4 px-0 border-md-top border-none">
                 <div class="row mx-0 d-flex align-items-center justify-content-center flex-column">
-                    <div class="col-4 w-100 border-bottom mb-md-3 mb-0" style=" height: max-content;">
+                    <div class="col-md-12 w-100 border-bottom mb-3" style=" height: max-content;">
                         <div class="px-3 py-4">
                             <h1 class="h4 text-dark fw-bold">About {{ $freelancer->name }}</h1>
                             <div class="mt-3">
-                                <small class="text-muted">{{ $freelancer->about ?? 'No About Me Yet.' }}</small>
+                                <small class="text-muted">{{ $freelancer->about ?? 'Nothing About Freelancer.' }}</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-8 w-100 px-0" style="height: max-content;">
-                        <div class="d-none align-items-center justify-content-start border py-3" style="">
-                            <ul class="navbar-nav d-flex flex-row">
-                                <li class="px-4 border-end" style="cursor: pointer;">All</li>
-                                <li class="px-4" style="cursor: pointer;">Ratings</li>
-                            </ul>
+                    <div class="px-sm-3 px-0 m-0 d-flex align-items-center justify-content-between">
+                        <div class="col-md-3 col-2 d-sm-block d-none px-0">
+                            <small class="text-dark d-block" style="font-size: 13.5px;"><span id="filter-count">{{ count($freelancer->service) }}</span> Results</small>
                         </div>
-                        <div class="py-3">
-                            <div class="row mx-0 d-flex justify-content-start align-items-center" style="row-gap: 10px;">
+                        <div class="d-flex align-items-center justify-content-end w-100 gap-md-2 gap-0">
+                            <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
+                                <div class="rounded-3 border" id="select">
+                                    <select name="" id="select-sort" class="ps-3 w-100 text-dark h-100">
+                                        <option value="">Sort By</option>
+                                        <option value="">Latest</option>
+                                        <option value="">Oldest</option>
+                                        <option value="">Top Order</option>
+                                        <option value="">Lowest Order</option>
+                                        <option value="">Top Rating</option>
+                                        <option value="">Lowest Rating</option>
+                                        <option value="">Top Price</option>
+                                        <option value="" selected>Lowest Price</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" value="{{ $freelancer->name }}" id="freelancer-name">
+                            <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
+                                <div class="rounded-3 border" id="select">
+                                    <select name="" id="select-categories" class="ps-3 w-100 text-dark h-100">
+                                        <option value="all">Categories</option>
+                                        @foreach ($freelancer->service->pluck('category') as $value)
+                                            <option value="{{ $value }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="py-3 px-0">
+                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services">
                                 @foreach ($freelancer->service as $service)
-                                    <div class="col-sm-6 col-12 px-sm-3">
+                                    <div class="col-sm-6 col-12">
                                         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                                             <div class="d-flex align-items-center justify-content-center flex-column">
                                                 <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
@@ -125,27 +166,30 @@
                                                         @endif
                                                     @endforeach
                                                     @if (!auth()->check())
-                                                        <a href="{{ route('login') }}" class="text-decoration-none">
-                                                            <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                                        </a>
+                                                        <form action="{{ route('login') }}" method="get">
+                                                            @csrf
+                                                            <button type="submit" class="border-0" style="background: unset;">
+                                                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                            </button>
+                                                        </form>
                                                     @else
                                                         <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                                         <input type="hidden" value="{{ $service->id }}">
                                                         <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                                     @endif
                                                 </div>
-                                                <div class="p-2 w-100">
-                                                    <div class="d-flex align-items-start justify-content-between">
-                                                        <p class="mb-0 text-dark" style="width: 95%;">{{ Str::limit($service->title, 15) }}</p>
-                                                        <div class="d-flex align-items-center justify-content-end mt-2 flex-row-reverse">
-                                                            <i class="fa-solid fa-star text-dark" style="font-size: 13.5px;"></i>
-                                                            <small class="me-2 text-dark" style="font-size: 13.5px;">4.5</small>
+                                                <div class="p-2 w-100 mt-1">
+                                                    <div class="d-flex align-items-center justify-content-start">
+                                                        <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
+                                                        <div class="d-flex align-items-center justify-content-end flex-row-reverse">
+                                                            <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
+                                                            <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
                                                         </div>
                                                     </div>
-                                                    <small class="text-muted" style="font-size: 13px;">Klang ,  Selangor</small>
-                                                    <div class="mt-2 d-flex">
-                                                        <small class="mb-0 text-dark">{{ 'RM' . $service->price }}</small>
-                                                        <small class="mb-0 ms-1 text-muted">per service</small>
+                                                    <small class="text-muted d-block" style="font-size: 12px;">{{ $service->category }}</small>
+                                                    <div class="mt-2 d-flex align-items-center justify-content-between">
+                                                        <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                                        <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
                                                     </div>
                                                 </div>
                                             </div>
