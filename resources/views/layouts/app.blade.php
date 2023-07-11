@@ -51,14 +51,13 @@
                 <div class="" id="mobile-navbar">
                     <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
                         <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-house {{ Route::currentRouteName() === 'home' ? 'text-dark' : 'text-muted' }}" style="font-size: 19px;"></i>
+                            <i class="fa-solid fa-house text-muted" style="font-size: 19px;"></i>
                         </a>
                         <a href="{{ route('profile.saved-services') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <i class="fa-regular text-muted fa-heart" style="font-size: 19px;"></i>
                         </a>
                         <a href="{{ route('notification') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <div class="position-relative">
-                                
                                 @if (Auth::check())
                                     <span class="badge rounded-circle position-absolute {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }} align-items-center justify-content-center m-0" style="top: -9px; right: -9px; font-size: 10px; background-color: #2891e1;">{{ count(auth()->user()->notification) === 'null' ? '' : count(auth()->user()->notification->where('read_at', null)) }}</span>
                                 @endif

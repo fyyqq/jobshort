@@ -1,4 +1,4 @@
-<div class="" style="border-top: 2px solid #2891e1;">
+<div class="d-none" style="border-top: 2px solid #2891e1;">
     <footer class="container-lg pt-5 pb-md-0 pb-5 px-md-0 px-3">
         <div class="d-flex align-items-center justify-content-between py-4 mt-4 border-top">
             <p>&copy; 2023 Jobshort.</p>

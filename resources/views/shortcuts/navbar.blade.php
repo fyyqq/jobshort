@@ -4,8 +4,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-3 fixed-top" style="border-bottom: 3px solid #2891e1;">
-    <div class="container">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top py-2" style="border-bottom: 3px solid #2891e1;">
+    <div class="container px-md-0 px-4 position-relative py-2">
+        <form action="{{ route('search') }}" method="get" class="d-md-none d-block" onsubmit="return search()">
+            <div class="px-3 rounded-pill h-100 position-absolute" id="searchbar-mobile">
+                <div class="position-absolute px-2" style="right: 25px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="return closeSearchbar(this)">
+                    <i class="mdi mdi-close-circle-outline text-dark" style="font-size: 22px;"></i>
+                </div>
+                <input type="text" name="keyword" id="searchbar" class="w-100 h-100 px-3 border border-secondary rounded-pill" placeholder="Find Services..." value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
+            </div>
+        </form>
         <a class="navbar-brand d-md-block d-none" href="{{ route('home') }}">
             <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;">
         </a>
@@ -15,50 +23,33 @@
             </a>
         @else
             <a class="navbar-brand d-md-none d-block" href="{{ route('home') }}">
-                <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;">
+                <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" id="logo-company">
+                <!-- <i class="mdi mdi-close-circle-outline d-none" style="font-size: 20px;"></i> -->
             </a>
         @endif
         <div class="collapse navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto"></ul>
             <!-- Center Side Of Navbar -->
-            <form action="{{ route('search') }}" method="get" class="d-md-flex d-none" onsubmit="return jobSearch()">
+            <form action="{{ route('search') }}" method="get" class="d-md-flex d-none" onsubmit="return search()">
                 <div class="btn-group" role="group">
-                    <input type="text" name="keyword" id="searchbar" class="px-3 py-2 text-dark" placeholder="*Web Developer..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>">
+                    <input type="text" name="keyword" id="searchbar" class="px-3 py-2 text-dark" placeholder="Find Service..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
                     <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
                         <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>
                 </div>
             </form>
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown d-flex align-items-center">
-                        <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
-                            <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
-                            @if (Auth::check() && count(auth()->user()->notification) > 0)
-                                <span class="badge align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -7px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span>
-                            @endif
-                        </a>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-        @auth
-            <div class="d-flex align-items-center justify-content-center ms-4">
+            <ul class="navbar-nav ms-auto gap-4">
+            @auth
+                <li class="nav-item dropdown d-flex align-items-center mt-1">
+                    <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
+                        <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
+                        @if (Auth::check() && count(auth()->user()->notification) > 0)
+                            <span class="badge align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -7px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span>
+                        @endif
+                    </a>
+                </li>
                 <li class="nav-item dropdown d-flex align-items-center">
                     <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 41px; width: 41px;">
                         @if (Auth::check())
@@ -94,34 +85,31 @@
                         </li>
                     </ul>
                 </li>
-            </div>
-        @endauth
+            @endauth
+            </ul>
+        </div>
+        @guest
+            <ul class="navbar-nav ms-auto d-md-flex d-none">
+                <!-- Authentication Links -->
+                @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @endif
+
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            </ul>
+        @endguest
+        <ul class="navbar-nav ms-auto gap-4 d-md-none d-flex">
+            <li class="nav-item dropdown d-flex align-items-center justify-content-center" style="height: 35px; width: 35px; cursor: pointer;" onclick="return showSearchbar(this)" >
+                <i class="fa-solid fa-magnifying-glass text-dark" style="font-size: 16px;"></i>
+            </li>
+        </ul>
     </div>
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
-<script>
-    function logout() {
-
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
-            },
-            buttonsStyling: false
-        });
-
-        swalWithBootstrapButtons.fire({
-            title: 'Confirm Logout ?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            position: 'center',
-            confirmButtonText: 'Logout',
-            showCloseButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('logout-form').submit();
-            }
-        });
-    }
-</script>

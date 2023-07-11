@@ -47,7 +47,7 @@ Route::prefix('user')->group(function() {
 Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');
 
 // Notifications
-Route::prefix('notifications')->group(function() {
+Route::prefix('notifications')->middleware(['auth'])->group(function() {
     Route::get('/', [NotificationController::class, 'index'])->name('notification');
     Route::get('/read', [NotificationController::class, 'readPage'])->name('notification.read');
     Route::post('/read/{id}', [NotificationController::class, 'readMessage']);

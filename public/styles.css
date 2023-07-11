@@ -68,10 +68,26 @@ a:hover {
     border: 1px solid rgb(187, 187, 187);
     border-right: unset;
     width: 280px;
+    border-top-left-radius: 20px; 
+    border-bottom-left-radius: 20px; 
+    font-size: 14px;
 }
 
 #searchbar::placeholder {
     font-size: 13px;
+}
+
+#searchbar-mobile {
+    bottom: 0; 
+    right: 0; 
+    width: 100%; 
+    overflow: hidden; 
+    display: none;
+    z-index: 999;
+}
+
+#searchbar-mobile #searchbar {
+    background: white;
 }
 
 .dropdown-list-image {
@@ -529,6 +545,9 @@ input[type=number] {
     }
     #filter-mobile-container {
         display: block;
+    }
+    #searchbar {
+        width: 300px;
     }
 }
 

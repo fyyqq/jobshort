@@ -40,13 +40,46 @@ function goToPreviousPage() {
     window.history.back();
 }
 
-function jobSearch() {
+function logout() {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: 'Confirm Logout ?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        position: 'center',
+        confirmButtonText: 'Logout',
+        showCloseButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('logout-form').submit();
+        }
+    });
+}
+
+function search() {
     const keyword = document.getElementById('searchbar').value;
     if (keyword.trim() != "") {
         return this.submit();
     } else {
         return false;
     }
+}
+
+const searchbar = document.getElementById('searchbar-mobile');
+
+function showSearchbar(element) {
+    searchbar.style.display = 'flex';
+}
+
+function closeSearchbar(element) {
+    searchbar.style.display = 'none';
 }
 
 const countryList = document.querySelectorAll('.suggestion-list');
