@@ -32,6 +32,7 @@
                     <div class="box-body p-0" id="display-notification">
                         @foreach ($notifications as $index => $notification)
                             <?php 
+                                // $title = json_decode($notification->data)->title;
                                 $message = json_decode($notification->data)->message;
                                 $user = json_decode($notification->data)->user;
                                 $image = json_decode($notification->data)->image;
@@ -49,6 +50,7 @@
                                     <div class="font-weight-bold mx-3">
                                         <small class="text-dark fw-bold d-block mb-0">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
                                         <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 90) }}</small>
+                                        {{-- <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($title, 90) }}</small> --}}
                                     </div>
                                 </div>
                                 <span class="ml-auto mb-0 d-md-flex d-none align-items-center gap-2">
@@ -88,13 +90,13 @@
                             </div>
                             <div class="modal fade" id="{{ $index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
+                                    <div class="modal-content pb-3">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</h5>
+                                            <h5 class="modal-title text-dark" id="exampleModalLabel">Notification</h5>
                                             <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="py-2 px-3 d-flex align-items-center justify-content-start gap-3">
+                                            <div class="pt-2 pb-3 px-3 d-flex align-items-center justify-content-start gap-3 border-bottom">
                                                 <div class="rounded-circle border" style="height: 50px; width: 50px; overflow: hidden;">
                                                     @if ($user === 'admin')
                                                         <img class="w-100 h-100" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
@@ -106,6 +108,14 @@
                                                     <small class="text-dark lh-sm">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
                                                     <small class="text-muted" style="font-size: 12px;">{{ $notification->created_at->diffForHumans() }}</small>
                                                 </div>
+                                            </div>
+                                            <div class="mt-3 mb-2 row mx-0">
+                                                <small class="text-dark d-block lh-lg fw-bold">Title :</small>
+                                                {{-- <small class="text-dark">{{ $title != null ? $title : '' }}</small> --}}
+                                            </div>
+                                            <div class="row mx-0">
+                                                <small class="text-dark d-block lh-lg fw-bold">Message :</small>
+                                                <small class="text-dark" style="font-size: 13.5px;">{{ $message }}</small>
                                             </div>
                                         </div>
                                     </div>
