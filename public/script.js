@@ -1,4 +1,3 @@
-
 console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bold;");
 
 $('.owl-carousel').owlCarousel({
@@ -734,6 +733,20 @@ function filterCategories(select) {
             getDataFilter(res.data, 2);
         }, 1500);
     });
+}
+
+function sortService(select) {
+    loader.style.display = 'block';
+    const freelancer_name = select.parentElement.parentElement.nextElementSibling.value;
+    const optionSelected = select.options[select.selectedIndex].value;
+
+    axios.get(`/user/${freelancer_name}/sort-by/${optionSelected}`)
+    .then(res => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            getDataFilter(res.data, 2);
+        }, 1500);
+    }).catch(err => console.error(err.message));
 }
 
 function getDataFilter(services, action) {

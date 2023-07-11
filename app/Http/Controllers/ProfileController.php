@@ -32,6 +32,42 @@ class ProfileController extends Controller
         } else {
             $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->where('category', $category)->get();
         }
+        
+        return response()->json($service);
+    }
+    
+    public function sortFilter(string $name, string $type) {
+        $freelancer_id = Freelancer::where('name', $name)->first()->id;
+
+        switch ($type) {
+            case 'latest':
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->latest()->get();
+                break;
+            case 'oldest':
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->orderBy('id', 'asc')->get();
+                break;
+            case 'top-order':
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)
+                ->withCount(['order as top_order' => function($query) {
+                    $query->where('status', 'completed');
+                }])->orderByDesc('top_order')->get();
+                break;
+            case 'lowest-order':
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)
+                    ->withCount(['order as low_order' => function($query) {
+                        $query->where('status', 'completed');
+                    }])->orderBy('low_order')->get();
+                break;
+            case 'top-price': 
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->orderBy('price', 'desc')->get();
+                break;
+            case 'lowest-price':
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->orderBy('price', 'asc')->get();
+                break;
+            default:
+                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer_id)->get();
+                break;
+        }
 
         return response()->json($service);
     }

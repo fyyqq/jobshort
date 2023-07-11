@@ -127,16 +127,16 @@
                         <div class="d-flex align-items-center justify-content-end w-100 gap-md-2 gap-0">
                             <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
                                 <div class="rounded-3 border" id="select">
-                                    <select name="" id="select-sort" class="ps-3 w-100 text-dark h-100">
-                                        <option value="">Sort By</option>
-                                        <option value="">Latest</option>
-                                        <option value="">Oldest</option>
-                                        <option value="">Top Order</option>
-                                        <option value="">Lowest Order</option>
-                                        <option value="">Top Rating</option>
-                                        <option value="">Lowest Rating</option>
-                                        <option value="">Top Price</option>
-                                        <option value="" selected>Lowest Price</option>
+                                    <select name="" class="ps-3 w-100 text-dark h-100" onchange="return sortService(this)">
+                                        <option value="normal" selected>Sort By</option>
+                                        <option value="latest">Latest</option>
+                                        <option value="oldest">Oldest</option>
+                                        <option value="top-order">Top Order</option>
+                                        <option value="lowest-order">Lowest Order</option>
+                                        <option value="top-rating">Top Rating</option>
+                                        <option value="lowest-rating">Lowest Rating</option>
+                                        <option value="top-price">Top Price</option>
+                                        <option value="lowest-price">Lowest Price</option>
                                     </select>
                                 </div>
                             </div>
