@@ -722,8 +722,7 @@ $(document).ready(function() {
     });  
 });
 
-const select = document.getElementById('select-categories');
-select.addEventListener('change', e => {
+function filterCategories(select) {
     loader.style.display = 'block';
     const freelancer_name = select.parentElement.parentElement.previousElementSibling.value;
     const optionSelected = select.options[select.selectedIndex].value;
@@ -735,15 +734,18 @@ select.addEventListener('change', e => {
             getDataFilter(res.data, 2);
         }, 1500);
     });
-});
+}
 
 function getDataFilter(services, action) {
     const parentService = document.getElementById('display_service');
     const parentUserService = document.getElementById('display-user-services');
+    const filterCount = document.getElementById('filter-count');
     if (action == 1) {
         parentService.innerHTML = '';
     } else if (action == 2) {
         parentUserService.innerHTML = '';
+        filterCount.innerHTML = '';
+        filterCount.innerHTML = services.length;
     }
     
     services.forEach(service => {
