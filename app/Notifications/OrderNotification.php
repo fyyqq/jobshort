@@ -49,9 +49,8 @@ class OrderNotification extends Notification
             "id" => $uuid,
             "user" => $notifiable->name,
             "image" => $notifiable->image,
-            "message" => "Congratulations! You've Received an Order!
-            Dear " . $this->order->freelancer->name . ",
-            We are thrilled to inform you that you have received a new order on our platform. This is a significant milestone in your freelancing journey, and we are excited to see your skills and expertise being recognized by buyers.            
+            "title" => "Congratulations! You've Received an Order!" ,
+            "message" => "Dear " . $this->order->freelancer->name . " We are thrilled to inform you that you have received a new order on our platform. This is a significant milestone in your freelancing journey, and we are excited to see your skills and expertise being recognized by buyers.
             Order Details: 
             Order ID:" . $this->order->id .
             "Buyer:" . Auth::user()->name . 

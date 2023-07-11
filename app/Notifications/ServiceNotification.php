@@ -50,18 +50,18 @@ class ServiceNotification extends Notification
             "id" => $uuid,
             "user" => $this->service->freelancer->name,
             "image" => $this->service->freelancer->image,
-            "message" => "Congratulations! You've Got a New Freelancer Service from " . $this->service->freelancer->name .
-            " Hello" . Auth::user()->name . ",
-            We are happy to let you know that you have successfully secured the services of a talented freelancer on our platform. We want to let you know that the freelancer you choose is ready to meet your needs and deliver exceptional results.
-            With this new freelancer service, you can expect:
-            High Quality: Our freelancers are experienced and skilled professionals in their field. They will work hard to deliver results that meet or even exceed your expectations.
-            Effective Collaboration: Good communication with freelancers is very important. They are ready to collaborate with you, listen to your needs, and provide the right solution for your project.
-            On Time Delivery: Our freelancers value your time and will commit to completing the project according to the agreed schedule.
-            We hope that this freelancer service will help you achieve your goals and provide satisfactory results. If you have any questions or need additional assistance, do not hesitate to contact our support team who are ready to help you.
-            Thank you for using our platform. We hope you have an amazing experience with the freelancer you choose. Please feel free to provide feedback about your experience, as it means a lot to us.
-            Thank you and happy using freelancer services!
-            Greetings,
-            Team Jobshort"
+            "title" => "Congratulations! You've Got a New Freelancer Service from " . $this->service->freelancer->name,
+            "message" => " Hello" . Auth::user()->name . ",
+                We are happy to let you know that you have successfully secured the services of a talented freelancer on our platform. We want to let you know that the freelancer you choose is ready to meet your needs and deliver exceptional results.
+                With this new freelancer service, you can expect:
+                High Quality: Our freelancers are experienced and skilled professionals in their field. They will work hard to deliver results that meet or even exceed your expectations.
+                Effective Collaboration: Good communication with freelancers is very important. They are ready to collaborate with you, listen to your needs, and provide the right solution for your project.
+                On Time Delivery: Our freelancers value your time and will commit to completing the project according to the agreed schedule.
+                We hope that this freelancer service will help you achieve your goals and provide satisfactory results. If you have any questions or need additional assistance, do not hesitate to contact our support team who are ready to help you.
+                Thank you for using our platform. We hope you have an amazing experience with the freelancer you choose. Please feel free to provide feedback about your experience, as it means a lot to us.
+                Thank you and happy using freelancer services!
+                Greetings,
+                Team Jobshort"
         ];
     }
 

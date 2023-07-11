@@ -37,8 +37,8 @@
                                 $image = json_decode($notification->data)->image;
                                 $id = json_decode($notification->data)->id;
                             ?>
-                            <div class="p-3 d-flex align-items-center justify-content-between border-bottom parent-notification" style="cursor: pointer; {{ $notification->read_at != null ? 'border: unset;' : 'border-left: 3px solid #2891e1;' }} " data-bs-toggle="modal" data-bs-target="#{{ $index }}">
-                                <div class="d-flex align-items-center justify-content-start">
+                            <div class="pe-4 d-flex align-items-center justify-content-between border-bottom parent-notification" style="cursor: pointer; {{ $notification->read_at != null ? 'border: unset;' : 'border-left: 3px solid #2891e1;' }} ">
+                                <div class="p-3 d-flex align-items-center justify-content-start w-100" data-bs-toggle="modal" data-bs-target="#{{ $index }}">
                                     <div class="dropdown-list-image mx-2">
                                         @if ($user === 'admin')
                                             <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
@@ -48,10 +48,10 @@
                                     </div>
                                     <div class="font-weight-bold mx-3">
                                         <small class="text-dark fw-bold d-block mb-0">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
-                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 100) }}</small>
+                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 90) }}</small>
                                     </div>
                                 </div>
-                                <span class="ml-auto mb-0 d-md-flex d-none align-items-center gap-1">
+                                <span class="ml-auto mb-0 d-md-flex d-none align-items-center gap-2">
                                     <input type="hidden" id="notification-id" value="{{ $id }}">
                                     <button type="button" class="btn btn-light btn-sm rounded unread {{ $notification->read_at != null ? 'd-block' : 'd-none' }}" data-bs-toggle="tooltip" title="Mark as unread">
                                         <i class="mdi mdi-email"></i>
@@ -87,19 +87,27 @@
                                 </span>
                             </div>
                             <div class="modal fade" id="{{ $index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">{{ $user }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+                                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</h5>
+                                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="py-2 px-3 d-flex align-items-center justify-content-start gap-3">
+                                                <div class="rounded-circle border" style="height: 50px; width: 50px; overflow: hidden;">
+                                                    @if ($user === 'admin')
+                                                        <img class="w-100 h-100" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
+                                                    @else
+                                                        <img class="w-100 h-100" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
+                                                    @endif
+                                                </div>
+                                                <div class="d-flex align-items-start justify-content-center flex-column">
+                                                    <small class="text-dark lh-sm">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
+                                                    <small class="text-muted" style="font-size: 12px;">{{ $notification->created_at->diffForHumans() }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -109,5 +117,4 @@
             </div>
         </div>
     </div>
-    
 @endsection

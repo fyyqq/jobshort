@@ -48,8 +48,8 @@ class ApproveNotification extends Notification
             "id" => $uuid,
             "user" => $this->order->freelancer->name,
             "image" => $this->order->freelancer->image,
-            "message" => "Congratulations! Your Order Has Been Approved by " . $this->order->freelancer->name .
-            ". We are happy to inform you that your order has been approved by your chosen freelancer. This is an important stage in your collaboration process.
+            "title" => "Congratulations! Your Order Has Been Approved by " . $this->order->freelancer->name,
+            "message" => "We are happy to inform you that your order has been approved by your chosen freelancer. This is an important stage in your collaboration process.
             Our freelancer has seen the details of your order and is ready to start work. They have the skills and experience needed to deliver exceptional results.            
             We appreciate your trust in this freelancer and hope this cooperation goes smoothly. If you have any questions or need to communicate further, do not hesitate to contact the freelancer through our platform.
             We hope you enjoy this collaborative experience and get satisfactory results from our freelancers. Thank you for choosing our platform to meet your needs.

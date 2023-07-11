@@ -47,8 +47,8 @@ class ReviewNotification extends Notification
             "id" => $uuid,
             "user" => $this->order->user->name,
             "image" => $this->order->user->image,
-            "message" => "Congratulations! You Receive Positive Reviews and Ratings from Buyers
-            We are happy to inform you that the buyer has given a positive review and evaluation of the service you provided. This is a remarkable achievement and shows your quality and professionalism in working on this project.
+            "title" => "Congratulations! You Receive Positive Reviews and Ratings from Buyers",
+            "message" => "We are happy to inform you that the buyer has given a positive review and evaluation of the service you provided. This is a remarkable achievement and shows your quality and professionalism in working on this project.
             Positive reviews and ratings are not only an appreciation for your hard work, but also improve your reputation on our platform. This can attract the attention of potential buyers and help you get more job opportunities in the future.
             We would like to thank you for your dedication in providing quality service to buyers. Keep innovating and delivering the best results in every project you work on.
             You can see those reviews and ratings on your profile. Use this feedback as motivation to continue to improve and provide the best experience to buyers in the future.
