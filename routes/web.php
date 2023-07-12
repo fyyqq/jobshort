@@ -120,16 +120,15 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::get('/', [FreelancerController::class, 'index'])->name('freelancer.main');
         Route::prefix('services')->group(function() {
             Route::get('/', [ServicesController::class, 'index'])->name('freelancer.services');
+            Route::get('/all', [ServicesController::class, 'all'])->name('freelancer.services-all');
+            Route::get('/active', [ServicesController::class, 'active'])->name('freelancer.services-active');
+            Route::get('/archive', [ServicesController::class, 'archive'])->name('freelancer.services-archive');
             Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('freelancer.edit-services');
             Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('freelancer.update-services');
             Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('freelancer.update-archive-services');
             Route::post('/archive-items', [ServicesController::class, 'archiveItems'])->name('freelancer.archive-item-services');
             Route::delete('/delete/{slug}', [ServicesController::class, 'destroy'])->name('freelancer.delete-services');
             Route::post('/delete-items', [ServicesController::class, 'deletedItems'])->name('freelancer.delete-item-services');
-            Route::get('/live', [FreelancerController::class, 'live'])->name('freelancer.live-services');
-            Route::get('/ongoing', [FreelancerController::class, 'ongoing'])->name('freelancer.on-services');
-            Route::get('/complete', [FreelancerController::class, 'complete'])->name('freelancer.complete-services');
-            Route::get('/archive', [FreelancerController::class, 'archive'])->name('freelancer.archive-services');
             // Filter
             Route::get('/sort-by-normal-price', [ServicesController::class, 'sortByNormal'])->name('freelancer.normal');
             Route::get('/sort-by-high-price', [ServicesController::class, 'sortByHighPrice'])->name('freelancer.filter-high-price');

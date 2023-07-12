@@ -16,6 +16,10 @@
     font-size: 14px;
 }
 
+.service-link {
+    cursor: pointer;
+}
+
 .custom-loader {
     display: none;
     position: fixed;

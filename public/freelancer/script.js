@@ -87,24 +87,8 @@ if (inputText && inputText.nextElementSibling) {
     });
 }
 
-
-const checkJobs = document.querySelectorAll('#select-jobs');
-
-function allService() {
-    const checkAllService = document.getElementById('select-all-jobs');
-    if (checkAllService.checked) {
-        checkJobs.forEach(element => {
-            element.checked = true;
-        });
-    } else {
-        checkJobs.forEach(element => {
-            element.checked = false;
-        });
-    }
-}
-
 function deleteSelectedItems() {
-
+    const checkJobs = document.querySelectorAll('#select-jobs');
     var selectedItems = [];
     checkJobs.forEach(element => {
         if (element.checked) {
@@ -162,7 +146,8 @@ function deleteSelectedItems() {
 }
 
 function archiveSelectedItems() {
-    
+    const checkJobs = document.querySelectorAll('#select-jobs');
+
     var selectedItems = [];
     checkJobs.forEach(element => {
         if (element.checked) {
@@ -248,6 +233,21 @@ $(document).ready(function() {
     $.ajaxSetup({
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
+
+    $('#select-all-jobs').click(function(e) {
+        const checkAllService = document.getElementById('select-all-jobs');
+        const checkJobs = document.querySelectorAll('#select-jobs');
+
+        if (checkAllService.checked) {
+            checkJobs.forEach(element => {
+                element.checked = true;
+            });
+        } else {
+            checkJobs.forEach(element => {
+                element.checked = false;
+            });
+        }
     });
 
     $('.approve-btn').each(function(index, value) {
@@ -357,7 +357,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.archive-service-btn').on('click', function(e) {
+    $(document).on('click', '.archive-service-btn', function(e) {
         e.preventDefault();
 
         const slug = $(this).siblings('#service-slug').val(); 
@@ -391,7 +391,7 @@ $(document).ready(function() {
         });
     });
     
-    $('.delete-service-btn').on('click', function(e) {
+    $(document).on('click', '.delete-service-btn', function(e) {
         e.preventDefault();
         
         const slug = $(this).siblings('#service-slug').val(); 
@@ -640,11 +640,36 @@ function displayFilteredServices(services) {
         </div>`;
 
         parentService.appendChild(serviceElement);
+        document.getElementById('select-all-jobs').checked = false;
     });
 
 }
 
-
 function goToPreviousPage() {
     window.history.back();
 }
+
+
+$(document).on('click', '.service-link', function(e) {
+    $(loader).css('display', 'block');
+    $('.service-link').removeClass('active');
+    $(this).addClass('active');
+    
+    const url = $(this).data('service-link');
+    const container = $('#parent-show-services');
+    
+    $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'html',
+        success: function(res) {
+            history.pushState(null, null, url);
+            setTimeout(() => {
+                $(container).html('');
+                $(loader).css('display', 'none');
+                $(container).html(res);
+                document.getElementById('select-all-jobs').checked = false;
+            }, 1000);
+        }
+    });
+});
