@@ -49,7 +49,9 @@ Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('cat
 // Notifications
 Route::prefix('notifications')->middleware(['auth'])->group(function() {
     Route::get('/', [NotificationController::class, 'index'])->name('notification');
-    Route::get('/read', [NotificationController::class, 'readPage'])->name('notification.read');
+    Route::get('/inbox', [NotificationController::class, 'inbox'])->name('notification.inbox');
+    Route::get('/read', [NotificationController::class, 'read'])->name('notification.read');
+    Route::get('/unread', [NotificationController::class, 'unread'])->name('notification.unread');
     Route::post('/read/{id}', [NotificationController::class, 'readMessage']);
     Route::post('/unread/{id}', [NotificationController::class, 'unreadMessage']);
     Route::delete('/delete/{id}', [NotificationController::class, 'destroy']);

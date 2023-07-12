@@ -9,18 +9,18 @@
             <div class="col-md-3 left">
                 <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
-                        <a href="" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0">
+                        <span data-notification-link="{{ route('notification.inbox') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
                             <i class="mdi mdi-inbox text-dark"></i>
-                            <li class="nav-item py-2 border-bottom w-100 d-md-block d-none text-dark fw-bold" style="font-size: 13.5px;">Inbox</li>
-                        </a>
-                        <span class="d-flex align-items-center justify-content-start gap-md-3 gap-0" id="read-link" style="cursor: pointer;">
-                            <i class="mdi mdi-email text-dark"></i>
-                            <li class="nav-item py-2 border-bottom w-100 d-md-block d-none text-muted" style="font-size: 13.5px;">Read</li>
+                            <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.inbox' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Inbox</li>
                         </span>
-                        <a href="" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0">
+                        <span data-notification-link="{{ route('notification.read') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
+                            <i class="mdi mdi-email text-dark"></i>
+                            <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.read' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Read</li>
+                        </span>
+                        <span data-notification-link="{{ route('notification.unread') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
                             <i class="mdi mdi-email-open text-dark"></i>
-                            <li class="nav-item py-2 d-md-block d-none text-muted" style="font-size: 13.5px;">Unread</li>
-                        </a>
+                            <li class="nav-item py-2 text-dark d-md-block d-none {{ Route::currentRouteName() === 'notification.unread' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Unread</li>
+                        </span>
                     </ul>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                                 $id = json_decode($notification->data)->id;
                             ?>
                             <div class="pe-4 d-flex align-items-center justify-content-between border-bottom parent-notification" style="cursor: pointer; {{ $notification->read_at != null ? 'border: unset;' : 'border-left: 3px solid #2891e1;' }} ">
-                                <div class="p-3 d-flex align-items-center justify-content-start w-100" data-bs-toggle="modal" data-bs-target="#{{ $index }}">
+                                <div class="p-3 d-flex align-items-center justify-content-start w-100" data-bs-toggle="modal" data-bs-target="{{ '#abc' . $index }}">
                                     <div class="dropdown-list-image mx-2">
                                         @if ($user === 'admin')
                                             <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
@@ -88,7 +88,7 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="modal fade" id="{{ $index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="{{ 'abc' . $index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content pb-3">
                                         <div class="modal-header">

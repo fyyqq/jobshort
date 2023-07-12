@@ -57,11 +57,9 @@ a:hover {
     }
 }
 
-/*
-#phone-view {
-    display: none;
-    gap: 20px;
-} */
+.notification-link {
+    cursor: pointer;
+}
 
 #searchbar {
     outline: none;

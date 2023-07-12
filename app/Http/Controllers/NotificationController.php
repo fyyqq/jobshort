@@ -12,19 +12,41 @@ use Illuminate\Support\Facades\Auth;
 class NotificationController extends Controller
 {
     public function index() {
-        $notification = Notification::where('notifiable_id', Auth::id())->latest()->get();
-
-        return view('notification', [
-            "notifications" => $notification
+        $notifications = Notification::where('notifiable_id', Auth::id())->latest()->get();
+        
+        return view('notifications.index', [
+            "notifications" => $notifications
         ]);
     }
+    
+    public function inbox() {
+        $notifications = Notification::where('notifiable_id', Auth::id())->latest()->get();
 
-    public function readPage() {
-        $notification = Notification::where('notifiable_id', Auth::id())->where('read_at', '!=', null)->latest()->get();
+        if (request()->ajax()) {
+            return view('notifications.action', ["notifications" => $notifications]);
+        } else {
+            return view('notifications.index', ["notifications" => $notifications]);
+        }
+    }
+    
+    public function read() {
+        $notifications = Notification::where('notifiable_id', Auth::id())->where('read_at', '!=', null)->latest()->get();
 
-        return view('notification-read', [
-            "notifications" => $notification
-        ]);
+        if (request()->ajax()) {
+            return view('notifications.action', ["notifications" => $notifications]);
+        } else {
+            return view('notifications.index', ["notifications" => $notifications]);
+        }
+    }
+
+    public function unread() {
+        $notifications = Notification::where('notifiable_id', Auth::id())->where('read_at', null)->latest()->get();
+
+        if (request()->ajax()) {
+            return view('notifications.action', ["notifications" => $notifications]);
+        } else {
+            return view('notifications.index', ["notifications" => $notifications]);
+        }
     }
 
 

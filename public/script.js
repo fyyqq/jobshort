@@ -870,6 +870,34 @@ function closeFilter() {
     filter_mobile.style.height = '0%';
 }
 
+$(document).on('click', '.notification-link', function(e) {
+    e.preventDefault();
+    $(loader).css("display", "block");
+    
+    let url = $(this).data("notification-link");
+    
+    const link = $('.notification-link .nav-item');
+    $(link).removeClass('fw-bold');
+    $(this).children('.nav-item').addClass('fw-bold');
+    
+    $.ajax({
+        url: url,
+        method: "GET",
+        dataType: 'html',
+        success: function(res) {
+            const display_notification = $('#display-notification');
+            setTimeout(() => {
+                $(loader).css("display", "none");
+                $(display_notification).html('');
+                $(display_notification).html(res);
+                history.pushState(null, null, url);
+            }, 1000);
+        }, error: function(err) {
+            console.error(err);
+        }
+    });
+});
+
 // fetch('https://restcountries.com/v3.1/all')
 // .then(res => res.json())
 // .then(data => {
