@@ -651,6 +651,8 @@ function goToPreviousPage() {
 
 
 $(document).on('click', '.service-link', function(e) {
+    e.preventDefault();
+
     $(loader).css('display', 'block');
     $('.service-link').removeClass('active');
     $(this).addClass('active');
@@ -669,6 +671,31 @@ $(document).on('click', '.service-link', function(e) {
                 $(loader).css('display', 'none');
                 $(container).html(res);
                 document.getElementById('select-all-jobs').checked = false;
+            }, 1000);
+        }
+    });
+});
+
+$(document).on('click', '.order-menu-link', function(e) {
+    e.preventDefault();
+
+    $(loader).css('display', 'block');
+    let url = $(this).data('order-link');
+    const container = $('#display-order');
+
+    $('.order-menu-link').removeClass('border-bottom border-2 border-primary');
+    $(this).addClass('border-bottom border-2 border-primary');
+    
+    $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'html',
+        success: function(res) {
+            history.pushState(null, null, url);
+            setTimeout(() => {
+                $(container).html('');
+                $(loader).css('display', 'none');
+                $(container).html(res);
             }, 1000);
         }
     });

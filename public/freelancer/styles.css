@@ -238,10 +238,6 @@ input[type=number] {
     font-size: 13px;
 }
 
-#order-menu-link {
-    font-size: 14px;
-}
-
 @media (max-width: 991.5px) {
 }
 
@@ -255,9 +251,6 @@ input[type=number] {
     }
     #dashboard-main-detail {
         grid-template-columns: repeat(2, 1fr);
-    }
-    #order-menu-link {
-        font-size: 13.5px;
     }
     #service-order-title {
         font-size: 14px;
@@ -282,9 +275,6 @@ input[type=number] {
     }
     #parent-order-menu {
         overflow-x: scroll;
-    }
-    #order-menu-link {
-        font-size: 13px;
     }
     #service-order-title {
         font-size: 13.5px;

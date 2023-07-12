@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.applicant') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.applicant' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.order') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.order' ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">clinical_notes</span>
                     </div>

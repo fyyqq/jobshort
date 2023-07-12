@@ -52,7 +52,7 @@
             </li>
         @endif
         <li class="nav-item w-100">
-            <a href="{{ route('profile.applied') }}" class="{{ Route::currentRouteName() === 'profile.applied' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="orders">
+            <a href="{{ route('profile.order') }}" class="{{ Route::currentRouteName() === 'profile.order' ? 'text-primary' : 'text-muted' }} px-md-3 px-4 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="orders">
                 <div class="col-md-2 col-none">
                     <i class="fa-solid fa-briefcase" id="sidebar-icon"></i>
                 </div>

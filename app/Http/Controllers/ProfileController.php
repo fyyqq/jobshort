@@ -72,7 +72,7 @@ class ProfileController extends Controller
         return response()->json($service);
     }
 
-    public function applied() {
+    public function order() {
         return view('profile.order.index', [
             "orders" => Order::where('user_id', Auth::id())->where('status', 'pending')->latest()->get()
         ]);

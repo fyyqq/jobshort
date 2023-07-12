@@ -75,7 +75,7 @@ Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::c
 
 Route::prefix('orders')->middleware(['auth'])->group(function() {
     // Route::get('/{slug}', [OrdersController::class, 'show'])->name('apply-services');
-    Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store'])->name('applied-services');
+    Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store']);
 });
 
 Route::prefix('services')->group(function() {
@@ -105,14 +105,13 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::put('/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('profile.saved-services');
         Route::prefix('orders')->group(function() {
-            Route::get('/', [ProfileController::class, 'applied'])->name('profile.applied');
-            Route::get('/pending', [ProfileController::class, 'pending'])->name('profile.applied-pending');
-            Route::get('/approved', [ProfileController::class, 'approved'])->name('profile.applied-approved');
-            Route::get('/rejected', [ProfileController::class, 'rejected'])->name('profile.applied-rejected');
-            Route::get('/completed', [ProfileController::class, 'completed'])->name('profile.applied-completed');
-            Route::get('/status/{slug}', [ProfileController::class, 'status'])->name('profile.applied-status');
+            Route::get('/', [ProfileController::class, 'order'])->name('profile.order');
+            Route::get('/pending', [ProfileController::class, 'pending'])->name('profile.order-pending');
+            Route::get('/approved', [ProfileController::class, 'approved'])->name('profile.order-approved');
+            Route::get('/rejected', [ProfileController::class, 'rejected'])->name('profile.order-rejected');
+            Route::get('/completed', [ProfileController::class, 'completed'])->name('profile.order-completed');
             Route::post('/reject/{id}', [OrdersController::class, 'reject']);
-            Route::post('/complete/{id}', [OrdersController::class, 'complete'])->name('freelancer.applicant-complete');
+            Route::post('/complete/{id}', [OrdersController::class, 'complete']);
             Route::post('/rating', [RatingController::class, 'store'])->name('freelancer.rating');
         });
     });
@@ -153,11 +152,12 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::post('/add-service', [ServicesController::class, 'store'])->name('freelancer.post-service');
 
         Route::prefix('orders')->group(function() {
-            Route::get('/', [OrdersController::class, 'index'])->name('freelancer.applicant');
-            Route::get('/approved', [OrdersController::class, 'approved'])->name('freelancer.applicant-approved');
-            Route::get('/rejected', [OrdersController::class, 'rejected'])->name('freelancer.applicant-rejected');
-            Route::get('/completed', [OrdersController::class, 'completed'])->name('freelancer.applicant-completed');
-            Route::post('/approve/{id}', [OrdersController::class, 'approve'])->name('freelancer.applicant-approve');
+            Route::get('/', [OrdersController::class, 'index'])->name('freelancer.order');
+            Route::get('/pending', [OrdersController::class, 'pending'])->name('freelancer.order-pending');
+            Route::get('/approved', [OrdersController::class, 'approved'])->name('freelancer.order-approved');
+            Route::get('/rejected', [OrdersController::class, 'rejected'])->name('freelancer.order-rejected');
+            Route::get('/completed', [OrdersController::class, 'completed'])->name('freelancer.order-completed');
+            Route::post('/approve/{id}', [OrdersController::class, 'approve']);
         });
     });
 });

@@ -12,7 +12,7 @@
                     <a class="nav-link" href="{{ route('freelancer.main') }}" style="font-size: 13.8px;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('freelancer.applicant') }}" style="font-size: 13.8px;">Order</a>
+                    <a class="nav-link" href="{{ route('freelancer.order') }}" style="font-size: 13.8px;">Order</a>
                 </li>
                 <li class="nav-item dropdown" style="cursor: pointer;">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Service</a>
