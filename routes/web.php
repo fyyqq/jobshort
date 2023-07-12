@@ -106,6 +106,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('profile.saved-services');
         Route::prefix('orders')->group(function() {
             Route::get('/', [ProfileController::class, 'applied'])->name('profile.applied');
+            Route::get('/pending', [ProfileController::class, 'pending'])->name('profile.applied-pending');
             Route::get('/approved', [ProfileController::class, 'approved'])->name('profile.applied-approved');
             Route::get('/rejected', [ProfileController::class, 'rejected'])->name('profile.applied-rejected');
             Route::get('/completed', [ProfileController::class, 'completed'])->name('profile.applied-completed');

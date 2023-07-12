@@ -1,3 +1,4 @@
+
 @foreach ($notifications as $index => $notification)
     <?php 
         // $title = json_decode($notification->data)->title;

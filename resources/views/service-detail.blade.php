@@ -112,10 +112,10 @@
                 <div class="col-md-7 col-12 px-0">
                     <div class="py-3 px-md-4 px-3 shadow-sm border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
+                            <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
                                 <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover">
                             </a>
-                            <a href="{{ route('users', $service->freelancer->name) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
+                            <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
                                 <small class="text-dark ms-3 lh-sm">{{ $service->freelancer->name }}</small>
                                 <small class="text-muted ms-3" style="font-size: 12px;">{{ $service->freelancer->skills }}</small>
                             </a>

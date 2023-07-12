@@ -261,6 +261,10 @@ employer.forEach(element => {
     });
 });
 
+
+
+
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers:
@@ -268,59 +272,92 @@ $(document).ready(function() {
     });
 
     // Wishlist 
-    $('.wishlist').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
+    $(document).on('click', '.wishlist', function(e) {
+        e.preventDefault();
 
-            const jobSlug = e.target.previousElementSibling.value;
-            
-            $(value).css('display', 'none');
-            const unwishlist = $(value).siblings('.unwishlist');
-            $(unwishlist).css('display', 'block');
+        const jobSlug = e.target.previousElementSibling.value;
+        
+        $(this).css('display', 'none');
+        const unwishlist = $(this).siblings('.unwishlist');
+        $(unwishlist).css('display', 'block');
 
-            $(value).removeClass('d-block').addClass('d-none');
-            unwishlist.removeClass('d-none').addClass('d-block');
-            
-            $.ajax({
-                url: `/saved/${jobSlug}`,
-                method: 'POST',
-                success: function(response) {
-                    iziToast.success({
-                        title: 'Success',
-                        message: 'Added to Wishlist',
-                        position: 'bottomLeft'
-                    });
-                }
-            });
-        });
-    });
-    $('.unwishlist').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            const jobSlug = e.target.nextElementSibling.value;
-
-            $(value).css('display', 'none');
-            const wishlist = $(value).siblings('.wishlist');
-            $(wishlist).css('display', 'block');
-
-            wishlist.removeClass('d-none').addClass('d-block');
-            $(value).removeClass('d-block').addClass('d-none');
-
-            $.ajax({
-                url: `/unsaved/${jobSlug}`,
-                method: 'DELETE',
-                success: function(response) {
-                    iziToast.success({
-                        title: 'Success',
-                        message: 'Remove to Wishlist',
-                        position: 'bottomLeft'
-                    });
-                }
-            });
+        $(this).removeClass('d-block').addClass('d-none');
+        unwishlist.removeClass('d-none').addClass('d-block');
+        
+        $.ajax({
+            url: `/saved/${jobSlug}`,
+            method: 'POST',
+            success: function(response) {
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Added to Wishlist',
+                    position: 'bottomLeft'
+                });
+            }
         });
     });
 
+    // UnWishlist 
+    $(document).on('click', '.unwishlist', function(e) {
+        e.preventDefault();
+
+        const jobSlug = e.target.nextElementSibling.value;
+
+        $(this).css('display', 'none');
+        const wishlist = $(this).siblings('.wishlist');
+        $(wishlist).css('display', 'block');
+
+        wishlist.removeClass('d-none').addClass('d-block');
+        $(this).removeClass('d-block').addClass('d-none');
+
+        $.ajax({
+            url: `/unsaved/${jobSlug}`,
+            method: 'DELETE',
+            success: function(response) {
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Remove to Wishlist',
+                    position: 'bottomLeft'
+                });
+            }
+        });
+    });
+
+    // Form Rating
+    $(document).on('submit', '.formRating', function(e) {
+        e.preventDefault();
+
+        if ($('#starLength').val() < 1) {
+            alert('Star rating is required!');
+            return;
+        }
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '/account/profile/orders/rating',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+                window.location.href = res;
+            }, error: function(err) {
+                console.error(err.responseText);
+            }
+        });
+    });
+
+    // Star Rating
+    $(document).on('click', '.fa-star', function(e) {
+        e.preventDefault();
+
+        $(this).prevAll().addBack().addClass('fa-solid');
+        $(this).nextAll().addClass('fa-regular').removeClass('fa-solid');
+
+        var indexStars = $(this).index() + 1;
+        $('#starLength').val(indexStars);
+    });
 
     // Order Services
     $('.order-btn').click(function(e) {
@@ -338,15 +375,16 @@ $(document).ready(function() {
                 method: 'POST',
                 success: function(res) {
                     if (res) {
-                        $('.order-btn').addClass('d-none');
-                        $('.order-btn').siblings('.d-none').removeClass('d-none');
                         const swalWithBootstrapButtons = Swal.mixin({
                             customClass: {
-                                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+                                confirmButton: 'btn btn-sm px-3 py-2 btn-primary shadow-none',
                             },
                             buttonsStyling: false
                         });
-                
+
+                        $('.order-btn').addClass('d-none');
+                        $('.order-btn').siblings('.d-none').removeClass('d-none');
+                        
                         swalWithBootstrapButtons.fire({
                             title: 'Successfully Order',
                             icon: 'success',
@@ -366,141 +404,7 @@ $(document).ready(function() {
         }, 3000);
     });
 
-    // $('.jobCategories').each(function(index, value) {
-    //     $(value).on('click', function(e) {
-    //         e.preventDefault();
-            
-    //         var categoriesValue = $(value).find('small')[0].textContent;
-            
-    //         $.ajax({
-    //             url: `/category/${categoriesValue}`,
-    //             method: 'GET',
-    //             success: function(res) {
-    //                 $('#view-job').html(res);
-    //                 history.pushState({}, '', $(value).data('url'));
-    //             }
-    //         });
-    //     });
-    // });
-
-    $('.reject-btn').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            let orderId = ($(value).siblings('#order_id')).val();
-            
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                  confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Cancel Order ?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                position: 'center',
-                confirmButtonText: 'Confirm',
-                showCloseButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `/account/profile/orders/reject/${orderId}`,
-                        method: 'POST',
-                        success: function(res) {
-                            if (res) {
-                                swalWithBootstrapButtons.fire(
-                                    'Cancelled!',
-                                    'Your Request Will be Notify Soon.',
-                                    'success'
-                                );
-                            }
-                        }
-                    });
-                }
-            });
-
-        });
-    });
-
-    $('.complete-btn').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-            
-            let orderId = ($(value).siblings('#order_id')).val();
-
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                  confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Complete Order ?',
-                text: "Make sure your service has been completed!",
-                icon: 'warning',
-                position: 'center',
-                confirmButtonText: 'Confirm',
-                showCloseButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `/account/profile/orders/complete/${orderId}`,
-                        method: 'POST',
-                        success: function(res) {
-                            if (res) {
-                                swalWithBootstrapButtons.fire(
-                                    'Completed!',
-                                    'Your Order Has Been Completed!.',
-                                    'success'
-                                );
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    });
-
-    $('.fa-star').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            $(this).prevAll().addBack().addClass('fa-solid');
-            $(this).nextAll().addClass('fa-regular').removeClass('fa-solid');
-
-            var indexStars = $(this).index() + 1;
-            $('#starLength').val(indexStars);
-        });
-    });
-
-    $('.formRating').submit(function(e) {
-        e.preventDefault();
-
-        if ($('#starLength').val() < 1) {
-            alert('Star rating is required!');
-            return;
-        }
-
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: '/account/profile/orders/rating',
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(res) {
-                window.location.href = res;
-                // console.log(res);
-            }, error: function(err) {
-                console.error(err.responseText);
-            }
-        });
-    });
-
+    // Notify Service
     $('#notify').on('click', function(e) {
         e.preventDefault();
 
@@ -523,6 +427,7 @@ $(document).ready(function() {
         $(this).next().removeClass('d-none');
     });
 
+    // Unotify Service
     $('#disnotify').on('click', function(e) {
         e.preventDefault();
 
@@ -545,23 +450,164 @@ $(document).ready(function() {
         $(this).prev().removeClass('d-none');
     });
 
-    $('.notification-delete').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
+    // Read Notification
+    $(document).on('click', '.read', function(e) {
+        e.preventDefault();
 
-            $id = $(value).siblings('#notification-id').val();
-
-            $.ajax({
-                url: `/notifications/delete/${$id}`,
-                method: 'DELETE',
-                success: function(res) {
-                    $(value).parent().parent().remove();
-                }, error: function(err) {
-                    console.log(err.responseText);
+        $id = $(this).siblings('#notification-id').val();
+        $(this).removeClass('d-block');
+        $(this).addClass('d-none');
+        $(this).prev().removeClass('d-none');
+        $(this).prev().addClass('d-block');
+        
+        $.ajax({
+            url: `/notifications/read/${$id}`,
+            method: 'POST',
+            success: function(res) {
+                if (res) {
+                    $(this).parent().parent().css('border', 'unset');
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Mark As Read',
+                        position: 'bottomLeft'
+                    });
                 }
-            });
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
         });
-    });  
+    });
+
+    // Unread Notification
+    $(document).on('click', '.unread', function(e) {
+        e.preventDefault();
+
+        $id = $(this).siblings('#notification-id').val();
+        $(this).removeClass('d-block');
+        $(this).addClass('d-none');
+        $(this).next().removeClass('d-none');
+        $(this).next().addClass('d-block');
+
+        $.ajax({
+            url: `/notifications/unread/${$id}`,
+            method: 'POST',
+            success: function(res) {
+                if (res) {
+                    $(this).parent().parent().css('border-left', '3px solid #2891e1');
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Mark As Unread',
+                        position: 'bottomLeft'
+                    });
+                }
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
+        });
+    });
+
+    // Delete Notification
+    $(document).on('click', '.notification-delete', function(e) {
+        e.preventDefault();
+
+        $id = $(this).siblings('#notification-id').val();
+
+        $.ajax({
+            url: `/notifications/delete/${$id}`,
+            method: 'DELETE',
+            success: function(res) {
+                $(this).parent().parent().remove();
+                if (res) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Mark As Unread',
+                        position: 'bottomLeft'
+                    });
+                }
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
+        });
+    });
+
+    // Reject-btn
+    $(document).on('click', '.reject-btn', function(e) {
+        e.preventDefault();
+
+        let orderId = ($(this).siblings('#order_id')).val();
+        
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Cancel Order ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/account/profile/orders/reject/${orderId}`,
+                    method: 'POST',
+                    success: function(res) {
+                        if (res) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled!',
+                                'Your Request Will be Notify Soon.',
+                                'success'
+                            );
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+
+    // Complete-btn
+    $(document).on('click', '.complete-btn', function(e) {
+        e.preventDefault();
+        
+        let orderId = ($(this).siblings('#order_id')).val();
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Complete Order ?',
+            text: "Make sure your service has been completed!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/account/profile/orders/complete/${orderId}`,
+                    method: 'POST',
+                    success: function(res) {
+                        if (res) {
+                            swalWithBootstrapButtons.fire(
+                                'Completed!',
+                                'Your Order Has Been Completed!.',
+                                'success'
+                            );
+                        }
+                    }
+                });
+            }
+        });
+    });
 });
 
 function autoImage(event) {
@@ -822,14 +868,14 @@ function closeFilter() {
     filter_mobile.style.height = '0%';
 }
 
-
-$(document).on('click', '.notification-link', function(e) {
+// Notification Menu
+$(document).on('click', '#notification-link', function(e) {
     e.preventDefault();
     $(loader).css("display", "block");
 
     let url = $(this).data("notification-link");
-    
-    const link = $('.notification-link .nav-item');
+
+    const link = $('#notification-link .nav-item');
     $(link).removeClass('fw-bold');
     $(this).children('.nav-item').addClass('fw-bold');
 
@@ -851,59 +897,35 @@ $(document).on('click', '.notification-link', function(e) {
     });
 });
 
-$(document).on('click', '.read', function(e) {
+// Profile Order
+$(document).on('click', '.order-menu-link', function(e) {
     e.preventDefault();
+    $(loader).css('display', 'block')
 
-    $id = $(this).siblings('#notification-id').val();
-    $(this).removeClass('d-block');
-    $(this).addClass('d-none');
-    $(this).prev().removeClass('d-none');
-    $(this).prev().addClass('d-block');
+    $('.order-menu-link').removeClass('border-bottom border-2 border-primary');
+    $(this).addClass('border-bottom border-2 border-primary');
+    
+    let url = $(this).data('order-link');
+    const display_notification = $('#display-order');
     
     $.ajax({
-        url: `/notifications/read/${$id}`,
-        method: 'POST',
+        url: url,
+        method: 'GET',
+        dataType: 'html',
         success: function(res) {
-            if (res) {
-                $(this).parent().parent().css('border', 'unset');
-                iziToast.success({
-                    title: 'Success',
-                    message: 'Mark As Read',
-                    position: 'bottomLeft'
-                });
-            }
+            setTimeout(() => {
+                $(loader).css('display', 'none')
+                $(display_notification).html('');
+                $(display_notification).html(res);
+                history.pushState(null, null, url);
+            }, 1000);
         }, error: function(err) {
-            console.log(err.responseText);
+            console.error(err.responseText);
         }
     });
 });
 
-$(document).on('click', '.unread', function(e) {
-    e.preventDefault();
 
-    $id = $(this).siblings('#notification-id').val();
-    $(this).removeClass('d-block');
-    $(this).addClass('d-none');
-    $(this).next().removeClass('d-none');
-    $(this).next().addClass('d-block');
-
-    $.ajax({
-        url: `/notifications/unread/${$id}`,
-        method: 'POST',
-        success: function(res) {
-            if (res) {
-                $(this).parent().parent().css('border-left', '3px solid #2891e1');
-                iziToast.success({
-                    title: 'Success',
-                    message: 'Mark As Unread',
-                    position: 'bottomLeft'
-                });
-            }
-        }, error: function(err) {
-            console.log(err.responseText);
-        }
-    });
-});
 
 // fetch('https://restcountries.com/v3.1/all')
 // .then(res => res.json())

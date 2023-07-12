@@ -9,15 +9,15 @@
             <div class="col-md-3 left">
                 <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
-                        <span data-notification-link="{{ route('notification.inbox') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
+                        <span data-notification-link="{{ route('notification.inbox') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
                             <i class="mdi mdi-inbox text-dark"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.inbox' || Route::currentRouteName() === 'notification' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Inbox</li>
                         </span>
-                        <span data-notification-link="{{ route('notification.read') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
+                        <span data-notification-link="{{ route('notification.read') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
                             <i class="mdi mdi-email text-dark"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.read' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Read</li>
                         </span>
-                        <span data-notification-link="{{ route('notification.unread') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
+                        <span data-notification-link="{{ route('notification.unread') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
                             <i class="mdi mdi-email-open text-dark"></i>
                             <li class="nav-item py-2 text-dark d-md-block d-none {{ Route::currentRouteName() === 'notification.unread' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Unread</li>
                         </span>

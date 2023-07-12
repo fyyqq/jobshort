@@ -7,7 +7,6 @@ use App\Models\Order;
 use App\Models\Service;
 use App\Models\Freelancer;
 use Illuminate\Http\Request;
-use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\OrderNotification;
 use App\Notifications\ApproveNotification;
@@ -99,8 +98,5 @@ class OrdersController extends Controller
             
             return true;
         }
-        
-        // $notificationCount = NotificationModel::where('notifiable_id', Auth::id())->count();
-        // return $notificationCount;
     }
 }

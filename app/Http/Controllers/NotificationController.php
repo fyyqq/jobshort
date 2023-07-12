@@ -88,6 +88,12 @@ class NotificationController extends Controller
 
     public function destroy(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
-        $notification->delete();
+        $confirmDestroy = $notification->delete();
+
+        if ($confirmDestroy) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

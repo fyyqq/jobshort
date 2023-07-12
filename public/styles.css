@@ -57,7 +57,7 @@ a:hover {
     }
 }
 
-.notification-link {
+#notification-link {
     cursor: pointer;
 }
 
@@ -417,7 +417,7 @@ input[type=number] {
 }
 
 #order-menu-link {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #filter-mobile-container {

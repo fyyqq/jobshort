@@ -260,7 +260,7 @@ $(document).ready(function() {
                 url: `/account/freelancer/orders/approve/${orderId}`,
                 method: 'POST',
                 success: function(res) {
-                    console.log(res);
+                    // console.log(res);
                 }
             });
         });

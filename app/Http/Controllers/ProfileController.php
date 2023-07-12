@@ -78,22 +78,44 @@ class ProfileController extends Controller
         ]);
     }
     
+    public function pending() {
+        $orders = Order::where('user_id', Auth::id())->where('status', 'pending')->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('profile.order.action', ["orders" => $orders]);
+        } else {
+            return view('profile.order.index', ["orders" => $orders]);
+        }
+    }
+    
     public function approved() {
-        return view('profile.order.index', [
-            "orders" => Order::where('user_id', Auth::id())->where('status', 'approved')->latest()->get()
-        ]);
+        $orders = Order::where('user_id', Auth::id())->where('status', 'approved')->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('profile.order.action', ["orders" => $orders]);
+        } else {
+            return view('profile.order.index', ["orders" => $orders]);
+        }
     }
     
     public function rejected() {
-        return view('profile.order.index', [
-            "orders" => Order::where('user_id', Auth::id())->where('status', 'rejected')->latest()->get()
-        ]);
+        $orders = Order::where('user_id', Auth::id())->where('status', 'rejected')->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('profile.order.action', ["orders" => $orders]);
+        } else {
+            return view('profile.order.index', ["orders" => $orders]);
+        }
     }
     
     public function completed() {
-        return view('profile.order.index', [
-            "orders" => Order::where('user_id', Auth::id())->where('status', 'completed')->latest()->get()
-        ]);
+        $orders = Order::where('user_id', Auth::id())->where('status', 'completed')->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('profile.order.action', ["orders" => $orders]);
+        } else {
+            return view('profile.order.index', ["orders" => $orders]);
+        }
     }
 
     public function index()
