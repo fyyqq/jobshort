@@ -545,54 +545,6 @@ $(document).ready(function() {
         $(this).prev().removeClass('d-none');
     });
 
-    $('.read').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            $id = $(value).siblings('#notification-id').val();
-            $(value).removeClass('d-block');
-            $(value).addClass('d-none');
-            $(value).prev().removeClass('d-none');
-            $(value).prev().addClass('d-block');
-            
-            $.ajax({
-                url: `/notifications/read/${$id}`,
-                method: 'POST',
-                success: function(res) {
-                    if (res) {
-                        $(value).parent().parent().css('border', 'unset');
-                    }
-                }, error: function(err) {
-                    console.log(err.responseText);
-                }
-            });
-        });
-    });
-
-    $('.unread').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            $id = $(value).siblings('#notification-id').val();
-            $(value).removeClass('d-block');
-            $(value).addClass('d-none');
-            $(value).next().removeClass('d-none');
-            $(value).next().addClass('d-block');
-
-            $.ajax({
-                url: `/notifications/unread/${$id}`,
-                method: 'POST',
-                success: function(res) {
-                    if (res) {
-                        $(value).parent().parent().css('border-left', '3px solid #2891e1');
-                    }
-                }, error: function(err) {
-                    console.log(err.responseText);
-                }
-            });
-        });
-    });
-
     $('.notification-delete').each(function(index, value) {
         $(value).on('click', function(e) {
             e.preventDefault();
@@ -870,16 +822,17 @@ function closeFilter() {
     filter_mobile.style.height = '0%';
 }
 
+
 $(document).on('click', '.notification-link', function(e) {
     e.preventDefault();
     $(loader).css("display", "block");
-    
+
     let url = $(this).data("notification-link");
     
     const link = $('.notification-link .nav-item');
     $(link).removeClass('fw-bold');
     $(this).children('.nav-item').addClass('fw-bold');
-    
+
     $.ajax({
         url: url,
         method: "GET",
@@ -894,6 +847,60 @@ $(document).on('click', '.notification-link', function(e) {
             }, 1000);
         }, error: function(err) {
             console.error(err);
+        }
+    });
+});
+
+$(document).on('click', '.read', function(e) {
+    e.preventDefault();
+
+    $id = $(this).siblings('#notification-id').val();
+    $(this).removeClass('d-block');
+    $(this).addClass('d-none');
+    $(this).prev().removeClass('d-none');
+    $(this).prev().addClass('d-block');
+    
+    $.ajax({
+        url: `/notifications/read/${$id}`,
+        method: 'POST',
+        success: function(res) {
+            if (res) {
+                $(this).parent().parent().css('border', 'unset');
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Mark As Read',
+                    position: 'bottomLeft'
+                });
+            }
+        }, error: function(err) {
+            console.log(err.responseText);
+        }
+    });
+});
+
+$(document).on('click', '.unread', function(e) {
+    e.preventDefault();
+
+    $id = $(this).siblings('#notification-id').val();
+    $(this).removeClass('d-block');
+    $(this).addClass('d-none');
+    $(this).next().removeClass('d-none');
+    $(this).next().addClass('d-block');
+
+    $.ajax({
+        url: `/notifications/unread/${$id}`,
+        method: 'POST',
+        success: function(res) {
+            if (res) {
+                $(this).parent().parent().css('border-left', '3px solid #2891e1');
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Mark As Unread',
+                    position: 'bottomLeft'
+                });
+            }
+        }, error: function(err) {
+            console.log(err.responseText);
         }
     });
 });

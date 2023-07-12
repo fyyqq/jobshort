@@ -11,7 +11,7 @@
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
                         <span data-notification-link="{{ route('notification.inbox') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
                             <i class="mdi mdi-inbox text-dark"></i>
-                            <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.inbox' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Inbox</li>
+                            <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.inbox' || Route::currentRouteName() === 'notification' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Inbox</li>
                         </span>
                         <span data-notification-link="{{ route('notification.read') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0 notification-link">
                             <i class="mdi mdi-email text-dark"></i>
@@ -110,11 +110,11 @@
                                                 </div>
                                             </div>
                                             <div class="mt-3 mb-2 row mx-0">
-                                                <small class="text-dark d-block lh-lg fw-bold">Title :</small>
+                                                <small class="text-dark d-block lh-lg">Title :</small>
                                                 {{-- <small class="text-dark">{{ $title != null ? $title : '' }}</small> --}}
                                             </div>
                                             <div class="row mx-0">
-                                                <small class="text-dark d-block lh-lg fw-bold">Message :</small>
+                                                <small class="text-dark d-block lh-lg">Message :</small>
                                                 <small class="text-dark" style="font-size: 13.5px;">{{ $message }}</small>
                                             </div>
                                         </div>

@@ -78,11 +78,11 @@
                         </div>
                     </div>
                     <div class="mt-3 mb-2 row mx-0">
-                        <small class="text-dark d-block lh-lg fw-bold">Title :</small>
+                        <small class="text-dark d-block lh-lg">Title :</small>
                         {{-- <small class="text-dark">{{ $title != null ? $title : '' }}</small> --}}
                     </div>
                     <div class="row mx-0">
-                        <small class="text-dark d-block lh-lg fw-bold">Message :</small>
+                        <small class="text-dark d-block lh-lg">Message :</small>
                         <small class="text-dark" style="font-size: 13.5px;">{{ $message }}</small>
                     </div>
                 </div>
