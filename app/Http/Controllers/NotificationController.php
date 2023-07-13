@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Auth;
 class NotificationController extends Controller
 {
     public function index() {
-        $notifications = Notification::where('notifiable_id', Auth::id())->latest()->get();
-        
+        $notifications = Notification::where('notifiable_id', auth()->user()->id)->latest()->get();
+
         return view('notifications.index', [
             "notifications" => $notifications
         ]);
     }
     
     public function inbox() {
-        $notifications = Notification::where('notifiable_id', Auth::id())->latest()->get();
+        $notifications = Notification::where('notifiable_id', auth()->user()->id)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);
@@ -30,7 +30,7 @@ class NotificationController extends Controller
     }
     
     public function read() {
-        $notifications = Notification::where('notifiable_id', Auth::id())->where('read_at', '!=', null)->latest()->get();
+        $notifications = Notification::where('notifiable_id', auth()->user()->id)->where('read_at', '!=', null)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);
@@ -40,7 +40,7 @@ class NotificationController extends Controller
     }
 
     public function unread() {
-        $notifications = Notification::where('notifiable_id', Auth::id())->where('read_at', null)->latest()->get();
+        $notifications = Notification::where('notifiable_id', auth()->user()->id)->where('read_at', null)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);

@@ -26,4 +26,8 @@ class Freelancer extends Model
     public function notify() {
         return $this->hasMany(Notify::class);
     }
+
+    public function notification() {
+        return $this->hasMany(Notification::class, 'notifiable_id');
+    }
 }

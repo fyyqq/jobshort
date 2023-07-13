@@ -32,7 +32,7 @@
                     <div class="box-body p-0" id="display-notification">
                         @foreach ($notifications as $index => $notification)
                             <?php 
-                                // $title = json_decode($notification->data)->title;
+                                $title = json_decode($notification->data)->title;
                                 $message = json_decode($notification->data)->message;
                                 $user = json_decode($notification->data)->user;
                                 $image = json_decode($notification->data)->image;
@@ -49,8 +49,7 @@
                                     </div>
                                     <div class="font-weight-bold mx-3">
                                         <small class="text-dark fw-bold d-block mb-0">{{ $user === 'admin' ? 'Jobshort ' . $user : $user }}</small>
-                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($message, 90) }}</small>
-                                        {{-- <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($title, 90) }}</small> --}}
+                                        <small class="text-muted fw-normal" style="font-size: 12.5px;">{{ Str::limit($title, 90) }}</small>
                                     </div>
                                 </div>
                                 <span class="ml-auto mb-0 d-md-flex d-none align-items-center gap-2">
@@ -111,7 +110,7 @@
                                             </div>
                                             <div class="mt-3 mb-2 row mx-0">
                                                 <small class="text-dark d-block lh-lg">Title :</small>
-                                                {{-- <small class="text-dark">{{ $title != null ? $title : '' }}</small> --}}
+                                                <small class="text-dark">{{ $title }}</small>
                                             </div>
                                             <div class="row mx-0">
                                                 <small class="text-dark d-block lh-lg">Message :</small>

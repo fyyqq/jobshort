@@ -12,4 +12,8 @@ class Notification extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function freelancer() {
+        return $this->belongsTo(Freelancer::class);
+    }
 }

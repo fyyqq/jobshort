@@ -697,14 +697,16 @@ function filterCategories(element) {
     const freelancer_name = element.parentElement.parentElement.previousElementSibling.value;
     const optionSelected = element.options[element.selectedIndex].value;
 
+    
     const container = $('#display-user-services');
-
+    
     axios.get(`/user/${freelancer_name}/filter-category/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
             $(container).html('');
             $(container).html(res.data);
+            $('#filter-count').html('');
         }, 1500);
     });
 }
