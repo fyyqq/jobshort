@@ -1,3 +1,4 @@
+
 console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bold;");
 
 $('.owl-carousel').owlCarousel({

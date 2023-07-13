@@ -13,13 +13,13 @@
                         <div class="mt-3">
                             <small class="text-dark mb-0" style="font-size: 13.5px;">Time Range :</small>
                             <div class="form-check my-1">
-                                <input class="form-check-input shadow-none" type="radio" name="time_range" id="latest_service" onclick="return timeRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="latest_service" onclick="return timeRange(this)">
                                 <label class="form-check-label" for="latest_service">
                                     <small class="text-muted" style="font-size: 12.5px;">Latest</small>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input shadow-none" type="radio" name="time_range" id="oldest_service" onclick="return timeRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="oldest_service" onclick="return timeRange(this)">
                                 <label class="form-check-label" for="oldest_service">
                                     <small class="text-muted" style="font-size: 12.5px;">Oldest</small>
                                 </label>
@@ -28,13 +28,13 @@
                         <div class="mt-3">
                             <small class="text-dark mb-0" style="font-size: 13.5px;">Order Range :</small>
                             <div class="form-check my-1">
-                                <input class="form-check-input shadow-none" type="radio" name="order_range" id="highest_order" onclick="return orderRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="highest_order" onclick="return orderRange(this)">
                                 <label class="form-check-label" for="highest_order">
                                     <small class="text-muted" style="font-size: 12.5px;">Highest</small>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input shadow-none" type="radio" name="order_range" id="lowest_order" onclick="return orderRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="lowest_order" onclick="return orderRange(this)">
                                 <label class="form-check-label" for="lowest_order">
                                     <small class="text-muted" style="font-size: 12.5px;">Lowest</small>
                                 </label>
@@ -43,13 +43,13 @@
                         <div class="mt-3">
                             <small class="text-dark mb-0" style="font-size: 13.5px;">Rating Range :</small>
                             <div class="form-check my-1">
-                                <input class="form-check-input shadow-none" type="radio" name="rating_range" id="highest_rating" onclick="return ratingRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="highest_rating" onclick="return ratingRange(this)">
                                 <label class="form-check-label" for="highest_rating">
                                     <small class="text-muted" style="font-size: 12.5px;">Highest</small>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input shadow-none" type="radio" name="rating_range" id="lowest_rating" onclick="return ratingRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="lowest_rating" onclick="return ratingRange(this)">
                                 <label class="form-check-label" for="lowest_rating">
                                     <small class="text-muted" style="font-size: 12.5px;">Lowest</small>
                                 </label>
@@ -58,13 +58,13 @@
                         <div class="mt-3">
                             <small class="text-dark mb-0" style="font-size: 13.5px;">Price Range :</small>
                             <div class="form-check my-1">
-                                <input class="form-check-input shadow-none" type="radio" name="price_range" id="highest_price" onclick="return priceRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="highest_price" onclick="return priceRange(this)">
                                 <label class="form-check-label" for="highest_price">
                                     <small class="text-muted" style="font-size: 12.5px;">Highest</small>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input shadow-none" type="radio" name="price_range" id="lowest_price" onclick="return priceRange(this)">
+                                <input class="form-check-input shadow-none" type="radio" name="filter" id="lowest_price" onclick="return priceRange(this)">
                                 <label class="form-check-label" for="lowest_price">
                                     <small class="text-muted" style="font-size: 12.5px;">Lowest</small>
                                 </label>
