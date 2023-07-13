@@ -17,27 +17,29 @@ class ProfileController extends Controller
 
     public function user(string $name) {
         return view('users', [
-            'freelancerServices' => Freelancer::where('name', $name)->first()->service,
+            'services' => Freelancer::where('name', $name)->first()->service,
             'freelancer' => Freelancer::where('name', $name)->first(),
         ]);
     }
     
     public function category(string $name, string $category) {
         $freelancer = Freelancer::where('name', $name)->first();
+        $services = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id);
+
         if ($category === 'all') {
-            $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->get();
+            $filter = $services->get();
         } else {
-            $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->where('category', $category)->get();
+            $filter = $services->where('category', $category)->get();
         }
         
         if (request()->ajax()) {
             return view('action', [
-                'freelancerServices' => $service,
+                'services' => $filter,
                 'freelancer' => $freelancer
             ]);
         } else {
             return view('users', [
-                'freelancerServices' => $service,
+                'services' => $filter,
                 'freelancer' => $freelancer
             ]);
         }
@@ -45,55 +47,54 @@ class ProfileController extends Controller
     
     public function sortFilter(string $name, string $type) {
         $freelancer = Freelancer::where('name', $name)->first();
+        $services = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id);
 
         switch ($type) {
             case 'latest':
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->latest()->get();
+                $filter = $services->latest()->get();
                 break;
             case 'oldest':
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->orderBy('id', 'asc')->get();
+                $filter = $services->orderBy('id', 'asc')->get();
                 break;
-            case 'top-order':
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)
-                ->withCount(['order as top_order' => function($query) {
+            case 'highest-order':
+                $filter = $services->withCount(['order as top_order' => function($query) {
                     $query->where('status', 'completed');
                 }])->orderByDesc('top_order')->get();
                 break;
             case 'lowest-order':
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)
-                    ->withCount(['order as low_order' => function($query) {
+                $filter = $services->withCount(['order as low_order' => function($query) {
                         $query->where('status', 'completed');
                     }])->orderBy('low_order')->get();
                 break;
-            case 'top-rating':
-                $service = Service::with(['order', 'rating' => function($query) {
+            case 'highest-rating':
+                $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderByDesc('stars');
                 }])->where('freelancer_id', $freelancer->id)->get();
                 break;
             case 'lowest-rating':
-                $service = Service::with(['order', 'rating' => function($query) {
+                $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderBy('stars', 'asc');
                 }])->where('freelancer_id', $freelancer->id)->get();
                 break;
-            case 'top-price': 
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
+            case 'highest-price': 
+                $filter = $services->orderBy('price', 'desc')->get();
                 break;
             case 'lowest-price':
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
+                $filter = $services->orderBy('price', 'asc')->get();
                 break;
             default:
-                $service = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->get();
+                $filter = $services->get();
                 break;
         }
 
         if (request()->ajax()) {
             return view('action', [
-                'freelancerServices' => $service,
+                'services' => $filter,
                 'freelancer' => $freelancer
             ]);
         } else {
             return view('users', [
-                'freelancerServices' => $service,
+                'services' => $filter,
                 'freelancer' => $freelancer
             ]);
         }

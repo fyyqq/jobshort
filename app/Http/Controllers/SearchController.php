@@ -15,81 +15,68 @@ class SearchController extends Controller
         ->orWhere('category', 'LIKE', '%' . $search . '%')->get();
 
         return view('search', [
-            "data" => $result
+            "services" => $result
         ]);
     }
 
     // Filter
 
-    public function latestService(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->latest()->get();
+    public function filterSearch(string $value, string $type) {
+        $services = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        ->orWhere('category', 'LIKE', '%' . $value . '%');
 
-        return response()->json($search);
-    }
+        switch ($type) {
+            case 'latest_service':
+                $filter = $services->latest()->get();
+                break;
+            case 'oldest_service':
+                $filter = $services->orderBy('id', 'asc')->get();
+                break;
+            case 'highest_order':
+                $filter = $services->withCount(['order as highest_order' => function($query) {
+                    $query->where('status', 'completed');
+                }])->orderBy('highest_order', 'desc')->get();
+                break;
+            case 'lowest_order':
+                $filter = $services->withCount(['order as lowest_order' => function($query) {
+                    $query->where('status', 'completed');
+                }])->orderBy('lowest_order', 'asc')->get();
+                break;
+            case 'highest_rating':
+                $filter = Service::with(['order', 'rating' => function($query) {
+                    $query->orderBy('stars', 'desc');
+                }])->where('title', 'LIKE', '%' . $value . '%')
+                ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+                break;
+            case 'lowest_rating':
+                $filter = Service::with(['order', 'rating' => function($query) {
+                    $query->orderBy('stars', 'asc');
+                }])->where('title', 'LIKE', '%' . $value . '%')
+                ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+                break;
+            case 'highest_price':
+                $filter = $services->orderBy('price', 'desc')->get();
+                break;
+            case 'lowest_price':
+                $filter = $services->orderBy('price', 'asc')->get();
+                break;
+        }
 
-    public function oldestService(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('id', 'asc')->get();
-        
-        return response()->json($search);
-    }
-    
-    public function highestOrder(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')
-        ->withCount(['order as top_order' => function($query) {
-            $query->where('status', 'completed');
-        }])->orderByDesc('top_order')->get();
-
-        return response()->json($search);
-    } 
-    
-    public function lowestOrder(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')
-        ->withCount(['order as low_order' => function($query) {
-            $query->where('status', 'completed');
-        }])->orderBy('low_order')->get();
-
-        return response()->json($search);
-    } 
-    
-    public function highestRating(string $value) {
-        $search = Service::with(['rating' => function($query) {
-            $query->orderByDesc('stars');
-        }, 'order'])->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
-        
-        return response()->json($search);
-    }
-    
-    public function lowestRating(string $value) {
-        $search = Service::with('rating', 'order')
-        ->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
-            
-        return response()->json($search);
-    }
-    
-    public function highestPrice(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('price', 'desc')->get();
-        
-        return response()->json($search);
-    }
-    
-    public function lowestPrice(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->orderBy('price', 'asc')->get();
-        
-        return response()->json($search);
+        if (request()->ajax()) {
+            return view('action', ["services" => $filter]);
+        } else {
+            return view('search', ["services" => $filter]);
+        }
     }
     
     public function reset(string $value) {
-        $search = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
+        $filter = Service::where('title', 'LIKE', '%' . $value . '%')
         ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
 
-        return response()->json($search);
+        if (request()->ajax()) {
+            return view('action', ["services" => $filter]);
+        } else {
+            return view('search', ["services" => $filter]);
+        }
     }
 }

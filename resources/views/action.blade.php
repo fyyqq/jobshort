@@ -1,4 +1,4 @@
-@foreach ($freelancerServices as $service)
+@foreach ($services as $service)
     <div class="col-sm-6 col-12">
         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
             <div class="d-flex align-items-center justify-content-center flex-column">

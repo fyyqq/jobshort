@@ -640,122 +640,53 @@ function autoImage(event) {
     }
 }
 
-function timeRange(element) {
+// search filter
+$(document).on('click', 'input[name="filter"]', function(e) {
+    e.preventDefault();
+
     loader.style.display = 'block';
-    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
-    let url = `/services/search`;
     
-    if (element.getAttribute('id') === 'latest_service') {
-        url += `/latest-service/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    } else if (element.getAttribute('id') === 'oldest_service') {
-        url += `/oldest-service/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    }
-    
+    var searchValue = $('#search_value').val();
+    var path = $($(this)).attr('id');
+    let url = `/services/search/${searchValue}/sort-by/${path}`;
+
+    const container = $('#display_service');
+
     axios.get(url).then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data, 1);
+            $(container).html('');
+            $(container).html(res.data);
         }, 1500);
     }).catch(err => {
         console.error(err.response.data.message);
     });
-}
+});
 
-function orderRange(element) {
-    loader.style.display = 'block';
-    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
-    let url = `/services/search`;
-    
-    if (element.getAttribute('id') === 'highest_order') {
-        url += `/highest-order/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    } else if (element.getAttribute('id') === 'lowest_order') {
-        url += `/lowest-order/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    }
-    
-    axios.get(url).then(res => {
-        setTimeout(() => {
-            loader.style.display = 'none';
-            getDataFilter(res.data, 1);
-        }, 1500);
-    }).catch(err => console.error(err.response.data.message));
-}
-
-function ratingRange(element) {
-    loader.style.display = 'block';
-    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
-    let url = `/services/search`;
-    
-    if (element.getAttribute('id') === 'highest_rating') {
-        url += `/highest-rating/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    } else if (element.getAttribute('id') === 'lowest_rating') {
-        url += `/lowest-rating/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    }
-
-    axios.get(url).then(res =>  {
-        setTimeout(() => {
-            loader.style.display = 'none';
-            getDataFilter(res.data, 1);
-        }, 1500);
-    }).catch(err => console.error(err.response.data.message));
-}
-
-function priceRange(element) {
-    loader.style.display = 'block';
-    var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
-    let url = `/services/search`;
-
-    if (element.getAttribute('id') === 'highest_price') {
-        url += `/highest-price/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    } else if (element.getAttribute('id') === 'lowest_price') {
-        url += `/lowest-price/${searchValue}`;
-        element.setAttribute('checked', 'checked');
-    }
-
-    axios.get(url).then(res => {
-        setTimeout(() => {
-            loader.style.display = 'none';
-            getDataFilter(res.data, 1);
-        }, 1500);
-    }).catch(err => console.error(err.response.data.message));
-}
-
-function resetFilter(e) {
-    var searchValue = e.closest('#filter-list').querySelector('#search_value').value;
+function resetFilter() {
+    var searchValue = $('#search_value').val();
     let url = `/services/search/reset/${searchValue}`;
 
+    loader.style.display = 'block';
+    const container = $('#display_service');
+
     axios.get(url).then(res => {
-        getDataFilter(res.data, 1);
         var radios = document.querySelectorAll('input[type="radio"]');
         radios.forEach(e => {
             if (e.getAttribute('checked') === 'checked') {
                 e.checked = false;
             }
+            setTimeout(() => {
+                loader.style.display = 'none';
+                $(container).html('');
+                $(container).html(res.data);
+            }, 1500);
         });
-    }).catch(err => console.error(err));
+    }).catch(err => console.error(err.response.data.message));
 }
 
+
 // users filter
-$(document).ready(function() {
-    $('#select-categories').change(function() {
-        const freelancer_name = $(this).parent().parent().prev().val();
-        $('#select-categories option:selected').each(function() {
-            const category = $(this).val();
-
-            axios.get(`/user/${freelancer_name}/filter-category/${category}`)
-            .then(res => {
-                // getDataFilter(res.data, 2);
-            });
-        });
-    });  
-});
-
 function filterCategories(element) {
     loader.style.display = 'block';
     const freelancer_name = element.parentElement.parentElement.previousElementSibling.value;

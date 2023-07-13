@@ -81,14 +81,7 @@ Route::prefix('orders')->middleware(['auth'])->group(function() {
 Route::prefix('services')->group(function() {
     Route::prefix('search')->group(function() {
         Route::get('/', [SearchController::class, 'index'])->name('search');
-        Route::get('/latest-service/{value}', [SearchController::class, 'latestService']);
-        Route::get('/oldest-service/{value}', [SearchController::class, 'oldestService']);
-        Route::get('/highest-order/{value}', [SearchController::class, 'highestOrder']);
-        Route::get('/lowest-order/{value}', [SearchController::class, 'lowestOrder']);
-        Route::get('/highest-rating/{value}', [SearchController::class, 'highestRating']);
-        Route::get('/lowest-rating/{value}', [SearchController::class, 'lowestRating']);
-        Route::get('/highest-price/{value}', [SearchController::class, 'highestPrice']);
-        Route::get('/lowest-price/{value}', [SearchController::class, 'lowestPrice']);
+        Route::get('/{value}/sort-by/{type}', [SearchController::class, 'filterSearch']);
         Route::get('/reset/{value}', [SearchController::class, 'reset']);
     });
 
