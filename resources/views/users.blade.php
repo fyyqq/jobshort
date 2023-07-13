@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ count($freelancer->service) }} services</small>
+                                <small class="text-muted">{{ count($freelancerServices) }} services</small>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="px-sm-3 px-0 m-0 d-flex align-items-center justify-content-between">
                         <div class="col-md-3 col-2 d-sm-block d-none px-0">
-                            <small class="text-dark d-block" style="font-size: 13.5px;"><span id="filter-count">{{ count($freelancer->service) }}</span> Results</small>
+                            <small class="text-dark d-block" style="font-size: 13.5px;"><span id="filter-count">{{ count($freelancerServices) }}</span> Results</small>
                         </div>
                         <div class="d-flex align-items-center justify-content-end w-100 gap-md-2 gap-0">
                             <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
@@ -145,7 +145,7 @@
                                 <div class="rounded-3 border" id="select">
                                     <select name="" class="ps-3 w-100 text-dark h-100" onchange="return filterCategories(this)">
                                         <option value="all">Categories</option>
-                                        @foreach ($freelancer->service->pluck('category') as $value)
+                                        @foreach ($freelancerServices->pluck('category') as $value)
                                             <option value="{{ $value }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
@@ -154,8 +154,8 @@
                         </div>
                     </div>
                         <div class="py-3 px-0">
-                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services" style="row-gap: 20px;">
-                                @foreach ($freelancer->service as $service)
+                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services" style="row-gap: 15px;">
+                                @foreach ($freelancerServices as $service)
                                     <div class="col-sm-6 col-12">
                                         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                                             <div class="d-flex align-items-center justify-content-center flex-column">
@@ -174,7 +174,8 @@
                                                         </form>
                                                     @else
                                                         <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                                        <input type="hidden" value="{{ $service->id }}">
+                                                        <input type="hidden" value="{{ route('wishlist-service', $service->id) }}" id="wishlist_path">
+                                                        <input type="hidden" value="{{ route('unwishlist-service', $service->id) }}" id="unwishlist_path">
                                                         <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                                     @endif
                                                 </div>

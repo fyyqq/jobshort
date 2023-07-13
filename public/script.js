@@ -1,6 +1,8 @@
 
 console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bold;");
 
+const loader = document.querySelector('.custom-loader');
+
 $('.owl-carousel').owlCarousel({
     margin: 10,
     loop: false,
@@ -278,7 +280,7 @@ $(document).ready(function() {
     $(document).on('click', '.wishlist', function(e) {
         e.preventDefault();
 
-        const jobSlug = e.target.previousElementSibling.value;
+        const url = $(this).siblings('#wishlist_path').val();
         
         $(this).css('display', 'none');
         const unwishlist = $(this).siblings('.unwishlist');
@@ -288,7 +290,7 @@ $(document).ready(function() {
         unwishlist.removeClass('d-none').addClass('d-block');
         
         $.ajax({
-            url: `/saved/${jobSlug}`,
+            url: url,
             method: 'POST',
             success: function(response) {
                 iziToast.success({
@@ -296,6 +298,8 @@ $(document).ready(function() {
                     message: 'Added to Wishlist',
                     position: 'bottomLeft'
                 });
+            }, error: function(err) {
+                console.error(err.responseText);
             }
         });
     });
@@ -304,7 +308,7 @@ $(document).ready(function() {
     $(document).on('click', '.unwishlist', function(e) {
         e.preventDefault();
 
-        const jobSlug = e.target.nextElementSibling.value;
+        const url = $(this).siblings('#unwishlist_path').val();
 
         $(this).css('display', 'none');
         const wishlist = $(this).siblings('.wishlist');
@@ -314,7 +318,7 @@ $(document).ready(function() {
         $(this).removeClass('d-block').addClass('d-none');
 
         $.ajax({
-            url: `/unsaved/${jobSlug}`,
+            url: url,
             method: 'DELETE',
             success: function(response) {
                 iziToast.success({
@@ -368,7 +372,6 @@ $(document).ready(function() {
 
         var service_id = $(e.target).siblings('#service_id').val(); // 4
         var freelancer_id = $(e.target).siblings('#freelancer_id').val();
-        const loader = document.querySelector('.custom-loader');
         $(loader).css('display', 'block');
 
         setTimeout(() => {
@@ -637,8 +640,6 @@ function autoImage(event) {
     }
 }
 
-const loader = document.querySelector('.custom-loader');
-
 function timeRange(element) {
     loader.style.display = 'block';
     var searchValue = element.closest('#filter-list').querySelector('#search_value').value;
@@ -755,103 +756,37 @@ $(document).ready(function() {
     });  
 });
 
-function filterCategories(select) {
+function filterCategories(element) {
     loader.style.display = 'block';
-    const freelancer_name = select.parentElement.parentElement.previousElementSibling.value;
-    const optionSelected = select.options[select.selectedIndex].value;
+    const freelancer_name = element.parentElement.parentElement.previousElementSibling.value;
+    const optionSelected = element.options[element.selectedIndex].value;
+
+    const container = $('#display-user-services');
 
     axios.get(`/user/${freelancer_name}/filter-category/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data, 2);
+            $(container).html('');
+            $(container).html(res.data);
         }, 1500);
     });
 }
 
-function sortService(select) {
+function sortService(element) {
     loader.style.display = 'block';
-    const freelancer_name = select.parentElement.parentElement.nextElementSibling.value;
-    const optionSelected = select.options[select.selectedIndex].value;
+    const freelancer_name = element.parentElement.parentElement.nextElementSibling.value;
+    const optionSelected = element.options[element.selectedIndex].value;
+
+    const container = $('#display-user-services');
 
     axios.get(`/user/${freelancer_name}/sort-by/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
-            getDataFilter(res.data, 2);
+            $(container).html('');
+            $(container).html(res.data);
         }, 1500);
-    }).catch(err => console.error(err.message));
-}
-
-function getDataFilter(services, action) {
-    const parentService = document.getElementById('display_service');
-    const parentUserService = document.getElementById('display-user-services');
-    const filterCount = document.getElementById('filter-count');
-    if (action == 1) {
-        parentService.innerHTML = '';
-    } else if (action == 2) {
-        parentUserService.innerHTML = '';
-        filterCount.innerHTML = '';
-        filterCount.innerHTML = services.length;
-    }
-    
-    services.forEach(service => {
-
-        let countOrders = 0;
-        service.order.forEach(e => {
-            if (e.status === 'completed') {
-                countOrders++;
-            }
-        });
-
-        let maxStars = 0;
-        service.rating.forEach(function(rating) {
-            maxStars = rating.stars;
-        });
-        if (maxStars > 0) {
-            stars = maxStars + '.0';
-        } else {
-            stars = '0'
-        }
-        const element = document.createElement('div');
-        element.className += 'col-sm-6 col-12';
-        element.innerHTML = 
-            `<a href="/services/${service.slug}" class="d-block text-decoration-none">
-                <div class="d-flex align-items-center justify-content-center flex-column">
-                    <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
-                        <img src="/images/${service.image.split(',')[0]}" class="w-100 h-100" style="object-fit: cover;">
-                        @if (!auth()->check())
-                            <a href="{{ route('login') }}" class="text-decoration-none">
-                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                            </a>
-                        @else
-                            <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                            <input type="hidden" value="{{ $service->id }}">
-                            <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                        @endif
-                    </div>
-                    <div class="p-2 w-100 mt-1">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">${service.title.slice(0, 35)}</p>
-                            <div class="d-flex align-items-center justify-content-end flex-row-reverse">
-                                <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
-                                <small class="me-1 text-dark" style="font-size: 13.5px;">${stars}</small>
-                            </div>
-                        </div>
-                        <small class="text-muted d-block" style="font-size: 12px;">${service.category}</small>
-                        <div class="mt-2 d-flex align-items-center justify-content-between">
-                            <small class="mb-0 text-dark" style="font-size: 14.5px;">$ ${service.price}</small>
-                            <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>${countOrders}</small>
-                        </div>
-                    </div>
-                </div>
-            </a>`;
-
-        if (action == 1) {
-            parentService.appendChild(element);
-        } else if (action == 2) {
-            parentUserService.appendChild(element);
-        }
     });
 }
 

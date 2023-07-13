@@ -21,7 +21,8 @@
                     <div class="d-flex align-items-center justify-content-center">
                         @if (auth()->check())
                             <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
-                            <input type="hidden" value="{{ $service->id }}">
+                            <input type="hidden" value="{{ route('wishlist-service', $service->id) }}" id="wishlist_path">
+                            <input type="hidden" value="{{ route('unwishlist-service', $service->id) }}" id="unwishlist_path">
                             <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
                         @else
                             <form action="{{ route('login') }}" method="get">
@@ -147,7 +148,7 @@
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
                                         <i class="me-2 mdi mdi-cart-check" style="font-size: 20px;"></i>
-                                        <h1 class="h5 text-dark mb-0">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
+                                        <h1 class="h6 text-dark mb-0">{{ count($service->order->where('status', 'completed')) < 1 ? 'N/A' : count($service->order->where('status', 'completed')) }}</h1>
                                     </div>
                                     <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
                                 </div>
@@ -157,7 +158,7 @@
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
                                         <i class="me-2 mdi mdi-text-box-check-outline" style="font-size: 20px;"></i>
-                                        <h1 class="h5 text-dark mb-1">{{ count($reviews) < 1 ? 'No Review' : count($reviews) }}</h1>
+                                        <h1 class="h6 text-dark mb-1">{{ count($reviews) < 1 ? 'N/A' : count($reviews) }}</h1>
                                     </div>
                                     <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
                                 </div>
@@ -166,7 +167,7 @@
                                 <p class="mb-0 text-dark">Top Ratings</p>
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center mb-1">
-                                        <h1 class="h5 text-dark mb-0">{{ count($reviews) < 1 ? 'No Review' : $reviews->max('stars') . '.0' }}</h1>
+                                        <h1 class="h6 text-dark mb-0">{{ count($reviews) < 1 ? 'N/A' : $reviews->max('stars') . '.0' }}</h1>
                                         <div class="ms-2">
                                             @for ($i = 0; $i < $reviews->max('stars'); $i++)
                                                 <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
@@ -246,7 +247,7 @@
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('login') }}" method="get">
+                                                <form action="{{ route('profile.main') }}" method="get">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 </form>
@@ -265,16 +266,16 @@
                                                 </form>
                                             @endif
                                         @else
-                                        // No Order Yet.
+                                        {{-- No Order Yet. --}}
                                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
-                                                <button class="btn px-3 py-2 text-light w-100 non-order" id="order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                                <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 <form action="{{ route('profile.order') }}" method="get" class="d-none">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('login') }}" method="get">
+                                                <form action="{{ route('profile.main') }}" method="get">
                                                     @csrf
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 </form>
@@ -282,7 +283,7 @@
                                             <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
                                         @endif
                                     @else
-                                        <form action="{{ route('login') }}" method="get">
+                                        <form action="{{ route('profile.main') }}" method="get">
                                             @csrf
                                             <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
                                         </form>
@@ -339,7 +340,7 @@
                         @else
                             <input type="hidden" id="service_id" value="{{ $service->id }}">
                                 @if (auth()->check() && auth()->user()->roles != '0')
-                                    <button class="btn px-3 py-2 text-light w-100" id="order-btn" style="background-color: #2891e1; font-size: 14px;">Order</button>
+                                    <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Order</button>
                                     <form action="{{ route('profile.order') }}" method="get" class="d-none">
                                         @csrf
                                         <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>

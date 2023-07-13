@@ -66,8 +66,8 @@ Route::get('/success', [PaymentController::class, 'success'])->name('payment_suc
 Route::get('/error', [PaymentController::class, 'error'])->name('payment_error');
 
 // Wishlist
-Route::post('/saved/{id}', [WishlistController::class, 'store'])->name('saved-service');
-Route::delete('/unsaved/{id}', [WishlistController::class, 'unstore'])->name('unsaved-service');
+Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-service');
+Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name('unwishlist-service');
 
 // Freelancer Notification
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
