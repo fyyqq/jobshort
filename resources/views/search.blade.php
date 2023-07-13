@@ -76,8 +76,8 @@
                     </div>
                 </div>
             </aside>
-            <section class="rounded-3 col-md-8 col-12 px-0 px-3" style="height: max-content;">
-                <div class="mb-3 mt-2 d-flex align-items-center jusitfy-content-md-start justify-content-between">
+            <section class="rounded-3 col-md-8 col-12 px-0" style="height: max-content;">
+                <div class="mb-3 mt-2 px-2 d-flex align-items-center jusitfy-content-md-start justify-content-between">
                     <div class="d-flex align-items-center justify-content-start gap-3">
                         <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 14px;"></i>
                         <small class="mb-0 text-dark">{{ count($services) }} result "<span class="fw-bold"><?php echo $_GET['keyword'] ?></span>"</small>
@@ -208,12 +208,7 @@
                             </div>
                         </div>
                         <div class="mt-4 row mx-0">
-                            <div class="col-6">
-                                <button class="btn btn-outline-secondary w-100" style="font-size: 12.5px;" onclick="return resetFilter(this)">Reset</button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn text-light w-100" style="background-color: #2891e1; font-size: 13px;" onclick="return closeFilter()">Apply</button>
-                            </div>
+                            <button class="btn btn-primary w-100" style="font-size: 13px;" onclick="return resetFilter(this)">Reset</button>
                         </div>
                     </div>
                 </div>
