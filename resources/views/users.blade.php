@@ -154,7 +154,7 @@
                         </div>
                     </div>
                         <div class="py-3 px-0">
-                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services">
+                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services" style="row-gap: 20px;">
                                 @foreach ($freelancer->service as $service)
                                     <div class="col-sm-6 col-12">
                                         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">

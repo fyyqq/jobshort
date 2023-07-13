@@ -96,11 +96,11 @@ class ServicesController extends Controller
     
     public function sortByTopRating() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)
-        ->orderByDesc('rating->max("stars")')->get();
-        
-        return response()->json($services);
+        $services = Service::with(['order', 'rating' => function ($query) {
+            $query->orderByDesc('stars');
+        }])->where('freelancer_id', $freelancer->id)->get();
 
+        return response()->json($services);
     }
     
     // Filter

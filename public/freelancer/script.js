@@ -481,7 +481,7 @@ function sortByTopRating(event) {
             $(loader).css('display', 'none');
             displayFilteredServices(data);
         }, 1300);
-    });
+    }).catch(err => console.error(err.message));
 }
 
 // Filter Price

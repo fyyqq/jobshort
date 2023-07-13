@@ -63,23 +63,25 @@ function logout() {
     });
 }
 
-function search() {
-    const keyword = document.getElementById('searchbar').value;
-    if (keyword.trim() != "") {
-        return this.submit();
-    } else {
-        return false;
-    }
-}
+$(document).ready(function() {
+    $('.submitSearch').submit(function() {
+        var keyword = $(this).children().find('#searchbar').val();
+        if (keyword.trim() != '') {
+            return $(this).submit();
+        } else {
+            return false;
+        }
+    });
+});
 
-const searchbar = document.getElementById('searchbar-mobile');
+const searchbar_mobile = document.getElementById('searchbar-mobile');
 
 function showSearchbar(element) {
-    searchbar.style.display = 'flex';
+    searchbar_mobile.style.display = 'flex';
 }
 
 function closeSearchbar(element) {
-    searchbar.style.display = 'none';
+    searchbar_mobile.style.display = 'none';
 }
 
 const countryList = document.querySelectorAll('.suggestion-list');
