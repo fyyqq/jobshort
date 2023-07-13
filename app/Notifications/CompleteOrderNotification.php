@@ -45,7 +45,7 @@ class CompleteOrderNotification extends Notification
             "id" => $uuid,
             "user" => $this->order->user->name,
             "image" => $this->order->user->image,
-            "title" => "Congratulations! Your Order Has Been Completed by the Buyer.",
+            "title" => "Congratulations! Your Order Has Been Completed by " . $this->order->user->name,
             "message" => "We are happy to inform you that the order you made has been completed by the buyer. This is a happy moment because you have completed a job well.
             Buyers have seen your work and are satisfied with what you provide. This is proof of your skill and dedication in working on this project.
             We thank you for your hard work and efforts to provide the best results for buyers. Hopefully this collaboration will bring satisfaction and success for both parties.

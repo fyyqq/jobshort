@@ -57,6 +57,6 @@ class RatingController extends Controller
             Notification::send($freelancer, new ReviewNotification($order));
         }
 
-        return route('profile.applied-completed');
+        return route('profile.order-completed');
     }
 }

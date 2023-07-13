@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        {{-- Izitoast --}}
+        <link rel="stylesheet" href="{{ asset('izitoast/iziToast.min.css') }}">
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
@@ -35,10 +37,17 @@
                 @yield('content')
             </main>
         </div>
+        {{-- iziToast --}}
+        <script src="{{ asset('izitoast/iziToast.min.js') }}"></script>
+        {{-- Jquery --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- Fontawesome --}}
         <script src="https://kit.fontawesome.com/5e539df1ae.js" crossorigin="anonymous"></script>
+        {{-- Bootstrap --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        {{-- OwlCarousel --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- Sweetalert --}}
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
         <script src="{{ asset('freelancer/script.js') }}"></script>
     </body>

@@ -403,6 +403,7 @@ $(document).ready(function() {
                                 window.location.href = '/account/profile/orders';
                             }
                         });
+                        console.log(res);
                     }
                 }, error: function(error) {
                     console.error(error.responseText);
@@ -527,7 +528,7 @@ $(document).ready(function() {
                 if (res) {
                     iziToast.success({
                         title: 'Success',
-                        message: 'Mark As Unread',
+                        message: 'Deleted',
                         position: 'bottomLeft'
                     });
                 }

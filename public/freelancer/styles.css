@@ -20,6 +20,10 @@
     cursor: pointer;
 }
 
+#order-menu-link {
+    font-size: 14px;
+}
+
 .custom-loader {
     display: none;
     position: fixed;

@@ -33,8 +33,8 @@ class FreelancerController extends Controller
 
     public function notification() 
     {
-        return view('freelancer.notification', [
-            "notifications" => Notification::where('notifiable_id', Auth::id())->latest()->get()
+        return view('freelancer.notifications.index', [
+            "notifications" => Notification::where('notifiable_id', auth()->user()->freelancer->id)->latest()->get()
         ]);
     }
 

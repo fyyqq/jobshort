@@ -235,6 +235,86 @@ $(document).ready(function() {
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
+    // Read Notification
+    $(document).on('click', '.read', function(e) {
+        e.preventDefault();
+
+        $id = $(this).siblings('#notification-id').val();
+        $(this).removeClass('d-block');
+        $(this).addClass('d-none');
+        $(this).prev().removeClass('d-none');
+        $(this).prev().addClass('d-block');
+        
+        $.ajax({
+            url: `/notifications/read/${$id}`,
+            method: 'POST',
+            success: function(res) {
+                if (res) {
+                    $(this).parent().parent().css('border', 'unset');
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Mark As Read',
+                        position: 'bottomLeft'
+                    });
+                }
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
+        });
+    });
+
+    // Unread Notification
+    $(document).on('click', '.unread', function(e) {
+        e.preventDefault();
+
+        $id = $(this).siblings('#notification-id').val();
+        $(this).removeClass('d-block');
+        $(this).addClass('d-none');
+        $(this).next().removeClass('d-none');
+        $(this).next().addClass('d-block');
+
+        $.ajax({
+            url: `/notifications/unread/${$id}`,
+            method: 'POST',
+            success: function(res) {
+                if (res) {
+                    $(this).parent().parent().css('border-left', '3px solid #2891e1');
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Mark As Unread',
+                        position: 'bottomLeft'
+                    });
+                }
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
+        });
+    });
+
+    // Delete Notification
+    $(document).on('click', '.notification-delete', function(e) {
+        e.preventDefault();
+
+        $id = $(this).siblings('#notification-id').val();
+
+        $.ajax({
+            url: `/notifications/delete/${$id}`,
+            method: 'DELETE',
+            success: function(res) {
+                $(this).parent().parent().remove();
+                if (res) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Deleted',
+                        position: 'bottomLeft'
+                    });
+                }
+            }, error: function(err) {
+                console.log(err.responseText);
+            }
+        });
+    });
+
     $('#select-all-jobs').click(function(e) {
         const checkAllService = document.getElementById('select-all-jobs');
         const checkJobs = document.querySelectorAll('#select-jobs');
