@@ -7,6 +7,10 @@
     font-family: 'Lato', sans-serif;
 }
 
+#add-image-container {
+    white-space: nowrap;
+}
+
 #swal2-title {
     font-size: 20px;
 }
@@ -273,9 +277,6 @@ input[type=number] {
 @media (max-width: 576px) {
     #dashboard-main-detail {
         grid-template-columns: 1fr;
-    }
-    #add-image-container {
-        overflow-x: scroll;
     }
     #parent-order-menu {
         overflow-x: scroll;

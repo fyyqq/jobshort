@@ -145,6 +145,21 @@ function deleteSelectedItems() {
     }    
 }
 
+$('#title').on('input', function(e) {
+    var value = e.target.value;
+    
+    if (value.length > 100) {
+        cutString = value.substring(0, 100);
+        e.target.value = cutString;
+
+        e.target.nextElementSibling.style.color = 'red';
+    } else {
+        e.target.nextElementSibling.style.color = '';
+    }
+});
+
+
+
 function archiveSelectedItems() {
     const checkJobs = document.querySelectorAll('#select-jobs');
 
@@ -213,12 +228,12 @@ function autoImage(event) {
 
         const xmark = event.nextElementSibling.nextElementSibling;;
         xmark.classList.remove('d-none');
-        xmark.addEventListener('click', e => {
-            e.preventDefault();
+        xmark.addEventListener('click', event => {
+            event.preventDefault();
             imgTag.removeAttribute('src');
             imgTag.classList.add('d-none');
             icon.classList.remove('d-none');
-            e.classList.add('d-none');
+            event.target.classList.add('d-none');
         });
 
         const imageUrl = URL.createObjectURL(fileName);
@@ -354,8 +369,8 @@ $(document).ready(function() {
         const imageContainer = $('.addImageContainer')[0];
 
         const parent = document.createElement('div');
-        parent.className = 'me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center serviceImages';
-        $(parent).css({ "height": "95px", "width": "95px", "overflow": "hidden" });
+        parent.className = 'me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center serviceImages';
+        $(parent).css({ "height": "125px", "width": "140px", "overflow": "hidden" });
 
         const inputFile = document.createElement('input');
         inputFile.type = 'file';
@@ -378,6 +393,7 @@ $(document).ready(function() {
                 icon.classList.add('d-none');
                 icon2.classList.remove('d-none');
 
+                // Remove Image
                 icon2.addEventListener('click', e => {
                     e.preventDefault();
 
@@ -413,6 +429,7 @@ $(document).ready(function() {
         parent.appendChild(icon2);
         parent.appendChild(icon3);
         
+        // Remove Add Image
         $(icon3).click(function(e) {
             e.preventDefault();
 
@@ -426,6 +443,8 @@ $(document).ready(function() {
             if (imgLength <= 14) {
                 $('#addImage').removeClass('d-none');
             }
+
+            updateScroll();
         });
 
         const imgLength = $('.serviceImages').length;
@@ -435,7 +454,10 @@ $(document).ready(function() {
         if (imgLength >= 14) {
             $(this).addClass('d-none');
         }
+
+        updateScroll();
     });
+    
 
     $(document).on('click', '.archive-service-btn', function(e) {
         e.preventDefault();
@@ -506,6 +528,19 @@ $(document).ready(function() {
     });
 });
 
+const parentElement = document.getElementById('add-image-container');
+const childElement = document.getElementById('child-container');
+
+function updateScroll() {
+    const parentWidth = parentElement.offsetWidth;
+    const childWidth = childElement.offsetWidth;
+
+    if (childWidth > parentWidth) {
+        parentElement.style.overflowX = 'scroll';
+    } else if (childWidth < parentWidth) {
+        parentElement.style.overflowX = 'hidden';
+    }
+}
 
 const loader = document.querySelector('.custom-loader');
 

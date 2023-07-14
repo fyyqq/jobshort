@@ -16,44 +16,54 @@
                 <form action="{{ route('freelancer.post-service') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-0 col-12">
-                        <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
-                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Gallery :</label>
+                        <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column" style="overflow: hidden;">
+                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Gallery :</label>
                             <div class="mt-2 w-100 d-flex align-items-center justify-content-start" id="add-image-container">
-                                <div class="me-2 border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden;">
-                                    <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
-                                    <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return autoImage(this)">
-                                    <i class="fa-solid fa-image" style="font-size: 18px;"></i>
-                                    <i class="p-1 fa-solid fa-xmark position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
-                                </div>
-                                <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
-                                <div id="addImage" class="border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 95px; width: 95px; overflow: hidden; cursor: pointer;">
-                                    <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
+                                <div class="d-flex" id="child-container">
+                                    <div>
+                                        <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 125px; width: 140px; overflow: hidden;">
+                                            <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
+                                            <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return autoImage(this)">
+                                            <i class="fa-solid fa-image" style="font-size: 18px;"></i>
+                                            <i class="p-1 fa-solid fa-xmark position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
+                                    <div>
+                                        <div id="addImage" data-bs-toggle="tooltip" title="Add Images" class="border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 125px; width: 140px; overflow: hidden; cursor: pointer;">
+                                            <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between w-100">
-                                <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 13px;">Support <b>MP4</b>, <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
-                                <div id="emailHelp" class="mt-2 w-100 text-end text-dark form-text" style="font-size: 13px;"><span id="lengthImg">1</span> | 15</div>
+                            <div class="mt-2 d-flex align-items-start justify-content-between w-100">
+                                <div class="d-flex align-items-start flex-column">
+                                    <div id="emailHelp" class="text-start form-text lh-1" style="font-size: 12.5px;">Support <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
+                                    <div id="emailHelp" class="text-start form-text" style="font-size: 12.5px;"><b>5</b> images required.</div>
+                                </div>
+                                <div id="emailHelp" class="text-end form-text" style="font-size: 12.5px;"><span id="lengthImg">1</span> | 15</div>
                             </div>
-                            @error('images')
-                                <span class="text-start w-100 text-danger mt-2" role="alert">
-                                    <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                            @if($errors->has('images'))
+                                <span class="text-start w-100 text-danger mt-1" role="alert">
+                                    <small class="fw-bold" style="font-size: 12px;">{{ $errors->first('images') }}</small>
                                 </span>
-                            @enderror
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-8 col-12 row mx-0">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
-                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Title :</label>
+                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Title :</label>
                             <input type="text" class="form-control shadow-none w-10" id="title" name="title" value="{{ old('title') }}">
+                            <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 12.5px;">Maximum length of <b>100</b> characters</div>
                             @error('title')
-                                <span class="text-start w-100 text-danger mt-2" role="alert">
+                                <span class="text-start w-100 text-danger mt-1" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
                                 </span>
                             @enderror
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
-                            <label for="description" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Description :</label>
-                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="4">{{ old('description') }}</textarea>
+                            <label for="description" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Description :</label>
+                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="6">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="text-start w-100 text-danger mt-2" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -61,12 +71,12 @@
                             @enderror
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
-                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Service Category :</label>
+                            <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Category :</label>
                             <div class="position-relative w-100">
                                 <select name="category" id="" class="form-control shadow-none">
-                                    <option value="" selected>Find Service Category</option>
+                                    <option value="" selected>Categories</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category['name'] }}">{{ $category['name'] }}</option>
+                                        <option value="{{ $category['name'] }}" {{ old('category') === $category['name'] ? 'selected' : '' }}>{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fa-solid fa-caret-down position-absolute" style="top: 50%; right: 10px; transform: translateY(-2px);"></i>
@@ -85,7 +95,12 @@
                                     <input type="number" class="ps-5 form-control shadow-none w-100" name="price" value="{{ old('price') }}">
                                 </div>
                             </div>
-                            <div id="emailHelp" class="mt-2 form-text" style="font-size: 13px;">Change your currency from profile page.</div>
+                            <div id="emailHelp" class="mt-2 form-text" style="font-size: 12.5px;">Change your currency from profile page.</div>
+                            @error('price')
+                                <span class="text-start w-100 text-danger mt-1" role="alert">
+                                    <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="w-100 text-md-start text-end">

@@ -24,7 +24,7 @@ class ServicesController extends Controller
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
         
-        return view('freelancer.service.index', [
+        return view('freelancer.index', [
             "services" => $service
         ]);
     }
@@ -164,11 +164,25 @@ class ServicesController extends Controller
     {
         $freelancer = Freelancer::where('user_id', Auth::id())->first();
 
+        // $validateStore = $request->validate([
+        //     'title' => ['required', 'max:100'],
+        //     'category' => ['required'],
+        //     'price' => ['required'],
+        // ]);
+
         $validateStore = $request->validate([
-            'images.*' => ['image', 'mimes:png,jpg,jpeg', 'required'],
-            'title' => 'required',
-            'category' => 'required',
-            'price' => 'required',
+            'title' => ['required', 'max:100'],
+            'category' => ['required'],
+            'price' => ['required'],
+            'images' => ['required', 'min:5'],
+            'images.*' => ['image', 'mimes:png,jpg,jpeg'],
+        ], [
+            'title.required' => 'Title is required.',
+            'category.required' => 'Category is required.',
+            'price.required' => 'Price is required.',
+            'images.required' => 'Image is required.',
+            'images.min' => 'Upload minimum 5 images.',
+            'images.*.mimes' => 'Invalid image format.',
         ]);
 
         $imagePaths = [];
@@ -182,14 +196,14 @@ class ServicesController extends Controller
         } else {
             $imagePaths = null;
         }
-
+        
         $slug = $freelancer->id . uniqid();
 
         $service = new Service();
         $service->freelancer_id = $freelancer->id;
-        $service->image = implode(',', $imagePaths);
         $service->title = $validateStore['title'];
         $service->slug = strtolower($slug);
+        $service->image = implode(',', $imagePaths);
         $service->description = $request->input('description');
         $service->category = $validateStore['category'];
         $service->price = $validateStore['price'];
@@ -201,9 +215,12 @@ class ServicesController extends Controller
             $users = User::whereIn('id', $userIDs)->get();
 
             Notification::send($users, new ServiceNotification($service));
+
+            return redirect()->route('freelancer.services')->with('success', 'New service has been uploaded');
+        } else {
+            return redirect()->back()->with('error', 'Failed to upload');
         }
 
-        return redirect()->route('freelancer.services')->with('success', 'New service has been uploaded');   
     }
 
     /**
@@ -222,7 +239,7 @@ class ServicesController extends Controller
         $servicesPath = file_get_contents(public_path('json/category.json'));
         $services =  json_decode($servicesPath, true);
         
-        return view('freelancer.service.edit', [
+        return view('freelancer.edit', [
             "service" => Service::where('slug', $slug)->first(),
             "categories" => $services
         ]);
