@@ -24,7 +24,7 @@ class ServicesController extends Controller
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
         
-        return view('freelancer.index', [
+        return view('freelancer.service.index', [
             "services" => $service
         ]);
     }
@@ -163,12 +163,6 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         $freelancer = Freelancer::where('user_id', Auth::id())->first();
-
-        // $validateStore = $request->validate([
-        //     'title' => ['required', 'max:100'],
-        //     'category' => ['required'],
-        //     'price' => ['required'],
-        // ]);
 
         $validateStore = $request->validate([
             'title' => ['required', 'max:100'],
