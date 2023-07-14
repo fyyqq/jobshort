@@ -152,7 +152,7 @@ class ServicesController extends Controller
         $servicesPath = file_get_contents(public_path('json/category.json'));
         $data = json_decode($servicesPath, true);
         
-        return view('freelancer.create-service', [
+        return view('freelancer.create', [
             "categories" => $data 
         ]);
     }
