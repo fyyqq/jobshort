@@ -1,20 +1,21 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
-
 @section('content')
 
-    <div class="my-4">
-        <div class="px-md-3 px-2 owl-carousel owl-theme">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
+
+    <div class="mt-4">
+        <div class="px-md-3 px-2 owl-carousel owl-theme gap-2">
             @foreach ($categories as $category)
-            <a href="{{ route('categories', $category['slug']) }}" class="jobCategories row mx-0 text-decoration-none px-3 item d-flex align-items-center rounded-3 justify-content-center border py-3" style="cursor: pointer; height: max-content;">
-                <small class="text-dark mb-0">{{ $category['name'] }}</small>
+            <a href="{{ route('category', $category['slug']) }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
+                <i class="{{ $category['icon'] }} fs-5 text-dark"></i>
+                <small class="text-dark mb-0" style="font-size: 13px;">{{ $category['name'] }}</small>
             </a>
             @endforeach
         </div>
     </div>
     <div class="container-xl">
-        <div class="row mx-0" style="row-gap: 18px;">
+        <div class="row mx-0" style="row-gap: 15px;">
             @foreach ($services as $service)
                 <div class="col-lg-4 col-sm-6 col-12 px-md-3">
                     <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">

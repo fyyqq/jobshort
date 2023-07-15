@@ -7,24 +7,38 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    public function index() {
+        return Service::all();
+    }
+
     public function show(string $slug) {
 
         $pathCategories = file_get_contents(public_path('json/category.json'));
-        $data =  json_decode($pathCategories, true);
+        $data = json_decode($pathCategories, true);
 
-        $filteredCategories = array_filter($data, function($category) use ($slug) {
-            return $category['slug'] == $slug;
+        $category = array_filter($data, function($category) use ($slug) {
+            return $category['slug'] === $slug;
         });
 
-        foreach($filteredCategories as $value) {
-            $data = Service::where('category', $value['name'])->get();
+        $categoryName;
+        foreach($category as $category) {
+            $categoryName = ($category['name']);
         }
+        
+        $services = Service::where('category', $categoryName)->get();
+        $serviceCount = Service::where('category', $categoryName)->first();
 
-        return $data;
+        $filterCategories = array_filter($data, function($category) use ($slug) {
+            return $category['slug'] !== $slug;
+        });
 
-        return view('view-category', [
-            "dataServices" => $data,
-            "dataCategory" => $filteredCategories
+        $categories = array_slice($filterCategories, 0, 5);
+
+        return view('category', [
+            "category" => $category,
+            "categories" => $categories,
+            "services" => $services,
+            "count" => $serviceCount,
         ]);
     }
 }

@@ -1,122 +1,142 @@
 [
     {
         "id": 1,
-        "name": "Graphic Design",
-        "slug": "graphic-design",
-        "about": "Provide visual communication through creative design solutions for various mediums such as logos, branding, illustrations, and print materials."
+        "name": "Programmer",
+        "slug": "programmer",
+        "icon": "mdi mdi-code-braces",
+        "about": "Develop and write code to create software applications, websites, and other computer programs."
     },
     {
         "id": 2,
-        "name": "Web and App Development",
-        "slug": "web-and-app-development",
-        "about": "Build and develop websites and mobile applications using various programming languages, frameworks, and technologies."
+        "name": "Designer",
+        "slug": "designer",
+        "icon": "mdi mdi-palette",
+        "about": "Create visual concepts, designs, and layouts for various mediums such as websites, graphics, logos, and marketing materials."
     },
     {
         "id": 3,
-        "name": "Writing and Editing",
-        "slug": "writing-and-editing",
-        "about": "Create engaging and informative written content, including articles, blog posts, copywriting, and proofreading/editing services."
+        "name": "Writer",
+        "slug": "writer",
+        "icon": "mdi mdi-pencil",
+        "about": "Create written content for various purposes such as articles, blog posts, social media posts, and marketing materials."
     },
     {
         "id": 4,
-        "name": "Translation",
-        "slug": "translation",
-        "about": "Provide accurate and professional translation services for written or spoken content between different languages."
+        "name": "Developer",
+        "slug": "developer",
+        "icon": "mdi mdi-code-tags",
+        "about": "Build and maintain software applications and systems using programming languages and development tools."
     },
     {
         "id": 5,
-        "name": "Digital Marketing",
-        "slug": "digital-marketing",
-        "about": "Promote brands, products, and services using online marketing strategies such as SEO, social media marketing, email marketing, and PPC advertising."
+        "name": "Photographer",
+        "slug": "photographer",
+        "icon": "mdi mdi-camera",
+        "about": "Capture high-quality images using cameras and various photography techniques for events, products, or portraits."
     },
     {
         "id": 6,
-        "name": "Customer Service",
-        "slug": "customer-service",
-        "about": "Deliver excellent customer support and assistance, handling inquiries, resolving issues, and ensuring customer satisfaction."
+        "name": "Marketing",
+        "slug": "marketing",
+        "icon": "mdi mdi-bullhorn",
+        "about": "Develop and implement strategies to promote products or services, including market research, advertising, and campaign management."
     },
     {
         "id": 7,
-        "name": "Multimedia and Video Production",
-        "slug": "multimedia-and-video-production",
-        "about": "Create visually compelling multimedia content, including videos, animations, motion graphics, and video editing."
+        "name": "Illustrator",
+        "slug": "illustrator",
+        "icon": "mdi mdi-brush",
+        "about": "Create visual representations and illustrations using artistic skills and digital tools for books, magazines, or digital media."
     },
     {
         "id": 8,
-        "name": "Administration and Finance",
-        "slug": "administration-and-finance",
-        "about": "Provide administrative support, financial management, bookkeeping, data entry, and other related tasks."
+        "name": "Videographer",
+        "slug": "videographer",
+        "icon": "mdi mdi-video",
+        "about": "Shoot and edit videos for various purposes, including events, documentaries, commercials, or online content."
     },
     {
         "id": 9,
-        "name": "Business Consulting",
-        "slug": "business-consulting",
-        "about": "Offer professional advice and expertise in various business areas, such as strategy, marketing, operations, and finance."
+        "name": "Translator",
+        "slug": "translator",
+        "icon": "mdi mdi-translate",
+        "about": "Translate written or spoken content from one language to another accurately and fluently."
     },
     {
         "id": 10,
-        "name": "Technical Skills",
-        "slug": "technical-skills",
-        "about": "Provide specialized technical skills and expertise, including IT support, software development, network administration, and system maintenance."
+        "name": "Data Analyst",
+        "slug": "data-analyst",
+        "icon": "mdi mdi-chart-bar",
+        "about": "Collect, analyze, and interpret complex data to help businesses make informed decisions and solve problems."
     },
     {
         "id": 11,
-        "name": "Typing and Data Entry",
-        "slug": "typing-and-data-entry",
-        "about": "Efficiently input and manage data, perform accurate typing tasks, transcription, data processing, and data analysis."
+        "name": "Content Writer",
+        "slug": "content-writer",
+        "icon": "mdi mdi-text-box-edit",
+        "about": "Create engaging and informative content for websites, blogs, social media, and other digital platforms."
     },
     {
         "id": 12,
-        "name": "Graphics and Illustration",
-        "slug": "graphics-and-illustration",
-        "about": "Create visually appealing graphics and illustrations for various purposes, such as digital artwork, infographics, and icon design."
+        "name": "Graphic Design",
+        "slug": "graphic-design",
+        "icon": "mdi mdi-image",
+        "about": "Provide visual communication through creative design solutions for various mediums such as logos, branding, illustrations, and print materials."
     },
     {
         "id": 13,
-        "name": "Editing and Proofreading",
-        "slug": "editing-and-proofreading",
-        "about": "Review and revise written content for clarity, grammar, spelling, and style, ensuring high-quality and error-free material."
+        "name": "Web Developer",
+        "slug": "web-developer",
+        "icon": "mdi mdi-web",
+        "about": "Build and maintain websites using programming languages, frameworks, and content management systems."
     },
     {
         "id": 14,
-        "name": "Search Engine Optimization (SEO)",
-        "slug": "search-engine-optimization",
-        "about": "Optimize websites and content to improve visibility and ranking on search engines, increasing organic traffic and online presence."
+        "name": "UI/UX Designer",
+        "slug": "ui-ux-designer",
+        "icon": "mdi mdi-view-dashboard",
+        "about": "Design user interfaces and experiences for websites, mobile apps, and other digital products, focusing on usability and aesthetics."
     },
     {
         "id": 15,
-        "name": "Social Media Marketing",
-        "slug": "social-media-marketing",
-        "about": "Develop and implement social media strategies, manage social media accounts, and create engaging content to enhance brand awareness and engagement."
+        "name": "Copywriter",
+        "slug": "copywriter",
+        "icon": "mdi mdi-file-document",
+        "about": "Create compelling and persuasive written content for advertisements, marketing campaigns, and promotional materials."
     },
     {
         "id": 16,
-        "name": "Mobile App Development",
-        "slug": "mobile-app-development",
-        "about": "Create and develop mobile applications for various platforms, ensuring functionality, usability, and user experience."
+        "name": "Social Media Manager",
+        "slug": "social-media-manager",
+        "icon": "mdi mdi-instagram",
+        "about": "Manage and implement social media strategies, create engaging content, and interact with the audience to build brand presence."
     },
     {
         "id": 17,
-        "name": "Technical Content Writing",
-        "slug": "technical-content-writing",
-        "about": "Produce informative and specialized content in technical fields, such as software documentation, user manuals, and technical guides."
+        "name": "SEO Specialist",
+        "slug": "seo-specialist",
+        "icon": "mdi mdi-chart-timeline-variant",
+        "about": "Optimize websites and content to improve search engine rankings, increase organic traffic, and enhance online visibility."
     },
     {
         "id": 18,
-        "name": "Social Media Management",
-        "slug": "social-media-management",
-        "about": "Manage and optimize social media accounts, create engaging content, implement social media strategies, and analyze performance."
+        "name": "Video Editor",
+        "slug": "video-editor",
+        "icon": "mdi mdi-video",
+        "about": "Edit and manipulate video footage, add effects, transitions, and audio to create compelling and visually appealing videos."
     },
     {
         "id": 19,
-        "name": "E-commerce Development",
-        "slug": "e-commerce-development",
-        "about": "Build and customize online stores, integrate payment gateways, manage product catalogs, and ensure smooth e-commerce functionality."
+        "name": "Project Manager",
+        "slug": "project-manager",
+        "icon": "mdi mdi-briefcase",
+        "about": "Plan, organize, and oversee the execution of projects, ensuring they are delivered on time, within budget, and meet the required objectives."
     },
     {
         "id": 20,
-        "name": "Data Analysis",
-        "slug": "data-analysis",
-        "about": "Analyze and interpret data using statistical methods, generate reports, and provide insights for informed decision-making."
+        "name": "Network Administrator",
+        "slug": "network-administrator",
+        "icon": "mdi mdi-network",
+        "about": "Manage and maintain computer networks, including hardware, software, security, and troubleshooting network issues."
     }
-]  
+]

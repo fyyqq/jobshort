@@ -35,7 +35,7 @@
                                     <small class="text-muted" style="font-size: 12.5px;">Oldest</small>
                                 </button>
                                 <button class="dropdown-item py-2" type="button" onclick="return sortByTopOrder(this)">
-                                    <i class="me-2 mdi mdi-cart"></i>
+                                    <i class="me-2 mdi mdi-text-box-check-outline"></i>
                                     <small class="text-muted" style="font-size: 12.5px;">Top Order</small>
                                 </button>
                                 <button class="dropdown-item py-2" type="button" onclick="return sortByTopRating(this)">

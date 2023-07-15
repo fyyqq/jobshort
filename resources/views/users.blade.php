@@ -1,21 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    #select {
-        overflow: hidden;
-        height: 35px;
-    }
-    select {
-        border-right: 10px solid transparent;
-        font-size: 13px;
-        outline: none;
-        border-color: transparent;
-    }
-    select option {
-        font-size: 14px;
-    }
-</style>
     <div class="container-lg">
         <div class="row d-flex align-items-start justify-content-between flex-md-row flex-column" style="height: max-content">
             <div class="col-md-4 col-12 rounded-3 px-4 pb-4 border-bottom">

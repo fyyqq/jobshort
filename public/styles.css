@@ -401,8 +401,26 @@ input[type=number] {
     font-size: 25px;
 }
 
+#select {
+    overflow: hidden;
+    height: 35px;
+}
+
+select {
+    border-right: 10px solid transparent;
+    font-size: 13px;
+    outline: none;
+    border-color: transparent;
+}
+
+select option {
+    font-size: 14px;
+}
+
 #service-gallery-container {
-    grid-template-columns: repeat(2, 1fr); gap: 6px; overflow: hidden;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 6px; 
+    overflow: hidden;
 }
 
 #gallery-img {
@@ -416,8 +434,47 @@ input[type=number] {
     overflow: hidden;
 }
 
+#slider_category {
+    background-color: #fff;
+    padding: 0 20px;
+    height: 50px;
+}
+
 #order-menu-link {
     font-size: 12px;
+}
+
+.owl-carousel .owl-stage-outer {
+    position: relative;
+    padding-left: 40px;
+}
+
+.owl-carousel .fa-angle-left, 
+.owl-carousel .fa-angle-right {
+    font-size: 22px;
+    position: absolute;
+    top: 8%;
+    color: #333;
+    height: 42px;
+    width: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.owl-carousel .fa-angle-left:hover, 
+.owl-carousel .fa-angle-right:hover {
+    color: #333;
+}
+
+.owl-carousel .fa-angle-left {
+    left: 20px;
+}
+
+.owl-carousel .fa-angle-right {
+    right: 20px;
 }
 
 #filter-mobile-container {

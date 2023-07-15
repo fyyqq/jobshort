@@ -3,13 +3,46 @@ console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bo
 
 const loader = document.querySelector('.custom-loader');
 
+// Category Slider
 $('.owl-carousel').owlCarousel({
     margin: 10,
     loop: false,
     autoWidth: true,
     items: 4,
-    nav: false,
-    dot: false
+    dot: false,
+    nav: true,
+    navText: [`<i class="fa-solid fa-angle-left"></i>`,`<i class="fa-solid fa-angle-right"></i>`],
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 2
+        },
+        1000: {
+            items: 3
+        }
+    }
+});
+
+$('.owl-prev').on('click', function(e) {
+    e.preventDefault();
+
+    if ($(this).hasClass('disabled')) {
+        $(this).css('cursor', 'not-allowed');
+    } else {
+        $('.owl-next').css('cursor', 'pointer');
+    }
+});
+
+$('.owl-next').on('click', function(e) {
+    e.preventDefault();
+
+    if ($(this).hasClass('disabled')) {
+        $(this).css('cursor', 'not-allowed');
+    } else {
+        $('.owl-prev').css('cursor', 'pointer')
+    }
 });
 
 $(document).ready(function() {

@@ -44,7 +44,10 @@ Route::prefix('user')->group(function() {
 // Route::get('/{slug}', [HomeController::class, 'services']);
 
 // Category Page
-Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('categories');
+Route::prefix('category')->group(function() {
+    Route::get('/', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('/{slug}', [CategoriesController::class, 'show'])->name('category');
+});
 
 // Notifications
 Route::prefix('notifications')->middleware(['auth'])->group(function() {

@@ -276,7 +276,7 @@ class ServicesController extends Controller
             $images = $request->input('oldImages');
         }
 
-        return $request->input('oldImages');
+        // return $request->input('oldImages');
         // return $imgArray;
         
         $service->freelancer_id = $service->freelancer_id;
@@ -286,11 +286,11 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateUpdate['category'];
         $service->price = $validateUpdate['price'];
-        // $confirmUpdate = $service->save();
+        $confirmUpdate = $service->save();
 
         $countImages = count($images);
         if ($countImages >= 5 && $confirmUpdate)  {
-            // return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
+            return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
         } else {
             return redirect()->back()->withErrors(['images' => 'Upload minimum 5 images.']);
         }
