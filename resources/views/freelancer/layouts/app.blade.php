@@ -25,6 +25,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         {{-- Izitoast --}}
         <link rel="stylesheet" href="{{ asset('izitoast/iziToast.min.css') }}">
+        {{-- MDI --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" crossorigin="anonymous">
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>

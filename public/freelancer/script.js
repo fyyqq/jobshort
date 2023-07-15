@@ -219,29 +219,35 @@ function archiveSelectedItems() {
     }    
 }
 
-function autoImage(event) {
-    if (event.files.length > 0) {
-        const fileName = event.files[0];
+// function insertImage(event) {
+//     if (event.files.length > 0) {
+//         const fileName = event.files[0];
+        
+//         const imgElement = event.previousElementSibling.previousElementSibling;
+//         const imageIcon = event.previousElementSibling;
+//         imageIcon.classList.add('d-none');
 
-        const imgTag = event.previousElementSibling;
-        const icon = event.nextElementSibling;
+//         const deleteImage = event.nextElementSibling;
+//         const deleteImageContainer = event.nextElementSibling.nextElementSibling;
+//         deleteImageContainer.classList.add('d-none');
+//         deleteImage.classList.remove('d-none');
 
-        const xmark = event.nextElementSibling.nextElementSibling;;
-        xmark.classList.remove('d-none');
-        xmark.addEventListener('click', event => {
-            event.preventDefault();
-            imgTag.removeAttribute('src');
-            imgTag.classList.add('d-none');
-            icon.classList.remove('d-none');
-            event.target.classList.add('d-none');
-        });
+//         deleteImage.addEventListener('click', e => {
+//             e.preventDefault();
+//             imgElement.removeAttribute('src');
+//             imgElement.classList.add('d-none');
+//             deleteImageContainer.classList.remove('d-none');
+//             e.target.classList.add('d-none');
+//             imageIcon.classList.remove('d-none');
+//             event.value = '';
+//             deleteImageContainer.classList.remove('text-light');
+//         });
 
-        const imageUrl = URL.createObjectURL(fileName);
-        imgTag.src = imageUrl;
-        imgTag.classList.remove('d-none');
-        icon.classList.add('d-none');
-    }
-}
+//         const imageUrl = URL.createObjectURL(fileName);
+//         imgElement.src = imageUrl;
+//         imgElement.classList.remove('d-none');
+//     }
+// }
 
 
 $(document).ready(function() {
@@ -361,104 +367,6 @@ $(document).ready(function() {
         });
     });
 
-    // Add Image on Create Service
-
-    $('#addImage').click(function(e) {
-        e.preventDefault();
-
-        const imageContainer = $('.addImageContainer')[0];
-
-        const parent = document.createElement('div');
-        parent.className = 'me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center serviceImages';
-        $(parent).css({ "height": "125px", "width": "140px", "overflow": "hidden" });
-
-        const inputFile = document.createElement('input');
-        inputFile.type = 'file';
-        inputFile.name = 'images[]';
-        inputFile.id = 'profile-img';
-        inputFile.accept = '.png, .jpg, .jpeg';
-        inputFile.onchange = function(event) {
-            if (event.target.files.length > 0) {
-                const fileName = event.target.files[0];
-                const imageUrl = URL.createObjectURL(fileName);
-    
-                const imgTag = event.target.previousElementSibling;
-                const icon = event.target.nextElementSibling;
-                const icon2 = event.target.nextElementSibling.nextElementSibling;
-                const icon3 = event.target.nextElementSibling.nextElementSibling.nextElementSibling;
-                
-                icon3.classList.add('d-none');
-                imgTag.classList.remove('d-none');
-                imgTag.src = imageUrl;
-                icon.classList.add('d-none');
-                icon2.classList.remove('d-none');
-
-                // Remove Image
-                icon2.addEventListener('click', e => {
-                    e.preventDefault();
-
-                    imgTag.classList.add('d-none');
-                    imgTag.removeAttribute('src');
-                    icon.classList.remove('d-none');
-                    icon2.classList.add('d-none');
-                    icon3.classList.remove('d-none');
-                });
-            }
-        }
-
-        const img = document.createElement('img');
-        img.className = 'w-100 h-100 d-none';
-        img.style.objectFit = 'cover';
-
-        const icon = document.createElement('i');
-        icon.className = 'fa-solid fa-image';
-        $(icon).css('font-size', '18px');
-
-        const icon2 = document.createElement('i');
-        icon2.className = 'fa-solid fa-xmark p-1 position-absolute d-none';
-        $(icon2).css({ 'font-size': '13px', 'top': '0', 'right': '0' });
-
-        const icon3 = document.createElement('i');
-        icon3.className = 'fa-solid fa-xmark p-1 position-absolute';
-        $(icon3).css({ 'font-size': '13px', 'top': '0', 'right': '0' });
-
-        imageContainer.appendChild(parent);
-        parent.appendChild(img);
-        parent.appendChild(inputFile);
-        parent.appendChild(icon);
-        parent.appendChild(icon2);
-        parent.appendChild(icon3);
-        
-        // Remove Add Image
-        $(icon3).click(function(e) {
-            e.preventDefault();
-
-            const parent = $(this).parent();
-            $(parent).remove();
-
-            const imgLength = $('.serviceImages').length;
-            $('#lengthImg')[0].innerText = '';
-            $('#lengthImg')[0].innerText = imgLength + 1;
-
-            if (imgLength <= 14) {
-                $('#addImage').removeClass('d-none');
-            }
-
-            updateScroll();
-        });
-
-        const imgLength = $('.serviceImages').length;
-        $('#lengthImg')[0].innerText = '';
-        $('#lengthImg')[0].innerText = imgLength + 1;
-
-        if (imgLength >= 14) {
-            $(this).addClass('d-none');
-        }
-
-        updateScroll();
-    });
-    
-
     $(document).on('click', '.archive-service-btn', function(e) {
         e.preventDefault();
 
@@ -526,12 +434,182 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Add Image on Create Service
+    $('#addImage').click(function(e) {
+        e.preventDefault();
+
+        const imageContainer = $('.addImageContainer')[0];
+
+        const parent = document.createElement('div');
+        parent.className = 'me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center serviceImages';
+        parent.id = 'serviceImage'
+        $(parent).css({ "height": "180px", "width": "250px", "overflow": "hidden" });
+
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.name = 'images[]';
+        inputFile.id = 'profile-img';
+        inputFile.accept = '.png, .jpg, .jpeg';
+        inputFile.onchange = function(event) {
+            if (event.target.files.length > 0) {
+                const fileName = event.target.files[0];
+                const imageUrl = URL.createObjectURL(fileName);
+    
+                const imgElement = event.target.previousElementSibling;
+                // sync icon
+                const icon0 = event.target.parentElement.childNodes[2];
+                // image icon
+                const icon = event.target.parentElement.childNodes[3];
+                // remove image icon
+                const icon2 = event.target.parentElement.childNodes[4];
+                // remove image container icon
+                const icon3 = event.target.parentElement.childNodes[5];
+                // value images
+                // const icon4 = document.createElement('input');
+                // icon4.type = "hidden";
+                // icon4.name = 'oldImages[]';
+                // icon4.value = event.target.value;
+                // parent.appendChild(icon4);
+
+                imgElement.classList.remove('d-none');
+                imgElement.src = imageUrl;
+                icon0.classList.remove('d-none');
+                icon.classList.add('d-none');
+                icon2.classList.remove('d-none');
+                icon3.classList.add('d-none');
+
+                // Remove Image
+                icon2.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    imgElement.classList.add('d-none');
+                    imgElement.removeAttribute('src');
+                    icon0.classList.add('d-none');
+                    icon.classList.remove('d-none');
+                    icon2.classList.add('d-none');
+                    icon3.classList.remove('d-none');
+                    inputFile.value = "";
+                });
+            }
+        }
+
+
+        const img = document.createElement('img');
+        img.className = 'w-100 h-100 d-none';
+        img.style.objectFit = 'cover';
+
+        const icon0 = document.createElement('i');
+        icon0.className = 'mdi mdi-sync d-none text-light position-absolute';
+        $(icon0).css({
+            'font-size': '25px',
+            'top': '50%',
+            'left': '50%',
+            'transform': 'translate(-50%, -50%)'
+        });
+
+        const icon = document.createElement('i');
+        icon.className = 'mdi mdi-image';
+        $(icon).css('font-size', '25px');
+
+        const icon2 = document.createElement('i');
+        icon2.className = 'fa-solid fa-xmark text-light p-1 position-absolute d-none';
+        $(icon2).css({ 'font-size': '13px', 'top': '0', 'right': '0' });
+
+        const icon3 = document.createElement('i');
+        icon3.className = 'fa-solid fa-xmark p-1 position-absolute';
+        $(icon3).css({ 'font-size': '13px', 'top': '0', 'right': '0' });
+
+        imageContainer.appendChild(parent);
+        parent.appendChild(img);
+        parent.appendChild(inputFile);
+        parent.appendChild(icon0);
+        parent.appendChild(icon);
+        parent.appendChild(icon2);
+        parent.appendChild(icon3);
+        
+        // Remove container add images
+        $(icon3).click(function(e) {
+            e.preventDefault();
+
+            const parent = $(this).parent();
+            $(parent).remove();
+
+            const imgLength = $('.serviceImages').length;
+            $('#lengthImg').html('');
+            $('#lengthImg').html(imgLength + 1);
+
+            if (imgLength <= 14) {
+                $('#addImage').removeClass('d-none');
+            }
+
+            updateScroll();
+        });
+
+        // add image length
+        const addImgLength = $('.serviceImages').length;
+        const countElement = document.getElementById('lengthImg');
+
+        // if (parseInt(countElement.textContent) > 1) {
+            // const calcUpdate = parseInt(countElement.textContent) + addImgLength;
+            // $(countElement).html('');
+            // $(countElement).html(calcUpdate);
+        // } else {
+            const calcAdd = addImgLength + 1;
+            $(countElement).html(calcAdd);
+        // }
+
+        if (addImgLength >= 14) {
+            $(this).addClass('d-none');
+        }
+
+
+        updateScroll();
+    });
 });
 
-const parentElement = document.getElementById('add-image-container');
-const childElement = document.getElementById('child-container');
+function insertImage(event) {
+    if (event.files.length > 0) {
+        const fileName = event.files[0];
+        
+        const imgElement = event.previousElementSibling.previousElementSibling;
+        const imageIcon = event.previousElementSibling;
+        imageIcon.classList.add('d-none');
+
+        const deleteImage = event.nextElementSibling;
+        const deleteImageContainer = event.nextElementSibling.nextElementSibling;
+        deleteImageContainer.classList.add('d-none');
+        deleteImage.classList.remove('d-none');
+
+        const syncIcon = event.parentElement.childNodes[1];
+        syncIcon.classList.remove('d-none');
+        
+        deleteImage.addEventListener('click', e => {
+            e.preventDefault();
+            imgElement.removeAttribute('src');
+            imgElement.classList.add('d-none');
+            deleteImageContainer.classList.remove('d-none');
+            e.target.classList.add('d-none');
+            imageIcon.classList.remove('d-none');
+            event.value = '';
+            deleteImageContainer.classList.remove('text-light');
+            syncIcon.classList.add('d-none');
+        });
+
+        const imageUrl = URL.createObjectURL(fileName);
+        imgElement.src = imageUrl;
+        imgElement.classList.remove('d-none');
+    }
+}
+
+function destroyImageContainer(event) {
+    $(event).parent().remove();
+}
 
 function updateScroll() {
+    const parentElement = document.getElementById('add-image-container');
+    const childElement = document.getElementById('child-container');
+    
     const parentWidth = parentElement.offsetWidth;
     const childWidth = childElement.offsetWidth;
 

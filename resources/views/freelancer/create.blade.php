@@ -21,16 +21,20 @@
                             <div class="mt-2 w-100 d-flex align-items-center justify-content-start" id="add-image-container">
                                 <div class="d-flex" id="child-container">
                                     <div>
-                                        <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 125px; width: 140px; overflow: hidden;">
+                                        <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" id="serviceImage" style="height: 180px; width: 250px; overflow: hidden;">
+                                            <i class="mdi mdi-sync position-absolute text-light d-none" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                             <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
-                                            <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return autoImage(this)">
-                                            <i class="fa-solid fa-image" style="font-size: 18px;"></i>
-                                            <i class="p-1 fa-solid fa-xmark position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                            <i class="mdi mdi-image" style="font-size: 25px;"></i>
+                                            <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
+                                            {{-- icon remove image --}}
+                                            <i class="p-1 fa-solid fa-xmark text-light position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                            {{-- icon remove image container --}}
+                                            <i class="p-1 fa-solid fa-xmark text position-absolute" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImageContainer(this)"></i>
                                         </div>
                                     </div>
                                     <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
                                     <div>
-                                        <div id="addImage" data-bs-toggle="tooltip" title="Add Images" class="border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 125px; width: 140px; overflow: hidden; cursor: pointer;">
+                                        <div id="addImage" data-bs-toggle="tooltip" title="Add Images" class="border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 180px; width: 250px; overflow: hidden; cursor: pointer;">
                                             <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
                                         </div>
                                     </div>

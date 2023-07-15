@@ -247,24 +247,53 @@ class ServicesController extends Controller
         $service = Service::where('slug', $slug)->first();
 
         $validateUpdate = $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => ['required', 'max:100'],
             'category' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+        ], [
+            'title.required' => 'Title is required.',
+            'category.required' => 'Category is required.',
+            'price.required' => 'Price is required.',
         ]);
         
-        $slug = uniqid();
-    
-        $freelancer = Freelancer::where('user_id', Auth::id())->first();
-        $service->freelancer_id = $freelancer->id;
+        // if new image was created
+        if ($request->hasFile('images')) {
+            $imgArray = [];
+            foreach ($request->file('images') as $image) {
+                $modifiedPath = uniqid() . '.' . $image->getClientOriginalExtension();
+                // $image->move(public_path('images'), $modifiedPath);
+                array_push($imgArray, $modifiedPath);
+            }
+            // if old image still have
+            if (!empty($request->input('oldImages'))) {
+                // old image & new image
+                $images = array_merge($request->input('oldImages'), $imgArray);
+            } else {
+                // if old images remove
+                $images = $imgArray;
+            }
+        } else {
+            $images = $request->input('oldImages');
+        }
+
+        return $request->input('oldImages');
+        // return $imgArray;
+        
+        $service->freelancer_id = $service->freelancer_id;
         $service->title = $validateUpdate['title'];
-        $service->slug = strtolower($slug);
-        $service->description = $validateUpdate['description'];
+        $service->slug = strtolower($service->slug);
+        $service->image = implode(',', $images);
+        $service->description = $request->input('description');
         $service->category = $validateUpdate['category'];
         $service->price = $validateUpdate['price'];
-        $service->save();
-    
-        return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
+        // $confirmUpdate = $service->save();
+
+        $countImages = count($images);
+        if ($countImages >= 5 && $confirmUpdate)  {
+            // return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
+        } else {
+            return redirect()->back()->withErrors(['images' => 'Upload minimum 5 images.']);
+        }
     }
 
     /**
