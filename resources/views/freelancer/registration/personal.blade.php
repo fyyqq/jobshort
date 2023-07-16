@@ -1,6 +1,7 @@
 @extends('freelancer.registration.layouts.app')
 
 @section('pages')
+
     <form action="{{ route('freelancer.post-registration') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row mx-0 flex-md-row flex-column-reverse">

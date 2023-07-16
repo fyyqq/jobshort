@@ -1,8 +1,8 @@
 @extends('profile.layouts.app')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
 @section('profile')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
     <header class="pb-4">
         <div class="box-title border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">

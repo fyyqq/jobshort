@@ -1,8 +1,9 @@
 @extends('profile.layouts.app')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
 @section('profile')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
+    
     <header class="px-4 pb-0 border shadow-sm" style="background-color: #fff;">
         <div class="py-4 ms-2 border-bottom">
             <h1 class="h5 mb-0 text-dark">My Address</h1>
