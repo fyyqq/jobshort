@@ -1,6 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .owl-carousel .owl-stage-outer {
+        padding-left: 0px;
+    }
+    .owl-carousel .owl-nav {
+        margin: 0px;
+    }
+    .owl-carousel .fa-angle-left, 
+    .owl-carousel .fa-angle-right {
+        font-size: 22px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-100%);
+        color: #333;
+        height: 42px;
+        width: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+</style>
     <div class="container-xl pb-5">
         <div class="my-4 ps-md-3 ps-1">
             <h1 class="h4 text-dark d-md-block d-none">{{ $service->title }}</h1>
@@ -295,72 +318,119 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 border-top"></div>
+        <div class="mt-4 border-top position-relative">
+            <div class="py-4 w-100 text-center">
+                <small class="mb-0 text-dark">Similiar Services</small>
+            </div>
+            <div class="owl-carousel owl-theme">
+                @foreach($similiar as $service)
+                    <div class="item h-auto">
+                        <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
+                            <div class="d-flex align-items-center justify-content-center flex-column">
+                                <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                    @foreach (explode(',', $service->image) as $key => $image)
+                                        @if ($key === 0)
+                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                        @endif
+                                    @endforeach
+                                    @if (!auth()->check())
+                                        <form action="{{ route('login') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="border-0" style="background: unset;">
+                                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                        <input type="hidden" value="{{ route('wishlist-service', $service->id) }}" id="wishlist_path">
+                                        <input type="hidden" value="{{ route('unwishlist-service', $service->id) }}" id="unwishlist_path">
+                                        <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                    @endif
+                                </div>
+                                <div class="p-2 w-100 mt-1">
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
+                                        <div class="d-flex align-items-center justify-content-end flex-row-reverse">
+                                            <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
+                                            <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted d-block" style="font-size: 12px;">{{ $service->category }}</small>
+                                    <div class="mt-2 d-flex align-items-center justify-content-between">
+                                        <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                        <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-@endsection
-
-{{-- Mobile Navbar --}}
-<div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-block' : 'd-none' }}">
-    <div class="" id="mobile-navbar">
-        <div class="row mx-0">
-            <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <i class="mdi mdi-message-text" style="font-size: 20px;"></i>
-                </div>  
-                <div class="d-flex align-items-center justify-content-center gap-3">
-                    <h1 class="h6 mb-0 text-dark">{{ 'RM' . $service->price }}</h1>
-                    @if (auth()->check())
-                        @if ($rejectOrCompleted)
-                            <input type="hidden" id="service_id" value="{{ $service->id }}">
-                            @if (auth()->check() && auth()->user()->roles != '0')
-                                <button type="button" class="w-100 btn btn-sm text-light px-4 py-2 order-btn" style="background-color: #2891e1;">Order</button>
-                                <form action="{{ route('profile.order') }}" method="get" class="d-none">
-                                    @csrf
-                                    <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
-                                </form>
-                            @else
-                                <form action="{{ route('login') }}" method="get">
-                                    @csrf
-                                    <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Order</button>
-                                </form>
-                            @endif
-                            <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
-                        @elseif ($pendingOrApproved)
-                            @if ($userOrder->status === 'pending')
-                                <form action="{{ route('profile.order') }}" method="get">
-                                    @csrf
-                                    <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
-                                </form>
-                            @elseif ($userOrder->status === 'approved')
-                                <form action="{{ route('profile.order-approved') }}" method="get">
-                                    @csrf
-                                    <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
-                                </form>
-                            @endif
-                        @else
-                            <input type="hidden" id="service_id" value="{{ $service->id }}">
+    {{-- Mobile Navbar --}}
+    <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-block' : 'd-none' }}">
+        <div class="" id="mobile-navbar">
+            <div class="row mx-0">
+                <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <i class="mdi mdi-message-text" style="font-size: 20px;"></i>
+                    </div>  
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <h1 class="h6 mb-0 text-dark">{{ 'RM' . $service->price }}</h1>
+                        @if (auth()->check())
+                            @if ($rejectOrCompleted)
+                                <input type="hidden" id="service_id" value="{{ $service->id }}">
                                 @if (auth()->check() && auth()->user()->roles != '0')
-                                    <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Order</button>
+                                    <button type="button" class="w-100 btn btn-sm text-light px-4 py-2 order-btn" style="background-color: #2891e1;">Order</button>
                                     <form action="{{ route('profile.order') }}" method="get" class="d-none">
                                         @csrf
-                                        <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
                                     </form>
                                 @else
                                     <form action="{{ route('login') }}" method="get">
                                         @csrf
-                                        <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Order</button>
+                                        <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Order</button>
                                     </form>
                                 @endif
-                            <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                                <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                            @elseif ($pendingOrApproved)
+                                @if ($userOrder->status === 'pending')
+                                    <form action="{{ route('profile.order') }}" method="get">
+                                        @csrf
+                                        <button type="submit" class="w-100 btn btn-sm text-light px-4 py-2" style="background-color: #2891e1;">Check Order</button>
+                                    </form>
+                                @elseif ($userOrder->status === 'approved')
+                                    <form action="{{ route('profile.order-approved') }}" method="get">
+                                        @csrf
+                                        <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                    </form>
+                                @endif
+                            @else
+                                <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                    @if (auth()->check() && auth()->user()->roles != '0')
+                                        <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Order</button>
+                                        <form action="{{ route('profile.order') }}" method="get" class="d-none">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('login') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Order</button>
+                                        </form>
+                                    @endif
+                                <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                            @endif
+                        @else
+                            <form action="{{ route('login') }}" method="get">
+                                @csrf
+                                <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
+                            </form>
                         @endif
-                    @else
-                        <form action="{{ route('login') }}" method="get">
-                            @csrf
-                            <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
-                        </form>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endsection

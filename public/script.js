@@ -25,14 +25,6 @@ $('.owl-carousel').owlCarousel({
     }
 });
 
-// $('.owl-carousel-category').owlCarousel({
-//     margin: 10,
-//     loop: false,
-//     autoWidth: true,
-//     items: 4,
-//     dot: false,
-//     nav: false,
-// });
 
 $('.owl-prev').on('click', function(e) {
     e.preventDefault();

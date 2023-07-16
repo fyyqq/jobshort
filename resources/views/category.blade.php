@@ -4,14 +4,14 @@
     <div class="container-lg">
         <div class="row mx-0">
             <div class="col-md-8 col-12 pe-2">
-                <div class="d-flex align-items-start justify-content-start gap-3 shadow-sm ps-3 pe-4 py-3 position-relative" style="background-color: #fff;">
+                <div class="d-flex align-items-start justify-content-start gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
                     <div class="rounded border" style="height: 165px; width: 230px; overflow: hidden;">
                         <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;">
                     </div>
-                    <div class="py-2 h-100">
+                    <div class="py-2">
                         <h1 class="h5 mb-2 text-dark"><i class="{{ $category['icon'] }} me-2"></i>{{ $category['name'] }}</h1>
+                        <small class="d-block lh-sm text-muted" style="font-size: 13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
                         <!-- <small class="d-block lh-sm text-muted" style="font-size: 13px;">{{ $category['about'] }}</small> -->
-                        <small class="d-block lh-sm text-muted" style="font-size: 13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia.</small>
                         <div class="position-absolute bottom-0 d-flex align-items-center justify-content-between pb-3">
                             <div class="d-flex align-items-center justify-content-start gap-1">
                                 <i class="mdi mdi-text-box-check-outline" style="font-size: 17px;"></i>
@@ -92,7 +92,7 @@
                 @else
                     <div class="d-flex align-items-center justify-content-center flex-column gap-3">
                         <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
-                        <small class="text-muted text-center">Empty Services</small>
+                        <small class="text-muted text-center">Empty Service Category</small>
                     </div>
                 @endif
                 </div>
@@ -102,18 +102,18 @@
                     <i class="mdi mdi-magnify" style="font-size: 17px;"></i>
                     <small class="mb-0 text-dark">More Categories</small>
                 </div>
-                <div class="d-grid" style="row-gap: 10px;">
+                <div class="d-md-grid d-none" style="row-gap: 10px;">
                     @foreach ($categories as $value)
                         <a href="{{ route('category', $value['slug']) }}" class="text-decoration-none">
                             <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
-                            <i class="{{ $value['icon'] }} fs-1 text-dark"></i>
-                            <h1 class="h6 text-muted">{{ $value['name'] }}</h1>
+                                <i class="{{ $value['icon'] }} fs-1 text-dark"></i>
+                                <h1 class="h6 text-muted">{{ $value['name'] }}</h1>
                             </div>
                         </a>
                     @endforeach
                     <a href="{{ route('categories') }}" class="text-decoration-none">
                         <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
-                        <i class="mdi mdi-cog fs-1 text-dark"></i>
+                        <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
                         <h1 class="h6 text-muted">More Services</h1>
                         </div>
                     </a>
