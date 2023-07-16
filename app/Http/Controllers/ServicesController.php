@@ -169,7 +169,7 @@ class ServicesController extends Controller
             'category' => ['required'],
             'price' => ['required'],
             'images' => ['required', 'min:5'],
-            'images.*' => ['image', 'mimes:png,jpg,jpeg'],
+            'images.*' => ['image', 'mimes:png,jpg,jpeg', 'size:2048'],
         ], [
             'title.required' => 'Title is required.',
             'category.required' => 'Category is required.',

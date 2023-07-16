@@ -282,11 +282,6 @@ input[type=number] {
     transform: translateY(7px);
 }
 
-.row #state option, 
-.row #city option {
-    font-size: 15px;
-}
-
 .row .suggestion-list {
     position: absolute;
     top: 105%;
@@ -514,6 +509,12 @@ select option {
     transition: height .3s ease;
 }
 
+#parent_image_category #category_image {
+    height: 165px;
+    width: 230px;
+    overflow: hidden;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;
@@ -634,6 +635,10 @@ select option {
     .searchbar:focus {
         border: 1.5px solid var(--primary-color);
     }
+    #category_image {
+        height: 145px;
+        width: 210px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -652,6 +657,13 @@ select option {
     }
     .profile #order-profile-title {
         font-size: 13px;
+    }
+    #parent_image_category {
+        width: 100%;
+    }
+    #parent_image_category #category_image {
+        /* height: 145px; */
+        width: 100%;
     }
 }
 

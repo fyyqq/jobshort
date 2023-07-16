@@ -4,13 +4,13 @@
     <div class="container-lg">
         <div class="row mx-0">
             <div class="col-md-8 col-12 pe-2">
-                <div class="d-flex align-items-start justify-content-start gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
-                    <div class="">
-                        <div class="rounded border" style="height: 165px; width: 230px; overflow: hidden;">
+                <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
+                    <div id="parent_image_category">
+                        <div class="rounded border" id="category_image">
                             <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;">
                         </div>
                     </div>
-                    <div class="py-2">
+                    <div class="pt-md-2 pb-md-2 pt-1 pb-5">
                         <h1 class="h5 mb-2 text-dark"><i class="{{ $category['icon'] }} me-2"></i>{{ $category['name'] }}</h1>
                         <small class="d-block lh-sm text-muted" style="font-size: 13px;">{{ $category['about'] }}</small>
                         <div class="position-absolute bottom-0 d-flex align-items-center justify-content-between pb-3">
