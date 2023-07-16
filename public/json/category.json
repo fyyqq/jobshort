@@ -4,139 +4,159 @@
         "name": "Programmer",
         "slug": "programmer",
         "icon": "mdi mdi-code-braces",
-        "about": "Develop and write code to create software applications, websites, and other computer programs."
+        "about": "Develop and write code to create software applications, websites, and other computer programs.",
+        "image" : "/"
     },
     {
         "id": 2,
         "name": "Designer",
         "slug": "designer",
         "icon": "mdi mdi-palette",
-        "about": "Create visual concepts, designs, and layouts for various mediums such as websites, graphics, logos, and marketing materials."
+        "about": "Create visual concepts, designs, and layouts for various mediums such as websites, graphics, logos, and marketing materials.",
+        "image" : "/designer.jpeg"
     },
     {
         "id": 3,
         "name": "Writer",
         "slug": "writer",
         "icon": "mdi mdi-pencil",
-        "about": "Create written content for various purposes such as articles, blog posts, social media posts, and marketing materials."
+        "about": "Create written content for various purposes such as articles, blog posts, social media posts, and marketing materials.",
+        "image" : "/writer.jpg"
     },
     {
         "id": 4,
         "name": "Developer",
         "slug": "developer",
         "icon": "mdi mdi-code-tags",
-        "about": "Build and maintain software applications and systems using programming languages and development tools."
+        "about": "Build and maintain software applications and systems using programming languages and development tools.",
+        "image" : "/developer.jpeg"
     },
     {
         "id": 5,
         "name": "Photographer",
         "slug": "photographer",
         "icon": "mdi mdi-camera",
-        "about": "Capture high-quality images using cameras and various photography techniques for events, products, or portraits."
+        "about": "Capture high-quality images using cameras and various photography techniques for events, products, or portraits.",
+        "image" : "/photographer.jpg"
     },
     {
         "id": 6,
         "name": "Marketing",
         "slug": "marketing",
         "icon": "mdi mdi-bullhorn",
-        "about": "Develop and implement strategies to promote products or services, including market research, advertising, and campaign management."
+        "about": "Develop and implement strategies to promote products or services, including market research, advertising, and campaign management.",
+        "image" : "/marketer.jpg"
     },
     {
         "id": 7,
         "name": "Illustrator",
         "slug": "illustrator",
         "icon": "mdi mdi-brush",
-        "about": "Create visual representations and illustrations using artistic skills and digital tools for books, magazines, or digital media."
+        "about": "Create visual representations and illustrations using artistic skills and digital tools for books, magazines, or digital media.",
+        "image" : "/"
     },
     {
         "id": 8,
         "name": "Videographer",
         "slug": "videographer",
         "icon": "mdi mdi-video",
-        "about": "Shoot and edit videos for various purposes, including events, documentaries, commercials, or online content."
+        "about": "Shoot and edit videos for various purposes, including events, documentaries, commercials, or online content.",
+        "image" : "/videographer.jpg"
     },
     {
         "id": 9,
         "name": "Translator",
         "slug": "translator",
         "icon": "mdi mdi-translate",
-        "about": "Translate written or spoken content from one language to another accurately and fluently."
+        "about": "Translate written or spoken content from one language to another accurately and fluently.",
+        "image" : "/translator.jpg"
     },
     {
         "id": 10,
         "name": "Data Analyst",
         "slug": "data-analyst",
         "icon": "mdi mdi-chart-bar",
-        "about": "Collect, analyze, and interpret complex data to help businesses make informed decisions and solve problems."
+        "about": "Collect, analyze, and interpret complex data to help businesses make informed decisions and solve problems.",
+        "image" : "/data-analyst.jpg"
     },
     {
         "id": 11,
         "name": "Content Writer",
         "slug": "content-writer",
         "icon": "mdi mdi-text-box-edit",
-        "about": "Create engaging and informative content for websites, blogs, social media, and other digital platforms."
+        "about": "Create engaging and informative content for websites, blogs, social media, and other digital platforms.",
+        "image" : "/content-writer.jpg"
     },
     {
         "id": 12,
         "name": "Graphic Design",
         "slug": "graphic-design",
         "icon": "mdi mdi-image",
-        "about": "Provide visual communication through creative design solutions for various mediums such as logos, branding, illustrations, and print materials."
+        "about": "Provide visual communication through creative design solutions for various mediums such as logos, branding, illustrations, and print materials.",
+        "image" : "/graphic-design.jpg"
     },
     {
         "id": 13,
         "name": "Web Developer",
         "slug": "web-developer",
         "icon": "mdi mdi-web",
-        "about": "Build and maintain websites using programming languages, frameworks, and content management systems."
+        "about": "Build and maintain websites using programming languages, frameworks, and content management systems.",
+        "image" : "/web-developer.jpg"
     },
     {
         "id": 14,
         "name": "UI/UX Designer",
         "slug": "ui-ux-designer",
         "icon": "mdi mdi-view-dashboard",
-        "about": "Design user interfaces and experiences for websites, mobile apps, and other digital products, focusing on usability and aesthetics."
+        "about": "Design user interfaces and experiences for websites, mobile apps, and other digital products, focusing on usability and aesthetics.",
+        "image" : "/uiux.jpg"
     },
     {
         "id": 15,
         "name": "Copywriter",
         "slug": "copywriter",
         "icon": "mdi mdi-file-document",
-        "about": "Create compelling and persuasive written content for advertisements, marketing campaigns, and promotional materials."
+        "about": "Create compelling and persuasive written content for advertisements, marketing campaigns, and promotional materials.",
+        "image" : "/copywriter.jpeg"
     },
     {
         "id": 16,
         "name": "Social Media Manager",
         "slug": "social-media-manager",
         "icon": "mdi mdi-instagram",
-        "about": "Manage and implement social media strategies, create engaging content, and interact with the audience to build brand presence."
+        "about": "Manage and implement social media strategies, create engaging content, and interact with the audience to build brand presence.",
+        "image" : "/smm.jpg"
     },
     {
         "id": 17,
         "name": "SEO Specialist",
         "slug": "seo-specialist",
         "icon": "mdi mdi-chart-timeline-variant",
-        "about": "Optimize websites and content to improve search engine rankings, increase organic traffic, and enhance online visibility."
+        "about": "Optimize websites and content to improve search engine rankings, increase organic traffic, and enhance online visibility.",
+        "image" : "/seo.jpg"
     },
     {
         "id": 18,
         "name": "Video Editor",
         "slug": "video-editor",
         "icon": "mdi mdi-video",
-        "about": "Edit and manipulate video footage, add effects, transitions, and audio to create compelling and visually appealing videos."
+        "about": "Edit and manipulate video footage, add effects, transitions, and audio to create compelling and visually appealing videos.",
+        "image" : "/video-editor.png"
     },
     {
         "id": 19,
         "name": "Project Manager",
         "slug": "project-manager",
         "icon": "mdi mdi-briefcase",
-        "about": "Plan, organize, and oversee the execution of projects, ensuring they are delivered on time, within budget, and meet the required objectives."
+        "about": "Plan, organize, and oversee the execution of projects, ensuring they are delivered on time, within budget, and meet the required objectives.",
+        "image" : "/project-manager.jpg"
     },
     {
         "id": 20,
         "name": "Network Administrator",
         "slug": "network-administrator",
         "icon": "mdi mdi-network",
-        "about": "Manage and maintain computer networks, including hardware, software, security, and troubleshooting network issues."
+        "about": "Manage and maintain computer networks, including hardware, software, security, and troubleshooting network issues.",
+        "image" : "/"
     }
 ]

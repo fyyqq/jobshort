@@ -19,6 +19,13 @@ class SearchController extends Controller
         ]);
     }
 
+    public function autocomplete(Request $request) {
+        $search = $request->input('keyword');
+        $result = Service::where('title', 'LIKE', $search . '%')->get();
+
+        return response()->json($result);
+    }
+
     // Filter
 
     public function filterSearch(string $value, string $type) {

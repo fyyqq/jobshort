@@ -84,6 +84,7 @@ Route::prefix('orders')->middleware(['auth'])->group(function() {
 Route::prefix('services')->group(function() {
     Route::prefix('search')->group(function() {
         Route::get('/', [SearchController::class, 'index'])->name('search');
+        Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
         Route::get('/{value}/sort-by/{type}', [SearchController::class, 'filterSearch']);
         Route::get('/reset/{value}', [SearchController::class, 'reset']);
     });

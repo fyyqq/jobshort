@@ -25,6 +25,15 @@ $('.owl-carousel').owlCarousel({
     }
 });
 
+// $('.owl-carousel-category').owlCarousel({
+//     margin: 10,
+//     loop: false,
+//     autoWidth: true,
+//     items: 4,
+//     dot: false,
+//     nav: false,
+// });
+
 $('.owl-prev').on('click', function(e) {
     e.preventDefault();
 
@@ -101,7 +110,7 @@ function logout() {
 
 $(document).ready(function() {
     $('.submitSearch').submit(function() {
-        var keyword = $(this).children().find('#searchbar').val();
+        var keyword = $(this).children().find('.searchbar').val();
         if (keyword.trim() != '') {
             return $(this).submit();
         } else {
@@ -131,6 +140,53 @@ function displayCountries(names) {
         element.appendChild(li);
     });
 }
+
+$(document).on('keyup', '.searchbar', function(e) {
+    var keyword = $(this).val();
+
+    const container = $('.autocomplete-container ');
+    $(container).css('display', 'block');
+
+    if (keyword.trim() != '') {
+        $.ajax({
+            url: '/services/search/autocomplete',
+            method: 'GET',
+            data: { keyword: keyword },
+            success: function(res) {
+                
+                $(container).empty();
+
+                if (res.length > 0) {
+                    $(res).each(function(index, value) {
+                        const element = `<li class="ps-3 dropdown-item py-2 autocomplete_link">${value.title}</li>`;
+                        $(container).append(element);
+                    });
+                } else {
+                    $(container).empty();
+                }
+
+            }, error: function(err) {
+                console.error(err.responseJSON.message);
+            }
+        });
+    } else {
+        $(container).css('display', 'none');
+    }
+});
+
+$(document).on('click', '.autocomplete_link', function(e) {
+    e.preventDefault();
+
+    const form = $(this).closest('form');
+    const searchbar = form.find('.searchbar');
+
+    $(searchbar).val();
+    $(searchbar).val($(this).text());
+
+    $(this).parent().empty();
+
+    $(form)[0].submit();
+});
 
 function findCountries(countries, event) {
     const inputValue = event.target.value.toLowerCase();
@@ -188,31 +244,8 @@ function chooseCountries(element, input) {
         data.addEventListener('click', e => {
             const selectCountry = input.target.value = e.target.textContent;
             element.style.display = 'none';
-            myStates(selectCountry);
         });
     });
-}
-
-const stateInput = document.querySelectorAll('#state');
-
-function myStates(value) {
-    if (value === "Malaysia") {
-        fetch('/json/states.json').then(res => res.json())
-        .then(data => {
-            data.forEach(e => {
-                stateInput.forEach(element => {
-                    element.add(new Option(e.toLowerCase(), e));
-                });
-            });
-        });
-        stateInput.forEach(element => {
-            myCity(element);
-        });
-    } else {
-        stateInput.forEach(element => {
-            element.innerHTML = "";
-        });
-    }
 }
 
 fetch('https://restcountries.com/v3.1/all')
@@ -220,36 +253,6 @@ fetch('https://restcountries.com/v3.1/all')
 .then(data => {
     allCountries(data);
 });
-
-
-
-const cityInput = document.querySelectorAll('#city');
-
-function myCity(stateInput) {
-    stateInput.addEventListener('change', e => {
-        const stateValue = e.target.value;
-    
-        cityInput.forEach(element => {
-            element.innerHTML = '';
-        });
-        
-        fetch('/json/states-cities.json')
-        .then(res => res.json())
-        .then(data => {
-            
-            const cities = data[stateValue];
-
-            cityInput.forEach(element => {
-                element.add(new Option("Select Cities", null));
-            });
-            cities.forEach(e => {
-                cityInput.forEach(element => {
-                    element.add(new Option(e.toLowerCase(), e));
-                });
-            });
-        });
-    });
-}
 
 
 const fileImage = document.getElementById('profile-img');
@@ -281,28 +284,6 @@ if (inputText && inputText.nextElementSibling) {
         fileImage.value = '';
     });
 }
-
-
-const employer = document.querySelectorAll('input[name="employer_type"]');
-const names = document.getElementById('name-title');
-const number = document.getElementById('number-title');
-
-employer.forEach(element => {
-    element.addEventListener('change', e => {
-
-        if (e.target.getAttribute('id') == 'company') {
-            names.textContent = 'Company Name';
-            number.textContent = 'Registered Business Number';
-        } else {
-            names.textContent = 'Name';
-            number.textContent = 'Identification Number';
-        }
-    });
-});
-
-
-
-
 
 $(document).ready(function() {
     $.ajaxSetup({

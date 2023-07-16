@@ -6,12 +6,13 @@
             <div class="col-md-8 col-12 pe-2">
                 <div class="d-flex align-items-start justify-content-start gap-3 shadow-sm ps-3 pe-4 py-3 position-relative" style="background-color: #fff;">
                     <div class="rounded border" style="height: 165px; width: 230px; overflow: hidden;">
-                        <img src="{{ asset('images\64b13d5be6f05.jpg') }}" class="w-100 h-100" style="object-fit: cover;">
+                        <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;">
                     </div>
+                    <!-- C:\xampp\htdocs\laravel\Jobshort\public\category\seo.jpg -->
                     <div class="py-2 h-100">
                         <h1 class="h5 mb-2 text-dark"><i class="{{ $category['icon'] }} me-2"></i>{{ $category['name'] }}</h1>
                         <!-- <small class="d-block lh-sm text-muted" style="font-size: 13px;">{{ $category['about'] }}</small> -->
-                            <small class="d-block lh-sm text-muted" style="font-size: 13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia.</small>
+                        <small class="d-block lh-sm text-muted" style="font-size: 13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia.</small>
                         <div class="position-absolute bottom-0 d-flex align-items-center justify-content-between pb-3">
                             <div class="d-flex align-items-center justify-content-start gap-1">
                                 <i class="mdi mdi-text-box-check-outline" style="font-size: 17px;"></i>
@@ -28,7 +29,7 @@
                 <div class="mt-3 row mx-0" style="{{ count($services) > 0 ? 'row-gap: 15px;' : 'height: 450px; display: grid; place-items: center;' }}">
                 @if (count($services) > 0)
                 <div class="d-flex align-items-center justify-content-between flex-row-reverse w-100 gap-md-2 gap-0">
-                    <div class="col-md-3 col-4 px-md-0 px-1">
+                    <div class="col-md-3 col-5 px-md-0 px-1">
                         <div class="rounded-3 border" id="select">
                             <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;">
                                 <option value="normal" selected>Sort By</option>
