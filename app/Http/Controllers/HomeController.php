@@ -24,9 +24,11 @@ class HomeController extends Controller
         $servicesPath = file_get_contents(public_path('json/category.json'));
         $data =  json_decode($servicesPath, true);
 
+        $categories = array_slice($data, 0, 15);
+
         return view('home', [
             "services" => Service::all(),
-            "categories" => $data
+            "categories" => $categories
         ]);
     }
 

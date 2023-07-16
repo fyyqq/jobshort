@@ -7,11 +7,15 @@
     <div class="mt-4">
         <div class="px-md-4 px-2 owl-carousel owl-theme gap-2">
             @foreach ($categories as $category)
-            <a href="{{ route('category', $category['slug']) }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
-                <i class="{{ $category['icon'] }} fs-5 text-dark"></i>
-                <small class="text-dark mb-0" style="font-size: 13px;">{{ $category['name'] }}</small>
-            </a>
+                <a href="{{ route('category', $category['slug']) }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
+                    <i class="{{ $category['icon'] }} fs-5 text-dark"></i>
+                    <small class="text-dark mb-0" style="font-size: 13px;">{{ $category['name'] }}</small>
+                </a>
             @endforeach
+            <a href="{{ route('categories') }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
+                <i class="mdi mdi-view-dashboard fs-5 text-dark"></i>
+                <small class="text-dark mb-0" style="font-size: 13px;">All Categories</small>
+            </a>
         </div>
     </div>
     <div class="container-xl">
