@@ -95,7 +95,7 @@
                                         <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                             @foreach (explode(',', $service->image) as $key => $image)
                                                 @if ($key === 0)
-                                                    <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                    <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                 @endif
                                             @endforeach
                                             @if (!auth()->check())

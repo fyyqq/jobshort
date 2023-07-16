@@ -83,7 +83,7 @@
             <div class="col-md-4 col-12 mb-md-0 mb-5">
                 <div class="d-flex align-items-center justify-content-start justify-content-md-center flex-column"id="profile-image-form">
                     <div class="rounded-3" style="width: 90px; height: 90px; overflow:hidden;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img" loading="lazy">
                     </div>
                     <div class="row mx-0 mt-3 position-relative">
                         <input type="text" id="file_text" class="form-control shadow-none border-bottom text-center border-bottom" value="Choose a file...">

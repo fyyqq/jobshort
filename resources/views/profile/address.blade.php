@@ -90,7 +90,7 @@
                 {{-- <label for="" class="form-label text-muted">Map Location</label>
                 <div class="form-floating col-12 mt-2">
                     <div class="w-100 border rounded" style="height: 250px;">
-                        <img src="https://i.stack.imgur.com/HILmr.png" class="w-100 h-100 rounded">
+                        <img src="https://i.stack.imgur.com/HILmr.png" class="w-100 h-100 rounded" loading="lazy">
                     </div>
                 </div> --}}
                 <div class="text-end mt-4 pe-0">

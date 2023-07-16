@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-2 col-1">
             <div class="profile-picture rounded-3" style="height: 45px; width: 45px; overflow: hidden;">
-                <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 h-100" style="object-fit: cover;">
+                <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
             </div>
         </div>
         <div class="col-md-10 col-11 ps-xl-2 ps-3 profile-info d-flex align-items-center justify-content-start">

@@ -7,7 +7,7 @@
                 <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
                     <div id="parent_image_category">
                         <div class="rounded border" id="category_image">
-                            <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;">
+                            <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                         </div>
                     </div>
                     <div class="pt-md-2 pb-md-2 pt-1 pb-5">
@@ -57,7 +57,7 @@
                                     <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $image)
                                             @if ($key === 0)
-                                                <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                             @endif
                                         @endforeach
                                         @if (!auth()->check())

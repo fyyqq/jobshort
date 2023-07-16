@@ -83,7 +83,7 @@
                 <div class="col-lg-4 col-12 mt-lg-4 mt-0 py-lg-0 py-4">
                     <div class="d-flex align-items-center flex-column">
                         <div class="rounded-3" id="profile-image-form" style="overflow:hidden;">
-                            <img src="{{ (auth()->user()->image == null) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->image) }}" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img">
+                            <img src="{{ (auth()->user()->image == null) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->image) }}" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img" loading="lazy">
                         </div>
                         <div class="mt-4 position-relative">
                             <input type="text" name="" id="file_text" class="form-control shadow-none border-bottom text-center border-bottom" value="Choose a file..." style="font-size: 13.5px;">

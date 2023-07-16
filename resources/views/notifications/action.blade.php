@@ -11,9 +11,9 @@
         <div class="p-3 d-flex align-items-center justify-content-start w-100" data-bs-toggle="modal" data-bs-target="{{ '#abc' . $index }}">
             <div class="dropdown-list-image mx-2">
                 @if ($user === 'admin')
-                    <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
+                    <img class="rounded-circle border" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;" loading="lazy">
                 @else
-                    <img class="rounded-circle border" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
+                    <img class="rounded-circle border" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;" loading="lazy">
                 @endif
             </div>
             <div class="font-weight-bold mx-3">
@@ -67,9 +67,9 @@
                     <div class="pt-2 pb-3 px-3 d-flex align-items-center justify-content-start gap-3 border-bottom">
                         <div class="rounded-circle border" style="height: 50px; width: 50px; overflow: hidden;">
                             @if ($user === 'admin')
-                                <img class="w-100 h-100" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;">
+                                <img class="w-100 h-100" src="{{ asset('brand/js-logo.jpg') }}" style="object-fit: cover;" loading="lazy">
                             @else
-                                <img class="w-100 h-100" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;">
+                                <img class="w-100 h-100" src="{{ $image !== null ? asset('images/' . $image) : asset('brand/unknown.png') }}" style="object-fit: cover;" loading="lazy">
                             @endif
                         </div>
                         <div class="d-flex align-items-start justify-content-center flex-column">

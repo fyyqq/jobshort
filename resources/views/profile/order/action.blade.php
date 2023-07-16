@@ -29,7 +29,7 @@
                                         <div class="d-flex align-items-start justify-content-start flex-column">
                                             <div class="px-2">
                                                 <div class="border rounded {{ $order->ratings->images != null ? 'd-block' : 'd-none' }}" style="width: 80px; height: 80px; overflow: hidden;">
-                                                    <img src="{{ asset('images/' . $order->ratings->images) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                    <img src="{{ asset('images/' . $order->ratings->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                 </div>
                                                 <div class="my-2">
                                                     @for ($i = 0; $i < $order->ratings->stars; $i++)
@@ -64,7 +64,7 @@
                                                 <label for="recipient-name" class="col-form-label">Images :</label>
                                                 <div class="mt-1 d-flex align-items-center justify-content-start" style="column-gap: 10px;">
                                                     <div class="border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 85px; width: 85px;">
-                                                        <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
+                                                        <img src="" class="w-100 h-100 d-none" style="object-fit: cover;" loading="lazy">
                                                         <input type="file" class="position-absolute w-100 h-100" name="images" id="" accept="image/png, image/jpeg, image/jpg" style="top: 0; left: 0; opacity: 0; cursor: pointer; font-size: .01px;" onchange="return autoImage(this)">
                                                         <i class="fa-regular fa-image" style="font-size: 18px;"></i>
                                                         <i class="fa-solid fa-xmark position-absolute p-1 d-none" id="remove_image" style="font-size: 13px; top: 0px; right: 0px;"></i>
@@ -113,7 +113,7 @@
                 <div class="rounded" id="order-profile-img" style="overflow: hidden;">
                     @foreach (explode(',', $order->service->image) as $key => $value)
                         @if ($key === 0)
-                            <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;">
+                            <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                         @endif
                     @endforeach
                 </div>
@@ -147,7 +147,7 @@
         <div class="d-flex align-items-center justify-content-between w-100 p-3 border-top">
             <div class="d-flex justify-content-start align-items-center flex-row">
                 <div class="rounded-circle border" id="order-freelancer-profile" style="overflow: hidden;">
-                    <img src="{{ $order->freelancer->image !== null ? asset('images/' . $order->freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
+                    <img src="{{ $order->freelancer->image !== null ? asset('images/' . $order->freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                 </div>
                 <div class="ms-3 d-flex align-items-start justify-content-center flex-column">
                     <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>

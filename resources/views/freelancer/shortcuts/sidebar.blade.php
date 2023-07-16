@@ -1,12 +1,12 @@
 <div class="sidebar shadow-sm d-md-block d-none">
     <a href="{{ route('home') }}" class="text-decoration-none sidebar-logo py-4 border-bottom d-flex align-items-center justify-content-center position-relative">
-        <img src="{{ asset('brand/jobshort.png') }}" style="width: 82px;">
+        <img src="{{ asset('brand/jobshort.png') }}" style="width: 82px;" loading="lazy">
         <span class="material-symbols-outlined rounded-circle border" id="btn_open_close">arrow_right</span>
     </a>
     <a href="{{ route('freelancer.profile') }}" id="side-profile" class="text-decoration-none profile d-flex align-items-center justify-content-start border-bottom px-4 py-3 position-relative">
         <div class="d-flex align-items-center justify-content-start flex-row">
             <div class="rounded border" style="height: 50px; width: 50px; overflow: hidden;">
-                <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
             </div>
             <div class="mt-1 pb-1 ms-3 d-flex flex-column justify-content-center">
                 <p class="text-dark mb-0 lh-sm" style="font-size: 13.5px;">{{ Str::limit(auth()->user()->freelancer->name, 17) }}</p>

@@ -105,7 +105,7 @@
         <div class="col-md-5 col-12 px-md-0 px-3">
             <div class="d-flex align-items-center justify-content-start justify-content-md-center flex-column">
                 <div class="rounded-3" style="width: 90px; height: 90px; overflow:hidden;">
-                    <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img">
+                    <img src="{{ is_null(auth()->user()->freelancer->image) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100 border" style="object-fit: cover;" id="seller_img" loading="lazy">
                 </div>
                 <div class="row mx-0 mt-3 position-relative">
                     <input type="text" name="" id="file_text" class="form-control shadow-none border-bottom text-center border-bottom" value="Choose a file...">

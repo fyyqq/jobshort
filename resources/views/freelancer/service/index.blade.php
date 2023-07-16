@@ -97,7 +97,7 @@
                                         <div class="rounded" style="height: 75px; width: 77px; overflow: hidden;">
                                             @foreach (explode(',', $service->image) as $key => $value)
                                                 @if ($key === 0)
-                                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                 @endif
                                             @endforeach
                                         </div>

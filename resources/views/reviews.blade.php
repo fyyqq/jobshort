@@ -10,7 +10,7 @@
                         <div class="rounded border" style="height: 150px; width: 200px; overflow: hidden;">
                             @foreach (explode(',', $service->image) as $key => $image)
                                 @if ($key === 0)
-                                    <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                    <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                 @endif
                             @endforeach
                         </div>
@@ -74,7 +74,7 @@
                             <div class="col-md-4 col-2">
                                 <div class="d-flex align-items-start justify-content-start gap-3">
                                     <div class="rounded-circle rounded-md" style="height: 50px; width: 50px; overflow: hidden;">
-                                        <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                     </div>
                                     <div class="d-md-flex d-none align-items-center justify-content-start">
                                         <p class="text-dark fw-bold mb-0" style="font-size: 13.5px;">{{ $review->user->name }}</p>
@@ -96,7 +96,7 @@
                                 <div class="mt-2">
                                     <p class="text-dark mb-1">{{ $review->title }}</p>
                                     <div class="my-2 rounded border" style="height: 75px; width: 75px; overflow: hidden;">
-                                        <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                     </div>
                                     <small class="text-muted">{{ $review->review }}</small>
                                 </div>

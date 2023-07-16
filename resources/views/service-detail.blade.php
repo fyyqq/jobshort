@@ -66,7 +66,7 @@
                         @foreach (explode(',', $service->image) as $key => $value)
                             <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" data-fancybox="gallery-phone" data-src="{{ asset('images/' . $value) }}">
                                 <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
-                                    <img src="{{ asset('images/' . $value) }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    <img src="{{ asset('images/' . $value) }}" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy">
                                 </div>
                             </div>
                         @endforeach
@@ -104,7 +104,7 @@
                     @foreach (explode(',', $service->image) as $key => $value)
                         @if ($key === 0)
                             <a href="{{ asset('images/' . $value) }}" class="w-100 detail-image" style="height: auto; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
+                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover" loading="lazy">
                             </a>
                         @endif
                     @endforeach
@@ -116,7 +116,7 @@
                     @foreach (explode(',', $service->image) as $key => $value)
                         @if ($key >= 1 && $key < 5)
                             <a href="{{ asset('images/' . $value) }}" class="detail-image" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover">
+                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover" loading="lazy">
                             </a>
                         @endif
                     @endforeach
@@ -137,7 +137,7 @@
                     <div class="py-3 px-md-4 px-3 shadow-sm border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
-                                <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover">
+                                <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover" loading="lazy">
                             </a>
                             <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
                                 <small class="text-dark ms-3 lh-sm">{{ $service->freelancer->name }}</small>
@@ -209,7 +209,7 @@
                                 <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border" style="background-color: #fff;">
                                     <div class="mx-3">
                                         <div class="rounded-circle border" style="height: 42px; width: 42px; overflow: hidden;">
-                                            <img src="{{ $review->user->image !== null ? asset('images/' . $review->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
+                                            <img src="{{ $review->user->image !== null ? asset('images/' . $review->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                         </div>
                                     </div>
                                     <div class="pe-4">
@@ -228,7 +228,7 @@
                                             <small class="text-dark my-1">{{ $review->title }}</small>
                                             @if ($review->image !== null)
                                                 <div class="my-2 rounded border border-dark" style="height: 65px; width: 65px; overflow: hidden;">
-                                                    <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                    <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                 </div>
                                             @endif
                                             <div class="">
@@ -330,7 +330,7 @@
                                 <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                     @foreach (explode(',', $service->image) as $key => $image)
                                         @if ($key === 0)
-                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                         @endif
                                     @endforeach
                                     @if (!auth()->check())

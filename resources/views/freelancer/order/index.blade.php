@@ -69,7 +69,7 @@
                                                         <div class="d-flex align-items-start justify-content-start flex-column">
                                                             <div class="px-2">
                                                                 <div class="border rounded {{ $order->ratings->images != null ? 'd-block' : 'd-none' }}" style="width: 80px; height: 80px; overflow: hidden;">
-                                                                    <img src="{{ asset('images/' . $order->ratings->images) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                                    <img src="{{ asset('images/' . $order->ratings->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                                 </div>
                                                                 <div class="my-2">
                                                                     @for ($i = 0; $i < $order->ratings->stars; $i++)
@@ -106,7 +106,7 @@
                                     <div class="rounded" style="height: 80px; width: 80px; overflow: hidden;">
                                         @foreach (explode(',', $order->service->image) as $key => $value)
                                             @if ($key === 0)
-                                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                             @endif
                                         @endforeach
                                     </div>
@@ -133,7 +133,7 @@
                             <div class="d-flex align-items-center justify-content-between w-100 px-3 py-3">
                                 <div class="d-flex justify-content-start align-items-center flex-row">
                                     <a href="{{ route('users', strtolower($order->user->name)) }}" id="order-img" class="rounded-circle text-decoration-none" style="overflow: hidden;">
-                                        <img src="{{ asset('images/' . $order->user->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                        <img src="{{ asset('images/' . $order->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                     </a>
                                     <div class="ms-3 d-flex align-items-center justify-content-center">
                                         <small class="mb-0 text-dark fw-bold" style="font-size: 14px;">{{ $order->user->name }}</small>

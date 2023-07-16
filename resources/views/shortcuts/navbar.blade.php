@@ -17,7 +17,7 @@
             <ul class="autocomplete-container ps-0 position-absolute w-100 shadow-sm"></ul>
         </form>
         <a class="navbar-brand d-md-block d-none" href="{{ route('home') }}">
-            <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;">
+            <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" loading="lazy">
         </a>
         @if (Route::currentRouteName() != 'home')
             <a class="navbar-brand d-md-none d-block py-2 px-3" style="cursor: pointer;" onclick="return goToPreviousPage()">
@@ -25,7 +25,7 @@
             </a>
         @else
             <a class="navbar-brand d-md-none d-block" href="{{ route('home') }}">
-                <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" id="logo-company">
+                <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" id="logo-company" loading="lazy">
                 <!-- <i class="mdi mdi-close-circle-outline d-none" style="font-size: 20px;"></i> -->
             </a>
         @endif
@@ -57,7 +57,7 @@
                 <li class="nav-item dropdown d-flex align-items-center">
                     <span class="rounded-circle dropdown-navbar border border-secondary" type="button" data-bs-toggle="dropdown" style="height: 41px; width: 41px;">
                         @if (Auth::check())
-                            <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;">
+                            <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 rounded-circle h-100" style="object-fit: cover;" loading="lazy">
                         @endif
                     </span>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-138px, 5px); width: 180px;">

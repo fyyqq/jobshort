@@ -35,7 +35,7 @@
                 </a>
                 <li class="nav-item dropdown d-flex align-items-center">
                     <div class="rounded-circle shadow-sm" style="height: 38px; width: 38px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
-                        <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;">
+                        <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                     </div>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-120px, 5px); width: 160px;">
                         <li>

@@ -7,7 +7,7 @@
                 <div class="border-bottom py-4 d-flex align-items-center justify-content-start">
                     <div class="w-100 d-flex align-items-center justify-content-start gap-4 position-relative">
                         <div class="rounded-3 border" style="height: 80px; width: 80px; overflow: hidden;">
-                            <img src="{{ $freelancer->image !== null ? asset('images/' . $freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
+                            <img src="{{ $freelancer->image !== null ? asset('images/' . $freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                         </div>
                         <div class="d-flex flex-column align-items-start justify-content-center">
                             <small class="fw-bold mb-0 lh-1">{{ $freelancer->name }}</small>
@@ -147,7 +147,7 @@
                                                 <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
                                                     @foreach (explode(',', $service->image) as $key => $image)
                                                         @if ($key === 0)
-                                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;">
+                                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                         @endif
                                                     @endforeach
                                                     @if (!auth()->check())

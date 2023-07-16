@@ -24,7 +24,7 @@
                                     <div>
                                         <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" id="serviceImage" style="height: 180px; width: 250px; overflow: hidden;">
                                             <i class="mdi mdi-sync position-absolute text-light d-none" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                            <img src="" class="w-100 h-100 d-none" style="object-fit: cover;">
+                                            <img src="" class="w-100 h-100 d-none" style="object-fit: cover;" loading="lazy">
                                             <i class="mdi mdi-image" style="font-size: 25px;"></i>
                                             <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
                                             {{-- icon remove image --}}
