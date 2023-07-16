@@ -47,6 +47,7 @@ Route::prefix('user')->group(function() {
 Route::prefix('category')->group(function() {
     Route::get('/', [CategoriesController::class, 'index'])->name('categories');
     Route::get('/{slug}', [CategoriesController::class, 'show'])->name('category');
+    Route::get('/{name}/sort-by/{type}', [CategoriesController::class, 'filter']);
 });
 
 // Notifications

@@ -433,7 +433,6 @@ input[type=number] {
 
 select {
     border-right: 10px solid transparent;
-    font-size: 13px;
     outline: none;
     border-color: transparent;
 }

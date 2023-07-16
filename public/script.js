@@ -701,10 +701,9 @@ function resetFilter() {
 // users filter
 function filterCategories(element) {
     loader.style.display = 'block';
-    const freelancer_name = element.parentElement.parentElement.previousElementSibling.value;
+    const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();;
     const optionSelected = element.options[element.selectedIndex].value;
 
-    
     const container = $('#display-user-services');
     
     axios.get(`/user/${freelancer_name}/filter-category/${optionSelected}`)
@@ -720,7 +719,7 @@ function filterCategories(element) {
 
 function sortService(element) {
     loader.style.display = 'block';
-    const freelancer_name = element.parentElement.parentElement.nextElementSibling.value;
+    const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();
     const optionSelected = element.options[element.selectedIndex].value;
 
     const container = $('#display-user-services');
@@ -733,6 +732,23 @@ function sortService(element) {
             $(container).html(res.data);
         }, 1500);
     });
+}
+
+function sortCategoryService(element) {
+    loader.style.display = 'block';
+    const category_name = $(element).closest('.d-flex').find('#category_name').val();
+    const optionSelected = element.options[element.selectedIndex].value;
+
+    const container = $('#service_container');
+
+    axios.get(`/category/${category_name}/sort-by/${optionSelected}`)
+    .then(res => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            $(container).html('');
+            $(container).html(res.data);
+        }, 1500);
+    }).catch(err => console.log(err.response.data.message));
 }
 
 function openFilter(element) {

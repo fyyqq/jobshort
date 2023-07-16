@@ -112,7 +112,7 @@
                         <div class="d-flex align-items-center justify-content-end w-100 gap-md-2 gap-0">
                             <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
                                 <div class="rounded-3 border" id="select">
-                                    <select name="" class="ps-3 w-100 text-dark h-100" onchange="return sortService(this)">
+                                    <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return sortService(this)">
                                         <option value="normal" selected>Sort By</option>
                                         <option value="latest">Latest</option>
                                         <option value="oldest">Oldest</option>
@@ -128,7 +128,7 @@
                             <input type="hidden" value="{{ $freelancer->name }}" id="freelancer-name">
                             <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
                                 <div class="rounded-3 border" id="select">
-                                    <select name="" class="ps-3 w-100 text-dark h-100" onchange="return filterCategories(this)">
+                                    <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return filterCategories(this)">
                                         <option value="all">Categories</option>
                                         @foreach ($services->pluck('category') as $value)
                                             <option value="{{ $value }}">{{ $value }}</option>

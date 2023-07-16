@@ -31,7 +31,7 @@
                 <div class="d-flex align-items-center justify-content-between flex-row-reverse w-100 gap-md-2 gap-0">
                     <div class="col-md-3 col-5 px-md-0 px-1">
                         <div class="rounded-3 border" id="select">
-                            <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;">
+                            <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return sortCategoryService(this)">
                                 <option value="normal" selected>Sort By</option>
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
@@ -43,11 +43,13 @@
                                 <option value="lowest-price">Lowest Price</option>
                             </select>
                         </div>
+                        <input type="hidden" id="category_name" value="{{ $category['name'] }}">
                     </div>
                     <div class="px-1">
                         <small class="text-dark">{{ count($services) }} results</small>
                     </div>
                 </div>
+                <span id="service_container" class="row mx-0">
                     @foreach ($services as $key => $service)
                         <div class="col-sm-6 col-12">
                             <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
@@ -90,6 +92,7 @@
                             </a>
                         </div>
                     @endforeach
+                </span>
                 @else
                     <div class="d-flex align-items-center justify-content-center flex-column gap-3">
                         <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
