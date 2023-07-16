@@ -14,7 +14,7 @@ class WishlistController extends Controller
     public function index()
     {
         return view('profile.wishlists', [
-            "wishlists" => Wishlist::where('user_id', Auth::id())->get()
+            "wishlists" => Wishlist::with('service')->where('user_id', Auth::id())->get()
         ]);
     }
 

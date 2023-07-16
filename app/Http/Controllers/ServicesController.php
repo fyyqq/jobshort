@@ -22,8 +22,8 @@ class ServicesController extends Controller
     public function index() 
     {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
-        
+        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
+
         return view('freelancer.service.index', [
             "services" => $service
         ]);
@@ -31,7 +31,7 @@ class ServicesController extends Controller
     
     public function all() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::where('freelancer_id', $freelancer->id)->latest()->get();
+        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
 
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $service]);
@@ -42,7 +42,7 @@ class ServicesController extends Controller
     
     public function active() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
+        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
 
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $service]);
@@ -53,7 +53,7 @@ class ServicesController extends Controller
     
     public function archive() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::where('freelancer_id', $freelancer->id)->where('status', 'archive')->latest()->get();
+        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'archive')->latest()->get();
 
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $service]);

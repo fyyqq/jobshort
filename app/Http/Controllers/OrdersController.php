@@ -21,13 +21,17 @@ class OrdersController extends Controller
     public function index()
     {
         return view('freelancer.order.index', [ 
-            "orders" => Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'pending')->get()
+            "orders" => Order::with(['service', 'rating', 'user'])
+            ->where('freelancer_id', auth()->user()->freelancer->id)
+            ->where('status', 'pending')->get()
         ]);
     }
     
     public function pending()
     {
-        $orders = Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'pending')->get();
+        $orders = Order::with(['service', 'rating', 'user'])
+        ->where('freelancer_id', auth()->user()->freelancer->id)
+        ->where('status', 'pending')->get();
 
         if (request()->ajax()) {
             return view('freelancer.order.action', ["orders" => $orders]);
@@ -38,7 +42,9 @@ class OrdersController extends Controller
     
     public function approved()
     {
-        $orders = Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'approved')->get();
+        $orders = Order::with(['service', 'rating', 'user'])
+        ->where('freelancer_id', auth()->user()->freelancer->id)
+        ->where('status', 'approved')->get();
      
         if (request()->ajax()) {
             return view('freelancer.order.action', ["orders" => $orders]);
@@ -49,7 +55,9 @@ class OrdersController extends Controller
     
     public function rejected()
     {
-        $orders = Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'rejected')->get();
+        $orders = Order::with(['service', 'rating', 'user'])
+        ->where('freelancer_id', auth()->user()->freelancer->id)
+        ->where('status', 'rejected')->get();
         
         if (request()->ajax()) {
             return view('freelancer.order.action', ["orders" => $orders]);
@@ -60,7 +68,9 @@ class OrdersController extends Controller
     
     public function completed()
     {
-        $orders = Order::where('freelancer_id', auth()->user()->freelancer->id)->where('status', 'completed')->get();
+        $orders = Order::with(['service', 'rating', 'user'])
+        ->where('freelancer_id', auth()->user()->freelancer->id)
+        ->where('status', 'completed')->get();
         
         if (request()->ajax()) {
             return view('freelancer.order.action', ["orders" => $orders]);

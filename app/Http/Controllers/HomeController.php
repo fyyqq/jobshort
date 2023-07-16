@@ -32,12 +32,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function showService(string $slug) {
-        $service = Service::where('slug', $slug)->first();
+    public function show(string $slug) {
+        $service = Service::with('freelancer')->where('slug', $slug)->first();
         
         return view('service-detail', [
-            "service" => Service::where('slug', $slug)->first(),
-            "services" => Service::all(),
+            "service" => $service,
             "reviews" => Rating::where('service_id', $service->id)->limit(5)->get(),
             "similiar" => Service::where('category', $service->category)->get()
         ]);

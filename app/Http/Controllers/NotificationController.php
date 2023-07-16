@@ -49,7 +49,6 @@ class NotificationController extends Controller
         }
     }
 
-
     public function readMessage(string $id) {
         $notification = Notification::whereJsonContains('data->id', $id)->first();
         $notification->read_at = now();

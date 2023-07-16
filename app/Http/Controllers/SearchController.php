@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function index(Request $request) {
         $search = $request->input('keyword');
 
-        $result = Service::where('title', 'LIKE', '%' . $search . '%')
+        $result = Service::with('rating')->where('title', 'LIKE', '%' . $search . '%')
         ->orWhere('category', 'LIKE', '%' . $search . '%')->get();
 
         return view('search', [

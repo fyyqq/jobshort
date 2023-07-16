@@ -26,7 +26,7 @@ class CategoriesController extends Controller
         }
         
         $services = Service::where('category', $categoryName)->get();
-        $serviceCount = Service::where('category', $categoryName)->first();
+        $serviceCount = Service::with(['order', 'rating'])->where('category', $categoryName)->first();
 
         $filterCategories = array_filter($data, function($category) use ($slug) {
             return $category['slug'] !== $slug;

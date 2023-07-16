@@ -13,20 +13,14 @@ use Illuminate\Support\Facades\Notification;
 class RatingController extends Controller
 {
     public function index(string $slug) {
-        $service = Service::where('slug', $slug)->first();
+        $service = Service::with(['rating', 'order'])->where('slug', $slug)->first();
 
         return view('reviews', [
-            "reviews" => Rating::where('service_id', $service->id)->get(),
+            "reviews" => $service->rating,
             "service" => $service
         ]);
     }
-
-    public function view(string $slug) {
-        return view('freelancer.applicant.ratings', [
-            "data" => Order::where('slug', $slug)->first()
-        ]);
-    }
-
+    
     public function store(Request $request) {
 
         if ($request->hasFile('images')) {

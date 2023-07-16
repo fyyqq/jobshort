@@ -89,7 +89,7 @@ Route::prefix('services')->group(function() {
         Route::get('/reset/{value}', [SearchController::class, 'reset']);
     });
 
-    Route::get('/{slug}', [HomeController::class, 'showService'])->name('services');
+    Route::get('/{slug}', [HomeController::class, 'show'])->name('services');
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
     Route::get('/payment/{slug}', [PaymentController::class, 'index'])->name('payment');
 });
@@ -139,7 +139,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::get('/notification', [FreelancerController::class, 'notification'])->name('freelancer.notification');
         Route::prefix('profile')->group(function() {
             Route::get('/', [FreelancerController::class, 'profile'])->name('freelancer.profile');
-            Route::put('/{id}', [FreelancerController::class, 'updateProfile'])->name('freelancer.profile-update');
+            Route::put('/{id}', [FreelancerController::class, 'update'])->name('freelancer.profile-update');
             Route::prefix('address')->group(function() {
                 Route::get('/', [FreelancerController::class, 'address'])->name('freelancer.profile-address');
                 Route::put('/{id}', [FreelancerController::class, 'updateAddress'])->name('freelancer.address-update');

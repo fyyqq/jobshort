@@ -25,7 +25,7 @@ class FreelancerController extends Controller
         $decode_data = json_decode($skills_path);        
         $dataFreelancer = Freelancer::where('user_id', Auth::id())->first();
 
-        return view('freelancer.profile.profile', [
+        return view('freelancer.profile.index', [
             "data" => $dataFreelancer,
             "skills" => $decode_data
         ]);
@@ -75,37 +75,8 @@ class FreelancerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slug)
-    {
-        // $jobs = Job::where('slug', $slug)->first();
-        
-        $validateUpdate = $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
-            'category' => 'required',
-            'salary' => 'nullable',
-            'date' => 'nullable',
-            'address' => 'required'
-        ]);
-        
-        $slug = Str::slug($request->input('title')) . '_' . uniqid();
 
-        // $employer = Employer::where('user_id', Auth::id())->first();
-        // $jobs->freelancer_id = $freelancer->id;
-        // $jobs->type = $request->input('type');
-        // $jobs->title = $validateUpdate['title'];
-        // $jobs->slug = strtolower($slug);
-        // $jobs->description = $validateUpdate['description'];
-        // $jobs->category = $validateUpdate['category'];
-        // $jobs->salary = $validateUpdate['salary'];
-        // $jobs->date = $validateUpdate['date'];
-        // $jobs->address = $validateUpdate['address'];
-        // $jobs->save();
-
-        return redirect()->route('freelancer.services')->with('success', 'My Service has been updated'); 
-    }
-
-    public function updateProfile(Request $request, string $id) 
+    public function update(Request $request, string $id) 
     {
         $freelancer = Freelancer::where('user_id', $id)->first();
 
