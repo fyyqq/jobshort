@@ -1,11 +1,11 @@
 [
     {
         "id": 1,
-        "name": "Programmer",
-        "slug": "programmer",
-        "icon": "mdi mdi-code-braces",
-        "about": "Develop and write code to create software applications, websites, and other computer programs.",
-        "image" : "/"
+        "name": "Virtual Assistant",
+        "slug": "virtual-assistant",
+        "icon": "mdi mdi-account-tie",
+        "about": "Provide remote administrative, technical, or creative assistance to clients, such as managing emails, scheduling appointments, conducting research, or social media management.",
+        "image" : "/virtual-assistant.jpg"
     },
     {
         "id": 2,
@@ -53,7 +53,7 @@
         "slug": "illustrator",
         "icon": "mdi mdi-brush",
         "about": "Create visual representations and illustrations using artistic skills and digital tools for books, magazines, or digital media.",
-        "image" : "/"
+        "image" : "/illustrator.jpg"
     },
     {
         "id": 8,
@@ -153,10 +153,10 @@
     },
     {
         "id": 20,
-        "name": "Network Administrator",
-        "slug": "network-administrator",
-        "icon": "mdi mdi-network",
-        "about": "Manage and maintain computer networks, including hardware, software, security, and troubleshooting network issues.",
-        "image" : "/"
+        "name": "Mobile App Developer",
+        "slug": "mobile-app-developer",
+        "icon": "mdi mdi-cellphone",
+        "about": "Develop mobile applications for various platforms such as iOS and Android, using programming languages like Swift, Kotlin, or React Native.",
+        "image" : "/mobile-app.jpg"
     }
 ]

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
     <div class="mt-4">
-        <div class="px-md-3 px-2 owl-carousel owl-theme gap-2">
+        <div class="px-md-4 px-2 owl-carousel owl-theme gap-2">
             @foreach ($categories as $category)
             <a href="{{ route('category', $category['slug']) }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
                 <i class="{{ $category['icon'] }} fs-5 text-dark"></i>

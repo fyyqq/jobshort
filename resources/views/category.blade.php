@@ -8,7 +8,6 @@
                     <div class="rounded border" style="height: 165px; width: 230px; overflow: hidden;">
                         <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;">
                     </div>
-                    <!-- C:\xampp\htdocs\laravel\Jobshort\public\category\seo.jpg -->
                     <div class="py-2 h-100">
                         <h1 class="h5 mb-2 text-dark"><i class="{{ $category['icon'] }} me-2"></i>{{ $category['name'] }}</h1>
                         <!-- <small class="d-block lh-sm text-muted" style="font-size: 13px;">{{ $category['about'] }}</small> -->
