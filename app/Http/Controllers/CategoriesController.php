@@ -65,12 +65,12 @@ class CategoriesController extends Controller
             case 'highest-rating':
                 $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderByDesc('stars');
-                }])->where('freelancer_id', $freelancer->id)->get();
+                }])->where('category', $name)->get();
                 break;
             case 'lowest-rating':
                 $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderBy('stars', 'asc');
-                }])->where('freelancer_id', $freelancer->id)->get();
+                }])->where('category', $name)->get();
                 break;
             case 'highest-price': 
                 $filter = $services->orderBy('price', 'desc')->get();
