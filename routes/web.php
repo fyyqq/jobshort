@@ -44,7 +44,8 @@ Route::prefix('user')->group(function() {
 // Route::get('/{slug}', [HomeController::class, 'services']);
 
 // Category Page
-Route::prefix('category')->group(function() {
+
+Route::prefix('categories')->group(function() {
     Route::get('/', [CategoriesController::class, 'index'])->name('categories');
     Route::get('/{slug}', [CategoriesController::class, 'show'])->name('category');
     Route::get('/{name}/sort-by/{type}', [CategoriesController::class, 'filter']);

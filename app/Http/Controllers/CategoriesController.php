@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function index() {
-        return Service::all();
+        $pathCategories = file_get_contents(public_path('json/category.json'));
+        $data = json_decode($pathCategories, true);
+
+        return view('categories', [
+            "categories" => $data
+        ]);
     }
 
     public function show(string $slug) {

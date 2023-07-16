@@ -515,6 +515,16 @@ select option {
     overflow: hidden;
 }
 
+#box_categories {
+    height: 150px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+#box_categories:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    transition: box-shadow .3s ease-in-out;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;

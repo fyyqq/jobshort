@@ -49,7 +49,7 @@
                         <small class="text-dark">{{ count($services) }} results</small>
                     </div>
                 </div>
-                <span id="service_container" class="row mx-0">
+                <span id="service_container" class="row mx-0" style="row-gap: 15px;">
                     @foreach ($services as $key => $service)
                         <div class="col-sm-6 col-12">
                             <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
