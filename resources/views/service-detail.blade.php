@@ -2,6 +2,12 @@
 
 @section('content')
 <style>
+    .owl-carousel .owl-item {
+    }
+    .owl-carousel .owl-item .item {
+        width: 320px;
+        background-color: transparent;
+    }
     .owl-carousel .owl-stage-outer {
         padding-left: 0px;
     }
@@ -348,7 +354,7 @@
                                     @endif
                                 </div>
                                 <div class="p-2 w-100 mt-1">
-                                    <div class="d-flex align-items-center justify-content-start">
+                                    <div class="lh-sm d-flex align-items-center justify-content-start">
                                         <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
                                         <div class="d-flex align-items-center justify-content-end flex-row-reverse">
                                             <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
@@ -364,7 +370,7 @@
                                             return $category['slug'] === $category_name;
                                         });
                                     ?>
-                                    <small class="text-muted d-block" style="font-size: 12px;"></small>
+                                    <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                                     <div class="mt-2 d-flex align-items-center justify-content-between">
                                         <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
                                         <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>

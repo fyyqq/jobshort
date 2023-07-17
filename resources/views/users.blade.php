@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-10">
                             <div class="d-flex align-items-center justify-content-start">
-                                <small class="text-muted">{{ count($services) }} services</small>
+                                <small class="text-muted">{{ count($freelancer->service->where('status', 'active')) }} services</small>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="px-sm-3 px-0 m-0 d-flex align-items-center justify-content-between">
                         <div class="col-md-3 col-2 d-sm-block d-none px-0">
-                            <small class="text-dark d-block" style="font-size: 13.5px;"><span id="filter-count">{{ count($services) }}</span> Results</small>
+                            <small class="text-dark d-block" style="font-size: 13.5px;"><span id="filter-count">{{ count($freelancer->service->where('status', 'active')) }}</span> Results</small>
                         </div>
                         <div class="d-flex align-items-center justify-content-end w-100 gap-md-2 gap-0">
                             <div class="col-md-5 col-sm-4 col-6 px-md-0 px-1">
@@ -130,68 +130,76 @@
                                 <div class="rounded-3 border" id="select">
                                     <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return filterCategories(this)">
                                         <option value="all">Categories</option>
-                                        @foreach ($services->pluck('category') as $value)
-                                            <option value="{{ $value }}">{{ $value }}</option>
-                                        @endforeach
+                                            @foreach ($freelancer->service->pluck('category')->unique() as $value)
+                                                <?php
+                                                    $category_name = $value;
+                                                    $pathCategories = file_get_contents(public_path('json/category.json'));
+                                                    $data = json_decode($pathCategories, true);
+                                                    
+                                                    $filter = array_filter($data, function($category) use($category_name) {
+                                                        return $category['slug'] === $category_name;
+                                                    });
+                                                ?>
+                                                <option value="{{ $value }}">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        <div class="py-3 px-0">
-                            <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services" style="row-gap: 15px;">
-                                @foreach ($services as $service)
-                                    <div class="col-sm-6 col-12">
-                                        <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
-                                            <div class="d-flex align-items-center justify-content-center flex-column">
-                                                <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
-                                                    @foreach (explode(',', $service->image) as $key => $image)
-                                                        @if ($key === 0)
-                                                            <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-                                                        @endif
-                                                    @endforeach
-                                                    @if (!auth()->check())
-                                                        <form action="{{ route('login') }}" method="get">
-                                                            @csrf
-                                                            <button type="submit" class="border-0" style="background: unset;">
-                                                                <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                                            </button>
-                                                        </form>
-                                                    @else
-                                                        <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                                        <input type="hidden" value="{{ route('wishlist-service', $service->id) }}" id="wishlist_path">
-                                                        <input type="hidden" value="{{ route('unwishlist-service', $service->id) }}" id="unwishlist_path">
-                                                        <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                    <div class="py-3 px-0">
+                        <div class="row mx-0 d-flex justify-content-start align-items-center" id="display-user-services" style="row-gap: 15px;">
+                            @foreach ($freelancer->service->where('status', 'active') as $service)
+                                <div class="col-sm-6 col-12">
+                                    <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
+                                        <div class="d-flex align-items-center justify-content-center flex-column">
+                                            <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                                @foreach (explode(',', $service->image) as $key => $image)
+                                                    @if ($key === 0)
+                                                        <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                     @endif
+                                                @endforeach
+                                                @if (!auth()->check())
+                                                    <form action="{{ route('login') }}" method="get">
+                                                        @csrf
+                                                        <button type="submit" class="border-0" style="background: unset;">
+                                                            <i class="fa-regular fa-heart position-absolute" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                    <input type="hidden" value="{{ route('wishlist-service', $service->id) }}" id="wishlist_path">
+                                                    <input type="hidden" value="{{ route('unwishlist-service', $service->id) }}" id="unwishlist_path">
+                                                    <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                                @endif
+                                            </div>
+                                            <div class="p-2 w-100 mt-1">
+                                                <div class="lh-sm d-flex align-items-center justify-content-start">
+                                                    <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
+                                                    <div class="d-flex align-items-center justify-content-end flex-row-reverse">
+                                                        <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
+                                                        <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
+                                                    </div>
                                                 </div>
-                                                <div class="p-2 w-100 mt-1">
-                                                    <div class="d-flex align-items-center justify-content-start">
-                                                        <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
-                                                        <div class="d-flex align-items-center justify-content-end flex-row-reverse">
-                                                            <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>
-                                                            <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                        $category_name = $service->category;
-                                                        $pathCategories = file_get_contents(public_path('json/category.json'));
-                                                        $data = json_decode($pathCategories, true);
-                                                        
-                                                        $filter = array_filter($data, function($category) use($category_name) {
-                                                            return $category['slug'] === $category_name;
-                                                        });
-                                                    ?>
-                                                    <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
-                                                    <div class="mt-2 d-flex align-items-center justify-content-between">
-                                                        <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
-                                                        <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
-                                                    </div>
+                                                <?php
+                                                    $category_name = $service->category;
+                                                    $pathCategories = file_get_contents(public_path('json/category.json'));
+                                                    $data = json_decode($pathCategories, true);
+                                                    
+                                                    $filter = array_filter($data, function($category) use($category_name) {
+                                                        return $category['slug'] === $category_name;
+                                                    });
+                                                ?>
+                                                <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
+                                                <div class="mt-2 d-flex align-items-center justify-content-between">
+                                                    <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                                    <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
                                                 </div>
                                             </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

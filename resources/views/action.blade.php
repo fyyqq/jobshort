@@ -1,4 +1,4 @@
-@foreach ($services as $service)
+@foreach ($services->where('status', 'active') as $service)
     <div class="col-sm-6 col-12">
         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
             <div class="d-flex align-items-center justify-content-center flex-column">
@@ -23,7 +23,7 @@
                     @endif
                 </div>
                 <div class="p-2 w-100 mt-1">
-                    <div class="d-flex align-items-center justify-content-start">
+                    <div class="lh-sm d-flex align-items-center justify-content-start">
                         <p class="mb-0 text-dark" style="width: 95%; font-size: 14.5px;">{{ Str::limit($service->title, 35) }}</p>
                         <div class="d-flex align-items-center justify-content-end flex-row-reverse">
                             <i class="fa-solid fa-star text-warning" style="font-size: 13.5px;"></i>

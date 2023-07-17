@@ -3,7 +3,7 @@ console.log("%c" + "Jobshort", "color: #2891e1; font-size: 40px; font-weight: bo
 
 const loader = document.querySelector('.custom-loader');
 
-// Category Slider
+// Slider
 $('.owl-carousel').owlCarousel({
     margin: 10,
     loop: false,
@@ -25,26 +25,25 @@ $('.owl-carousel').owlCarousel({
     }
 });
 
+// $('.owl-prev').on('click', function(e) {
+//     e.preventDefault();
 
-$('.owl-prev').on('click', function(e) {
-    e.preventDefault();
+//     if ($(this).hasClass('disabled')) {
+//         $(this).css('cursor', 'not-allowed');
+//     } else {
+//         $('.owl-next').css('cursor', 'pointer');
+//     }
+// });
 
-    if ($(this).hasClass('disabled')) {
-        $(this).css('cursor', 'not-allowed');
-    } else {
-        $('.owl-next').css('cursor', 'pointer');
-    }
-});
+// $('.owl-next').on('click', function(e) {
+//     e.preventDefault();
 
-$('.owl-next').on('click', function(e) {
-    e.preventDefault();
-
-    if ($(this).hasClass('disabled')) {
-        $(this).css('cursor', 'not-allowed');
-    } else {
-        $('.owl-prev').css('cursor', 'pointer')
-    }
-});
+//     if ($(this).hasClass('disabled')) {
+//         $(this).css('cursor', 'not-allowed');
+//     } else {
+//         $('.owl-prev').css('cursor', 'pointer')
+//     }
+// });
 
 $(document).ready(function() {
     $(".fancybox").fancybox({
