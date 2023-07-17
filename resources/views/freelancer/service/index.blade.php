@@ -86,7 +86,7 @@
                         <p class="mb-0 text-muted mt-3">No Services Yet.</p>
                     </div>
                     <div class="w-100 row mx-0" id="parent-show-services" style="row-gap: 7px;">
-                        @foreach ($services as $service)
+                        @foreach ($services as $index => $service)
                             <div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
                                 <div class="col-1 px-0 d-flex align-items-center justify-content-center">
                                     <input type="checkbox" id="select-jobs">
@@ -102,10 +102,19 @@
                                             @endforeach
                                         </div>
                                     </a>
+                                    <?php
+                                        $category_name = $service->category;
+                                        $pathCategories = file_get_contents(public_path('json/category.json'));
+                                        $data = json_decode($pathCategories, true);
+                                        
+                                        $filter = array_filter($data, function($category) use($category_name) {
+                                            return $category['slug'] === $category_name;
+                                        });
+                                    ?>
                                     <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                                         <small class="text-dark d-lg-block d-none text-break lh-sm">{{ Str::limit($service->title, 30) }}</small>
                                         <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 15) }}</small>
-                                        <small class="mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
+                                        <small class="mb-0 text-muted" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                                         <div class="d-flex align-items-center justify-content-between mt-2 w-100">
                                             <small class="mb-0 text-dark">${{ $service->price }}</small>
                                             <div class="d-lg-none d-flex flex-row-reverse">
@@ -169,19 +178,20 @@
         </div>
     </div>
 
-    <script>    
-        @if (session('success'))
-            $(document).ready(function() {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '{{ session('success') }}',
-                    showConfirmButton: false,
-                    timer: 1800
-                });
-            });
-        @endif
-    </script>
 @endsection
+
+<script>
+    // @if (session('success'))
+    //     $(document).ready(function() {
+    //         Swal.fire({
+    //             position: 'center',
+    //             icon: 'success',
+    //             title: '{{ session('success') }}',
+    //             showConfirmButton: false,
+    //             timer: 1800
+    //         });
+    //     });
+    // @endif
+</script>
 
 

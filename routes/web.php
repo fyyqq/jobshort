@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatifyController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\FreelancerRegistrationController;
@@ -41,14 +41,12 @@ Route::prefix('user')->group(function() {
     Route::get('/{name:freelancer}/filter-category/{service:category}', [ProfileController::class, 'category']);
     Route::get('/{name:freelancer}/sort-by/{type}', [ProfileController::class, 'sortFilter']);
 });
-// Route::get('/{slug}', [HomeController::class, 'services']);
 
 // Category Page
-
 Route::prefix('categories')->group(function() {
-    Route::get('/', [CategoriesController::class, 'index'])->name('categories');
-    Route::get('/{slug}', [CategoriesController::class, 'show'])->name('category');
-    Route::get('/{name}/sort-by/{type}', [CategoriesController::class, 'filter']);
+    Route::get('/', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/{slug}', [CategoryController::class, 'show'])->name('category');
+    Route::get('/{slug}/sort-by/{type}', [CategoryController::class, 'filter']);
 });
 
 // Notifications

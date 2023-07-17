@@ -110,11 +110,21 @@
                                             @endif
                                         @endforeach
                                     </div>
+                                    <?php
+                                        $category_name = $order->service->category;
+                                        $pathCategories = file_get_contents(public_path('json/category.json'));
+                                        $data = json_decode($pathCategories, true);
+                                        
+                                        $filter = array_filter($data, function($category) use($category_name) {
+                                            return $category['slug'] === $category_name;
+                                        });
+                                        
+                                    ?>
                                     <div class="ms-3 d-flex flex-column justify-content-center align-items-start" style="flex-grow: 1;">
                                         <p class="mb-1" id="service-order-title">{{  Str::limit($order->service->title, 50) }}</p>
                                         <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
                                             <span class="badge rounded-1 text-muted border px-2" id="order-price">{{ 'RM' . $order->service->price }}</span>
-                                            <span class="badge rounded-1 text-muted border px-2" id="order-category">{{ $order->service->category }}</span>
+                                            <span class="badge rounded-1 text-muted border px-2" id="order-category">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
                                         </div>
                                         <div class="mt-2 w-100 text-md-end text-start">
                                             @if (Route::is('freelancer.order') || Route::is('freelancer.order-pending'))

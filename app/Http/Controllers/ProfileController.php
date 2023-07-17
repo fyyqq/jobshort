@@ -102,12 +102,12 @@ class ProfileController extends Controller
 
     public function order() {
         return view('profile.order.index', [
-            "orders" => Order::with(['freelancer', 'service', 'rating'])->where('user_id', Auth::id())->where('status', 'pending')->latest()->get()
+            "orders" => Order::with(['freelancer', 'service'])->where('user_id', Auth::id())->where('status', 'pending')->latest()->get()
         ]);
     }
     
     public function pending() {
-        $orders = Order::with(['freelancer', 'service', 'rating'])->where('user_id', Auth::id())->where('status', 'pending')->latest()->get();
+        $orders = Order::with(['freelancer', 'service'])->where('user_id', Auth::id())->where('status', 'pending')->latest()->get();
         
         if (request()->ajax()) {
             return view('profile.order.action', ["orders" => $orders]);
@@ -117,7 +117,7 @@ class ProfileController extends Controller
     }
     
     public function approved() {
-        $orders = Order::with(['freelancer', 'service', 'rating'])->where('user_id', Auth::id())->where('status', 'approved')->latest()->get();
+        $orders = Order::with(['freelancer', 'service'])->where('user_id', Auth::id())->where('status', 'approved')->latest()->get();
         
         if (request()->ajax()) {
             return view('profile.order.action', ["orders" => $orders]);
@@ -127,7 +127,7 @@ class ProfileController extends Controller
     }
     
     public function rejected() {
-        $orders = Order::with(['freelancer', 'service', 'rating'])->where('user_id', Auth::id())->where('status', 'rejected')->latest()->get();
+        $orders = Order::with(['freelancer', 'service'])->where('user_id', Auth::id())->where('status', 'rejected')->latest()->get();
         
         if (request()->ajax()) {
             return view('profile.order.action', ["orders" => $orders]);
@@ -137,7 +137,7 @@ class ProfileController extends Controller
     }
     
     public function completed() {
-        $orders = Order::with(['freelancer', 'service', 'rating'])->where('user_id', Auth::id())->where('status', 'completed')->latest()->get();
+        $orders = Order::with(['freelancer', 'service'])->where('user_id', Auth::id())->where('status', 'completed')->latest()->get();
         
         if (request()->ajax()) {
             return view('profile.order.action', ["orders" => $orders]);

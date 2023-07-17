@@ -81,7 +81,7 @@
                                 <select name="category" id="" class="form-control shadow-none">
                                     <option value="">Find Category</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category['name'] }}" {{ $category['name'] === $service->category ? 'selected' : '' }}>{{ $category['name'] }}</option>
+                                        <option value="{{ $category['slug'] }}" {{ $category['slug'] === $service->category ? 'selected' : '' }}>{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fa-solid fa-caret-down position-absolute" style="top: 50%; right: 10px; transform: translateY(-2px);"></i>

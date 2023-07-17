@@ -518,10 +518,27 @@ select option {
 #box_categories {
     height: 150px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    background-color: #fff;
+    color: #333;
 }
 
 #box_categories:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    transition: box-shadow .3s ease-in-out;
+}
+
+#box_categories:hover .mdi {
+    transform: scale(1.1);
+    transition: transform .3s ease-in-out;
+}
+
+#box_categories:hover small {
+    transform: scale(1.05);
+    transition: transform .3s ease-in-out;
+}
+
+#box_categories:active {
+    box-shadow: unset;
     transition: box-shadow .3s ease-in-out;
 }
 

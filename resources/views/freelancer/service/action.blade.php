@@ -14,10 +14,19 @@
                     @endforeach
                 </div>
             </a>
+            <?php
+                $category_name = $service->category;
+                $pathCategories = file_get_contents(public_path('json/category.json'));
+                $data = json_decode($pathCategories, true);
+                
+                $filter = array_filter($data, function($category) use($category_name) {
+                    return $category['slug'] === $category_name;
+                });
+            ?>
             <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                 <small class="text-dark d-lg-block d-none text-break lh-sm">{{ Str::limit($service->title, 30) }}</small>
                 <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 15) }}</small>
-                <small class="mb-0 text-muted" style="font-size: 12px;">{{ $service->category }}</small>
+                <small class="mb-0 text-muted" style="font-size: 12px;"></small>
                 <div class="d-flex align-items-center justify-content-between mt-2 w-100">
                     <small class="mb-0 text-dark">${{ $service->price }}</small>
                     <div class="d-lg-none d-flex flex-row-reverse">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     public function index() {
         $pathCategories = file_get_contents(public_path('json/category.json'));
@@ -21,17 +21,12 @@ class CategoriesController extends Controller
         $pathCategories = file_get_contents(public_path('json/category.json'));
         $data = json_decode($pathCategories, true);
 
-        $category = array_filter($data, function($category) use ($slug) {
+        $category = array_values(array_filter($data, function($category) use ($slug) {
             return $category['slug'] === $slug;
-        });
-
-        $categoryName;
-        foreach($category as $category) {
-            $categoryName = ($category['name']);
-        }
+        }));
         
-        $services = Service::where('category', $categoryName)->get();
-        $serviceCount = Service::with(['order', 'rating'])->where('category', $categoryName)->first();
+        $services = Service::where('category', $slug)->get();
+        $serviceCount = Service::with(['order', 'rating'])->where('category', $slug)->first();
 
         $filterCategories = array_filter($data, function($category) use ($slug) {
             return $category['slug'] !== $slug;
@@ -40,15 +35,15 @@ class CategoriesController extends Controller
         $categories = array_slice($filterCategories, 0, 5);
 
         return view('category', [
-            "category" => $category,
+            "category" => $category[0],
             "categories" => $categories,
             "services" => $services,
             "count" => $serviceCount,
         ]);
     }
 
-    public function filter(string $name, string $type) {
-        $services = Service::where('category', $name);
+    public function filter(string $slug, string $type) {
+        $services = Service::where('category', $slug);
 
         switch ($type) {
             case 'latest':
@@ -70,12 +65,12 @@ class CategoriesController extends Controller
             case 'highest-rating':
                 $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderByDesc('stars');
-                }])->where('category', $name)->get();
+                }])->where('category', $slug)->get();
                 break;
             case 'lowest-rating':
                 $filter = Service::with(['order', 'rating' => function($query) {
                     $query->orderBy('stars', 'asc');
-                }])->where('category', $name)->get();
+                }])->where('category', $slug)->get();
                 break;
             case 'highest-price': 
                 $filter = $services->orderBy('price', 'desc')->get();

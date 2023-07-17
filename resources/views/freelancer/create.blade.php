@@ -81,7 +81,7 @@
                                 <select name="category" id="" class="form-control shadow-none">
                                     <option value="" selected>Categories</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category['name'] }}" {{ old('category') === $category['name'] ? 'selected' : '' }}>{{ $category['name'] }}</option>
+                                        <option value="{{ $category['slug'] }}" {{ old('category') === $category['name'] ? 'selected' : '' }}>{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fa-solid fa-caret-down position-absolute" style="top: 50%; right: 10px; transform: translateY(-2px);"></i>

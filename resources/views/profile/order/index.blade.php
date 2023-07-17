@@ -171,9 +171,18 @@
                                             <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
                                         </div>
                                     </div>
+                                    <?php
+                                        $category_name = $order->service->category;
+                                        $pathCategories = file_get_contents(public_path('json/category.json'));
+                                        $data = json_decode($pathCategories, true);
+                                        
+                                        $filter = array_filter($data, function($category) use($category_name) {
+                                            return $category['slug'] === $category_name;
+                                        });
+                                    ?>
                                     <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
                                         <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ 'RM' . $order->service->price }}</span>
-                                        <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ $order->service->category }}</span>
+                                        <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
                                     </div>
                                     <div class="mt-2 w-100 text-sm-end text-start">
                                         @if (Route::is('profile.order') || Route::is('profile.order-pending'))

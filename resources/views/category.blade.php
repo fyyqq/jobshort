@@ -7,7 +7,7 @@
                 <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
                     <div id="parent_image_category">
                         <div class="rounded border" id="category_image">
-                            <img src="{{ asset('category' . $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                            <img src="{{ asset('category' .  $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                         </div>
                     </div>
                     <div class="pt-md-2 pb-md-2 pt-1 pb-5">
@@ -43,7 +43,7 @@
                                 <option value="lowest-price">Lowest Price</option>
                             </select>
                         </div>
-                        <input type="hidden" id="category_name" value="{{ $category['name'] }}">
+                        <input type="hidden" id="category_slug" value="{{ $category['slug'] }}">
                     </div>
                     <div class="px-1">
                         <small class="text-dark">{{ count($services) }} results</small>
@@ -82,7 +82,16 @@
                                                 <small class="me-1 text-dark" style="font-size: 13.5px;">{{ $service->rating->max('stars') < 1 ? '0' : $service->rating->max('stars') . '.0' }}</small>
                                             </div>
                                         </div>
-                                        <small class="text-muted d-block" style="font-size: 12px;">{{ $service->category }}</small>
+                                        <?php
+                                            $category_name = $service->category;
+                                            $pathCategories = file_get_contents(public_path('json/category.json'));
+                                            $data = json_decode($pathCategories, true);
+                                            
+                                            $filter = array_filter($data, function($category) use($category_name) {
+                                                return $category['slug'] === $category_name;
+                                            });
+                                        ?>
+                                        <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                                         <div class="mt-2 d-flex align-items-center justify-content-between">
                                             <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
                                             <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>

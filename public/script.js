@@ -736,19 +736,19 @@ function sortService(element) {
 
 function sortCategoryService(element) {
     loader.style.display = 'block';
-    const category_name = $(element).closest('.d-flex').find('#category_name').val();
+    const category_slug = $(element).closest('.d-flex').find('#category_slug').val();
     const optionSelected = element.options[element.selectedIndex].value;
 
     const container = $('#service_container');
 
-    axios.get(`/category/${category_name}/sort-by/${optionSelected}`)
+    axios.get(`/categories/${category_slug}/sort-by/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
             loader.style.display = 'none';
             $(container).html('');
             $(container).html(res.data);
         }, 1500);
-    }).catch(err => console.log(err.response.data.message));
+    }).catch(err => console.log(err));
 }
 
 function openFilter(element) {
