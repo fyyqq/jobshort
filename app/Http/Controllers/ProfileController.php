@@ -24,7 +24,7 @@ class ProfileController extends Controller
     
     public function category(string $name, string $category) {
         $freelancer = Freelancer::where('name', $name)->first();
-        $services = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id);
+        $services = Service::with('rating', 'order')->where('freelancer_id', $freelancer->id)->where('status', 'active');
 
         if ($category === 'all') {
             $filter = $services->get();

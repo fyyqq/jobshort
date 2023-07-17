@@ -12,7 +12,7 @@ class SearchController extends Controller
         $search = $request->input('keyword');
 
         $result = Service::with('rating')->where('title', 'LIKE', '%' . $search . '%')
-        ->orWhere('category', 'LIKE', '%' . $search . '%')->get();
+        ->orWhere('category', 'LIKE', '%' . $search . '%')->where('status', 'active')->get();
 
         return view('search', [
             "services" => $result
@@ -21,7 +21,7 @@ class SearchController extends Controller
 
     public function autocomplete(Request $request) {
         $search = $request->input('keyword');
-        $result = Service::where('title', 'LIKE', $search . '%')->get();
+        $result = Service::where('title', 'LIKE', $search . '%')->where('status', 'active')->get();
 
         return response()->json($result);
     }
@@ -30,7 +30,7 @@ class SearchController extends Controller
 
     public function filterSearch(string $value, string $type) {
         $services = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%');
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->where('status', 'active');
 
         switch ($type) {
             case 'latest_service':
@@ -78,7 +78,7 @@ class SearchController extends Controller
     
     public function reset(string $value) {
         $filter = Service::where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
+        ->orWhere('category', 'LIKE', '%' . $value . '%')->where('status', 'active')->get();
 
         if (request()->ajax()) {
             return view('action', ["services" => $filter]);

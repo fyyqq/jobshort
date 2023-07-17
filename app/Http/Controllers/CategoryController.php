@@ -25,7 +25,7 @@ class CategoryController extends Controller
             return $category['slug'] === $slug;
         }));
         
-        $services = Service::where('category', $slug)->get();
+        $services = Service::where('category', $slug)->where('status', 'active')->get();
         $serviceCount = Service::with(['order', 'rating'])->where('category', $slug)->first();
 
         $filterCategories = array_filter($data, function($category) use ($slug) {
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     }
 
     public function filter(string $slug, string $type) {
-        $services = Service::where('category', $slug);
+        $services = Service::where('category', $slug)->where('status', 'active');
 
         switch ($type) {
             case 'latest':
