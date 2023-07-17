@@ -533,7 +533,7 @@ select option {
 }
 
 #box_categories:hover small {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(1px);
     transition: transform .3s ease-in-out;
 }
 
