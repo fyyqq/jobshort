@@ -28,7 +28,7 @@
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
 </style>
-    <div class="container-xl pb-5">
+    <div class="container-xl">
         <div class="my-4 ps-md-3 ps-1">
             <h1 class="h4 text-dark d-md-block d-none">{{ $service->title }}</h1>
             <h1 class="h5 text-dark d-md-none d-block">{{ $service->title }}</h1>
@@ -374,6 +374,14 @@
                         </a>
                     </div>
                 @endforeach
+                <div class="item h-auto">
+                    <a href="{{ route('category', $service->category) }}" class="text-decoration-none">
+                        <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 220px; background-color: #fff;">
+                        <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
+                        <h1 class="h6 text-muted">More Services</h1>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

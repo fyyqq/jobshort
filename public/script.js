@@ -7,22 +7,10 @@ $('.owl-carousel').owlCarousel({
     margin: 10,
     loop: false,
     autoWidth: true,
-    items: 4,
     dot: false,
     nav: true,
     navText: [`<i class="fa-solid fa-angle-left"></i>`,`<i class="fa-solid fa-angle-right"></i>`],
     pagination: false,
-    responsive: {
-        0: {
-            items: 1
-        },
-        600: {
-            items: 2
-        },
-        1000: {
-            items: 3
-        }
-    }
 });
 
 // $('.owl-prev').on('click', function(e) {

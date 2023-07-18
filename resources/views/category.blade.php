@@ -155,7 +155,7 @@
                     <a href="{{ route('categories') }}" class="text-decoration-none">
                         <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
                         <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
-                        <h1 class="h6 text-muted">More Services</h1>
+                        <h1 class="h6 text-muted">More Categories</h1>
                         </div>
                     </a>
                 </div>
@@ -175,7 +175,7 @@
                             <a href="{{ route('categories') }}" class="text-decoration-none">
                                 <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
                                 <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
-                                <h1 class="h6 text-muted">More Services</h1>
+                                <h1 class="h6 text-muted">More Categories</h1>
                                 </div>
                             </a>
                         </div>

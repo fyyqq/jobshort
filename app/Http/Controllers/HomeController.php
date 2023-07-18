@@ -40,7 +40,7 @@ class HomeController extends Controller
             "service" => $service,
             "reviews" => Rating::where('service_id', $service->id)->limit(5)->get(),
             "similiar" => Service::with(['rating'])->where('category', $service->category)->where('slug', '!=', $slug)
-            ->where('status', 'active')->get()
+            ->where('status', 'active')->limit(10)->get()
         ]);
     }
 
