@@ -50,7 +50,7 @@ class HomeController extends Controller
         ]);
     }
     
-    public function category(string $name, string $category) {
+    public function sortCategory(string $name, string $category) {
         $freelancer = Freelancer::where('name', $name)->first();
         $services = Service::with(['rating', 'order'])->where('freelancer_id', $freelancer->id)->where('status', 'active');
 
@@ -59,16 +59,15 @@ class HomeController extends Controller
         } else {
             $filter = $services->where('category', $category)->get();
         }
-        
+
         if (request()->ajax()) {
             return view('action', [
                 'services' => $filter,
-                'freelancer' => $freelancer
+                'countServices' => count($filter)
             ]);
         } else {
             return view('users', [
-                'services' => $filter,
-                'freelancer' => $freelancer
+                'services' => $filter
             ]);
         }
     }
@@ -117,13 +116,11 @@ class HomeController extends Controller
 
         if (request()->ajax()) {
             return view('action', [
-                'services' => $filter,
-                'freelancer' => $freelancer
+                'services' => $filter
             ]);
         } else {
             return view('users', [
-                'services' => $filter,
-                'freelancer' => $freelancer
+                'services' => $filter
             ]);
         }
     }

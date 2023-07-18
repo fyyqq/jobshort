@@ -702,16 +702,19 @@ function filterCategories(element) {
     loader.style.display = 'block';
     const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();;
     const optionSelected = element.options[element.selectedIndex].value;
-
+    
     const container = $('#display-user-services');
     
     axios.get(`/user/${freelancer_name}/filter-category/${optionSelected}`)
     .then(res => {
+        const html = $(res.data);
+        const servicesCount = html[0].value;
         setTimeout(() => {
             loader.style.display = 'none';
             $(container).html('');
             $(container).html(res.data);
             $('#filter-count').html('');
+            $('#filter-count').html(servicesCount);
         }, 1500);
     });
 }

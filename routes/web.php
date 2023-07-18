@@ -38,7 +38,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Users Page
 Route::prefix('user')->group(function() {
     Route::get('/{name:freelancer}', [HomeController::class, 'user'])->name('users');
-    Route::get('/{name:freelancer}/filter-category/{service:category}', [HomeController::class, 'category']);
+    Route::get('/{name:freelancer}/filter-category/{service:category}', [HomeController::class, 'sortCategory']);
     Route::get('/{name:freelancer}/sort-by/{type}', [HomeController::class, 'sortFilter']);
 });
 

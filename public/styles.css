@@ -544,7 +544,7 @@ select option {
 
 #box_categories:active {
     box-shadow: unset;
-    transition: box-shadow .3s ease-in-out;
+    transition: box-shadow .1s ease;
 }
 
 @media (max-width: 1120px) {

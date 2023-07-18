@@ -1,3 +1,4 @@
+<input type="hidden" id="services_count" value="{{ $countServices ?? 'NaN' }}">
 @foreach ($services->where('status', 'active') as $service)
     <div class="col-sm-6 col-12">
         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
