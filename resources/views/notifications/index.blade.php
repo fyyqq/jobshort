@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
     <div class="container-lg">
-        <div class="row">
+        <div class="row mx-0">
             <div class="col-md-3 left">
                 <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">

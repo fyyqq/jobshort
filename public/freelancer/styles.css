@@ -246,6 +246,13 @@ input[type=number] {
     font-size: 13px;
 }
 
+#serviceImage, #addImage {
+    height: 180px;
+    width: 250px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
 @media (max-width: 991.5px) {
 }
 

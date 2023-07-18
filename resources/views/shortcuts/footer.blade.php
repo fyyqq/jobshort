@@ -1,10 +1,10 @@
-<div style="border-top: 3px solid #2891e1; background-color: #fff;">
+<div class="w-100" style="border-top: 3px solid #2891e1; background-color: #fff;">
     <footer class="container-lg pt-5 pb-md-0 pb-5 px-md-0 px-3">
         <div class="d-flex align-items-center justify-content-lg-between justify-content-md-around justify-content-center flex-md-row flex-column py-3 gap-5">
             <div class="d-flex align-items-md-start align-items-center justify-content-center flex-column gap-4">
-                <div class="">
+                <a href="{{ route('home') }}" class="">
                     <img src="{{ asset('brand/jobshort.png') }}" alt="" style="width: 110px;" loading="lazy">
-                </div>
+                </a>
                 <div class="d-flex align-items-center justify-content-center gap-2">
                     @guest
                         <a href="{{ route('login') }}" class="btn btn-sm rounded-pill py-2 px-sm-4 px-3 btn-primary">Login</a>
@@ -39,22 +39,22 @@
             </div>
             <div class="row mx-0 gap-lg-5 gap-md-4 gap-3" id="footer_link">
                 <ul class="navbar-nav align-items-md-start align-items-center justify-content-center gap-2 col-sm">
-                    <small><a href="/" class="dropdown-item">Home</a></small>
+                    <small><a href="{{ route('home') }}" class="dropdown-item">Home</a></small>
                     <small><a href="{{ route('categories') }}" class="dropdown-item">Categories</a></small>
                     <small><a href="{{ route('profile.main') }}" class="dropdown-item">Profile</a></small>
                     <small><a href="{{ route('freelancer.main') }}" class="dropdown-item">Freelancer</a></small>
                 </ul>
                 <ul class="navbar-nav align-items-md-start align-items-center justify-content-center gap-2 col-sm">
                     <small><a href="{{ route('notification') }}" class="dropdown-item">Notification</a></small>
-                    <small><a href="" class="dropdown-item">About</a></small>
-                    <small><a href="" class="dropdown-item">Contact</a></small>
-                    <small><a href="" class="dropdown-item">Lorem</a></small>
+                    <small><a href="#" class="dropdown-item">PortFolio</a></small>
+                    <small><a href="#" class="dropdown-item">About</a></small>
+                    <small><a href="#" class="dropdown-item">Contact</a></small>
                 </ul>
                 <ul class="navbar-nav align-items-md-start align-items-center justify-content-center gap-2 col-sm">
-                    <small><a href="" class="dropdown-item">PortFolio</a></small>
-                    <small><a href="" class="dropdown-item">FAQ</a></small>
-                    <small><a href="" class="dropdown-item">Term Of Service</a></small>
-                    <small><a href="" class="dropdown-item">Privacy Policy</a></small>
+                    <small><a href="#" class="dropdown-item">Privacy Policy</a></small>
+                    <small><a href="#" class="dropdown-item">FAQ</a></small>
+                    <small><a href="#" class="dropdown-item">Term Of Service</a></small>
+                    <small><a href="#" class="dropdown-item">Terms and Conditions</a></small>
                 </ul>
             </div>
         </div>

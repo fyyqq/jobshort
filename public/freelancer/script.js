@@ -219,37 +219,6 @@ function archiveSelectedItems() {
     }    
 }
 
-// function insertImage(event) {
-//     if (event.files.length > 0) {
-//         const fileName = event.files[0];
-        
-//         const imgElement = event.previousElementSibling.previousElementSibling;
-//         const imageIcon = event.previousElementSibling;
-//         imageIcon.classList.add('d-none');
-
-//         const deleteImage = event.nextElementSibling;
-//         const deleteImageContainer = event.nextElementSibling.nextElementSibling;
-//         deleteImageContainer.classList.add('d-none');
-//         deleteImage.classList.remove('d-none');
-
-//         deleteImage.addEventListener('click', e => {
-//             e.preventDefault();
-//             imgElement.removeAttribute('src');
-//             imgElement.classList.add('d-none');
-//             deleteImageContainer.classList.remove('d-none');
-//             e.target.classList.add('d-none');
-//             imageIcon.classList.remove('d-none');
-//             event.value = '';
-//             deleteImageContainer.classList.remove('text-light');
-//         });
-
-//         const imageUrl = URL.createObjectURL(fileName);
-//         imgElement.src = imageUrl;
-//         imgElement.classList.remove('d-none');
-//     }
-// }
-
-
 $(document).ready(function() {
     $.ajaxSetup({
         headers:
@@ -563,7 +532,6 @@ $(document).ready(function() {
             $(this).addClass('d-none');
         }
 
-
         updateScroll();
     });
 });
@@ -571,34 +539,30 @@ $(document).ready(function() {
 function insertImage(event) {
     if (event.files.length > 0) {
         const fileName = event.files[0];
-        
-        const imgElement = event.previousElementSibling.previousElementSibling;
-        const imageIcon = event.previousElementSibling;
-        imageIcon.classList.add('d-none');
+
+        const imgElement = $(event).siblings('img')[0];
+        const imageIcon = $(event).prev();
+        $(imageIcon).addClass('d-none');
 
         const deleteImage = event.nextElementSibling;
-        const deleteImageContainer = event.nextElementSibling.nextElementSibling;
-        deleteImageContainer.classList.add('d-none');
         deleteImage.classList.remove('d-none');
 
-        const syncIcon = event.parentElement.childNodes[1];
-        syncIcon.classList.remove('d-none');
+        const syncIcon = $(event).siblings('.mdi-sync');
+        $(syncIcon).removeClass('d-none');
         
         deleteImage.addEventListener('click', e => {
             e.preventDefault();
-            imgElement.removeAttribute('src');
-            imgElement.classList.add('d-none');
-            deleteImageContainer.classList.remove('d-none');
+            $(imgElement).removeAttr('src');
+            $(imgElement).addClass('d-none');
             e.target.classList.add('d-none');
-            imageIcon.classList.remove('d-none');
+            $(imageIcon).removeClass('d-none');
+            $(syncIcon).addClass('d-none');
             event.value = '';
-            deleteImageContainer.classList.remove('text-light');
-            syncIcon.classList.add('d-none');
         });
 
         const imageUrl = URL.createObjectURL(fileName);
         imgElement.src = imageUrl;
-        imgElement.classList.remove('d-none');
+        $(imgElement).removeClass('d-none');
     }
 }
 
