@@ -90,6 +90,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
         {{-- Sweetalert --}}
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+        {{-- Axios --}}
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ asset('script.js') }}"></script>
     </body>
 </html>
