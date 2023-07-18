@@ -12,6 +12,7 @@ $('.owl-carousel').owlCarousel({
     dot: false,
     nav: true,
     navText: [`<i class="fa-solid fa-angle-left"></i>`,`<i class="fa-solid fa-angle-right"></i>`],
+    pagination: false,
     responsive: {
         0: {
             items: 1

@@ -547,6 +547,30 @@ select option {
     transition: box-shadow .1s ease;
 }
 
+#link_personal_footer {
+    height: 35px;
+    width: 35px;
+    display: grid;
+    place-items: center;
+    border: 1px solid gainsboro;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+#link_personal_footer:hover {
+    transform: translateY(-5px);
+    transition: transform .2s ease-in-out;
+}
+
+#footer_link {
+    color: #555;
+}
+
+#footer_link ul small a:hover {
+    color: var(--primary-color);
+    transition: color .3s ease-in-out;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;
