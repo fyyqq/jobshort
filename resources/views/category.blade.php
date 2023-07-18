@@ -1,6 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .owl-carousel .owl-item .item {
+        width: 320px;
+        background-color: transparent;
+    }
+    .owl-carousel .owl-stage-outer {
+        padding-left: 0px;
+    }
+    .owl-carousel .owl-nav {
+        margin: 0px;
+    }
+    .owl-carousel .fa-angle-left, 
+    .owl-carousel .fa-angle-right {
+        font-size: 22px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-80%);
+        color: #333;
+        height: 42px;
+        width: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+</style>
     <div class="container-lg">
         <div class="row mx-0">
             <div class="col-md-8 col-12 pe-2">
@@ -110,8 +137,9 @@
                 @endif
                 </div>
             </div>
-            <div class="col-md-4 col-12">
-                <div class="ps-2 pt-1 pb-2 d-flex align-items-center justify-content-start gap-2">
+            <div class="col-md-4 col-12 mt-md-0 mt-4">
+                <span class="border-top d-md-none d-block"></span>
+                <div class="ps-md-2 ps-0 pt-md-1 pt-3 pb-md-2 pb-3 d-flex align-items-center justify-content-md-start justify-content-center gap-2">
                     <i class="mdi mdi-magnify" style="font-size: 17px;"></i>
                     <small class="mb-0 text-dark">More Categories</small>
                 </div>
@@ -130,6 +158,28 @@
                         <h1 class="h6 text-muted">More Services</h1>
                         </div>
                     </a>
+                </div>
+                <div class="d-md-none d-flex">
+                    <div class="owl-carousel owl-theme">
+                        @foreach ($categories as $value)
+                            <div class="item h-100">
+                                <a href="{{ route('category', $value['slug']) }}" class="text-decoration-none">
+                                    <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                                        <i class="{{ $value['icon'] }} fs-1 text-dark"></i>
+                                        <h1 class="h6 text-muted">{{ $value['name'] }}</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                        <div class="item h-100">
+                            <a href="{{ route('categories') }}" class="text-decoration-none">
+                                <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                                <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
+                                <h1 class="h6 text-muted">More Services</h1>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

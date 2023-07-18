@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
@@ -31,8 +32,12 @@ class CategoryController extends Controller
         $filterCategories = array_filter($data, function($category) use ($slug) {
             return $category['slug'] !== $slug;
         });
+        
+        $expirationInSeconds = 3600;
 
-        $categories = array_slice($filterCategories, 0, 5);
+        $categories = Cache::remember('categories', $expirationInSeconds, function () use ($filterCategories) {
+            return array_slice($filterCategories, 0, 5);
+        });
 
         return view('category', [
             "category" => $category[0],
