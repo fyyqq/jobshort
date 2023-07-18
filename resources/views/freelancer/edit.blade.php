@@ -28,8 +28,8 @@
                                                     <i class="mdi mdi-image d-none position-absolute" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                     <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
                                                     <input type="hidden" name="oldImages[]" value="{{ $value }}">
-                                                    <i class="p-1 fa-solid fa-xmark text-light position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
-                                                    <i class="p-1 fa-solid fa-xmark text-light position-absolute" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImageContainer(this)"></i>
+                                                    <i class="destoryImg p-1 fa-solid fa-xmark text-light position-absolute" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImage(this)"></i>
+                                                    <i class="destoryImgContainer p-1 fa-solid fa-xmark text-dark position-absolute d-none" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImageContainer(this)"></i>
                                                 </div>
                                             @endforeach
                                         </div>

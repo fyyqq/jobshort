@@ -539,6 +539,8 @@ $(document).ready(function() {
 function insertImage(event) {
     if (event.files.length > 0) {
         const fileName = event.files[0];
+        const destoryContainerIcon = $(event).siblings('.destoryImgContainer');
+        $(destoryContainerIcon).addClass('d-none');
 
         const imgElement = $(event).siblings('img')[0];
         const imageIcon = $(event).prev();
@@ -564,6 +566,16 @@ function insertImage(event) {
         imgElement.src = imageUrl;
         $(imgElement).removeClass('d-none');
     }
+}
+
+function destroyImage(event) {
+    const destroyImgContainerIcon = $(event).next();
+    const imgElement = $(event).siblings('img')[0];
+    const imgIcon = $(event).siblings('.mdi-image');
+    imgElement.src = '';
+    $(imgElement).addClass('d-none');
+    $(imgIcon).removeClass('d-none');
+    $(destroyImgContainerIcon).removeClass('d-none');
 }
 
 function destroyImageContainer(event) {

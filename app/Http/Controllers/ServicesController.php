@@ -264,21 +264,28 @@ class ServicesController extends Controller
                 // $image->move(public_path('images'), $modifiedPath);
                 array_push($imgArray, $modifiedPath);
             }
-            // if old image still have
-            if (!empty($request->input('oldImages'))) {
-                // old image & new image
-                $images = array_merge($request->input('oldImages'), $imgArray);
-            } else {
-                // if old images remove
-                $images = $imgArray;
+
+            $existingImages = explode(',', $service->image);
+
+            $filteredImages = array_filter($imgArray, function($newImage) use ($existingImages) {
+                return !in_array($newImage, $existingImages);
+            });
+
+            foreach ($existingImages as $image) {
+                if (!in_array($existingImages, $filteredImages)) {
+                    if (file_exists(public_path('/images' . $image))) {
+                        unlink(public_path('/images' . $image));
+                    }
+                }
             }
+
+            $images = array_merge($existingImages, $filteredImages);
         } else {
             $images = $request->input('oldImages');
         }
 
-        // return $request->input('oldImages');
-        // return $imgArray;
-        
+        return $images;
+
         $service->freelancer_id = $service->freelancer_id;
         $service->title = $validateUpdate['title'];
         $service->slug = strtolower($service->slug);
