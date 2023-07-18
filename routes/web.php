@@ -95,7 +95,6 @@ Route::prefix('services')->group(function() {
 });
 
 Route::prefix('account')->middleware(['auth'])->group(function() {
-    Route::get('/', [ProfileController::class, 'account'])->name('my-account');
     Route::prefix('profile')->group(function() {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.main');
         Route::post('/registration', [ProfileController::class, 'store'])->name('profile.registration');
