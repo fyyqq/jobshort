@@ -23,6 +23,11 @@ a:hover {
     text-decoration: none;
 }
 
+#order_rating {
+    border-right: 1px solid gainsboro;
+    padding-right: 0px;
+}
+
 #swal2-title {
     font-size: 20px;
 }
@@ -665,6 +670,10 @@ select option {
     #category_image {
         height: 145px;
         width: 210px;
+    }
+    #order_rating {
+        border-right: unset;
+        border-bottom: 1px solid gainsboro;
     }
 }
 

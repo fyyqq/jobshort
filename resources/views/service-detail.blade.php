@@ -2,8 +2,6 @@
 
 @section('content')
 <style>
-    .owl-carousel .owl-item {
-    }
     .owl-carousel .owl-item .item {
         width: 320px;
         background-color: transparent;
@@ -137,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4" style="height: max-content;">
+        <div class="mt-4 mb-2 pb-4 border-bottom" style="height: max-content;">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
                     <div class="py-3 px-md-4 px-3 shadow-sm border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
@@ -172,45 +170,41 @@
                     </div>
                     <div class="">
                         <div class="row mx-0 rounded py-3 ps-sm-1 border ps-0" style="background-color: #fff;">
-                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" style="row-gap: 8px;">
+                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
                                 <p class="mb-0 text-dark">Total Orders</p>
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
-                                        <i class="me-2 mdi mdi-cart-check" style="font-size: 20px;"></i>
+                                        <i class="me-2 mdi mdi-text-box-check-outline" style="font-size: 20px;"></i>
                                         <h1 class="h6 text-dark mb-0">{{ count($service->order->where('status', 'completed')) < 1 ? 'N/A' : count($service->order->where('status', 'completed')) }}</h1>
                                     </div>
                                     <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" style="row-gap: 8px;">
+                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
                                 <p class="mb-0 text-dark">Total Reviews</p>
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
-                                        <i class="me-2 mdi mdi-text-box-check-outline" style="font-size: 20px;"></i>
-                                        <h1 class="h6 text-dark mb-1">{{ count($reviews) < 1 ? 'N/A' : count($reviews) }}</h1>
+                                        <i class="me-2 mdi mdi-file-document-check-outline" style="font-size: 20px;"></i>
+                                        <h1 class="h6 text-dark mb-0">{{ count($reviews) < 1 ? 'N/A' : count($reviews) }}</h1>
                                     </div>
-                                    <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
+                                    <small class="text-muted" style="font-size: 12.5px;">Growth in reviews on this year</small>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-2 align-items-center justify-content-start flex-column" style="row-gap: 8px;">
-                                <p class="mb-0 text-dark">Top Ratings</p>
+                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
+                                <p class="mb-0 text-dark">Total Ratings</p>
                                 <div class="d-flex justify-content-center flex-column">
-                                    <div class="d-flex align-items-center justify-content-sm-start justify-content-center mb-1">
+                                    <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
+                                        <i class="me-2 mdi mdi-star text-warning" style="font-size: 20px;"></i>
                                         <h1 class="h6 text-dark mb-0">{{ count($reviews) < 1 ? 'N/A' : $reviews->max('stars') . '.0' }}</h1>
-                                        <div class="ms-2">
-                                            @for ($i = 0; $i < $reviews->max('stars'); $i++)
-                                                <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
-                                            @endfor
-                                        </div>
                                     </div>
-                                    <small class="text-muted" style="font-size: 12.5px;">Average rating on this year</small>
+                                    <small class="text-muted" style="font-size: 12.5px;">Growth in ratings on this year</small>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-3 d-grid" style="row-gap: 6px;">
-                        <div class="my-2">
-                            <h1 class="h6 mb-0 text-sm-start text-center text-dark">Reviews</h1>
-                        </div>
+                            <div class="my-2">
+                                <h1 class="h6 mb-0 text-sm-start text-center text-dark">Reviews</h1>
+                            </div>
                             @foreach ($reviews as $review)
                                 <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border" style="background-color: #fff;">
                                     <div class="mx-3">
@@ -324,7 +318,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 border-top position-relative">
+        <div class="mt-2 position-relative {{ count($similiar) < 1 ? 'd-none' : 'd-block' }}">
             <div class="py-4 w-100 text-center">
                 <small class="mb-0 text-dark">Similiar Services</small>
             </div>
