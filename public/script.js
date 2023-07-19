@@ -815,15 +815,3 @@ $(document).on('click', '.order-menu-link', function(e) {
 });
 
 
-
-// fetch('https://restcountries.com/v3.1/all')
-// .then(res => res.json())
-// .then(data => {
-//     const dt = data.filter(e => e.name.common === 'Malaysia');
-//     dt.forEach(e => {
-//         console.log(e.currencies.MYR.symbol);
-//     });
-// });
-
-
-

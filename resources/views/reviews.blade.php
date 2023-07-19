@@ -16,7 +16,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="pb-md-2 pb-5 pt-sm-2 pt-0 w-100">
+                        <div class="pb-sm-2 pb-5 pt-sm-2 pt-0 w-100">
                             <div class="d-flex align-items-center justify-content-between lh-sm">
                                 <h1 class="h5 mb-0 text-dark">{{ $service->title }}</h1>
                                 <div class="d-flex align-items-center justify-content-end gap-1">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="row mx-0 border-bottom py-4 gap-sm-0 gap-4">
-                    <div class="col-sm-4 col-12 d-flex align-items-md-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
+                    <div class="col-sm-4 col-12 d-flex align-items-sm-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Total Orders</p>
                         <div class="d-flex jusitfy-content-center flex-column">
                             <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
@@ -55,7 +55,7 @@
                             <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-12 d-flex align-items-md-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
+                    <div class="col-sm-4 col-12 d-flex align-items-sm-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Total Reviews</p>
                         <div class="d-flex jusitfy-content-center flex-column">
                             <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
@@ -83,20 +83,20 @@
                 <div class="gap-3">
                     @foreach ($reviews as $review)
                         <div class="row mx-0 mt-4">
-                            <div class="col-md-4 col-2">
+                            <div class="col-sm-4 col-2">
                                 <div class="d-flex align-items-center justify-content-start gap-3">
                                     <div class="">
                                         <div class="rounded-circle rounded-md" style="height: 45px; width: 45px; overflow: hidden;">
                                             <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                         </div>
                                     </div>
-                                    <div class="d-md-flex d-none align-items-center justify-content-start">
+                                    <div class="d-sm-flex d-none align-items-center justify-content-start">
                                         <small class="text-dark mb-0" style="font-size: 13px;">{{ $review->user->name }}</small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-9">
-                                <small class="text-dark d-md-none d-block">{{ $review->user->name }}</small>
+                            <div class="col-sm-8 col-9">
+                                <small class="text-dark d-sm-none d-block">{{ $review->user->name }}</small>
                                 <div class="d-flex align-items-center justify-content-start gap-2">
                                     <div class="">
                                         @for ($i = 1; $i <= $review->stars; $i++)
