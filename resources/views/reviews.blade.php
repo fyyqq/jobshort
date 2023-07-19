@@ -4,59 +4,72 @@
 
     <div class="container-xl">
         <div class="row mx-0 mt-4">
-            <div class="col-md-9 col-12 mt-3">
-                <div class="shadow-sm border rounded px-1 row mx-0 mb-3 p-3">
-                    <a href="{{ route('services', $service->slug) }}" class="text-decoration-none d-flex align-items-start justify-content-start gap-4 border-bottom pb-3">
-                        <div class="rounded border" style="height: 150px; width: 200px; overflow: hidden;">
-                            @foreach (explode(',', $service->image) as $key => $image)
-                                @if ($key === 0)
-                                    <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-                                @endif
-                            @endforeach
+            <div class="col-lg-9 col-12 mt-3">
+                <div class="shadow-sm border rounded position-relative w-100" style="background-color: #fff;">
+                    <a href="{{ route('services', $service->slug) }}" class="text-decoration-none d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 ps-3 pe-4 py-3 flex-row">
+                        <div id="parent_image_category">
+                            <div class="rounded border" id="category_image">
+                                @foreach (explode(',', $service->image) as $key => $image)
+                                    @if ($key === 0)
+                                        <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="py-1 w-100">
-                            <div class="d-flex align-items-start justify-content-between">
-                                <h1 class="h5 text-dark mb-0">{{ $service->title }}</h1>
-                                <div class="d-flex align-items-center justify-content-center gap-2">
-                                    <small class="text-dark mb-0 mt-1">{{ $service->rating->max('stars') . '.0' }}</small>
-                                    <i class="fa-solid fa-star text-warning"></i>
+                        <div class="pb-md-2 pb-5 pt-sm-2 pt-0 w-100">
+                            <div class="d-flex align-items-center justify-content-between lh-sm">
+                                <h1 class="h5 mb-0 text-dark">{{ $service->title }}</h1>
+                                <div class="d-flex align-items-center justify-content-end gap-1">
+                                    <small class="text-dark">{{ $service->rating->max('stars') }}</small>
+                                    <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-start justify-content-center flex-column gap-1">
-                                <small class="text-muted">{{ $service->category }}</small>
-                                <small class="text-muted d-md-block d-none">{{ Str::limit($service->description, 180) }}</small>
-                                <small class="text-muted d-md-none d-block">{{ Str::limit($service->description, 100) }}</small>
+                            <?php
+                                $category_name = $service->category;
+                                $pathCategories = file_get_contents(public_path('json/category.json'));
+                                $data = json_decode($pathCategories, true);
+                                
+                                $filter = array_filter($data, function($category) use($category_name) {
+                                    return $category['slug'] === $category_name;
+                                });
+                            ?>
+                            <small class="d-block lh-sm text-muted" style="font-size: 12.5px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
+                            <div class="mt-2">
+                                <p class="mb-0 text-dark">${{ $service->price }}</p>
                             </div>
                         </div>
                     </a>
-                    <div class="w-100 mt-3 d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-end justify-content-start gap-1">
-                            <h1 class="h4 text-dark mb-0">{{ '$' . $service->price }}</h1>
-                        </div>
-                        <button class="btn text-light" style="font-size: 15px; background-color: #2891e1;">Place Order</button>
+                    <div class="position-absolute w-100 text-end bottom-0 pb-3 pe-3">
+                        <button class="btn btn-dark"><i class="mdi mdi-message-text"></i></button>
+                        <button class="btn btn-sm btn-primary px-3 py-2" style="font-size: 13.5px;">Place Order</button>
                     </div>
                 </div>
-                {{-- <h1 class="h4 text-dark">Review & Rating</h1> --}}
-                <div class="row mx-0 border-bottom py-4 gap-sm-0 gap-3">
-                    <div class="col-sm-4 col-12 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                <div class="row mx-0 border-bottom py-4 gap-sm-0 gap-4">
+                    <div class="col-sm-4 col-12 d-flex align-items-md-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Total Orders</p>
                         <div class="d-flex jusitfy-content-center flex-column">
-                            <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
+                            <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
+                                <i class="me-2 mdi mdi-text-box-check-outline" style="font-size: 20px;"></i>
+                                <h1 class="h5 text-dark mb-0">{{ count($service->order->where('status', 'completed')) < 1 ? 'No Orders' : count($service->order->where('status', 'completed')) }}</h1>
+                            </div>
                             <small class="text-muted" style="font-size: 12.5px;">Growth in orders on this year</small>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-12 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                    <div class="col-sm-4 col-12 d-flex align-items-md-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Total Reviews</p>
                         <div class="d-flex jusitfy-content-center flex-column">
-                            <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-1">{{ count($reviews) < 1 ? 'No Review' : count($reviews) }}</h1>
+                            <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
+                                <i class="me-2 mdi mdi-file-document-check-outline" style="font-size: 20px;"></i>
+                                <h1 class="h5 text-dark mb-0">{{ count($reviews) < 1 ? 'No Review' : count($reviews) }}</h1>
+                            </div>
                             <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-12 border-end d-flex align-items-start justify-content-center flex-column" style="row-gap: 8px;">
+                    <div class="col-sm-4 col-12 d-flex align-items-sm-start align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <p class="mb-0 text-muted">Average Ratings</p>
                         <div class="d-flex justify-content-center flex-column">
-                            <div class="d-flex align-items-center justify-content-start mb-1">
-                                <h1 class="{{ count($reviews) < 1 ? 'h5' : 'h4' }} text-dark mb-0">{{ count($reviews) < 1 ? 'No Review' : $reviews->max('stars') . '.0' }}</h1>
+                            <div class="d-flex align-items-center justify-content-sm-start justify-content-center mb-1">
+                                <h1 class="h5 text-dark mb-0">{{ count($reviews) < 1 ? 'No Review' : $reviews->max('stars') . '.0' }}</h1>
                                 <div class="ms-2">
                                     @for ($i = 0; $i < $reviews->max('stars'); $i++)
                                         <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
@@ -66,31 +79,32 @@
                             <small class="text-muted" style="font-size: 12.5px;">Average rating on this year</small>
                         </div>
                     </div>
-
                 </div>
                 <div class="gap-3">
                     @foreach ($reviews as $review)
                         <div class="row mx-0 mt-4">
                             <div class="col-md-4 col-2">
-                                <div class="d-flex align-items-start justify-content-start gap-3">
-                                    <div class="rounded-circle rounded-md" style="height: 50px; width: 50px; overflow: hidden;">
-                                        <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                <div class="d-flex align-items-center justify-content-start gap-3">
+                                    <div class="">
+                                        <div class="rounded-circle rounded-md" style="height: 45px; width: 45px; overflow: hidden;">
+                                            <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                        </div>
                                     </div>
                                     <div class="d-md-flex d-none align-items-center justify-content-start">
-                                        <p class="text-dark fw-bold mb-0" style="font-size: 13.5px;">{{ $review->user->name }}</p>
+                                        <small class="text-dark mb-0" style="font-size: 13px;">{{ $review->user->name }}</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-8 col-9">
-                                <h1 class="h6 text-dark fw-bold d-md-none d-block">{{ $review->user->name }}</h1>
-                                <div class="d-flex align-items-center justify-content-between">
+                                <small class="text-dark d-md-none d-block">{{ $review->user->name }}</small>
+                                <div class="d-flex align-items-center justify-content-start gap-2">
                                     <div class="">
                                         @for ($i = 1; $i <= $review->stars; $i++)
-                                            <i class="fa-solid fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
                                         @endfor
                                     </div>
                                     <div class="">
-                                        <small class="text-muted" style="font-size: 13px;">{{ $review->created_at->diffForHumans() }}</small>
+                                        <small class="text-muted" style="font-size: 12.5px;">{{ $review->created_at->diffForHumans() }}</small>
                                     </div>
                                 </div>
                                 <div class="mt-2">
