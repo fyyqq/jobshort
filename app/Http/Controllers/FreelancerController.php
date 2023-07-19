@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FreelancerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $freelancer = auth()->user()->freelancer;
@@ -119,44 +116,6 @@ class FreelancerController extends Controller
         }
     }
 
-    public function addService() 
-    {
-        $servicesPath = file_get_contents(public_path('json/category.json'));
-        $data =  json_decode($servicesPath, true);
-        
-        return view('freelancer.create-service', [
-            "categories" => $data 
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-
-    /**
-     * Update the specified resource in storage.
-     */
-
     public function update(Request $request, string $id) 
     {
         $freelancer = Freelancer::where('user_id', $id)->first();
@@ -195,12 +154,4 @@ class FreelancerController extends Controller
 
         return back()->with('success', 'Freelancer Profile Updated Successfully');
     }
-
-    public function updateAddress(Request $request, string $id) {
-        return $request->all();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
 }

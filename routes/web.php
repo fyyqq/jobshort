@@ -66,7 +66,6 @@ Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class,
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 
 Route::prefix('orders')->middleware(['auth'])->group(function() {
-    // Route::get('/{slug}', [OrdersController::class, 'show'])->name('apply-services');
     Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store']);
 });
 
@@ -123,7 +122,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             // Filter Search
             Route::get('/search', [ServicesController::class, 'searchServices'])->name('freelancer.search-services');
         });
-        Route::prefix('notification')->group(function() {
+        Route::prefix('notifications')->group(function() {
             Route::get('/', [FreelancerController::class, 'notification'])->name('freelancer.notification');
             Route::get('/inbox', [FreelancerController::class, 'inboxNotification'])->name('freelancer.notification-inbox');
             Route::get('/orders', [FreelancerController::class, 'orderNotification'])->name('freelancer.notification-order');

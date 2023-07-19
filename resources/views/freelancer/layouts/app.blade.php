@@ -31,11 +31,11 @@
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body style="background-color: #f7f7f7;">
-        <div id="app">
+        <div id="app" class="pt-lg-0 pt-5">
             <div class="custom-loader"></div>
             @include('freelancer.shortcuts.navbar')
             @include('freelancer.shortcuts.sidebar')
-            <main class="pb-md-5 pb-3">
+            <main class="pb-md-5 pb-3 pt-lg-0 pt-2">
                 @yield('content')
             </main>
         </div>

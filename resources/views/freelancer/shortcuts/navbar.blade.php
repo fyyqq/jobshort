@@ -1,11 +1,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<nav class="navbar navbar-expand bg-light py-3 shadow-sm d-md-none d-flex">
+<nav class="navbar navbar-expand bg-light py-3 shadow-sm d-md-none d-flex fixed-top">
     <div class="container-fluid">
-        {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
-        {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> --}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
@@ -34,7 +30,7 @@
                     <i class="fa-regular fa-bell text-muted" style="font-size: 15px;"></i>
                 </a>
                 <li class="nav-item dropdown d-flex align-items-center">
-                    <div class="rounded-circle shadow-sm" style="height: 38px; width: 38px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
+                    <div class="rounded-circle border" style="height: 40px; width: 40px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
                         <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                     </div>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-120px, 5px); width: 160px;">

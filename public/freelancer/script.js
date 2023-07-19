@@ -191,7 +191,7 @@ $(document).ready(function() {
         $(loader).css('display', 'block');
         
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notification/inbox')
+        axios.get('/account/freelancer/notifications/inbox')
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none'); 
@@ -208,7 +208,7 @@ $(document).ready(function() {
         $(loader).css('display', 'block');
         
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notification/orders')
+        axios.get('/account/freelancer/notifications/orders')
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none'); 
@@ -225,7 +225,7 @@ $(document).ready(function() {
         $(loader).css('display', 'block');
         
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notification/reviews')
+        axios.get('/account/freelancer/notifications/reviews')
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
@@ -242,7 +242,7 @@ $(document).ready(function() {
         $(loader).css('display', 'block');
         
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notification/read')
+        axios.get('/account/freelancer/notifications/read')
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
@@ -259,7 +259,7 @@ $(document).ready(function() {
         $(loader).css('display', 'block');
         
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notification/unread')
+        axios.get('/account/freelancer/notifications/unread')
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
