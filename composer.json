@@ -14,7 +14,6 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "league/omnipay": "^3.2",
-        "munafio/chatify": "^1.6",
         "omnipay/paypal": "^3.0",
         "ramsey/uuid": "^4.7"
     },

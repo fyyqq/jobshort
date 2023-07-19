@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Chatify\Traits\HasChats;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Freelancer extends Model
 {
-    use HasFactory, Notifiable, HasChats;
+    use HasFactory, Notifiable;
 
     public function user() {
         return $this->belongsTo(User::class);

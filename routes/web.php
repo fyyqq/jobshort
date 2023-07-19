@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ChatifyController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\FreelancerRegistrationController;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +29,6 @@ use App\Models\Notification;
 */
 
 Auth::routes();
-// Chatify::routes();
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -59,9 +57,6 @@ Route::prefix('notifications')->middleware(['auth'])->group(function() {
     Route::post('/unread/{id}', [NotificationController::class, 'unreadMessage']);
     Route::delete('/delete/{id}', [NotificationController::class, 'destroy']);
 });
-
-// Chatify
-Route::get('/chatify/{id}', [ChatifyController::class, 'index'])->name('chatify.user');;
 
 // Payment
 Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
