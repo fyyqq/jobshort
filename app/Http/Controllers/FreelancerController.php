@@ -46,6 +46,78 @@ class FreelancerController extends Controller
             "notifications" => Notification::where('notifiable_id', auth()->user()->freelancer->id)->latest()->get()
         ]);
     }
+    
+    public function inboxNotification() {
+        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('freelancer.notifications.action', [
+                'notifications' => $notifications
+            ]);
+        } else {
+            return view('freelancer.notifications.index', [
+                'notifications' => $notifications
+            ]);
+        }
+    }
+    
+    public function orderNotification() {
+        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)
+        ->where('type', 'App\Notifications\OrderNotification')->latest()->get();
+        
+        if (request()->ajax()) {
+            return view('freelancer.notifications.action', [
+                'notifications' => $notifications
+            ]);
+        } else {
+            return view('freelancer.notifications.index', [
+                'notifications' => $notifications
+            ]);
+        }
+    }
+    
+    public function reviewNotification() {
+        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)
+        ->where('type', 'App\Notifications\ReviewNotification')->latest()->get();
+
+        if (request()->ajax()) {
+            return view('freelancer.notifications.action', [
+                'notifications' => $notifications
+            ]);
+        } else {
+            return view('freelancer.notifications.index', [
+                'notifications' => $notifications
+            ]);
+        }
+    }
+    
+    public function readNotification() {
+        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', '!=', null)->latest()->get();        
+
+        if (request()->ajax()) {
+            return view('freelancer.notifications.action', [
+                'notifications' => $notifications
+            ]);
+        } else {
+            return view('freelancer.notifications.index', [
+                'notifications' => $notifications
+            ]);
+        }
+    }
+    
+    public function unreadNotification() {
+        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', null)->latest()->get();
+    
+        if (request()->ajax()) {
+            return view('freelancer.notifications.action', [
+                'notifications' => $notifications
+            ]);
+        } else {
+            return view('freelancer.notifications.index', [
+                'notifications' => $notifications
+            ]);
+        }
+    }
 
     public function addService() 
     {

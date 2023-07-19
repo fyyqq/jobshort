@@ -123,7 +123,14 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             // Filter Search
             Route::get('/search', [ServicesController::class, 'searchServices'])->name('freelancer.search-services');
         });
-        Route::get('/notification', [FreelancerController::class, 'notification'])->name('freelancer.notification');
+        Route::prefix('notification')->group(function() {
+            Route::get('/', [FreelancerController::class, 'notification'])->name('freelancer.notification');
+            Route::get('/inbox', [FreelancerController::class, 'inboxNotification'])->name('freelancer.notification-inbox');
+            Route::get('/orders', [FreelancerController::class, 'orderNotification'])->name('freelancer.notification-order');
+            Route::get('/reviews', [FreelancerController::class, 'reviewNotification'])->name('freelancer.notification-rating');
+            Route::get('/read', [FreelancerController::class, 'readNotification']);
+            Route::get('/unread', [FreelancerController::class, 'unreadNotification']);
+        });
         Route::prefix('profile')->group(function() {
             Route::get('/', [FreelancerController::class, 'profile'])->name('freelancer.profile');
             Route::put('/{id}', [FreelancerController::class, 'update'])->name('freelancer.profile-update');

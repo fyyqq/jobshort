@@ -60,15 +60,15 @@
                     <div class="col-lg-8 col-12 px-0 mb-lg-0 mb-3">
                         <div class="border rounded shadow-sm" style="background-color: #fff;">
                             <div class="d-flex align-items-center justify-content-between border-bottom p-4">
-                                <h1 class="h6 mb-0 text-dark">Selling Products</h1>
+                                <h1 class="h6 mb-0 text-dark">Services</h1>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{ route('freelancer.create-service') }}" class="btn px-3 btn-sm btn-outline-dark"><i class="fa-solid fa-plus"></i></a>
                                     <a href="{{ route('freelancer.services') }}" class="btn px-3 btn-sm btn-primary"><i class="mdi mdi-arrow-top-right-thin"></i></a>
                                 </div>
                             </div>
-                            <div class="px-4 pb-3">
+                            <div class="pb-3">
                                 <div class="row mx-0 py-3 border-bottom mb-2">
-                                    <div class="col-lg-5 col-8 d-flex align-items-center justify-content-lg-center justify-content-start">
+                                    <div class="col-lg-5 col-8 d-flex align-items-center justify-content-lg-center justify-content-center">
                                         <small class="mb-0" style="font-size: 13px;">Service Details</small>
                                     </div>
                                     <div class="col-2 d-lg-flex d-none align-items-center justify-content-center">
@@ -81,7 +81,7 @@
                                         <small class="mb-0" style="font-size: 13px;">Status</small>
                                     </div>
                                 </div>
-                                <div class="w-100 row mx-0" id="parent-show-services" style="row-gap: 5px;">
+                                <div class="px-4 w-100 row mx-0" id="parent-show-services" style="row-gap: 5px;">
                                     @foreach ($services as $index => $service)
                                         <div class="d-flex align-items-center px-2 py-2">
                                             <div class="col-lg-5 col-12 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">

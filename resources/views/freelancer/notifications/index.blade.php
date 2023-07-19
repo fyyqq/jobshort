@@ -16,23 +16,14 @@
                 <div class="box border shadow-sm rounded bg-white mb-3">
                     <div class="d-flex align-items-center justify-content-between px-2 border-bottom">
                         <span class="d-flex align-items-center justify-content-start lh-1 w-100">
-                            <div class="box-title py-3 px-md-4 px-3 {{ Route::currentRouteName() === 'freelancer.notification' ? 'border-bottom border-2 border-primary' : '' }}">
-                                <h6 class="m-0" id="order-menu-link">Inbox</h6>
-                            </div>
-                            <div class="dropdown box-title py-3 ps-md-4 pe-md-3 ps-3 pe-2 d-flex align-items-center justify-content-center gap-1" data-bs-toggle="dropdown" style="cursor: pointer;">
-                                <h6 class="m-0" id="order-menu-link">Orders</h6>
-                                <i class="mdi mdi-menu-down"></i>
-                                <ul class="dropdown-menu dropdown-menu-left py-0">
-                                    <li>
-                                        <span class="dropdown-item" style="font-size: 13px; padding: 13px; 10px">Approved</span>
-                                    </li>
-                                    <li>
-                                        <span class="dropdown-item" style="font-size: 13px; padding: 13px; 10px">Completed</span>
-                                    </li>
-                                </ul>
+                            <div class="box-title py-3 px-md-4 px-3">
+                                <h6 class="m-0 inbox-notification" id="order-menu-link">Inbox</h6>
                             </div>
                             <div class="box-title py-3 px-md-4 px-3">
-                                <h6 class="m-0" id="order-menu-link">Review</h6>
+                                <h6 class="m-0 order-notification" id="order-menu-link">Order</h6>
+                            </div>
+                            <div class="box-title py-3 px-md-4 px-3">
+                                <h6 class="m-0 review-notification" id="order-menu-link">Rating</h6>
                             </div>
                         </span>
                         <span class="d-flex align-items-center justify-content-end">
@@ -41,11 +32,11 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right py-0">
-                                    <button class="dropdown-item py-2" type="button">
+                                    <button class="dropdown-item py-2" type="button" id="read-notification">
                                         <i class="me-2 mdi mdi-email-open"></i>
                                         <small class="text-muted" style="font-size: 12.5px;">Read</small>
                                     </button>
-                                    <button class="dropdown-item py-2" type="button">
+                                    <button class="dropdown-item py-2" type="button" id="unread-notification">
                                         <i class="me-2 mdi mdi-email"></i>
                                         <small class="text-muted" style="font-size: 12.5px;">Unread</small>
                                     </button>
@@ -53,7 +44,7 @@
                             </div>
                         </span>
                     </div>
-                    <div class="box-body p-0">
+                    <div class="box-body p-0" id="container_notification">
                         @foreach ($notifications as $index => $notification)
                             <?php 
                                 $title = json_decode($notification->data)->title;

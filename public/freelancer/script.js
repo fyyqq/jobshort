@@ -307,6 +307,91 @@ $(document).ready(function() {
         });
     });
 
+    // Inbox Page Notification
+    $(document).on('click', '.inbox-notification', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        
+        const parent = $('#container_notification');
+        axios.get('/account/freelancer/notification/inbox')
+        .then(res => {
+            setTimeout(() => {
+                $(loader).css('display', 'none'); 
+                $(parent).html('');
+                $(parent).html(res.data);
+            }, 1000);
+        }).catch(err => console.log(err));
+    });
+    
+    // Order Page Notification
+    $(document).on('click', '.order-notification', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        
+        const parent = $('#container_notification');
+        axios.get('/account/freelancer/notification/orders')
+        .then(res => {
+            setTimeout(() => {
+                $(loader).css('display', 'none'); 
+                $(parent).html('');
+                $(parent).html(res.data);
+            }, 1000);
+        }).catch(err => console.log(err));
+    });
+    
+    // Review Page Notification
+    $(document).on('click', '.review-notification', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        
+        const parent = $('#container_notification');
+        axios.get('/account/freelancer/notification/reviews')
+        .then(res => {
+            setTimeout(() => {
+                $(loader).css('display', 'none');
+                $(parent).html('');
+                $(parent).html(res.data);
+            }, 1000);
+        }).catch(err => console.log(err));
+    });
+    
+    // Read Page Notification
+    $(document).on('click', '#read-notification', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        
+        const parent = $('#container_notification');
+        axios.get('/account/freelancer/notification/read')
+        .then(res => {
+            setTimeout(() => {
+                $(loader).css('display', 'none');
+                $(parent).html('');
+                $(parent).html(res.data);
+            }, 1000);
+        }).catch(err => console.log(err));
+    });
+    
+    // Unread Page Notification
+    $(document).on('click', '#unread-notification', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        
+        const parent = $('#container_notification');
+        axios.get('/account/freelancer/notification/unread')
+        .then(res => {
+            setTimeout(() => {
+                $(loader).css('display', 'none');
+                $(parent).html('');
+                $(parent).html(res.data);
+            }, 1000);
+        }).catch(err => console.log(err));
+    });
+
     $('#select-all-jobs').click(function(e) {
         const checkAllService = document.getElementById('select-all-jobs');
         const checkJobs = document.querySelectorAll('#select-jobs');
