@@ -1,7 +1,7 @@
 @foreach ($services as $service)
     <div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
         <div class="col-1 px-0 d-flex align-items-center justify-content-center">
-            <input type="checkbox" id="select-jobs">
+            <input type="checkbox" id="select-services">
             <input type="hidden" name="slug" value="{{ $service->slug }}">
         </div>
         <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">

@@ -10,6 +10,9 @@ const linkListText = document.querySelectorAll('.link-list .navbar-nav .dropdown
 const linkListIcon = document.querySelectorAll('.link-list .navbar-nav .dropdown-item a.active span');
 const contentEmployer = document.querySelector('.container-employer .content');
 
+const loader = document.querySelector('.custom-loader');
+
+// Sidebar Opan & Close
 open_close_btn.addEventListener('click', e => {
     e.preventDefault();
     const sidebarCloseSize = 85; 
@@ -63,6 +66,9 @@ open_close_btn.addEventListener('click', e => {
 const inputText = document.getElementById('file_text');
 const img = document.getElementById('seller_img');
 
+// Profile Page
+
+// Insert Freelancer Image
 function freelancerImage(event) {
     if (event.files.length > 0) {
         const fileName = event.files[0];
@@ -75,6 +81,7 @@ function freelancerImage(event) {
     }
 }
 
+// Insert Unknown Image if delete
 if (inputText && inputText.nextElementSibling) {
     const fileImage = document.getElementById('employer-img');
     const deleteImgIcon = inputText.nextElementSibling;
@@ -87,143 +94,13 @@ if (inputText && inputText.nextElementSibling) {
     });
 }
 
-function deleteSelectedItems() {
-    const checkJobs = document.querySelectorAll('#select-jobs');
-    var selectedItems = [];
-    checkJobs.forEach(element => {
-        if (element.checked) {
-            selectedItems.push(element.nextElementSibling.value);
-        }
-    });
-
-    if (selectedItems.length == 0) {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'd-none',
-                closeButton: 'shadow-none',
-            },
-            buttonsStyling: false
-        });
-
-        swalWithBootstrapButtons.fire({
-            title: 'Delete',
-            text: 'Select Items First Before Delete',
-            icon: 'warning',
-            position: 'center',
-            showCloseButton: true,
-        });
-    } else {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
-              closeButton: 'shadow-none',
-            },
-            buttonsStyling: false
-        });
-
-        swalWithBootstrapButtons.fire({
-            title: 'Delete ?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            position: 'center',
-            confirmButtonText: 'Confirm',
-            showCloseButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
-                .then(function(res) {
-                    if (res.data) {
-                        swalWithBootstrapButtons.fire(
-                            'Deleted!',
-                            'Your Selected Items has been Deleted.',
-                            'success'
-                        );
-                    }
-                });
-            }
-        });
-    }    
-}
-
-$('#title').on('input', function(e) {
-    var value = e.target.value;
-    
-    if (value.length > 100) {
-        cutString = value.substring(0, 100);
-        e.target.value = cutString;
-
-        e.target.nextElementSibling.style.color = 'red';
-    } else {
-        e.target.nextElementSibling.style.color = '';
-    }
-});
-
-
-
-function archiveSelectedItems() {
-    const checkJobs = document.querySelectorAll('#select-jobs');
-
-    var selectedItems = [];
-    checkJobs.forEach(element => {
-        if (element.checked) {
-            selectedItems.push(element.nextElementSibling.value);
-        }
-    });
-
-    if (selectedItems.length == 0) {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'd-none',
-                closeButton: 'shadow-none',
-            },
-            buttonsStyling: false
-        });
-
-        swalWithBootstrapButtons.fire({
-            title: 'Archive',
-            text: 'Select Items First Before Archive',
-            icon: 'warning',
-            position: 'center',
-            showCloseButton: true,
-        });
-    } else {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
-              closeButton: 'shadow-none',
-            },
-            buttonsStyling: false
-        });
-
-        swalWithBootstrapButtons.fire({
-            title: 'Archive ?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            position: 'center',
-            confirmButtonText: 'Confirm',
-            showCloseButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
-                .then(function(res) {
-                    if (res.data) {
-                        swalWithBootstrapButtons.fire(
-                            'Archived!',
-                            'Your Selected Items has been Archived.',
-                            'success'
-                        );
-                    }
-                });
-            }
-        });
-    }    
-}
-
 $(document).ready(function() {
     $.ajaxSetup({
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
+
+    // Notification Page
 
     // Read Notification
     $(document).on('click', '.read', function(e) {
@@ -392,37 +269,36 @@ $(document).ready(function() {
         }).catch(err => console.log(err));
     });
 
-    $('#select-all-jobs').click(function(e) {
-        const checkAllService = document.getElementById('select-all-jobs');
-        const checkJobs = document.querySelectorAll('#select-jobs');
+    // Services Page
 
-        if (checkAllService.checked) {
-            checkJobs.forEach(element => {
-                element.checked = true;
-            });
-        } else {
-            checkJobs.forEach(element => {
-                element.checked = false;
-            });
-        }
-    });
+    // change service page [all, active, archive]
+    $(document).on('click', '.service-link', function(e) {
+        e.preventDefault();
 
-    $('.approve-btn').each(function(index, value) {
-        $(value).on('click', function(e) {
-            e.preventDefault();
-
-            let orderId = ($(value).siblings('#order_id'))[0].value;
-
-            $.ajax({
-                url: `/account/freelancer/orders/approve/${orderId}`,
-                method: 'POST',
-                success: function(res) {
-                    // console.log(res);
-                }
-            });
+        $(loader).css('display', 'block');
+        $('.service-link').removeClass('active');
+        $(this).addClass('active');
+        
+        const url = $(this).data('service-link');
+        const container = $('#parent-show-services');
+        
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            success: function(res) {
+                history.pushState(null, null, url);
+                setTimeout(() => {
+                    $(container).html('');
+                    $(loader).css('display', 'none');
+                    $(container).html(res);
+                    document.getElementById('select-all-services').checked = false;
+                }, 1000);
+            }
         });
     });
 
+    // Archive Service
     $(document).on('click', '.archive-service-btn', function(e) {
         e.preventDefault();
 
@@ -457,6 +333,7 @@ $(document).ready(function() {
         });
     });
     
+    // Delete Service
     $(document).on('click', '.delete-service-btn', function(e) {
         e.preventDefault();
         
@@ -491,7 +368,86 @@ $(document).ready(function() {
         });
     });
 
-    // Add Image on Create Service
+    // Select All Services Option
+    $('#select-all-services').click(function(e) {
+        const checkAllService = document.getElementById('select-all-services');
+        const checkServices = document.querySelectorAll('#select-services');
+
+        if (checkAllService.checked) {
+            checkServices.forEach(element => {
+                element.checked = true;
+            });
+        } else {
+            checkServices.forEach(element => {
+                element.checked = false;
+            });
+        }
+    });
+
+    
+
+    // Order Page
+    
+    // change order page [pending, approved, rejected, completed]
+    $(document).on('click', '.order-menu-link', function(e) {
+        e.preventDefault();
+
+        $(loader).css('display', 'block');
+        let url = $(this).data('order-link');
+        const container = $('#display-order');
+
+        $('.order-menu-link').removeClass('border-bottom border-2 border-primary');
+        $(this).addClass('border-bottom border-2 border-primary');
+        
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            success: function(res) {
+                history.pushState(null, null, url);
+                setTimeout(() => {
+                    $(container).html('');
+                    $(loader).css('display', 'none');
+                    $(container).html(res);
+                }, 1000);
+            }
+        });
+    });
+
+    // Approve Order Btn 
+    $('.approve-btn').each(function(index, value) {
+        $(value).on('click', function(e) {
+            e.preventDefault();
+
+            let orderId = ($(value).siblings('#order_id'))[0].value;
+
+            $.ajax({
+                url: `/account/freelancer/orders/approve/${orderId}`,
+                method: 'POST',
+                success: function(res) {
+                    // console.log(res);
+                }
+            });
+        });
+    });
+    
+    // Create & Update
+
+    // Filter Title Add Create
+    $('#title').on('input', function(e) {
+        var value = e.target.value;
+        
+        if (value.length > 100) {
+            cutString = value.substring(0, 100);
+            e.target.value = cutString;
+
+            e.target.nextElementSibling.style.color = 'red';
+        } else {
+            e.target.nextElementSibling.style.color = '';
+        }
+    });
+
+    // Add Image Container
     $('#addImage').click(function(e) {
         e.preventDefault();
 
@@ -502,6 +458,7 @@ $(document).ready(function() {
         parent.id = 'serviceImage'
         $(parent).css({ "height": "180px", "width": "250px", "overflow": "hidden" });
 
+        // Add Images Detail
         const inputFile = document.createElement('input');
         inputFile.type = 'file';
         inputFile.name = 'images[]';
@@ -623,6 +580,7 @@ $(document).ready(function() {
     });
 });
 
+// Insert Image
 function insertImage(event) {
     if (event.files.length > 0) {
         const fileName = event.files[0];
@@ -655,6 +613,7 @@ function insertImage(event) {
     }
 }
 
+// Destroy Image
 function destroyImage(event) {
     const destroyImgContainerIcon = $(event).next();
     const imgElement = $(event).siblings('img')[0];
@@ -665,10 +624,12 @@ function destroyImage(event) {
     $(destroyImgContainerIcon).removeClass('d-none');
 }
 
+// Destroy Image Container
 function destroyImageContainer(event) {
     $(event).parent().remove();
 }
 
+// Scroll Create Images 
 function updateScroll() {
     const parentElement = document.getElementById('add-image-container');
     const childElement = document.getElementById('child-container');
@@ -683,7 +644,7 @@ function updateScroll() {
     }
 }
 
-const loader = document.querySelector('.custom-loader');
+// Services Page
 
 // Filter Search
 function searchServices(event) {
@@ -703,7 +664,7 @@ function searchServices(event) {
     });
 }
 
-// Filter SortBy
+// Filter SortBy Desc Service
 function sortByOldest(event) {
     $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-oldest')
@@ -716,6 +677,7 @@ function sortByOldest(event) {
     });
 }
 
+// Filter SortBy Desc Service
 function sortByTopOrder(event) {
     $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-top-order')
@@ -728,6 +690,7 @@ function sortByTopOrder(event) {
     });
 }
 
+// Filter SortBy Desc Rating
 function sortByTopRating(event) {
     $(loader).css('display', 'block');
     axios.get('/account/freelancer/services/sort-by-top-rating')
@@ -740,7 +703,7 @@ function sortByTopRating(event) {
     }).catch(err => console.error(err.message));
 }
 
-// Filter Price
+// Filter Price Desc
 function priceRangeTop(event) {
     $(loader).css('display', 'block');
 
@@ -764,6 +727,7 @@ function priceRangeTop(event) {
     });
 }
 
+// Filter Price Asc
 function priceRangeDown(event) {
     $(loader).css('display', 'block');
 
@@ -786,6 +750,7 @@ function priceRangeDown(event) {
     });
 }
 
+// Filter Price Normal
 function priceRange(event) {
     $(loader).css('display', 'block');
     
@@ -808,6 +773,7 @@ function priceRange(event) {
     });
 }
 
+// Display Service After Filter
 function displayFilteredServices(services) {
     const parentService = document.getElementById('parent-show-services');
     parentService.innerHTML = '';
@@ -829,7 +795,7 @@ function displayFilteredServices(services) {
         serviceElement.innerHTML = 
         `<div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
             <div class="col-1 px-0 d-flex align-items-center justify-content-center">
-                <input type="checkbox" id="select-jobs">
+                <input type="checkbox" id="select-services">
                 <input type="hidden" name="slug" value="${service.slug}">
             </div>
             <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
@@ -896,63 +862,131 @@ function displayFilteredServices(services) {
         </div>`;
 
         parentService.appendChild(serviceElement);
-        document.getElementById('select-all-jobs').checked = false;
+        document.getElementById('select-all-services').checked = false;
     });
 
 }
 
+// Delete Selected Services
+function deleteSelectedItems() {
+    const checkServices = document.querySelectorAll('#select-services');
+    var selectedItems = [];
+    checkServices.forEach(element => {
+        if (element.checked) {
+            selectedItems.push(element.nextElementSibling.value);
+        }
+    });
+
+    if (selectedItems.length == 0) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'd-none',
+                closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Delete',
+            text: 'Select Items First Before Delete',
+            icon: 'warning',
+            position: 'center',
+            showCloseButton: true,
+        });
+    } else {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+              closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
+                .then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your Selected Items has been Deleted.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    }    
+}
+
+// Archive Selected Services
+function archiveSelectedItems() {
+    const checkServices = document.querySelectorAll('#select-services');
+
+    var selectedItems = [];
+    checkServices.forEach(element => {
+        if (element.checked) {
+            selectedItems.push(element.nextElementSibling.value);
+        }
+    });
+
+    if (selectedItems.length == 0) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'd-none',
+                closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Archive',
+            text: 'Select Items First Before Archive',
+            icon: 'warning',
+            position: 'center',
+            showCloseButton: true,
+        });
+    } else {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+              closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Archive ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
+                .then(function(res) {
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Archived!',
+                            'Your Selected Items has been Archived.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    }    
+}
+
+// Back History Button
 function goToPreviousPage() {
     window.history.back();
 }
-
-
-$(document).on('click', '.service-link', function(e) {
-    e.preventDefault();
-
-    $(loader).css('display', 'block');
-    $('.service-link').removeClass('active');
-    $(this).addClass('active');
-    
-    const url = $(this).data('service-link');
-    const container = $('#parent-show-services');
-    
-    $.ajax({
-        url: url,
-        method: 'GET',
-        dataType: 'html',
-        success: function(res) {
-            history.pushState(null, null, url);
-            setTimeout(() => {
-                $(container).html('');
-                $(loader).css('display', 'none');
-                $(container).html(res);
-                document.getElementById('select-all-jobs').checked = false;
-            }, 1000);
-        }
-    });
-});
-
-$(document).on('click', '.order-menu-link', function(e) {
-    e.preventDefault();
-
-    $(loader).css('display', 'block');
-    let url = $(this).data('order-link');
-    const container = $('#display-order');
-
-    $('.order-menu-link').removeClass('border-bottom border-2 border-primary');
-    $(this).addClass('border-bottom border-2 border-primary');
-    
-    $.ajax({
-        url: url,
-        method: 'GET',
-        dataType: 'html',
-        success: function(res) {
-            history.pushState(null, null, url);
-            setTimeout(() => {
-                $(container).html('');
-                $(loader).css('display', 'none');
-                $(container).html(res);
-            }, 1000);
-        }
-    });
-});
