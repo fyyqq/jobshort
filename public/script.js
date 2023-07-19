@@ -13,26 +13,7 @@ $('.owl-carousel').owlCarousel({
     pagination: false,
 });
 
-// $('.owl-prev').on('click', function(e) {
-//     e.preventDefault();
-
-//     if ($(this).hasClass('disabled')) {
-//         $(this).css('cursor', 'not-allowed');
-//     } else {
-//         $('.owl-next').css('cursor', 'pointer');
-//     }
-// });
-
-// $('.owl-next').on('click', function(e) {
-//     e.preventDefault();
-
-//     if ($(this).hasClass('disabled')) {
-//         $(this).css('cursor', 'not-allowed');
-//     } else {
-//         $('.owl-prev').css('cursor', 'pointer')
-//     }
-// });
-
+// Fancybox Image Product 
 $(document).ready(function() {
     $(".fancybox").fancybox({
     buttons: [
@@ -60,12 +41,13 @@ $(document).ready(function() {
     });
 });
 
+// Back History Btn
 function goToPreviousPage() {
     window.history.back();
 }
 
+// Logout btn
 function logout() {
-
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
@@ -87,6 +69,7 @@ function logout() {
     });
 }
 
+// Submit Search Service
 $(document).ready(function() {
     $('.submitSearch').submit(function() {
         var keyword = $(this).children().find('.searchbar').val();
@@ -100,26 +83,18 @@ $(document).ready(function() {
 
 const searchbar_mobile = document.getElementById('searchbar-mobile');
 
+// Show Searchbar Mobile
 function showSearchbar() {
     searchbar_mobile.style.display = 'flex';
     $('#searchbar').focus();
 }
 
+// Close Searchbar Mobile
 function closeSearchbar() {
     searchbar_mobile.style.display = 'none';
 }
 
-const countryList = document.querySelectorAll('.suggestion-list');
-const inputCountry = document.querySelectorAll('#location');
-
-function displayCountries(names) {
-    const li = document.createElement('li');
-    li.textContent = names;
-    countryList.forEach(element => {
-        element.appendChild(li);
-    });
-}
-
+// Show Searchbar Autocomplete
 $(document).on('keyup', '.searchbar', function(e) {
     var keyword = $(this).val();
 
@@ -153,6 +128,7 @@ $(document).on('keyup', '.searchbar', function(e) {
     }
 });
 
+// Click Autocomplete 
 $(document).on('click', '.autocomplete_link', function(e) {
     e.preventDefault();
 
@@ -167,6 +143,19 @@ $(document).on('click', '.autocomplete_link', function(e) {
     $(form)[0].submit();
 });
 
+const countryList = document.querySelectorAll('.suggestion-list');
+const inputCountry = document.querySelectorAll('#location');
+
+// Display Select Countries
+function displayCountries(names) {
+    const li = document.createElement('li');
+    li.textContent = names;
+    countryList.forEach(element => {
+        element.appendChild(li);
+    });
+}
+
+// Display Countries
 function findCountries(countries, event) {
     const inputValue = event.target.value.toLowerCase();
 
@@ -227,6 +216,7 @@ function chooseCountries(element, input) {
     });
 }
 
+// Countries Api
 fetch('https://restcountries.com/v3.1/all')
 .then(res => res.json())
 .then(data => {
@@ -238,6 +228,7 @@ const fileImage = document.getElementById('profile-img');
 const inputText = document.getElementById('file_text');
 const img = document.getElementById('seller_img');
 
+// insert Image
 if (fileImage) {
     fileImage.addEventListener('change', () => {
         if (fileImage.files.length > 0) {
@@ -252,7 +243,7 @@ if (fileImage) {
     });
 }
 
-
+// Delete Image
 if (inputText && inputText.nextElementSibling) {
     const deleteImgIcon = inputText.nextElementSibling;
     deleteImgIcon.addEventListener('click', e => {
@@ -662,6 +653,7 @@ $(document).on('click', 'input[name="filter"]', function(e) {
     });
 });
 
+// Reset filter page
 function resetFilter() {
     closeFilter();
     
@@ -687,7 +679,7 @@ function resetFilter() {
     }).catch(err => console.error(err.response.data.message));
 }
 
-// users filter
+// filter Categoy in Freelancer Page
 function filterCategories(element) {
     loader.style.display = 'block';
     const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();;
@@ -709,6 +701,7 @@ function filterCategories(element) {
     });
 }
 
+// Reset sort search page
 function sortService(element) {
     loader.style.display = 'block';
     const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();
@@ -726,6 +719,7 @@ function sortService(element) {
     });
 }
 
+// Filter Categories
 function sortCategoryService(element) {
     loader.style.display = 'block';
     const category_slug = $(element).closest('.d-flex').find('#category_slug').val();
@@ -743,6 +737,7 @@ function sortCategoryService(element) {
     }).catch(err => console.log(err));
 }
 
+// Open Filter Search Mobile
 function openFilter(element) {
     const filter_mobile = document.getElementById('filter-mobile-container');
     if (!element.className.includes('open')) {
@@ -754,6 +749,7 @@ function openFilter(element) {
     }
 }
 
+// Close Filter Search Mobile
 function closeFilter() {
     const filter_mobile = document.getElementById('filter-mobile-container');
     filter_mobile.style.height = '0%';

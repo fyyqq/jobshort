@@ -195,7 +195,7 @@ $(document).ready(function() {
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none'); 
-                $(parent).html('');
+                $(parent).html('');;
                 $(parent).html(res.data);
             }, 1000);
         }).catch(err => console.log(err));
@@ -212,7 +212,7 @@ $(document).ready(function() {
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none'); 
-                $(parent).html('');
+                $(parent).html('');;
                 $(parent).html(res.data);
             }, 1000);
         }).catch(err => console.log(err));
@@ -229,7 +229,7 @@ $(document).ready(function() {
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
-                $(parent).html('');
+                $(parent).html('');;
                 $(parent).html(res.data);
             }, 1000);
         }).catch(err => console.log(err));
@@ -246,7 +246,7 @@ $(document).ready(function() {
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
-                $(parent).html('');
+                $(parent).html('');;
                 $(parent).html(res.data);
             }, 1000);
         }).catch(err => console.log(err));
@@ -263,7 +263,7 @@ $(document).ready(function() {
         .then(res => {
             setTimeout(() => {
                 $(loader).css('display', 'none');
-                $(parent).html('');
+                $(parent).html('');;
                 $(parent).html(res.data);
             }, 1000);
         }).catch(err => console.log(err));
@@ -646,6 +646,8 @@ function updateScroll() {
 
 // Services Page
 
+const parent = ('#parent-show-services');
+
 // Filter Search
 function searchServices(event) {
     
@@ -659,7 +661,8 @@ function searchServices(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 2000);
     });
 }
@@ -672,7 +675,8 @@ function sortByOldest(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
     });
 }
@@ -685,7 +689,8 @@ function sortByTopOrder(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
     });
 }
@@ -698,7 +703,8 @@ function sortByTopRating(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
     }).catch(err => console.error(err.message));
 }
@@ -719,7 +725,8 @@ function priceRangeTop(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
 
     }).catch(function(error) {
@@ -743,7 +750,8 @@ function priceRangeDown(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
     }).catch(function(error) {
         console.error(error.message);
@@ -766,105 +774,12 @@ function priceRange(event) {
         const data = res.data;
         setTimeout(() => {
             $(loader).css('display', 'none');
-            displayFilteredServices(data);
+            $(parent).html('');
+            $(parent).html(data);
         }, 1300);
     }).catch(function(error) {
         console.error(error.message);
     });
-}
-
-// Display Service After Filter
-function displayFilteredServices(services) {
-    const parentService = document.getElementById('parent-show-services');
-    parentService.innerHTML = '';
-
-    services.forEach(function(service) {
-        let maxStars = 0;
-        service.rating.forEach(function(rating) {
-            if (rating.stars > maxStars) {
-                maxStars = rating.stars;
-            }
-        });
-        if (maxStars > 0) {
-            stars = maxStars + '.0';
-        } else {
-            stars = '0'
-        }
-        const serviceElement = document.createElement('div');
-        serviceElement.className += 'px-0';
-        serviceElement.innerHTML = 
-        `<div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
-            <div class="col-1 px-0 d-flex align-items-center justify-content-center">
-                <input type="checkbox" id="select-services">
-                <input type="hidden" name="slug" value="${service.slug}">
-            </div>
-            <div class="col-lg-4 col-8 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
-                <a href="/services/${service.slug}" class="rounded" style="height: 75px; width: 110px; overflow: hidden;">
-                    <img src="/images/${service.image.split(',')[0]}" class="w-100 h-100" style="object-fit: cover;">
-                </a>
-                <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
-                    <small class="text-dark d-lg-block d-none text-break lh-sm">${service.title.slice(0, 30)}</small>
-                    <small class="text-dark d-lg-none d-block lh-base">${service.title.slice(0, 15)}</small>
-                    <small class="mb-0 text-muted" style="font-size: 12px;">${service.category}</small>
-                    <div class="d-flex align-items-center justify-content-between mt-2 w-100">
-                        <small class="mb-0 text-dark">$${service.price}</small>
-                        <div class="d-lg-none d-flex flex-row-reverse">
-                            <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
-                                <i class="fa-solid fa-star text-warning" style="font-size: 12.5px;"></i>
-                                <small class="text-muted">${stars}</small>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center gap-1 pe-1 border-end">
-                                <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
-                                <small class="text-muted">${service.order.filter(order => order.status === 'completed').length}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
-                    <i class="mdi mdi-text-box-check-outline" style="font-size: 16px;"></i>
-                    <small class="">${service.order.filter(order => order.status === 'completed').length}</small>
-                </div>
-            </div>
-            <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
-                    <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
-                    <small class="">${stars}</small>
-                </div>
-            </div>
-            <div class="col-lg-3 col-2 d-flex align-items-lg-center align-items-end justify-content-center flex-column" style="row-gap: 5px;">
-                <div class="btn-group" role="group">
-                    <a href="/account/freelancer/services/edit/${service.slug}" class="btn btn-sm border btn-light px-3 d-md-block d-none">
-                        <small class="text-dark">Edit</small>
-                    </a>
-                    <div class="btn-group dropdown">
-                        <button type="button" class="border btn btn-light btn-sm" data-bs-toggle="dropdown">
-                            <i class="mdi mdi-dots-vertical"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                            <button class="dropdown-item py-2 archive-service-btn" type="button">
-                                <i class="me-2 mdi mdi-archive"></i>
-                                <small class="text-muted" style="font-size: 12.5px;">Archive</small>
-                            </button>
-                            <a href="/account/freelancer/services/edit/${service.slug}" type="button" class="dropdown-item py-2 d-md-none d-block">
-                                <i class="me-2 mdi mdi-pencil"></i>
-                                <small class="text-dark">Edit</small>
-                            </a>
-                            <button class="dropdown-item py-2 delete-service-btn" type="button">
-                                <i class="me-2 mdi mdi-delete"></i>
-                                <small class="text-muted" style="font-size: 12.5px;">Delete</small>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-
-        parentService.appendChild(serviceElement);
-        document.getElementById('select-all-services').checked = false;
-    });
-
 }
 
 // Delete Selected Services

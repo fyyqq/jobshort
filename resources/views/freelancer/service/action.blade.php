@@ -26,7 +26,7 @@
             <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
                 <small class="text-dark d-lg-block d-none text-break lh-sm">{{ Str::limit($service->title, 30) }}</small>
                 <small class="text-dark d-lg-none d-block lh-base">{{ Str::limit($service->title, 15) }}</small>
-                <small class="mb-0 text-muted" style="font-size: 12px;"></small>
+                <small class="mb-0 text-muted" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                 <div class="d-flex align-items-center justify-content-between mt-2 w-100">
                     <small class="mb-0 text-dark">{{ '$' . $service->price }}</small>
                     <div class="d-lg-none d-flex flex-row-reverse">

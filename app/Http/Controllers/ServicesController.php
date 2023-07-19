@@ -22,43 +22,43 @@ class ServicesController extends Controller
     public function index() 
     {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
+        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
 
         return view('freelancer.service.index', [
-            "services" => $service
+            "services" => $services
         ]);
     }
     
     public function all() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
+        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
 
         if (request()->ajax()) {
-            return view('freelancer.service.action', ["services" => $service]);
+            return view('freelancer.service.action', ["services" => $services]);
         } else {
-            return view('freelancer.service.index', ["services" => $service]);
+            return view('freelancer.service.index', ["services" => $services]);
         }
     }
     
     public function active() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
+        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
 
         if (request()->ajax()) {
-            return view('freelancer.service.action', ["services" => $service]);
+            return view('freelancer.service.action', ["services" => $services]);
         } else {
-            return view('freelancer.service.index', ["services" => $service]);
+            return view('freelancer.service.index', ["services" => $services]);
         }
     }
     
     public function archive() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $service = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'archive')->latest()->get();
+        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'archive')->latest()->get();
 
         if (request()->ajax()) {
-            return view('freelancer.service.action', ["services" => $service]);
+            return view('freelancer.service.action', ["services" => $services]);
         } else {
-            return view('freelancer.service.index', ["services" => $service]);
+            return view('freelancer.service.index', ["services" => $services]);
         }
     }
 
@@ -70,7 +70,11 @@ class ServicesController extends Controller
         $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)
         ->where('title', 'like', "$keyword%")->get();
 
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
 
     // Filter SortBy
@@ -80,7 +84,11 @@ class ServicesController extends Controller
         ->where('freelancer_id', $freelancer->id)
         ->orderBy('id', 'asc')->get();
         
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
 
     public function sortByTopOrder() {
@@ -91,7 +99,11 @@ class ServicesController extends Controller
             $query->where('status', 'completed');
         }])->orderByDesc('top_order')->get();
         
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
     
     public function sortByTopRating() {
@@ -100,7 +112,12 @@ class ServicesController extends Controller
             $query->orderByDesc('stars');
         }])->where('freelancer_id', $freelancer->id)->get();
 
-        return response()->json($services);
+        
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
     
     // Filter
@@ -108,21 +125,33 @@ class ServicesController extends Controller
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->latest()->get();
         
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
 
     public function sortByHighPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
         
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
 
     public function sortByLowPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
         
-        return response()->json($services);
+        if (request()->ajax()) {
+            return view('freelancer.service.action', ["services" => $services]);
+        } else {
+            return view('freelancer.service.index', ["services" => $services]);
+        }
     }
 
     public function updateArchive(string $slug) {

@@ -4,8 +4,6 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\FreelancerRegistrationController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrdersController;
@@ -14,7 +12,8 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ServicesController;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +60,7 @@ Route::prefix('notifications')->middleware(['auth'])->group(function() {
 Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-service');
 Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name('unwishlist-service');
 
-// Freelancer Notification
+// Notification Post
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 
