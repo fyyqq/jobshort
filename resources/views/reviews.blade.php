@@ -39,9 +39,66 @@
                             </div>
                         </div>
                     </a>
-                    <div class="position-absolute w-100 text-end bottom-0 pb-3 pe-3">
-                        <button class="btn btn-dark"><i class="mdi mdi-message-text"></i></button>
-                        <button class="btn btn-sm btn-primary px-3 py-2" style="font-size: 13.5px;">Place Order</button>
+                    <div class="position-absolute w-100 bottom-0 pb-3 pe-3">
+                        <div class="d-flex justify-content-end gap-1">
+                            <button class="btn btn-dark"><i class="mdi mdi-message-text"></i></button>
+                            @if (auth()->check())
+                                <?php
+                                    $userOrder = auth()->user()->order->where('service_id', $service->id)->sortByDesc('created_at')->first();
+                                    $rejectOrCompleted = $userOrder && in_array($userOrder->status, ['rejected', 'completed']);
+                                    $pendingOrApproved = $userOrder && in_array($userOrder->status, ['pending', 'approved']);
+                                ?>
+                                @if ($rejectOrCompleted)
+                                    <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                    @if (auth()->check() && auth()->user()->roles != '0')
+                                        <button class="btn px-3 btn-sm py-2 text-light order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                        <form action="{{ route('profile.order') }}" method="get" class="d-none">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('profile.main') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                        </form>
+                                    @endif
+                                    <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                                @elseif ($pendingOrApproved)
+                                    @if ($userOrder->status === 'pending')
+                                        <form action="{{ route('profile.order') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        </form>
+                                    @elseif ($userOrder->status === 'approved')
+                                        <form action="{{ route('profile.order-approved') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        </form>
+                                    @endif
+                                @else
+                                {{-- No Order Yet. --}}
+                                    <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                    @if (auth()->check() && auth()->user()->roles != '0')
+                                        <button class="btn px-3 btn-sm py-2 text-light order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                        <form action="{{ route('profile.order') }}" method="get" class="d-none">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Check Order</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('profile.main') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                        </form>
+                                    @endif
+                                    <input type="hidden" id="freelancer_id" value="{{ $service->freelancer->id }}">
+                                @endif
+                            @else
+                                <form action="{{ route('profile.main') }}" method="get">
+                                    @csrf
+                                    <button type="submit" class="btn px-3 btn-sm py-2 text-light" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
+                                </form>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="row mx-0 border-bottom py-4 gap-sm-0 gap-4">
