@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WishlistController;
@@ -58,11 +57,6 @@ Route::prefix('notifications')->middleware(['auth'])->group(function() {
     Route::delete('/delete/{id}', [NotificationController::class, 'destroy']);
 });
 
-// Payment
-Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
-Route::get('/success', [PaymentController::class, 'success'])->name('payment_success');
-Route::get('/error', [PaymentController::class, 'error'])->name('payment_error');
-
 // Wishlist
 Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-service');
 Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name('unwishlist-service');
@@ -86,7 +80,6 @@ Route::prefix('services')->group(function() {
 
     Route::get('/{slug}', [HomeController::class, 'show'])->name('services');
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
-    Route::get('/payment/{slug}', [PaymentController::class, 'index'])->name('payment');
 });
 
 Route::prefix('account')->middleware(['auth'])->group(function() {
