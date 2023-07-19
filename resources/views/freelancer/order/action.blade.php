@@ -73,7 +73,7 @@
                 <div class="ms-3 d-flex flex-column justify-content-center align-items-start" style="flex-grow: 1;">
                     <p class="mb-1" id="service-order-title">{{  Str::limit($order->service->title, 50) }}</p>
                     <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
-                        <span class="badge rounded-1 text-muted border px-2" id="order-price">{{ 'RM' . $order->service->price }}</span>
+                        <span class="badge rounded-1 text-muted border px-2" id="order-price">{{ '$' . $order->service->price }}</span>
                         <span class="badge rounded-1 text-muted border px-2" id="order-category">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
                     </div>
                     <div class="mt-2 w-100 text-md-end text-start">

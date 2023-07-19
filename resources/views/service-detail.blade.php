@@ -247,7 +247,7 @@
                 <div class="col-5 ps-lg-3 ps-0 pe-0 d-md-flex d-none justify-content-center align-items-start position-relative">
                     <div class="border shadow-sm rounded-3" style="height: 450px; position: sticky; top: 100px; width: 90%; background-color: #fff;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-center">
-                            <h1 class="h5 mb-0 text-dark">RM {{ $service->price }}</h1>
+                            <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
                         </div>
                         <div class="px-3 position-absolute w-100" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
                             <div class="d-flex align-items-center justify-content-center gap-1" style="flex-flow: 1;">
@@ -394,7 +394,7 @@
                         <i class="mdi mdi-message-text" style="font-size: 20px;"></i>
                     </div>  
                     <div class="d-flex align-items-center justify-content-center gap-3">
-                        <h1 class="h6 mb-0 text-dark">{{ 'RM' . $service->price }}</h1>
+                        <h1 class="h6 mb-0 text-dark">{{ '$' . $service->price }}</h1>
                         @if (auth()->check())
                             @if ($rejectOrCompleted)
                                 <input type="hidden" id="service_id" value="{{ $service->id }}">
