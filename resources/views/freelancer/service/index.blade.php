@@ -10,8 +10,7 @@
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">
                     <i class="fa-solid fa-chevron-left"></i>
                 </div>
-                <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Services</h1>
-                <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Services</h1>
+                <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Services</h1>
             </div>
             <div class="mt-3">
                 <div class="d-flex align-items-center justify-content-sm-between justify-content-center flex-sm-row flex-column gap-2">

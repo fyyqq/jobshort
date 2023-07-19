@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Freelancer;
 use App\Models\Notification;
+use App\Models\Order;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
 class FreelancerController extends Controller
@@ -15,14 +17,21 @@ class FreelancerController extends Controller
      */
     public function index()
     {
+        $freelancer = auth()->user()->freelancer;
+        $order = Order::where('freelancer_id', $freelancer->id);
+
         return view('freelancer.main', [
+            'freelancer' => $freelancer,
+            'orders' => $order->get(),
+            'services' => Service::where('freelancer_id', $freelancer->id)->latest()->limit(5)->get(),
+            'pendings' => $order->latest()->limit(5)->get(),
         ]);
     }
 
     public function profile() 
     {
         $skills_path = file_get_contents(public_path('json/skills.json'));
-        $decode_data = json_decode($skills_path);        
+        $decode_data = json_decode($skills_path);
         $dataFreelancer = Freelancer::where('user_id', Auth::id())->first();
 
         return view('freelancer.profile.index', [

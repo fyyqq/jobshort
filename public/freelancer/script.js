@@ -229,18 +229,19 @@ $(document).ready(function() {
     $(document).on('click', '.read', function(e) {
         e.preventDefault();
 
-        $id = $(this).siblings('#notification-id').val();
+        var id = $(this).siblings('#notification-id').val();
         $(this).removeClass('d-block');
         $(this).addClass('d-none');
         $(this).prev().removeClass('d-none');
         $(this).prev().addClass('d-block');
+        const container = $(this).parents()[1];
         
         $.ajax({
-            url: `/notifications/read/${$id}`,
+            url: `/notifications/read/${id}`,
             method: 'POST',
             success: function(res) {
                 if (res) {
-                    $(this).parent().parent().css('border', 'unset');
+                    $(container).css('border', 'unset');
                     iziToast.success({
                         title: 'Success',
                         message: 'Mark As Read',
@@ -257,18 +258,19 @@ $(document).ready(function() {
     $(document).on('click', '.unread', function(e) {
         e.preventDefault();
 
-        $id = $(this).siblings('#notification-id').val();
+        var id = $(this).siblings('#notification-id').val();
         $(this).removeClass('d-block');
         $(this).addClass('d-none');
         $(this).next().removeClass('d-none');
         $(this).next().addClass('d-block');
+        const container = $(this).parents()[1];
 
         $.ajax({
-            url: `/notifications/unread/${$id}`,
+            url: `/notifications/unread/${id}`,
             method: 'POST',
             success: function(res) {
                 if (res) {
-                    $(this).parent().parent().css('border-left', '3px solid #2891e1');
+                    $(container).css('border-left', '3px solid #2891e1');
                     iziToast.success({
                         title: 'Success',
                         message: 'Mark As Unread',
@@ -285,10 +287,10 @@ $(document).ready(function() {
     $(document).on('click', '.notification-delete', function(e) {
         e.preventDefault();
 
-        $id = $(this).siblings('#notification-id').val();
+        var id = $(this).siblings('#notification-id').val();
 
         $.ajax({
-            url: `/notifications/delete/${$id}`,
+            url: `/notifications/delete/${id}`,
             method: 'DELETE',
             success: function(res) {
                 $(this).parent().parent().remove();
