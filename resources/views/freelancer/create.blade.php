@@ -4,14 +4,13 @@
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     
-    <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
+    <div class="container-employer pt-4 px-lg-4 px-2">
         <div class="content">
             <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">
                     <i class="fa-solid fa-chevron-left"></i>
                 </div>
-                <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Create Service</h1>
-                <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Create Service</h1>
+                <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Create Service</h1>
             </div>
             <div class="mt-2 ps-md-5 ps-4 pe-3 py-4 border" id="create-jobs" style="background-color: #fff;">
                 <form action="{{ route('freelancer.post-service') }}" method="post" enctype="multipart/form-data">

@@ -1,14 +1,13 @@
 @extends('freelancer.layouts.app')
 
 @section('content')
-    <div class="container-employer pt-md-4 pt-3 px-lg-4 px-2">
+    <div class="container-employer pt-4 px-lg-4 px-2">
         <div class="content">
             <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">
                     <i class="fa-solid fa-chevron-left"></i>
                 </div>
-                <h1 class="h4 text-dark mb-0 d-md-block d-none" style="font-size: 20px;">Update Service</h1>
-                <h1 class="h4 text-dark mb-0 d-md-none d-block" style="font-size: 17px;">Update Service</h1>
+                <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Update Service</h1>
             </div>
             <div class="mt-2 ps-md-5 ps-4 pe-3 py-4 border" id="create-jobs" style="background-color: #fff;">
                 <form action="/account/freelancer/services/update/{{ $service->slug }}" method="post" enctype="multipart/form-data">

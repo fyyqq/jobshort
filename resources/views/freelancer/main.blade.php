@@ -6,8 +6,7 @@
     <div class="container-employer pt-4 px-4">
         <div class="content">
             <div class="border rounded py-4 px-4" style="background-color: #fff;">
-                <h1 class="h4 text-dark mb-0 d-lg-block d-none" style="font-size: 20px;">Dashboard</h1>
-                <h1 class="h4 text-dark mb-0 d-lg-none d-block" style="font-size: 17px;">Dashboard</h1>
+                <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Dashboard</h1>
             </div>
             <div class="mt-3 pt-2">
                 <div class="w-100 d-grid gap-2" id="dashboard-main-detail">
