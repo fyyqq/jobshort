@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\ServiceNotification;
 use Illuminate\Support\Facades\Notification;
 
+use function PHPUnit\Framework\returnSelf;
+
 class ServicesController extends Controller
 {
     /**
@@ -284,49 +286,60 @@ class ServicesController extends Controller
             'category.required' => 'Category is required.',
             'price.required' => 'Price is required.',
         ]);
-        
-        // if new image was created
-        if ($request->hasFile('images')) {
-            $imgArray = [];
-            foreach ($request->file('images') as $image) {
-                $modifiedPath = uniqid() . '.' . $image->getClientOriginalExtension();
-                // $image->move(public_path('images'), $modifiedPath);
-                array_push($imgArray, $modifiedPath);
-            }
 
-            $existingImages = explode(',', $service->image);
-
-            $filteredImages = array_filter($imgArray, function($newImage) use ($existingImages) {
-                return !in_array($newImage, $existingImages);
-            });
-
-            foreach ($existingImages as $image) {
-                if (!in_array($existingImages, $filteredImages)) {
-                    if (file_exists(public_path('/images' . $image))) {
-                        unlink(public_path('/images' . $image));
-                    }
+        function deleteImages($images) {
+            foreach ($images as $image) {
+                if (file_exists(public_path('images/' . $image))) {
+                    unlink(public_path('images/' . $image));
                 }
             }
-
-            $images = array_merge($existingImages, $filteredImages);
-        } else {
-            $images = $request->input('oldImages');
         }
 
-        return $images;
+        $existingImages = explode(',', $service->image);
+        $oldImages = $request->input('oldImages');
+
+        // if new image Added
+        if ($request->hasFile('images')) {
+
+            $imgArray = [];
+
+            foreach ($request->file('images') as $image) {
+                $modifiedPath = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $modifiedPath);
+                array_push($imgArray, $modifiedPath);
+            }
+            
+            if (!empty($oldImages)) {
+                // if new image added && something change to oldImages                
+                $diffImages = array_diff($existingImages, $oldImages);
+                deleteImages($diffImages);
+                
+                $images = array_merge($oldImages, $imgArray);
+            } else {
+                // If oldImages doesn't exists
+                deleteImages($existingImages);
+                $images = $imgArray;
+            }
+        } else {
+            // If there's no new images added             
+            $diffImages = array_diff($existingImages, $oldImages);
+            deleteImages($diffImages);
+
+            $images = $oldImages;
+        }
 
         $service->freelancer_id = $service->freelancer_id;
         $service->title = $validateUpdate['title'];
         $service->slug = strtolower($service->slug);
-        $service->image = implode(',', $images);
         $service->description = $request->input('description');
         $service->category = $validateUpdate['category'];
         $service->price = $validateUpdate['price'];
+        $service->image = implode(',', $images);
         $confirmUpdate = $service->save();
 
         $countImages = count($images);
         if ($countImages >= 5 && $confirmUpdate)  {
-            return redirect()->route('freelancer.services')->with('success', 'My service has been updated'); 
+            return redirect()->route('freelancer.services')->with('success', 'My service has been updated!'); 
         } else {
             return redirect()->back()->withErrors(['images' => 'Upload minimum 5 images.']);
         }

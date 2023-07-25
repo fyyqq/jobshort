@@ -21,7 +21,7 @@
                                     <div>
                                         <div class="d-flex align-items-center justify-content-start">
                                             @foreach (explode(',', $service->image) as $key => $value)
-                                                <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 180px; width: 250px; overflow: hidden; cursor: pointer;">
+                                                <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 180px; width: 250px; overflow: hidden;">
                                                     <i class="mdi mdi-sync position-absolute text-light" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                     <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                     <i class="mdi mdi-image d-none position-absolute" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>

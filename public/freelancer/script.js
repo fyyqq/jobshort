@@ -591,6 +591,8 @@ function insertImage(event) {
         const imageIcon = $(event).prev();
         $(imageIcon).addClass('d-none');
 
+        $(event).siblings('input:hidden').remove();
+
         const deleteImage = event.nextElementSibling;
         deleteImage.classList.remove('d-none');
 
@@ -607,6 +609,7 @@ function insertImage(event) {
             event.value = '';
         });
 
+
         const imageUrl = URL.createObjectURL(fileName);
         imgElement.src = imageUrl;
         $(imgElement).removeClass('d-none');
@@ -622,6 +625,7 @@ function destroyImage(event) {
     $(imgElement).addClass('d-none');
     $(imgIcon).removeClass('d-none');
     $(destroyImgContainerIcon).removeClass('d-none');
+    $(event).prev().remove();
 }
 
 // Destroy Image Container
