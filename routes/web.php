@@ -46,7 +46,7 @@ Route::prefix('categories')->group(function() {
 });
 
 // Notifications
-Route::prefix('notifications')->middleware(['auth'])->group(function() {
+Route::prefix('notifications')->middleware('auth')->group(function() {
     Route::get('/', [NotificationController::class, 'index'])->name('notification');
     Route::get('/inbox', [NotificationController::class, 'inbox'])->name('notification.inbox');
     Route::get('/read', [NotificationController::class, 'read'])->name('notification.read');
@@ -151,7 +151,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
     });
 });
 
-Route::prefix('freelancer_registration')->group(function() {
+Route::prefix('freelancer_registration')->middleware('auth')->group(function() {
     Route::get('/', [FreelancerRegistrationController::class, 'index'])->name('freelancer.registration');
     Route::post('/', [FreelancerRegistrationController::class, 'store'])->name('freelancer.post-registration');
 });

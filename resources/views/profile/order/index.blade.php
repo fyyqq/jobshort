@@ -115,7 +115,7 @@
                                                                         <i class="fa-solid fa-xmark position-absolute p-1 d-none" id="remove_image" style="font-size: 13px; top: 0px; right: 0px;"></i>
                                                                     </div>
                                                                 </div>
-                                                                <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 13px;">Support <b>MP4</b>, <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
+                                                                <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 13px;">Support <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Star :</label>

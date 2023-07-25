@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="pe-lg-4 pe-2">
-                <i class="fa-solid fa-message text-dark"></i>
+                <i class="mdi mdi-message-reply-text text-dark" style="font-size: 20px;"></i>
             </div>
         </div>
     </div>
