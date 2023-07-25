@@ -478,12 +478,6 @@ $(document).ready(function() {
                 const icon2 = event.target.parentElement.childNodes[4];
                 // remove image container icon
                 const icon3 = event.target.parentElement.childNodes[5];
-                // value images
-                // const icon4 = document.createElement('input');
-                // icon4.type = "hidden";
-                // icon4.name = 'oldImages[]';
-                // icon4.value = event.target.value;
-                // parent.appendChild(icon4);
 
                 imgElement.classList.remove('d-none');
                 imgElement.src = imageUrl;
@@ -541,6 +535,9 @@ $(document).ready(function() {
         parent.appendChild(icon2);
         parent.appendChild(icon3);
         
+        const countElement = ('#lengthImg');
+        const addImgLength = $('.serviceImages').length;
+        
         // Remove container add images
         $(icon3).click(function(e) {
             e.preventDefault();
@@ -548,32 +545,33 @@ $(document).ready(function() {
             const parent = $(this).parent();
             $(parent).remove();
 
-            const imgLength = $('.serviceImages').length;
-            $('#lengthImg').html('');
-            $('#lengthImg').html(imgLength + 1);
+            $(countElement).html('');
+            $(countElement).html(addImgLength + 1);
 
-            if (imgLength <= 14) {
-                $('#addImage').removeClass('d-none');
+            if (addImgLength <= 14) {
+                $('#addImage').show();
             }
 
             updateScroll();
         });
 
         // add image length
-        const addImgLength = $('.serviceImages').length;
-        const countElement = document.getElementById('lengthImg');
+        
+        const countEditElement = $('#lengthEditImg');
+        const countEditElement2 = $('#lengthEditImg2');
+        
+        var calcEditAdd = parseInt($(countEditElement).text()) + addImgLength;
+        $(countEditElement).hide();
+        $(countEditElement2).removeClass('d-none');
+        $(countEditElement2).text(calcEditAdd);
 
-        // if (parseInt(countElement.textContent) > 1) {
-            // const calcUpdate = parseInt(countElement.textContent) + addImgLength;
-            // $(countElement).html('');
-            // $(countElement).html(calcUpdate);
-        // } else {
-            const calcAdd = addImgLength + 1;
-            $(countElement).html(calcAdd);
-        // }
+        // Create Image
+        
+        const calcAdd = addImgLength + 1;
+        $(countElement).html(calcAdd);
 
-        if (addImgLength >= 14) {
-            $(this).addClass('d-none');
+        if (addImgLength >= 14 || calcEditAdd >= 15) {
+            $(this).hide();
         }
 
         updateScroll();

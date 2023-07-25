@@ -46,7 +46,7 @@
                                     <div id="emailHelp" class="text-start form-text lh-1" style="font-size: 12.5px;">Support <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
                                     <div id="emailHelp" class="text-start form-text" style="font-size: 12.5px;"><b>5</b> images required.</div>
                                 </div>
-                                <div id="emailHelp" class="text-end form-text" style="font-size: 12.5px;"><span id="lengthImg">{{ count(explode(',', $service->image)) }}</span> | 15</div>
+                                <div id="emailHelp" class="text-end form-text" style="font-size: 12.5px;"><span id="lengthEditImg">{{ count(explode(',', $service->image)) }}</span><span id="lengthEditImg2" class="d-none"></span> | 15</div>
                             </div>
                             @if ($errors->has('images'))
                                 <span class="text-start w-100 text-danger" role="alert">
