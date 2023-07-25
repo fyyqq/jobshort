@@ -58,7 +58,7 @@
                     <div class="col-lg-8 col-12 row mx-0">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Title :</label>
-                            <input type="text" class="form-control shadow-none w-100" id="title" name="title" value="{{ old('title') ? old('title', $service->title) : $service->title }}">
+                            <input type="text" class="form-control shadow-none w-100" id="title" name="title" value="{{ old('title', $service->title) }}">
                             @error('title')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="description" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Description :</label>
-                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="4">{{ old('description') ? old('description', $service->description) : $service->description }}</textarea>
+                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="4">{{ old('description', $service->description) }}</textarea>
                             @error('description')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -80,7 +80,7 @@
                                 <select name="category" id="" class="form-control shadow-none">
                                     <option value="">Find Category</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category['slug'] }}" {{ $category['slug'] === $service->category ? 'selected' : '' }}>{{ $category['name'] }}</option>
+                                        <option value="{{ $category['slug'] }}" {{ old('category', $service->category) === $category['slug'] ? 'selected' : '' }}>{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fa-solid fa-caret-down position-absolute" style="top: 50%; right: 10px; transform: translateY(-2px);"></i>
@@ -96,7 +96,7 @@
                             <div class="d-flex align-items-center justify-content-start">
                                 <div class="position-relative" id="lower_price">
                                     <div class="currency mb-0 text-dark">RM</div>
-                                    <input type="number" class="ps-5 form-control shadow-none w-100" placeholder="How much you charge ?" name="price" value="{{ old('price') ? old('price', $service->price) : $service->price }}">
+                                    <input type="number" class="ps-5 form-control shadow-none w-100" placeholder="How much you charge ?" name="price" value="{{ old('price', $service->price) }}">
                                 </div>
                             </div>
                             <div id="emailHelp" class="mt-2 form-text" style="font-size: 13.5px;">Change your currency from profile page.</div>
