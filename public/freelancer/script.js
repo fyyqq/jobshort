@@ -907,3 +907,89 @@ function archiveSelectedItems() {
 function goToPreviousPage() {
     window.history.back();
 }
+
+
+// Countries Api
+fetch('https://restcountries.com/v3.1/all')
+.then(res => res.json())
+.then(data => {
+    getCountries(data);
+});
+
+const listContainer = document.querySelectorAll('.suggestion-list');
+
+function getCountries(countries) {
+    $('#countryInput').on('keyup', function(e) {
+        var value = $(this).val();
+
+        listContainer.forEach(element => {
+            element.innerHTML = '';
+        });
+
+        $(listContainer).show();
+        
+        if (value.trim() != '') {
+            const search = countries.filter(dt => {
+                const countriesName = dt.name.common.toLowerCase();
+                return countriesName.startsWith(value);
+            });
+            
+            $(search).each(function(index, value) {
+                var names = value.name.common;
+                
+                displayCountries(names);
+            });
+
+            if (search.length <= 5) {
+                listContainer.forEach(element => {
+                    element.style.height = 'max-content';
+                    element.style.overflowY = 'unset';
+                });
+            } else {
+                listContainer.forEach(element => {
+                    element.style.height = '200px';
+                    element.style.overflowY = 'scroll';
+                });
+            }
+            selectCountry($(this));
+        } else {
+            $(listContainer).hide();
+        }
+    });
+}
+
+function displayCountries(data) {
+    const newElement = document.createElement('li')
+    newElement.innerHTML = data;
+    newElement.className = 'py-2 px-3 text-muted border';
+    
+    listContainer.forEach(element => {
+        element.appendChild(newElement);
+    });
+}
+
+function selectCountry(element) {
+    const countryLists = $(listContainer).children();
+    $(countryLists).on('click', function(e) {
+        e.preventDefault();
+
+        $(element).removeAttr('value');
+        $(element).attr('value', $(this).text());
+        $(element).val($(this).text());
+
+        $(listContainer).hide();
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -47,7 +47,7 @@
                             @yield('pages')
                         </div>
                         <div class="w-100 text-end mt-4 px-3">
-                            <button type="submit" class="btn btn-sm px-3 text-light py-2" style="background-color: #2891e1;">Submit Changes</button>
+                            <button type="submit" class="btn btn-sm px-3 py-1 text-light" style="background-color: #2891e1;">Update</button>
                         </div>
                     </form>
                 </div>

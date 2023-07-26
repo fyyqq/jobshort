@@ -28,12 +28,12 @@ class FreelancerController extends Controller
     public function profile() 
     {
         $skills_path = file_get_contents(public_path('json/skills.json'));
-        $decode_data = json_decode($skills_path);
+        $skills = json_decode($skills_path);
         $dataFreelancer = Freelancer::where('user_id', Auth::id())->first();
 
         return view('freelancer.profile.index', [
             "data" => $dataFreelancer,
-            "skills" => $decode_data
+            "skills" => $skills
         ]);
     }
 
@@ -124,6 +124,7 @@ class FreelancerController extends Controller
             'name' => 'required',
             'number' => 'required',
             'contact' => 'required',
+            'skills' => 'required',
             'country' => 'required'
         ]);
 
@@ -148,7 +149,8 @@ class FreelancerController extends Controller
         $freelancer->number = $validateStore['number'];
         $freelancer->contact = $validateStore['contact'];
         $freelancer->about = $request->input('about');
-        $freelancer->skills = $request->input('skills');
+        $freelancer->skills = $validateStore['skills'];
+        $freelancer->country = $validateStore['country'];
         $freelancer->image = $imagePath;
         $freelancer->save();
 
