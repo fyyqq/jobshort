@@ -567,7 +567,8 @@ select option {
 }
 
 #footer_link ul small a:hover {
-    color: var(--primary-color);
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color);
     transition: color .3s ease-in-out;
 }
 

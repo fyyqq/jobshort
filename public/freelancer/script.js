@@ -908,7 +908,6 @@ function goToPreviousPage() {
     window.history.back();
 }
 
-
 // Countries Api
 fetch('https://restcountries.com/v3.1/all')
 .then(res => res.json())

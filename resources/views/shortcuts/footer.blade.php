@@ -10,8 +10,7 @@
                         <a href="{{ route('login') }}" class="btn btn-sm rounded-pill py-2 px-sm-4 px-3 btn-primary">Login</a>
                         <a href="{{ route('register') }}" class="btn btn-sm rounded-pill py-2 px-sm-4 px-3 border">Register</a>
                     @else
-                        <a href="{{ route('profile.main') }}" class="btn btn-sm rounded-pill py-2 px-sm-4 px-3 btn-primary">Profile</a>
-                        <a href="{{ route('freelancer.main') }}" class="btn btn-sm rounded-pill py-2 px-sm-4 px-3 border">Freelancer</a>
+                        <a href="{{ route('freelancer.main') }}" class="btn btn-sm">Sell Your Skills <i class="ms-2 mdi mdi-arrow-top-right-thin"></i></a>
                     @endguest
                 </div>
                 <ul class="list-unstyled d-flex mb-0">
