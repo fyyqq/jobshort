@@ -37,8 +37,12 @@
                     <small class="text-muted">{{ $service->freelancer->country }}</small>
                     <small class="text-muted">|</small>
                     <div class="d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-star" style="font-size: 13.5px;"></i>
-                        <small class="text-muted ms-1">{{ $service->rating->max('stars') }} out of 5 stars</small>
+                        <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
+                        @if (count($service->rating) > 0)
+                            <small class="text-muted ms-1">{{ $service->rating->max('stars') }} out of 5 Star.</small>
+                        @else
+                            <small class="text-muted ms-1">No Rating Yet.</small>
+                        @endif
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 me-3">
@@ -255,8 +259,14 @@
                                 <i class="mdi mdi-message-text"></i>
                             </button>
                                 <div class="w-100">
-                                    @if (auth()->check())
-                                        <?php
+                                    <form action="{{ route('session', $service->slug) }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="service_id" value="{{ $service->id }}">
+                                        <input type="hidden" name="price" value="{{ $service->price }}">
+                                        <button type="submit" class="btn text-light w-100 py-2" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
+                                    </form>
+                                    {{-- @if (auth()->check())
+                                        </?php
                                             $userOrder = auth()->user()->order->where('service_id', $service->id)->sortByDesc('created_at')->first();
                                             $rejectOrCompleted = $userOrder && in_array($userOrder->status, ['rejected', 'completed']);
                                             $pendingOrApproved = $userOrder && in_array($userOrder->status, ['pending', 'approved']);
@@ -288,9 +298,9 @@
                                                     <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14px;">Check Your Order</button>
                                                 </form>
                                             @endif
-                                        @else
+                                        @else --}}
                                         {{-- No Order Yet. --}}
-                                            <input type="hidden" id="service_id" value="{{ $service->id }}">
+                                            {{-- <input type="hidden" id="service_id" value="{{ $service->id }}">
                                             @if (auth()->check() && auth()->user()->roles != '0')
                                                 <button class="btn px-3 py-2 text-light w-100 order-btn" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                                 <form action="{{ route('profile.order') }}" method="get" class="d-none">
@@ -310,7 +320,7 @@
                                             @csrf
                                             <button type="submit" class="btn px-3 py-2 text-light w-100" style="background-color: #2891e1; font-size: 14.5px;">Place Order</button>
                                         </form>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>
@@ -386,7 +396,7 @@
         </div>
     </div>
     {{-- Mobile Navbar --}}
-    <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-block' : 'd-none' }}">
+    {{-- <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-block' : 'd-none' }}">
         <div class="" id="mobile-navbar">
             <div class="row mx-0">
                 <div class="d-flex align-items-center justify-content-between ps-4 pe-3">
@@ -449,5 +459,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

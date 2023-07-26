@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\FreelancerRegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WishlistController;
@@ -75,8 +75,13 @@ Route::prefix('services')->group(function() {
         Route::get('/{value}/sort-by/{type}', [SearchController::class, 'filterSearch']);
         Route::get('/reset/{value}', [SearchController::class, 'reset']);
     });
-
+    // Show Service Detail
     Route::get('/{slug}', [HomeController::class, 'show'])->name('services');
+    // Make Service Payment
+    // Route::get('/checkout/{slug}', [PaymentController::class, 'index'])->name('checkout');
+    Route::post('/session/{slug}', [PaymentController::class, 'session'])->name('session');
+    Route::get('/success/{slug}', [PaymentController::class, 'success'])->name('success_payment');
+    // Show Service Review
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
 });
 
