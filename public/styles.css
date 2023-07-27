@@ -32,6 +32,14 @@ a:hover {
     font-size: 14px;
 }
 
+#card_payment {
+    width: 70%;
+}
+
+#card_payment #text_payment {
+    width: 100%;
+}
+
 .custom-loader {
     display: none;
     position: fixed;
@@ -690,6 +698,12 @@ select option {
     #category_image {
         height: 145px;
         width: 210px;
+    }
+    #card_payment {
+        width: 100%;
+    }
+    #card_payment #text_payment {
+        width: 70%;
     }
 }
 

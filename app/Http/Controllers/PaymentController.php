@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 
@@ -35,12 +34,13 @@ class PaymentController extends Controller
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => route('success_payment', $service->slug),
+            'success_url' => route('success', $service->slug),
         ]);
 
         return redirect()->away($session->url);
     }
 
     public function success(Request $request) {
+        return view('payment.success');
     }
 }

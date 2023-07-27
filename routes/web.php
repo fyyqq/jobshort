@@ -80,7 +80,7 @@ Route::prefix('services')->group(function() {
     // Make Service Payment
     // Route::get('/checkout/{slug}', [PaymentController::class, 'index'])->name('checkout');
     Route::post('/session/{slug}', [PaymentController::class, 'session'])->name('session');
-    Route::get('/success/{slug}', [PaymentController::class, 'success'])->name('success_payment');
+    Route::get('/success/{slug}', [PaymentController::class, 'success'])->name('success');
     // Show Service Review
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
 });
