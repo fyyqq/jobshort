@@ -488,10 +488,13 @@ $(document).ready(function() {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+                closeButton: 'shadow-none'
             },
             buttonsStyling: false
-        })
+        });
 
+        const container = $(this).closest('#order_container');
+        
         swalWithBootstrapButtons.fire({
             title: 'Cancel Order ?',
             text: "You won't be able to revert this!",
@@ -506,6 +509,7 @@ $(document).ready(function() {
                     method: 'POST',
                     success: function(res) {
                         if (res) {
+                            $(container).remove();
                             swalWithBootstrapButtons.fire(
                                 'Cancelled!',
                                 'Your Request Will be Notify Soon.',
@@ -532,6 +536,8 @@ $(document).ready(function() {
             buttonsStyling: false
         })
 
+        const container = $(this).closest('#order_container');
+
         swalWithBootstrapButtons.fire({
             title: 'Complete Order ?',
             text: "Make sure your service has been completed!",
@@ -546,6 +552,7 @@ $(document).ready(function() {
                     method: 'POST',
                     success: function(res) {
                         if (res) {
+                            $(container).remove();
                             swalWithBootstrapButtons.fire(
                                 'Completed!',
                                 'Your Order Has Been Completed!.',
@@ -560,27 +567,32 @@ $(document).ready(function() {
 });
 
 // Image Insert
-function autoImage(event) {
-    if (event.target.files.length > 0) {
-        const fileName = event.target.files[0];
+function insertImage(event) {
+    if (event.files.length > 0) {
+        const fileName = event.files[0];
 
-        const imgTag = event.target.previousElementSibling;
-        const icon = event.target.nextElementSibling;
+        const imgIcon = $(event).prev();
+        const xmark = $(event).next();
+        const syncIcon = $(event).siblings('.mdi-sync');
+        const imgTag = $(event).siblings('img')[0];
 
-        const xmark = event.target.nextElementSibling.nextElementSibling;;
-        xmark.classList.remove('d-none');
-        xmark.addEventListener('click', e => {
+        $(imgIcon).hide();
+        $(imgTag).removeClass('d-none');
+        $(syncIcon).removeClass('d-none');
+        $(xmark).removeClass('d-none')
+
+        $(xmark).on('click', function(e) {
             e.preventDefault();
-            imgTag.removeAttribute('src');
-            imgTag.classList.add('d-none');
-            icon.classList.remove('d-none');
-            e.target.classList.add('d-none');
+
+            $(imgTag).removeAttr('src');
+            $(imgTag).addClass('d-none');
+            $(syncIcon).addClass('d-none');
+            $(imgIcon).show();
+            $(this).addClass('d-none');
         });
 
         const imageUrl = URL.createObjectURL(fileName);
         imgTag.src = imageUrl;
-        imgTag.classList.remove('d-none');
-        icon.classList.add('d-none');
     }
 }
 
@@ -772,6 +784,11 @@ $(document).on('click', '.order-menu-link', function(e) {
         dataType: 'html',
         success: function(res) {
             setTimeout(() => {
+                if (res === '') {
+                    $(display_notification).css('height', '400px');
+                } else {
+                    $(display_notification).css('height', 'max-content');
+                }
                 $(loader).css('display', 'none')
                 $(display_notification).html('');
                 $(display_notification).html(res);

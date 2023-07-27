@@ -100,7 +100,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/completed', [ProfileController::class, 'completed'])->name('profile.order-completed');
             Route::post('/reject/{id}', [OrdersController::class, 'reject']);
             Route::post('/complete/{id}', [OrdersController::class, 'complete']);
-            Route::post('/rating', [RatingController::class, 'store'])->name('freelancer.rating');
+            Route::post('/rating', [RatingController::class, 'store'])->name('profile.rating');
         });
     });
     Route::prefix('freelancer')->middleware(['freelancer'])->group(function() {
