@@ -32,13 +32,13 @@
                 <div class="d-flex align-items-center justify-content-center flex-column">
                     <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>
                     @if (Route::is('profile.order-pending') || Route::is('profile.order'))
-                        <small class="mb-0 text-muted">No Pending Order</small>
+                        <p class="mb-0 text-muted">No Pending Order</p>
                     @elseif(Route::is('profile.order-approved'))
-                        <small class="mb-0 text-muted">No Approved Order</small>
+                        <p class="mb-0 text-muted">No Approved Order</p>
                     @elseif(Route::is('profile.order-rejected'))
-                        <small class="mb-0 text-muted">No Rejected Order</small>
+                        <p class="mb-0 text-muted">No Rejected Order</p>
                     @elseif(Route::is('profile.order-completed'))
-                        <small class="mb-0 text-muted">No Completed Order</small>
+                        <p class="mb-0 text-muted">No Completed Order</p>
                     @endif
                 </div>
             @else

@@ -394,6 +394,7 @@ $(document).ready(function() {
 
         $(loader).css('display', 'block');
         let url = $(this).data('order-link');
+        let type = $(this).data('type');
         const container = $('#display-order');
 
         $('.order-menu-link').removeClass('border-bottom border-2 border-primary');
@@ -404,12 +405,27 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'html',
             success: function(res) {
-                history.pushState(null, null, url);
                 setTimeout(() => {
                     $(container).html('');
                     $(loader).css('display', 'none');
                     $(container).html(res);
+                    if (res === '') {
+                        $(container).css('height', '400px');
+                        const div = document.createElement('div');
+                        div.className = 'd-flex align-items-center justify-content-center flex-column gap-3';
+                        const icon = document.createElement('i');
+                        icon.className = 'fa-regular fa-folder-open d-block';
+                        icon.style.fontSize = '35px';
+                        const p = document.createElement('p');
+                        p.className = 'text-muted mb-0';
+                        p.innerHTML = `No ${type} Order`;
+                        $(div).append(icon, p);
+                        $(container).html(div);
+                    } else {
+                        $(container).css('height', 'max-content');
+                    }
                 }, 1000);
+                history.pushState(null, null, url);
             }
         });
     });

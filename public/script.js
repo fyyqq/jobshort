@@ -727,7 +727,7 @@ $(document).on('click', '#notification-link', function(e) {
     e.preventDefault();
     $(loader).css("display", "block");
 
-    let url = $(this).data("notification-link");
+    let url = $(this).data('notification-link');
 
     const link = $('#notification-link .nav-item');
     $(link).removeClass('fw-bold');
@@ -740,6 +740,7 @@ $(document).on('click', '#notification-link', function(e) {
         method: "GET",
         dataType: 'html',
         success: function(res) {
+            history.pushState(null, null, url);
             const display_notification = $('#display-notification');
             setTimeout(() => {
                 $(loader).css("display", "none");
@@ -784,6 +785,7 @@ $(document).on('click', '.order-menu-link', function(e) {
         method: 'GET',
         dataType: 'html',
         success: function(res) {
+            history.pushState(null, null, url);
             setTimeout(() => {
                 $(loader).css('display', 'none')
                 $(display_order).html('');
@@ -795,16 +797,15 @@ $(document).on('click', '.order-menu-link', function(e) {
                     const icon = document.createElement('i');
                     icon.className = 'fa-regular fa-folder-open d-block mb-3';
                     icon.style.fontSize = '35px';
-                    const small = document.createElement('small');
-                    small.className = 'text-muted';
-                    small.innerHTML = `No ${type} Order`;
-                    $(div).append(icon, small);
+                    const p = document.createElement('p');
+                    p.className = 'text-muted mb-0';
+                    p.innerHTML = `No ${type} Order`;
+                    $(div).append(icon, p);
                     $(display_order).html(div);
                 } else {
                     $(display_order).css('height', 'max-content');
                 }
             }, 1000);
-            history.pushState(null, null, url)
         }, error: function(err) {
             console.error(err.responseText);
         }

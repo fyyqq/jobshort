@@ -12,40 +12,40 @@
             <div class="border rounded my-2" style="background-color: #fff;">
                 <ul class="navbar-nav px-md-3 px-2" id="parent-order-menu">
                     <div class="d-flex align-items-center justify-content-start">
-                        <li data-order-link="{{ route('freelancer.order-pending') }}" class="position-relative order-menu-link {{ Route::is('freelancer.order') || Route::is('freelancer.order-pending') ? 'border-bottom border-2 border-primary' : '' }}">
+                        <li data-order-link="{{ route('freelancer.order-pending') }}" data-type="Pending" class="position-relative order-menu-link {{ Route::is('freelancer.order') || Route::is('freelancer.order-pending') ? 'border-bottom border-2 border-primary' : '' }}">
                             <span class="btn p-3 rounded-0" style="font-size: 14px;">Pending</span>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
-                        <li data-order-link="{{ route('freelancer.order-approved') }}" class="position-relative order-menu-link {{ Route::is('freelancer.order-approved') ? 'border-bottom border-2 border-primary' : '' }}">
+                        <li data-order-link="{{ route('freelancer.order-approved') }}" data-type="Approved" class="position-relative order-menu-link {{ Route::is('freelancer.order-approved') ? 'border-bottom border-2 border-primary' : '' }}">
                             <span class="btn p-3 rounded-0" style="font-size: 14px;">Approved</span>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
-                        <li data-order-link="{{ route('freelancer.order-rejected') }}" class="position-relative order-menu-link {{ Route::is('freelancer.order-rejected') ? 'border-bottom border-2 border-primary' : '' }}">
+                        <li data-order-link="{{ route('freelancer.order-rejected') }}" data-type="Rejected" class="position-relative order-menu-link {{ Route::is('freelancer.order-rejected') ? 'border-bottom border-2 border-primary' : '' }}">
                             <span class="btn p-3 rounded-0" style="font-size: 14px;">Rejected</span>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
-                        <li data-order-link="{{ route('freelancer.order-completed') }}" class="position-relative order-menu-link {{ Route::is('freelancer.order-completed') ? 'border-bottom border-2 border-primary' : '' }}">
+                        <li data-order-link="{{ route('freelancer.order-completed') }}" data-type="Completed" class="position-relative order-menu-link {{ Route::is('freelancer.order-completed') ? 'border-bottom border-2 border-primary' : '' }}">
                             <span class="btn p-3 rounded-0" style="font-size: 14px;">Completed</span>
                             <small class="position-absolute" style="top: 15%; right: 5px; font-size: 12px;"></small>
                         </li>
                     </div>
                 </ul>
             </div>
-            <div class="row mx-0 d-flex justify-content-center align-items-center position-relative" id="display-order" style="row-gap: 10px; height: max-content;">
-                {{-- @if (count($orders) < 1)
-                    <div class="position-absolute text-center" style="transform: translateY(-20px);">
+            <div class="row mx-0 {{ count($orders) < 1 ? 'd-flex justify-content-center align-items-center' : '' }}" id="display-order" style="row-gap: 10px; {{ count($orders) < 1 ? 'height: 400px;' :  'height: max-content;' }}">
+                @if (count($orders) < 1)
+                    <div class="d-flex align-items-center justify-content-center flex-column gap-3">
                         <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
-                        @if (Route::currentRouteName() == 'freelancer.order')
-                            <p class="mb-0 text-muted mt-3">No Pending Orders.</p>
-                        @elseif (Route::currentRouteName() == 'freelancer.order-approved')
-                            <p class="mb-0 text-muted mt-3">No Approved Orders.</p>
-                        @elseif (Route::currentRouteName() == 'freelancer.order-rejected')
-                            <p class="mb-0 text-muted mt-3">No Rejected Orders.</p>
-                        @elseif (Route::currentRouteName() == 'freelancer.order-completed')
-                            <p class="mb-0 text-muted mt-3">No Completed Orders.</p>
+                        @if (Route::is('freelancer.order') || Route::is('freelancer.order-pending'))
+                            <p class="mb-0 text-muted">No Pending Orders</p>
+                        @elseif (Route::is('freelancer.order-approved'))
+                            <p class="mb-0 text-muted">No Approved Orders</p>
+                        @elseif (Route::is('freelancer.order-rejected'))
+                            <p class="mb-0 text-muted">No Rejected Orders</p>
+                        @elseif (Route::is('freelancer.order-completed'))
+                            <p class="mb-0 text-muted">No Completed Orders</p>
                         @endif
                     </div>
-                @else --}}
+                @else
                     @foreach ($orders as $order)
                         <div class="d-flex align-items-center justify-content-start flex-column border rounded px-md-3 px-1" style="background-color:#fff;">
                             <div class="{{ (Route::currentRouteName() == 'freelancer.order-completed') ? 'd-flex' : 'd-none' }} align-items-center justify-content-between w-100 p-3">
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     @endforeach
-                {{-- @endif --}}
+                @endif
             </div>
         </div>
     </div>
