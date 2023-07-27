@@ -8,30 +8,38 @@
         <div class="border my-2" id="parent-order-menu-link" style="background-color: #fff;">
             <ul class="navbar-nav px-3">
                 <div class="d-flex align-items-center justify-content-start">
-                    <li data-order-link="{{ route('profile.order-pending') }}" class="position-relative order-menu-link {{ Route::is('profile.order' ) || Route::is('profile.order-pending') ? 'border-bottom border-2 border-primary' : '' }}">
+                    <li data-order-link="{{ route('profile.order-pending') }}" data-type="Pending" class="position-relative order-menu-link {{ Route::is('profile.order' ) || Route::is('profile.order-pending') ? 'border-bottom border-2 border-primary' : '' }}">
                         <span class="btn p-sm-3 p-3 rounded-0" style="font-size: 13px;">Pending</span>
                         <span class="badge rounded-circle text-dark position-absolute" style="top: 10px; right: 0px; font-size: 10px;">{{ count(auth()->user()->order->where('status', 'pending')) }}</span>
                     </li>
-                    <li data-order-link="{{ route('profile.order-approved') }}" class="position-relative order-menu-link {{ Route::is('profile.order-approved') ? 'border-bottom border-2 border-primary' : '' }}">
+                    <li data-order-link="{{ route('profile.order-approved') }}" data-type="Approved" class="position-relative order-menu-link {{ Route::is('profile.order-approved') ? 'border-bottom border-2 border-primary' : '' }}">
                         <span class="btn p-sm-3 p-3 rounded-0" style="font-size: 13px;">Approved</span>
                         <span class="badge rounded-circle text-dark position-absolute" style="top: 10px; right: 0px; font-size: 10px;">{{ count(auth()->user()->order->where('status', 'approved')) }}</span>
                     </li>
-                    <li data-order-link="{{ route('profile.order-rejected') }}" class="position-relative order-menu-link {{ Route::is('profile.order-rejected') ? 'border-bottom border-2 border-primary' : '' }}">
+                    <li data-order-link="{{ route('profile.order-rejected') }}" data-type="Rejected" class="position-relative order-menu-link {{ Route::is('profile.order-rejected') ? 'border-bottom border-2 border-primary' : '' }}">
                         <span class="btn p-sm-3 p-3 rounded-0" style="font-size: 13px;">Rejected</span>
                         <span class="badge rounded-circle text-dark position-absolute" style="top: 10px; right: 0px; font-size: 10px;">{{ count(auth()->user()->order->where('status', 'rejected')) }}</span>
                     </li>
-                    <li data-order-link="{{ route('profile.order-completed') }}" class="position-relative order-menu-link {{ Route::is('profile.order-completed') ? 'border-bottom border-2 border-primary' : '' }}">
+                    <li data-order-link="{{ route('profile.order-completed') }}" data-type="Completed" class="position-relative order-menu-link {{ Route::is('profile.order-completed') ? 'border-bottom border-2 border-primary' : '' }}">
                         <span class="btn p-sm-3 p-3 rounded-0" style="font-size: 13px;">Completed</span>
                         <span class="badge rounded-circle text-dark position-absolute" style="top: 10px; right: 0px; font-size: 10px;">{{ count(auth()->user()->order->where('status', 'completed')) }}</span>
                     </li>
                 </div>
             </ul>
         </div>
-        <div id="display-order" class="row mx-0 d-flex justify-content-center align-items-center position-relative" style="gap: 10px; {{ count($orders) < 1 ? 'height: 400px;' : 'height: max-content;' }}">
+        <div id="display-order" class="row mx-0 d-flex justify-content-center align-items-center" style="gap: 10px; {{ count($orders) < 1 ? 'height: 400px;' : 'height: max-content;' }}">
             @if (count($orders) < 1)
-                <div class="position-absolute text-center" style="transform: translateY(-20px);">
+                <div class="d-flex align-items-center justify-content-center flex-column">
                     <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>
-                    <small class="mb-0 text-muted">No Pending Order</small>
+                    @if (Route::is('profile.order-pending') || Route::is('profile.order'))
+                        <small class="mb-0 text-muted">No Pending Order</small>
+                    @elseif(Route::is('profile.order-approved'))
+                        <small class="mb-0 text-muted">No Approved Order</small>
+                    @elseif(Route::is('profile.order-rejected'))
+                        <small class="mb-0 text-muted">No Rejected Order</small>
+                    @elseif(Route::is('profile.order-completed'))
+                        <small class="mb-0 text-muted">No Completed Order</small>
+                    @endif
                 </div>
             @else
                 @foreach ($orders as $order)

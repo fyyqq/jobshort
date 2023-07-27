@@ -767,7 +767,7 @@ $(document).on('click', '#notification-link', function(e) {
     });
 });
 
-// Profile Order
+// Profile Order Menu
 $(document).on('click', '.order-menu-link', function(e) {
     e.preventDefault();
     $(loader).css('display', 'block')
@@ -776,7 +776,8 @@ $(document).on('click', '.order-menu-link', function(e) {
     $(this).addClass('border-bottom border-2 border-primary');
     
     let url = $(this).data('order-link');
-    const display_notification = $('#display-order');
+    let type = $(this).data('type');
+    const display_order = $('#display-order');
     
     $.ajax({
         url: url,
@@ -784,15 +785,26 @@ $(document).on('click', '.order-menu-link', function(e) {
         dataType: 'html',
         success: function(res) {
             setTimeout(() => {
-                if (res === '') {
-                    $(display_notification).css('height', '400px');
-                } else {
-                    $(display_notification).css('height', 'max-content');
-                }
                 $(loader).css('display', 'none')
-                $(display_notification).html('');
-                $(display_notification).html(res);
+                $(display_order).html('');
+                $(display_order).html(res);
+                if (res === '') {
+                    $(display_order).css('height', '400px');
+                    const div = document.createElement('div');
+                    div.className = 'd-flex align-items-center justify-content-center flex-column';
+                    const icon = document.createElement('i');
+                    icon.className = 'fa-regular fa-folder-open d-block mb-3';
+                    icon.style.fontSize = '35px';
+                    const small = document.createElement('small');
+                    small.className = 'text-muted';
+                    small.innerHTML = `No ${type} Order`;
+                    $(div).append(icon, small);
+                    $(display_order).html(div);
+                } else {
+                    $(display_order).css('height', 'max-content');
+                }
             }, 1000);
+            history.pushState(null, null, url)
         }, error: function(err) {
             console.error(err.responseText);
         }
