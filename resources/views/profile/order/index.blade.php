@@ -99,19 +99,19 @@
                                                         <h5 class="modal-title" id="exampleModalLabel">Review & Ratings</h5>
                                                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form action="{{ route('profile.rating') }}" method="POST" enctype="multipart/form-data">
+                                                    <form class="formRating" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="modal-body">
                                                             <div class="mb-2">
                                                                 <label for="recipient-name" class="col-form-label">Images :</label>
                                                                 <div class="mt-1 d-flex align-items-center justify-content-start" style="column-gap: 10px;">
-                                                                    <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center">
+                                                                    <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 120px; width: 140px; overflow: hidden;">
                                                                         <i class="mdi mdi-sync position-absolute text-light d-none" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                                         <img src="" class="w-100 h-100 d-none" style="object-fit: cover;" loading="lazy">
                                                                         <i class="mdi mdi-image" style="font-size: 25px;"></i>
-                                                                        <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
+                                                                        <input type="file" name="images" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
                                                                         {{-- icon remove image --}}
-                                                                        <i class="p-1 fa-solid fa-xmark text-light position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                                                        <i class="p-1 fa-solid fa-xmark text-light position-absolute d-none" style="font-size: 13px; top: 0; right: 0; cursor: pointer;" ></i>
                                                                     </div>
                                                                 </div>
                                                                 <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 13px;">Support <b>JPG</b>, <b>JPEG</b> &  <b>PNG</b> file.</div>
@@ -119,14 +119,11 @@
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Star :</label>
                                                                 <div class="d-flex align-items-center justify-content-start flex-row mt-1" id="stars" style="column-gap: 5px;">
-                                                                    <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
-                                                                    <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
-                                                                    <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
-                                                                    <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
-                                                                    <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
+                                                                    @for($i = 1; $i <= 5; $i++)
+                                                                        <i class="fa-regular fa-star" style="font-size: 17px; cursor: pointer;"></i>
+                                                                    @endfor
                                                                 </div>
                                                                 <input type="hidden" name="stars" id="starLength">
-                                                                
                                                             </div>
                                                             <input type="hidden" name="user_id" value="{{ $order->user_id }}">
                                                             <input type="hidden" name="freelancer_id" value="{{ $order->freelancer->id }}">
