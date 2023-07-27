@@ -64,8 +64,8 @@ Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name(
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 
-Route::prefix('orders')->middleware(['auth'])->group(function() {
-    Route::post('/{service:id}/{freelancer:id}', [OrdersController::class, 'store']);
+Route::prefix('orders')->group(function() {
+    Route::get('/success/{slug}', [PaymentController::class, 'pages'])->name('order.success');
 });
 
 Route::prefix('services')->group(function() {
@@ -81,6 +81,7 @@ Route::prefix('services')->group(function() {
     // Route::get('/checkout/{slug}', [PaymentController::class, 'index'])->name('checkout');
     Route::post('/session/{slug}', [PaymentController::class, 'session'])->name('session');
     Route::get('/success/{slug}', [PaymentController::class, 'success'])->name('success');
+    Route::get('/cancel/{slug}', [PaymentController::class, 'cancel'])->name('cancel');
     // Show Service Review
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
 });

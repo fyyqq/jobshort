@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
-use App\Models\Service;
 use App\Models\Freelancer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\OrderNotification;
 use App\Notifications\ApproveNotification;
 use App\Notifications\CompleteOrderNotification;
 use Illuminate\Support\Facades\Notification;
@@ -114,21 +110,6 @@ class OrdersController extends Controller
             $freelancer = Freelancer::find($order->freelancer_id);
             Notification::send($freelancer, new CompleteOrderNotification($order));
 
-            return true;
-        }
-    }
-
-    public function store(string $service_id, string $freelancer_id) {
-        $order = new Order();
-        $order->user_id = Auth::id();
-        $order->service_id = $service_id;
-        $order->freelancer_id = $freelancer_id;
-        $confirmOrder = $order->save();
-
-        if ($confirmOrder) {
-            $freelancer = Freelancer::find($freelancer_id);
-            Notification::send($freelancer, new OrderNotification($order));
-            
             return true;
         }
     }

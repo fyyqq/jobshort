@@ -351,51 +351,6 @@ $(document).ready(function() {
         $('#starLength').val(indexStars);
     });
 
-    // Order Services
-    $('.order-btn').click(function(e) {
-        e.preventDefault();
-
-        var service_id = $(e.target).siblings('#service_id').val(); // 4
-        var freelancer_id = $(e.target).siblings('#freelancer_id').val();
-        $(loader).css('display', 'block');
-
-        setTimeout(() => {
-            $(loader).css('display', 'none');
-            $.ajax({
-                url: `/orders/${service_id}/${freelancer_id}`,
-                method: 'POST',
-                success: function(res) {
-                    if (res) {
-                        const swalWithBootstrapButtons = Swal.mixin({
-                            customClass: {
-                                confirmButton: 'btn btn-sm px-3 py-2 btn-primary shadow-none',
-                            },
-                            buttonsStyling: false
-                        });
-
-                        $('.order-btn').addClass('d-none');
-                        $('.order-btn').siblings('.d-none').removeClass('d-none');
-                        
-                        swalWithBootstrapButtons.fire({
-                            title: 'Successfully Order',
-                            icon: 'success',
-                            position: 'center',
-                            confirmButtonText: 'Check Order',
-                            showCloseButton: true,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = '/account/profile/orders';
-                            }
-                        });
-                        console.log(res);
-                    }
-                }, error: function(error) {
-                    console.error(error.responseText);
-                }
-            });
-        }, 3000);
-    });
-
     // Notify Service
     $('#notify').on('click', function(e) {
         e.preventDefault();
