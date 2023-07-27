@@ -721,6 +721,8 @@ $(document).on('click', '#notification-link', function(e) {
     $(link).removeClass('fw-bold');
     $(this).children('.nav-item').addClass('fw-bold');
 
+    var type = $(this).data('type');
+ 
     $.ajax({
         url: url,
         method: "GET",
@@ -731,7 +733,21 @@ $(document).on('click', '#notification-link', function(e) {
                 $(loader).css("display", "none");
                 $(display_notification).html('');
                 $(display_notification).html(res);
-                history.pushState(null, null, url);
+                if (res === '') {
+                    $(display_notification).addClass('d-flex align-items-center justify-content-center');
+                    const div = document.createElement('div');
+                    div.className = 'd-flex align-items-center justify-content-center flex-column-reverse gap-1';
+                    const small = document.createElement('small');
+                    small.className = 'text-muted';
+                    small.innerHTML = `${type} notification is empty`;
+                    const icon = document.createElement('i');
+                    icon.className = "fa-regular fa-folder-open d-block mb-3";
+                    icon.style.fontSize = '35px';
+                    $(div).append(small, icon);
+                    $(display_notification).html(div);
+                } else {
+                    $(display_notification).removeClass('d-flex align-items-center justify-content-center');
+                }
             }, 1000);
         }, error: function(err) {
             console.error(err);
@@ -759,7 +775,6 @@ $(document).on('click', '.order-menu-link', function(e) {
                 $(loader).css('display', 'none')
                 $(display_notification).html('');
                 $(display_notification).html(res);
-                history.pushState(null, null, url);
             }, 1000);
         }, error: function(err) {
             console.error(err.responseText);

@@ -8,16 +8,16 @@
             <div class="col-md-3 left">
                 <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
-                        <span data-notification-link="{{ route('notification.inbox') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
-                            <i class="mdi mdi-inbox text-dark"></i>
+                        <span data-notification-link="{{ route('notification.inbox') }}" data-type="Inbox" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
+                            <i class="mdi mdi-inbox text-dark" data-bs-target="tooltip" title="Inbox"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.inbox' || Route::currentRouteName() === 'notification' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Inbox</li>
                         </span>
-                        <span data-notification-link="{{ route('notification.read') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
-                            <i class="mdi mdi-email text-dark"></i>
+                        <span data-notification-link="{{ route('notification.read') }}" data-type="Read" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
+                            <i class="mdi mdi-email text-dark" data-bs-target="tooltip" title="Read"></i>
                             <li class="nav-item py-2 border-bottom w-100 d-md-block text-dark d-none {{ Route::currentRouteName() === 'notification.read' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Read</li>
                         </span>
-                        <span data-notification-link="{{ route('notification.unread') }}" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
-                            <i class="mdi mdi-email-open text-dark"></i>
+                        <span data-notification-link="{{ route('notification.unread') }}" data-type="Unread" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
+                            <i class="mdi mdi-email-open text-dark" data-bs-target="tooltip" title="Unread"></i>
                             <li class="nav-item py-2 text-dark d-md-block d-none {{ Route::currentRouteName() === 'notification.unread' ? 'fw-bold' : '' }}" style="font-size: 13.5px;">Unread</li>
                         </span>
                     </ul>
@@ -28,7 +28,11 @@
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Recent</h6>
                     </div>
-                    <div class="box-body p-0" id="display-notification">
+                    <div class="box-body p-0 {{ count($notifications) < 1 ? 'd-flex align-items-center justify-content-center' : '' }}" id="display-notification" style="{{ count($notifications) < 5 ? 'height: 400px;' : 'height: max-content;' }} ">
+                        <div class="d-flex align-items-center justify-content-center flex-column-reverse gap-1 {{ count($notifications) < 1 ? 'd-block' : 'd-none' }}">
+                            <small class="text-dark">Inbox Notification is Empty</small>
+                            <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>
+                        </div>
                         @foreach ($notifications as $index => $notification)
                             <?php 
                                 $title = json_decode($notification->data)->title;
