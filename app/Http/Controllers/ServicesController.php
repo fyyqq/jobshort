@@ -374,6 +374,16 @@ class ServicesController extends Controller
 
     public function deletedItems(Request $request) {
         $selected = $request->input('selectedItems');
+        $serviceSelected = Service::whereIn('slug', $selected)->get();
+        foreach ($serviceSelected as $service) {
+            $images = explode(',', $service->image);
+            foreach ($images as $image) {
+                if (file_exists(public_path('images/' . $image))) {
+                    unlink(public_path('images/' . $image));
+                }
+            }
+        }
+
         $confirmDelete = Service::whereIn('slug', $selected)->delete();
         
         if ($confirmDelete) {
