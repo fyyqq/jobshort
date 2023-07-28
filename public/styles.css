@@ -409,6 +409,18 @@ input[type=number] {
     font-size: 25px;
 }
 
+#filter-search {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 45px;
+    width: 80%;
+    background-color: var(--primary-color);
+    user-select: none;
+    cursor: pointer;
+}
+
 #select {
     overflow: hidden;
     height: 35px;
@@ -507,14 +519,15 @@ select option {
 #filter-mobile-container {
     position: fixed;
     left: 0;
-    bottom: 0;
-    height: 0%;
+    bottom: -500px;
+    height: max-content;
     width: 100%;
     background-color: rgb(255, 255, 255);
     border-top-right-radius: 35px;
     border-top-left-radius: 35px;
     display: none;
-    transition: height .3s ease;
+    transition: bottom .3s ease;
+    padding-bottom: 90px;
 }
 
 #parent_image_category #category_image {

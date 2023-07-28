@@ -139,6 +139,8 @@ $(document).on('click', '.autocomplete_link', function(e) {
     $(searchbar).val();
     $(searchbar).val($(this).text());
 
+    $('.autocomplete-container').hide();
+
     $(this).parent().empty();
 
     $(form)[0].submit();
@@ -608,6 +610,7 @@ $(document).on('click', 'input[name="filter"]', function(e) {
     let url = `/services/search/${searchValue}/sort-by/${path}`;
 
     const container = $('#display_service');
+    closeFilter();
 
     axios.get(url).then(res => {
         setTimeout(() => {
@@ -615,9 +618,8 @@ $(document).on('click', 'input[name="filter"]', function(e) {
             $(container).html('');
             $(container).html(res.data);
         }, 1500);
-        closeFilter();
     }).catch(err => {
-        console.error(err.response.data.message);
+        console.error(err);
     });
 });
 
@@ -707,20 +709,23 @@ function sortCategoryService(element) {
 
 // Open Filter Search Mobile
 function openFilter(element) {
-    const filter_mobile = document.getElementById('filter-mobile-container');
+    const filter_mobile = $('#filter-mobile-container');
     if (!element.className.includes('open')) {
         element.className += ' open';
-        filter_mobile.style.height = '80%';
+        $(filter_mobile).css('bottom', '0px');
+        $('#mobile-navbar').hide();
+        $(element).children().text('Close');
     } else {
         element.classList.remove('open');
-        filter_mobile.style.height = '0%';
+        $(filter_mobile).css('bottom','-500px');
+        $('#mobile-navbar').show();
+        $(element).children().text('Filter');
     }
 }
 
-// Close Filter Search Mobile
 function closeFilter() {
-    const filter_mobile = document.getElementById('filter-mobile-container');
-    filter_mobile.style.height = '0%';
+    const filter_mobile = $('#filter-mobile-container');
+    $(filter_mobile).css('bottom','-500px');
 }
 
 // Notification Menu

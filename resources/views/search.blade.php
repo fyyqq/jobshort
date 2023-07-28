@@ -82,9 +82,6 @@
                         <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 14px;"></i>
                         <small class="mb-0 text-dark">{{ count($services) }} result "<span class="fw-bold"><?php echo $_GET['keyword'] ?></span>"</small>
                     </div>
-                    <div class="d-md-none d-flex align-items-center justify-content-end">
-                        <button class="btn btn-light border" onclick="return openFilter(this)" style="font-size: 14px;"><i class="fa-solid fa-filter me-2" style="font-size: 13px;"></i>Filter</button>
-                    </div>
                 </div>
                 @if (count($services) > 0)
                     <div class="row mx-0" id="display_service" style="row-gap: 15px;">
@@ -151,12 +148,13 @@
                         </div>
                     </div>
                 @endif
+                {{-- Filter Mobile --}}
                 <div class="shadow-sm border" id="filter-mobile-container">
                     <div class="w-100 position-relative">
                         <span class="bg-secondary position-absolute rounded-pill" style="height: 4px; width: 40%; top: 10px; left: 50%; transform: translateX(-50%);"></span>
                     </div>
                     <div class="px-4 mt-5" id="filter-list">
-                        <div class="mt-2">
+                        <div class="">
                             <small class="text-dark mb-0" style="font-size: 13.5px;">Time Range :</small>
                             <div class="form-check my-1">
                                 <input class="form-check-input shadow-none" type="radio" name="filter" id="latest_service">
@@ -216,12 +214,12 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="mt-4 row mx-0">
-                            <button class="btn btn-primary w-100" style="font-size: 13px;" onclick="return resetFilter(this)">Reset</button>
-                        </div>
                     </div>
                 </div>
             </section>
+        </div>
+        <div class="shadow-sm rounded-pill d-md-none d-flex align-items-center justify-content-center" id="filter-search" onclick="return openFilter(this)">
+            <p class="text-light mb-0">Filter</p>
         </div>
     </div>
 @endsection

@@ -44,7 +44,7 @@
             {{-- Loader --}}
             <div class="custom-loader"></div>
             {{-- Mobile Navbar --}}
-            <div class="shadow-sm {{ Route::currentRouteName() === 'services' ? 'd-none' : 'd-block' }}">
+            <div class="shadow-sm {{ Route::currentRouteName() === 'services' || Route::currentRouteName() === 'search' ? 'd-none' : 'd-block' }}">
                 <div class="" id="mobile-navbar">
                     <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
                         <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
