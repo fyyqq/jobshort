@@ -244,7 +244,6 @@ $(document).ready(function() {
         
         const url = $(this).data('service-link');
         const container = $(parent);
-        console.log(container);
 
         const type = $(this).text();
 

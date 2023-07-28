@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Models\User;
-use App\Models\Order;
 use App\Models\Notify;
 use App\Models\Service;
 use App\Models\Freelancer;
-use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ServiceNotification;
 use Illuminate\Support\Facades\Notification;
-
-use function PHPUnit\Framework\returnSelf;
+use Illuminate\Support\Facades\Route;
 
 class ServicesController extends Controller
 {
@@ -58,8 +55,7 @@ class ServicesController extends Controller
         $keyword = $request->query('keyword');
         
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)
-        ->where('title', 'like', "$keyword%")->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->where('status', 'active')->where('title', 'like', "$keyword%")->get();
 
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $services]);
