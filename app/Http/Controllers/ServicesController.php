@@ -24,7 +24,7 @@ class ServicesController extends Controller
     public function index() 
     {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
+        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
 
         return view('freelancer.service.index', [
             "services" => $services
@@ -32,17 +32,6 @@ class ServicesController extends Controller
     }
     
     public function all() {
-        $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->latest()->get();
-
-        if (request()->ajax()) {
-            return view('freelancer.service.action', ["services" => $services]);
-        } else {
-            return view('freelancer.service.index', ["services" => $services]);
-        }
-    }
-    
-    public function active() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
 
@@ -153,6 +142,25 @@ class ServicesController extends Controller
             return view('freelancer.service.action', ["services" => $services]);
         } else {
             return view('freelancer.service.index', ["services" => $services]);
+        }
+    }
+
+    public function updateActive(string $slug) {
+        $service = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
+        $service->status = "active";
+        $confirmActive = $service->save();
+
+        if ($confirmActive) {
+            return true;
+        }
+    }
+
+    public function activeItems(Request $request) {
+        $selected = $request->input('selectedItems');
+        $confirmActive = Service::whereIn('slug', $selected)->update(['status' => 'active']);
+
+        if ($confirmActive) {
+            return true;
         }
     }
 

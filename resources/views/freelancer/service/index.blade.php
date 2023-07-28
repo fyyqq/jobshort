@@ -56,9 +56,6 @@
                         <span class="nav-link text-dark px-4 service-link {{ Route::is('freelancer.services') || Route::is('freelancer.services-all') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-all') }}" style="font-size: 14.5px;">All</span>
                     </li>
                     <li class="nav-item">
-                        <span class="nav-link text-dark service-link {{ Route::is('freelancer.services-active') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-active') }}" style="font-size: 14.5px;">Active</span>
-                    </li>
-                    <li class="nav-item">
                         <span class="nav-link text-dark service-link {{ Route::is('freelancer.services-archive') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-archive') }}" style="font-size: 14.5px;">Archive</span>
                     </li>
                 </ul>
@@ -80,13 +77,13 @@
                     </div>
                 </div>
                 <div style="{{ count($services) > 0 ? 'height: max-content;' : 'height: 420px; display: grid; place-items: center;' }}">
-                    <div class="text-center {{ count($services) > 0 ? 'd-none' : '' }}" style="transform: translateY(85px);">
+                    {{-- <div class="text-center {{ count($services) > 0 ? 'd-none' : '' }}" style="transform: translateY(85px);">
                         <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
                         <p class="mb-0 text-muted mt-3">No Services Yet.</p>
-                    </div>
+                    </div> --}}
                     <div class="w-100 row mx-0" id="parent-show-services" style="row-gap: 7px;">
                         @foreach ($services as $index => $service)
-                            <div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
+                            <div class="d-flex align-items-center px-0 py-2 border" id="parent_service" style="background-color: #fff;">
                                 <div class="col-1 px-0 d-flex align-items-center justify-content-center">
                                     <input type="checkbox" id="select-services">
                                     <input type="hidden" name="slug" value="{{ $service->slug }}">
@@ -151,11 +148,17 @@
                                                 <i class="mdi mdi-dots-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                                                <button class="dropdown-item py-2 archive-service-btn" type="button">
-                                                    <small class="text-dark" style="font-size: 12.5px;">Archive</small>
-                                                </button>
+                                                @if (Route::is('freelancer.services') || Route::is('freelancer.services-all'))
+                                                    <button class="dropdown-item py-2 archive-service-btn" type="button">
+                                                        <small class="text-dark" style="font-size: 12.5px;">Archive</small>
+                                                    </button>
+                                                @elseif (Route::is('freelancer.services-archive'))
+                                                    <button class="dropdown-item py-2 active-service-btn" type="button">
+                                                        <small class="text-dark" style="font-size: 12.5px;">Active</small>
+                                                    </button>
+                                                @endif
                                                 <a href="{{ route('freelancer.edit-services', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
-                                                    <small class="text-dark">Edit</small>
+                                                    <small class="text-dark" style="font-size: 12.5px;">Edit</small>
                                                 </a>
                                                 <input type="hidden" value="{{ $service->slug }}" id="service-slug">
                                                 <button class="dropdown-item py-2 delete-service-btn" type="button">
@@ -170,8 +173,9 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex align-items-center justify-content-end gap-2 {{ count($services) < 1 ? 'd-none' : 'd-flex mt-3' }}">
-                    <button class="btn btn-sm btn-dark py-md-2 py-1 px-3" onclick="return archiveSelectedItems()">Archive</button>
-                    <button class="btn btn-sm btn-danger py-md-2 py-1 px-md-4 px-3" onclick="return deleteSelectedItems()">Delete</button>
+                    <button class="btn btn-sm btn-dark px-3 {{ Route::is('freelancer.services') || Route::is('freelancer.services-all') ? '' : 'd-none' }}" id="archive_btn" onclick="return archiveSelectedItems()">Archive</button>
+                    <button class="btn btn-sm btn-success px-3 {{ Route::is('freelancer.services-archive') ? '' : 'd-none' }}" id="active_btn" onclick="return activeSelectedItems()">Active</button>
+                    <button class="btn btn-sm btn-danger px-3" onclick="return deleteSelectedItems()">Delete</button>
                 </div>
             </div>
         </div>

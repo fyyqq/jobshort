@@ -1,5 +1,5 @@
 @foreach ($services as $service)
-    <div class="d-flex align-items-center px-0 py-2 border" style="background-color: #fff;">
+    <div class="d-flex align-items-center px-0 py-2 border" id="parent_service" style="background-color: #fff;">
         <div class="col-1 px-0 d-flex align-items-center justify-content-center">
             <input type="checkbox" id="select-services">
             <input type="hidden" name="slug" value="{{ $service->slug }}">
@@ -64,9 +64,15 @@
                         <i class="mdi mdi-dots-vertical"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                        <button class="dropdown-item py-2 archive-service-btn" type="button">
-                            <small class="text-dark" style="font-size: 12.5px;">Archive</small>
-                        </button>
+                        @if (Route::is('freelancer.services') || Route::is('freelancer.services-all'))
+                            <button class="dropdown-item py-2 archive-service-btn" type="button">
+                                <small class="text-dark" style="font-size: 12.5px;">Archive</small>
+                            </button>
+                        @elseif (Route::is('freelancer.services-archive'))
+                            <button class="dropdown-item py-2 active-service-btn" type="button">
+                                <small class="text-dark" style="font-size: 12.5px;">Active</small>
+                            </button>
+                        @endif
                         <a href="{{ route('freelancer.edit-services', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
                             <small class="text-dark">Edit</small>
                         </a>

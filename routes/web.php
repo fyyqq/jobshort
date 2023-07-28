@@ -107,10 +107,11 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
         Route::prefix('services')->group(function() {
             Route::get('/', [ServicesController::class, 'index'])->name('freelancer.services');
             Route::get('/all', [ServicesController::class, 'all'])->name('freelancer.services-all');
-            Route::get('/active', [ServicesController::class, 'active'])->name('freelancer.services-active');
             Route::get('/archive', [ServicesController::class, 'archive'])->name('freelancer.services-archive');
             Route::get('/edit/{slug}', [ServicesController::class, 'edit'])->name('freelancer.edit-services');
             Route::put('/update/{slug}', [ServicesController::class, 'update'])->name('freelancer.update-services');
+            Route::put('/active/{slug}', [ServicesController::class, 'updateActive'])->name('freelancer.update-active-services');
+            Route::post('/active-items', [ServicesController::class, 'activeItems'])->name('freelancer.active-item-services');
             Route::put('/archive/{slug}', [ServicesController::class, 'updateArchive'])->name('freelancer.update-archive-services');
             Route::post('/archive-items', [ServicesController::class, 'archiveItems'])->name('freelancer.archive-item-services');
             Route::delete('/delete/{slug}', [ServicesController::class, 'destroy'])->name('freelancer.delete-services');

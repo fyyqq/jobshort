@@ -244,6 +244,11 @@ $(document).ready(function() {
         
         const url = $(this).data('service-link');
         const container = $('#parent-show-services');
+
+        const type = $(this).text();
+
+        const archiveBtn = ($('#archive_btn'));
+        const activeBtn = ($('#active_btn'));
         
         $.ajax({
             url: url,
@@ -256,7 +261,52 @@ $(document).ready(function() {
                     $(loader).hide();
                     $(container).html(res);
                     document.getElementById('select-all-services').checked = false;
+                    if (type === 'All') {
+                        $(archiveBtn).removeClass('d-none');
+                        $(activeBtn).addClass('d-none')
+                    } else if(type === 'Archive') {
+                        $(activeBtn).removeClass('d-none');
+                        $(archiveBtn).addClass('d-none');
+                    } 
                 }, 1000);
+            }
+        });
+    });
+
+    // Active Service
+    $(document).on('click', '.active-service-btn', function(e) {
+        e.preventDefault();
+
+        const slug = $(this).siblings('#service-slug').val(); 
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+            },
+            buttonsStyling: false
+        })
+
+        const parent = $(this).parents().closest('#parent_service');
+
+        swalWithBootstrapButtons.fire({
+            title: 'Active ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`/account/freelancer/services/active/${slug}`).then(function(res) {
+                    if (res.data) {
+                        $(parent).remove();
+                        swalWithBootstrapButtons.fire(
+                            'Active!',
+                            'Your Services Has Been Active.',
+                            'success'
+                        );
+                    }
+                });
             }
         });
     });
@@ -274,6 +324,8 @@ $(document).ready(function() {
             buttonsStyling: false
         })
 
+        const parent = $(this).parents().closest('#parent_service');
+
         swalWithBootstrapButtons.fire({
             title: 'Archive ?',
             text: "You won't be able to revert this!",
@@ -285,6 +337,7 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 axios.put(`/account/freelancer/services/archive/${slug}`).then(function(res) {
                     if (res.data) {
+                        $(parent).remove();
                         swalWithBootstrapButtons.fire(
                             'Archived!',
                             'Your Services Has Been Archived.',
@@ -302,12 +355,14 @@ $(document).ready(function() {
         
         const slug = $(this).siblings('#service-slug').val(); 
 
+        const parent = $(this).parents().closest('#parent_service');
+
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
             },
             buttonsStyling: false
-        })
+        });
 
         swalWithBootstrapButtons.fire({
             title: 'Deleted ?',
@@ -320,6 +375,7 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 axios.delete(`/account/freelancer/services/delete/${slug}`).then(function(res) {
                     if (res.data) {
+                        $(parent).remove();
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
                             'Your Services Has Been Deleted.',
@@ -770,9 +826,11 @@ function priceRange(event) {
 function deleteSelectedItems() {
     const checkServices = document.querySelectorAll('#select-services');
     var selectedItems = [];
+    var selectedElement = [];
     checkServices.forEach(element => {
         if (element.checked) {
             selectedItems.push(element.nextElementSibling.value);
+            selectedElement.push(element);
         }
     });
 
@@ -813,6 +871,9 @@ function deleteSelectedItems() {
                 axios.post(`/account/freelancer/services/delete-items`, { selectedItems })
                 .then(function(res) {
                     if (res.data) {
+                        $(selectedElement).each(function(index, value) {
+                            $(value).closest('#parent_service').remove();
+                        });
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
                             'Your Selected Items has been Deleted.',
@@ -825,14 +886,81 @@ function deleteSelectedItems() {
     }    
 }
 
+// Active Selected Services
+function activeSelectedItems() {
+    const checkServices = document.querySelectorAll('#select-services');
+
+    var selectedItems = [];
+    var selectedElement = [];
+    checkServices.forEach(element => {
+        if (element.checked) {
+            selectedItems.push(element.nextElementSibling.value);
+            selectedElement.push(element);
+        }
+    });
+
+    if (selectedItems.length == 0) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'd-none',
+                closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Active',
+            text: 'Select Items First Before Active',
+            icon: 'warning',
+            position: 'center',
+            showCloseButton: true,
+        });
+    } else {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-sm px-3 py-2 btn-primary',
+              closeButton: 'shadow-none',
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: 'Active ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            position: 'center',
+            confirmButtonText: 'Confirm',
+            showCloseButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`/account/freelancer/services/active-items`, { selectedItems })
+                .then(function(res) {
+                    $(selectedElement).each(function(index, value) {
+                        $(value).closest('#parent_service').remove();
+                    });
+                    if (res.data) {
+                        swalWithBootstrapButtons.fire(
+                            'Active!',
+                            'Your Selected Items has been Active.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    }
+}
+
 // Archive Selected Services
 function archiveSelectedItems() {
     const checkServices = document.querySelectorAll('#select-services');
 
     var selectedItems = [];
+    var selectedElement = [];
     checkServices.forEach(element => {
         if (element.checked) {
             selectedItems.push(element.nextElementSibling.value);
+            selectedElement.push(element);
         }
     });
 
@@ -872,6 +1000,9 @@ function archiveSelectedItems() {
             if (result.isConfirmed) {
                 axios.post(`/account/freelancer/services/archive-items`, { selectedItems })
                 .then(function(res) {
+                    $(selectedElement).each(function(index, value) {
+                        $(value).closest('#parent_service').remove();
+                    });
                     if (res.data) {
                         swalWithBootstrapButtons.fire(
                             'Archived!',
