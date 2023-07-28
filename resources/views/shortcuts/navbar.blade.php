@@ -12,9 +12,9 @@
                 <div class="position-absolute px-2" style="right: 25px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="return closeSearchbar(this)">
                     <i class="mdi mdi-close-circle-outline text-dark" style="font-size: 22px;"></i>
                 </div>
-                <input type="text" name="keyword" class="searchbar w-100 h-100 px-3 rounded-pill" placeholder="Find Services..." value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
+                <input type="text" name="keyword" id="searchbar" class="searchbar w-100 h-100 px-3 rounded-pill" placeholder="Find Services..." value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
             </div>
-            <ul class="autocomplete-container ps-0 position-absolute w-100 shadow-sm"></ul>
+            <ul class="autocomplete-container ps-0 position-absolute border shadow-sm" style="width: 90%;"></ul>
         </form>
         <a class="navbar-brand d-md-block d-none" href="{{ route('home') }}">
             <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" loading="lazy">
@@ -36,12 +36,12 @@
             <!-- Searchbar Desktop -->
             <form action="{{ route('search') }}" method="get" class="d-md-flex d-none submitSearch position-relative">
                 <div class="btn-group" role="group">
-                    <input type="text" name="keyword" class="searchbar px-3 py-2 text-dark" placeholder="Find Service..." style="border-top-left-radius: 20px; border-bottom-left-radius: 20px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
-                    <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
+                    <input type="text" name="keyword" class="searchbar px-3 py-2 text-dark" placeholder="Find Service..." style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
+                    <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
                         <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>
                 </div>
-                <ul class="autocomplete-container ps-0 position-absolute w-100 shadow-sm"></ul>
+                <ul class="autocomplete-container ps-0 position-absolute w-100 border shadow-sm"></ul>
             </form>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto gap-4">

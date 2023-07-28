@@ -91,6 +91,7 @@ function showSearchbar() {
 
 // Close Searchbar Mobile
 function closeSearchbar() {
+    $('.autocomplete-container').hide();
     searchbar_mobile.style.display = 'none';
 }
 

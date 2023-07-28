@@ -417,7 +417,7 @@ input[type=number] {
 .autocomplete-container {
     background-color: #fff;
     top: 42px;
-    border-radius: 5px;
+    border-radius: 10px;
     display: none;
     overflow: hidden;
     /* height: 300px; */
@@ -426,12 +426,12 @@ input[type=number] {
 
 .autocomplete-container .autocomplete_link {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12.5px;
     color: #333;
 }
 
 .autocomplete-container .autocomplete_link:hover {
-    background-color: rgba(234, 233, 233, 0.498);
+    background-color: rgba(214, 214, 214, 0.411);
 }
 
 select {
