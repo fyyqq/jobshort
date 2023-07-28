@@ -355,8 +355,17 @@ class ServicesController extends Controller
      */
     public function destroy(string $slug)
     {
-        $slug = Service::where('freelancer_id', auth()->user()->freelancer->id)->where('slug', $slug)->first();
-        $confirmDelete = $slug->delete();
+        $service = Service::where('freelancer_id', auth()->user()->freelancer->id)
+        ->where('slug', $slug)->first();
+        $confirmDelete = $service->delete();
+        
+        $images = explode(',', $service->image);
+
+        foreach ($images as $image) {
+            if (file_exists(public_path('images/' . $image))) {
+                unlink(public_path('images/' . $image));
+            }
+        }
 
         if ($confirmDelete) {
             return true;
