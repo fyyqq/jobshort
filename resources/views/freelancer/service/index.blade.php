@@ -178,21 +178,17 @@
             </div>
         </div>
     </div>
-
+    @if(session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    @endif
 @endsection
-
-<script>
-    // @if (session('success'))
-    //     $(document).ready(function() {
-    //         Swal.fire({
-    //             position: 'center',
-    //             icon: 'success',
-    //             title: '{{ session('success') }}',
-    //             showConfirmButton: false,
-    //             timer: 1800
-    //         });
-    //     });
-    // @endif
-</script>
-
 

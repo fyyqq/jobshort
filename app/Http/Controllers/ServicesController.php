@@ -203,14 +203,15 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => ['required'],
             'price' => ['required'],
-            'images' => ['required', 'min:5'],
-            'images.*' => ['image', 'mimes:png,jpg,jpeg', 'size:2048'],
+            'images' => ['required', 'min:5', 'max:2048'],
+            'images.*' => ['mimes:png,jpg,jpeg'],
         ], [
             'title.required' => 'Title is required.',
             'category.required' => 'Category is required.',
             'price.required' => 'Price is required.',
             'images.required' => 'Image is required.',
-            'images.min' => 'Upload minimum 5 images.',
+            'images.max' => 'Upload minimum 5 images.',
+            'images.size' => 'Image file too big.',
             'images.*.mimes' => 'Invalid image format.',
         ]);
 
@@ -225,7 +226,7 @@ class ServicesController extends Controller
         } else {
             $imagePaths = null;
         }
-        
+
         $slug = $freelancer->id . uniqid();
 
         $service = new Service();

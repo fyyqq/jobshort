@@ -95,11 +95,10 @@
                             <label for="price" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Price Per Service :</label>
                             <div class="d-flex align-items-center justify-content-start">
                                 <div class="position-relative" id="lower_price">
-                                    <div class="currency mb-0 text-dark">RM</div>
+                                    <div class="currency mb-0 text-dark">USD</div>
                                     <input type="number" class="ps-5 form-control shadow-none w-100" placeholder="How much you charge ?" name="price" value="{{ old('price', $service->price) }}">
                                 </div>
                             </div>
-                            <div id="emailHelp" class="mt-2 form-text" style="font-size: 13.5px;">Change your currency from profile page.</div>
                             @error('price')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -108,7 +107,7 @@
                         </div>
                     </div>
                     <div class="w-100 text-md-start text-end">
-                        <button type="submit" class="btn btn-sm btn-primary px-3">Update Service</button>
+                        <button type="submit" class="btn btn-sm btn-primary px-3">Update</button>
                     </div>
                 </form>
             </div>

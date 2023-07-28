@@ -142,7 +142,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             });
         });
         Route::get('/add-service', [ServicesController::class, 'create'])->name('freelancer.create-service');
-        Route::post('/add-service', [ServicesController::class, 'store'])->name('freelancer.post-service');
+        Route::post('/store-service', [ServicesController::class, 'store'])->name('freelancer.post-service');
 
         Route::prefix('orders')->group(function() {
             Route::get('/', [OrdersController::class, 'index'])->name('freelancer.order');

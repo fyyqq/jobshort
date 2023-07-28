@@ -93,26 +93,36 @@
                             <label for="price" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Price :</label>
                             <div class="d-flex align-items-center justify-content-start">
                                 <div class="position-relative">
-                                    <span class="currency mb-0 text-dark px-2">$</span>
+                                    <span class="currency mb-0 text-dark px-2">RM</span>
                                     <input type="number" class="ps-5 form-control shadow-none w-100" name="price" value="{{ old('price') }}">
                                 </div>
                             </div>
-                            <div id="emailHelp" class="mt-2 form-text" style="font-size: 12.5px;">Change your currency from profile page.</div>
                             @error('price')
-                                <span class="text-start w-100 text-danger mt-1" role="alert">
+                                <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
                                 </span>
                             @enderror
                         </div>
                     </div>
                     <div class="w-100 text-md-start text-end">
-                        <button type="submit" class="btn btn-sm btn-primary px-3">Post Service</button>
+                        <button type="submit" class="btn btn-sm btn-primary px-3">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    @endif
 @endsection
 
