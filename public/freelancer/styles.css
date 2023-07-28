@@ -28,9 +28,14 @@
     cursor: pointer;
 }
 
-#order-menu-link {
+#order-menu-link, 
+#notification-link {
     font-size: 14px;
     cursor: pointer;
+}
+
+#notification-link h6 {
+    font-size: 14px;
 }
 
 .custom-loader {

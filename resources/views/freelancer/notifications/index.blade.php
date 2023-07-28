@@ -13,37 +13,34 @@
             </div>
             <div class="mt-2">
                 <div class="box border shadow-sm rounded bg-white mb-3">
-                    <div class="d-flex align-items-center justify-content-between px-2 border-bottom">
+                    <div class="d-flex align-items-center justify-content-start px-2 border-bottom">
                         <span class="d-flex align-items-center justify-content-start lh-1 w-100">
-                            <div class="box-title py-3 px-md-4 px-3">
-                                <h6 class="m-0 inbox-notification" id="order-menu-link">Inbox</h6>
+                            <div data-type="Inbox" data-notification-path="{{ route('freelancer.notification-inbox') }}" class="box-title py-3 px-md-4 px-3 {{ Route::is('freelancer.notification') || Route::is('freelancer.notification-inbox') ? 'border-bottom border-2 border-primary' : '' }}" id="notification-link">
+                                <h6 class="m-0">Inbox</h6>
                             </div>
-                            <div class="box-title py-3 px-md-4 px-3">
-                                <h6 class="m-0 order-notification" id="order-menu-link">Order</h6>
+                            <div data-type="Order" data-notification-path="{{ route('freelancer.notification-order') }}" class="box-title py-3 px-md-4 px-3 {{ Route::is('freelancer.notification-order') ? 'border-bottom border-2 border-primary' : '' }}" id="notification-link">
+                                <h6 class="m-0">Order</h6>
                             </div>
-                            <div class="box-title py-3 px-md-4 px-3">
-                                <h6 class="m-0 review-notification" id="order-menu-link">Rating</h6>
-                            </div>
-                        </span>
-                        <span class="d-flex align-items-center justify-content-end">
-                            <div class="btn-group dropdown">
-                                <button type="button" class="btn btn-light btn-sm rounded" data-bs-toggle="dropdown">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right py-0">
-                                    <button class="dropdown-item py-2" type="button" id="read-notification">
-                                        <i class="me-2 mdi mdi-email-open"></i>
-                                        <small class="text-muted" style="font-size: 12.5px;">Read</small>
-                                    </button>
-                                    <button class="dropdown-item py-2" type="button" id="unread-notification">
-                                        <i class="me-2 mdi mdi-email"></i>
-                                        <small class="text-muted" style="font-size: 12.5px;">Unread</small>
-                                    </button>
-                                </div>
+                            <div data-type="Rating" data-notification-path="{{ route('freelancer.notification-rating') }}" class="box-title py-3 px-md-4 px-3 {{ Route::is('freelancer.notification-rating') ? 'border-bottom border-2 border-primary' : '' }}" id="notification-link">
+                                <h6 class="m-0">Rating</h6>
                             </div>
                         </span>
                     </div>
-                    <div class="box-body p-0" id="container_notification">
+                    <div class="box-body p-0 {{ count($notifications) < 1 ? 'd-flex align-items-center justify-content-center' : '' }}" id="container_notification" style="{{ count($notifications) < 1 ? 'height: 400px;' : 'height: max-content;' }}">
+                        @if (count($notifications) < 1)
+                            <div class="d-flex align-items-center justify-content-center flex-column gap-3">
+                                <i class="fa-regular fa-folder-open" style="font-size: 35px;"></i>
+                                @if (Route::is('freelancer.notification') || Route::is('freelancer.notification-inbox'))
+                                    <p class="mb-0 text-muted">Empty Inbox Notifications</p>
+                                @elseif (Route::is('freelancer.notification-order'))
+                                    <p class="mb-0 text-muted">Empty Order Notifications</p>
+                                @elseif (Route::is('freelancer.notification-rating'))
+                                    <p class="mb-0 text-muted">Empty Rating Notifications</p>
+                                @endif
+                            </div>
+                        @else
+                            
+                        @endif
                         @foreach ($notifications as $index => $notification)
                             <?php 
                                 $title = json_decode($notification->data)->title;

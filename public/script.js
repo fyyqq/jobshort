@@ -752,7 +752,7 @@ $(document).on('click', '#notification-link', function(e) {
                     div.className = 'd-flex align-items-center justify-content-center flex-column-reverse gap-1';
                     const small = document.createElement('small');
                     small.className = 'text-muted';
-                    small.innerHTML = `${type} notification is empty`;
+                    small.innerHTML = `Empty ${type} Notifications`;
                     const icon = document.createElement('i');
                     icon.className = "fa-regular fa-folder-open d-block mb-3";
                     icon.style.fontSize = '35px';

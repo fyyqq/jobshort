@@ -64,7 +64,7 @@ Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name(
 Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
 Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
 
-Route::prefix('orders')->group(function() {
+Route::prefix('orders')->middleware('auth')->group(function() {
     Route::get('/success/{slug}', [PaymentController::class, 'pages'])->name('order.success');
 });
 
@@ -78,10 +78,9 @@ Route::prefix('services')->group(function() {
     // Show Service Detail
     Route::get('/{slug}', [HomeController::class, 'show'])->name('services');
     // Make Service Payment
-    // Route::get('/checkout/{slug}', [PaymentController::class, 'index'])->name('checkout');
-    Route::post('/session/{slug}', [PaymentController::class, 'session'])->name('session');
-    Route::get('/success/{slug}', [PaymentController::class, 'success'])->name('success');
-    Route::get('/cancel/{slug}', [PaymentController::class, 'cancel'])->name('cancel');
+    Route::post('/session/{slug}', [PaymentController::class, 'session'])->middleware('auth')->name('session');
+    Route::get('/success/{slug}', [PaymentController::class, 'success'])->middleware('auth')->name('success');
+    Route::get('/cancel/{slug}', [PaymentController::class, 'cancel'])->middleware('auth')->name('cancel');
     // Show Service Review
     Route::get('/reviews/{slug}', [RatingController::class, 'index'])->name('reviews');
 });
@@ -131,9 +130,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/', [FreelancerController::class, 'notification'])->name('freelancer.notification');
             Route::get('/inbox', [FreelancerController::class, 'inboxNotification'])->name('freelancer.notification-inbox');
             Route::get('/orders', [FreelancerController::class, 'orderNotification'])->name('freelancer.notification-order');
-            Route::get('/reviews', [FreelancerController::class, 'reviewNotification'])->name('freelancer.notification-rating');
-            Route::get('/read', [FreelancerController::class, 'readNotification']);
-            Route::get('/unread', [FreelancerController::class, 'unreadNotification']);
+            Route::get('/rating', [FreelancerController::class, 'reviewNotification'])->name('freelancer.notification-rating');
         });
         Route::prefix('profile')->group(function() {
             Route::get('/', [FreelancerController::class, 'profile'])->name('freelancer.profile');

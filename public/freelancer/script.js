@@ -184,89 +184,52 @@ $(document).ready(function() {
         });
     });
 
-    // Inbox Page Notification
-    $(document).on('click', '.inbox-notification', function(e) {
+    // Page Notification
+    const notifications = document.querySelectorAll('#notification-link');
+
+    $(document).on('click', '#notification-link', function(e) {
         e.preventDefault();
 
-        $(loader).css('display', 'block');
-        
-        const parent = $('#container_notification');
-        axios.get('/account/freelancer/notifications/inbox')
-        .then(res => {
-            setTimeout(() => {
-                $(loader).css('display', 'none'); 
-                $(parent).html('');;
-                $(parent).html(res.data);
-            }, 1000);
-        }).catch(err => console.log(err));
-    });
-    
-    // Order Page Notification
-    $(document).on('click', '.order-notification', function(e) {
-        e.preventDefault();
+        $(loader).show();
 
-        $(loader).css('display', 'block');
-        
-        const parent = $('#container_notification');
-        axios.get('/account/freelancer/notifications/orders')
-        .then(res => {
-            setTimeout(() => {
-                $(loader).css('display', 'none'); 
-                $(parent).html('');;
-                $(parent).html(res.data);
-            }, 1000);
-        }).catch(err => console.log(err));
-    });
-    
-    // Review Page Notification
-    $(document).on('click', '.review-notification', function(e) {
-        e.preventDefault();
+        $(notifications).removeClass('border-bottom border-2 border-primary');
+        $(this).addClass('border-bottom border-2 border-primary');
 
-        $(loader).css('display', 'block');
-        
-        const parent = $('#container_notification');
-        axios.get('/account/freelancer/notifications/reviews')
-        .then(res => {
-            setTimeout(() => {
-                $(loader).css('display', 'none');
-                $(parent).html('');;
-                $(parent).html(res.data);
-            }, 1000);
-        }).catch(err => console.log(err));
-    });
-    
-    // Read Page Notification
-    $(document).on('click', '#read-notification', function(e) {
-        e.preventDefault();
+        const path = $(this).data('notification-path');
+        const type = $(this).data('type');
 
-        $(loader).css('display', 'block');
-        
         const parent = $('#container_notification');
-        axios.get('/account/freelancer/notifications/read')
-        .then(res => {
-            setTimeout(() => {
-                $(loader).css('display', 'none');
-                $(parent).html('');;
-                $(parent).html(res.data);
-            }, 1000);
-        }).catch(err => console.log(err));
-    });
-    
-    // Unread Page Notification
-    $(document).on('click', '#unread-notification', function(e) {
-        e.preventDefault();
 
-        $(loader).css('display', 'block');
-        
-        const parent = $('#container_notification');
-        axios.get('/account/freelancer/notifications/unread')
-        .then(res => {
-            setTimeout(() => {
-                $(loader).css('display', 'none');
-                $(parent).html('');;
-                $(parent).html(res.data);
-            }, 1000);
-        }).catch(err => console.log(err));
+        $.ajax({
+            url: path,
+            method: 'get',
+            success: function(res) {
+                setTimeout(() => {
+                    $(loader).hide();
+                    $(parent).html('');
+                    $(parent).html(res);
+
+                    if (res === '') {
+                        $(parent).css('height', '400px');
+                        const div = document.createElement('div');
+                        div.className = 'd-flex align-items-center justify-content-center flex-column gap-3';
+                        const p = document.createElement('p');
+                        p.className = 'mb-0 text-muted';
+                        p.innerHTML = `Empty ${type} Notifications`;
+                        const icon = document.createElement('i');
+                        icon.className = 'fa-regular fa-folder-open';
+                        icon.style.fontSize = '35px';
+                        $(div).append(p, icon);
+                        $(parent).html(div);
+                    } else {
+                        $(parent).css('height', 'max-content');
+                    }
+                }, 1000);
+                history.pushState(null, null, path);
+            }, error: function(err) {
+                console.log(err);
+            }
+        });
     });
 
     // Services Page

@@ -88,34 +88,6 @@ class FreelancerController extends Controller
         }
     }
     
-    public function readNotification() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', '!=', null)->latest()->get();        
-
-        if (request()->ajax()) {
-            return view('freelancer.notifications.action', [
-                'notifications' => $notifications
-            ]);
-        } else {
-            return view('freelancer.notifications.index', [
-                'notifications' => $notifications
-            ]);
-        }
-    }
-    
-    public function unreadNotification() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', null)->latest()->get();
-    
-        if (request()->ajax()) {
-            return view('freelancer.notifications.action', [
-                'notifications' => $notifications
-            ]);
-        } else {
-            return view('freelancer.notifications.index', [
-                'notifications' => $notifications
-            ]);
-        }
-    }
-
     public function update(Request $request, string $id) 
     {
         $freelancer = Freelancer::where('user_id', $id)->first();
