@@ -47,7 +47,7 @@
                     </div>
                 @else
                     @foreach ($orders as $order)
-                        <div class="d-flex align-items-center justify-content-start flex-column border rounded px-md-3 px-1" style="background-color:#fff;">
+                        <div class="d-flex align-items-center justify-content-start flex-column border rounded px-md-3 px-1" id="order_container" style="background-color:#fff;">
                             <div class="{{ (Route::currentRouteName() == 'freelancer.order-completed') ? 'd-flex' : 'd-none' }} align-items-center justify-content-between w-100 p-3">
                                 <div class="">
                                     <small class="mb-0 text-dark" id="order-time">Order at {{ $order->created_at->diffForHumans() }}</small>

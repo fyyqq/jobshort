@@ -345,9 +345,7 @@ $(document).ready(function() {
                 element.checked = false;
             });
         }
-    });
-
-    
+    });  
 
     // Order Page
     
@@ -397,14 +395,19 @@ $(document).ready(function() {
     $('.approve-btn').each(function(index, value) {
         $(value).on('click', function(e) {
             e.preventDefault();
-
+            $(loader).show();
+            
             let orderId = ($(value).siblings('#order_id'))[0].value;
-
+            const container = $(this).closest('#order_container');
+            
             $.ajax({
                 url: `/account/freelancer/orders/approve/${orderId}`,
                 method: 'POST',
                 success: function(res) {
-                    // console.log(res);
+                    setTimeout(() => {
+                        $(loader).hide();
+                        $(container).remove();
+                    }, 1000);
                 }
             });
         });
