@@ -65,9 +65,9 @@
                         <div class="d-flex jusitfy-content-center flex-column">
                             <p class="mb-0 text-muted text-sm-start text-center">Total Reviews</p>
                             <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
-                                <h1 class="me-2 h5 text-dark mb-0">{{ $service->rating->max('stars') < 1 ? 'No Rating' : $service->rating->max('stars') }}</h1>
+                                <h1 class="me-2 h5 text-dark mb-0">{{ $service->rating->max('stars') < 1 ? 'No Rating' : $service->rating->max('stars') . '.0' }}</h1>
                                 @for($i = 1; $i <= $service->rating->max('stars'); $i++)
-                                    <i class="mdi mdi-star" style="font-size: 20px;"></i>
+                                    <i class="mdi mdi-star text-warning" style="font-size: 20px;"></i>
                                 @endfor
                             </div>
                             <small class="text-muted" style="font-size: 12.5px;">Growth in review on this year</small>
@@ -116,8 +116,8 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="text-center border-top card-header">
-                        <small class="mb-0">End Of Section</small>
+                    <div class="text-center border-top card-header" style="background-color: #fff;">
+                        <small class="mb-0">End of Section</small>
                     </div>
                 </div>
             </div>

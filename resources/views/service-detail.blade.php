@@ -215,7 +215,7 @@
                                     <small class="text-muted" style="font-size: 12.5px;">Growth in reviews on this year</small>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
+                            <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-0 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
                                 <p class="mb-0 text-dark">Total Ratings</p>
                                 <div class="d-flex justify-content-center flex-column">
                                     <div class="d-flex align-items-center justify-content-sm-start justify-content-center">
