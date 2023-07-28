@@ -238,7 +238,7 @@ $(document).ready(function() {
     $(document).on('click', '.service-link', function(e) {
         e.preventDefault();
 
-        $(loader).css('display', 'block');
+        $(loader).show();
         $('.service-link').removeClass('active');
         $(this).addClass('active');
         
@@ -253,7 +253,7 @@ $(document).ready(function() {
                 history.pushState(null, null, url);
                 setTimeout(() => {
                     $(container).html('');
-                    $(loader).css('display', 'none');
+                    $(loader).hide();
                     $(container).html(res);
                     document.getElementById('select-all-services').checked = false;
                 }, 1000);
@@ -353,7 +353,7 @@ $(document).ready(function() {
     $(document).on('click', '.order-menu-link', function(e) {
         e.preventDefault();
 
-        $(loader).css('display', 'block');
+        $(loader).show();
         let url = $(this).data('order-link');
         let type = $(this).data('type');
         const container = $('#display-order');
@@ -368,7 +368,7 @@ $(document).ready(function() {
             success: function(res) {
                 setTimeout(() => {
                     $(container).html('');
-                    $(loader).css('display', 'none');
+                    $(loader).hide();
                     $(container).html(res);
                     if (res === '') {
                         $(container).css('height', '400px');
@@ -637,14 +637,14 @@ function searchServices(event) {
     
     const keyword = event.value;
     if (keyword.trim() != '') {
-        $(loader).css('display', 'block');
+        $(loader).show();
     }
 
     axios.get('/account/freelancer/services/search', { params: { keyword } })
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 2000);
@@ -653,12 +653,12 @@ function searchServices(event) {
 
 // Filter SortBy Desc Service
 function sortByOldest(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
     axios.get('/account/freelancer/services/sort-by-oldest')
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);
@@ -667,12 +667,12 @@ function sortByOldest(event) {
 
 // Filter SortBy Desc Service
 function sortByTopOrder(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
     axios.get('/account/freelancer/services/sort-by-top-order')
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);
@@ -681,12 +681,12 @@ function sortByTopOrder(event) {
 
 // Filter SortBy Desc Rating
 function sortByTopRating(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
     axios.get('/account/freelancer/services/sort-by-top-rating')
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);
@@ -695,7 +695,7 @@ function sortByTopRating(event) {
 
 // Filter Price Desc
 function priceRangeTop(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
 
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRangeDown(this)');
@@ -708,7 +708,7 @@ function priceRangeTop(event) {
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);
@@ -720,7 +720,7 @@ function priceRangeTop(event) {
 
 // Filter Price Asc
 function priceRangeDown(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
 
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRange(this)');
@@ -733,7 +733,7 @@ function priceRangeDown(event) {
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);
@@ -744,7 +744,7 @@ function priceRangeDown(event) {
 
 // Filter Price Normal
 function priceRange(event) {
-    $(loader).css('display', 'block');
+    $(loader).show();
     
     event.removeAttribute('onclick');
     event.setAttribute('onclick', 'return priceRangeTop(this)');
@@ -757,7 +757,7 @@ function priceRange(event) {
     .then(function(res) {
         const data = res.data;
         setTimeout(() => {
-            $(loader).css('display', 'none');
+            $(loader).hide();
             $(parent).html('');
             $(parent).html(data);
         }, 1300);

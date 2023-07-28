@@ -600,7 +600,7 @@ function insertImage(event) {
 $(document).on('click', 'input[name="filter"]', function(e) {
     e.preventDefault();
     
-    loader.style.display = 'block';
+    $(loader).show();
     
     var searchValue = $('#search_value').val();
     var path = $($(this)).attr('id');
@@ -610,7 +610,7 @@ $(document).on('click', 'input[name="filter"]', function(e) {
 
     axios.get(url).then(res => {
         setTimeout(() => {
-            loader.style.display = 'none';
+            $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
         }, 1500);
@@ -627,7 +627,7 @@ function resetFilter() {
     var searchValue = $('#search_value').val();
     let url = `/services/search/reset/${searchValue}`;
 
-    loader.style.display = 'block';
+    $(loader).show();
     const container = $('#display_service');
 
     axios.get(url).then(res => {
@@ -637,7 +637,7 @@ function resetFilter() {
                 e.checked = false;
             }
             setTimeout(() => {
-                loader.style.display = 'none';
+                $(loader).hide();
                 $(container).html('');
                 $(container).html(res.data);
             }, 1500);
@@ -648,7 +648,7 @@ function resetFilter() {
 
 // filter Categoy in Freelancer Page
 function filterCategories(element) {
-    loader.style.display = 'block';
+    $(loader).show();
     const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();;
     const optionSelected = element.options[element.selectedIndex].value;
     
@@ -659,7 +659,7 @@ function filterCategories(element) {
         const html = $(res.data);
         const servicesCount = html[0].value;
         setTimeout(() => {
-            loader.style.display = 'none';
+            $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
             $('#filter-count').html('');
@@ -670,7 +670,7 @@ function filterCategories(element) {
 
 // Reset sort search page
 function sortService(element) {
-    loader.style.display = 'block';
+    $(loader).show();
     const freelancer_name = $(element).closest('.d-flex').find('#freelancer-name').val();
     const optionSelected = element.options[element.selectedIndex].value;
 
@@ -679,7 +679,7 @@ function sortService(element) {
     axios.get(`/user/${freelancer_name}/sort-by/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
-            loader.style.display = 'none';
+            $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
         }, 1500);
@@ -688,7 +688,7 @@ function sortService(element) {
 
 // Filter Categories
 function sortCategoryService(element) {
-    loader.style.display = 'block';
+    $(loader).show();
     const category_slug = $(element).closest('.d-flex').find('#category_slug').val();
     const optionSelected = element.options[element.selectedIndex].value;
 
@@ -697,7 +697,7 @@ function sortCategoryService(element) {
     axios.get(`/categories/${category_slug}/sort-by/${optionSelected}`)
     .then(res => {
         setTimeout(() => {
-            loader.style.display = 'none';
+            $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
         }, 1500);
