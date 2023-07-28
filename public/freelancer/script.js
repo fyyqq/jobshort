@@ -243,12 +243,15 @@ $(document).ready(function() {
         $(this).addClass('active');
         
         const url = $(this).data('service-link');
-        const container = $('#parent-show-services');
+        const container = $(parent);
+        console.log(container);
 
         const type = $(this).text();
 
         const archiveBtn = ($('#archive_btn'));
         const activeBtn = ($('#active_btn'));
+
+        const buttonParent = ($(activeBtn).parent());
         
         $.ajax({
             url: url,
@@ -260,14 +263,36 @@ $(document).ready(function() {
                     $(container).html('');
                     $(loader).hide();
                     $(container).html(res);
+
                     document.getElementById('select-all-services').checked = false;
+                    
                     if (type === 'All') {
                         $(archiveBtn).removeClass('d-none');
                         $(activeBtn).addClass('d-none')
-                    } else if(type === 'Archive') {
+                    } else if (type === 'Archive') {
                         $(activeBtn).removeClass('d-none');
                         $(archiveBtn).addClass('d-none');
-                    } 
+                    }
+                    
+                    if (res === '') {
+                        $(container).css('height', '400px');
+                        $(buttonParent).removeClass('d-flex');
+                        $(buttonParent).addClass('d-none');
+                        const div = document.createElement('div');
+                        div.className = 'd-flex align-items-center justify-content-center flex-column gap-3';
+                        const p = document.createElement('p');
+                        p.innerHTML = 'No Services Yet';
+                        p.className = 'text-muted mb-0';
+                        const icon = document.createElement('i');
+                        icon.className = 'fa-regular fa-folder-open';
+                        icon.style.fontSize = '35px';
+                        $(div).append(icon, p);
+                        $(parent).html(div);
+                    } else {
+                        $(container).css('height', 'max-content');
+                        $(buttonParent).removeClass('d-none');
+                        $(buttonParent).addClass('d-flex');
+                    }
                 }, 1000);
             }
         });
