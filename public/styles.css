@@ -220,8 +220,9 @@ input[type=number] {
 }
 
 .profile #order-freelancer-profile {
-    height: 45px;
-    width: 45px;
+    height: 42px;
+    width: 42px;
+    overflow: hidden;
 }
 
 .profile #order-action-btn {
@@ -746,8 +747,8 @@ select option {
         font-size: 13.5px;
     }
     .profile #order-freelancer-profile {
-        height: 42px;
-        width: 42px;
+        height: 38px;
+        width: 38px;
     }
     .profile #order-profile-title {
         font-size: 13.5px;

@@ -120,10 +120,10 @@
                     <div class="d-flex align-items-center justify-content-between w-100">
                         <p class="mb-1" id="order-profile-title">{{ Str::limit($order->service->title, 50) }}</p>
                         <div class="">
-                            <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                            <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 16.5px;"></i>
                             <input type="hidden" value="{{ route('wishlist-service', $order->service->id) }}" id="wishlist_path">
                             <input type="hidden" value="{{ route('unwishlist-service', $order->service->id) }}" id="unwishlist_path">
-                            <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                            <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 16.5px;"></i>
                         </div>
                     </div>
                     <?php
@@ -137,8 +137,8 @@
                         
                     ?>
                     <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
-                        <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ '$' . $order->service->price }}</span>
-                        <span class="badge rounded-1 text-muted border px-2" style="font-size: 11.5px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
+                        <span class="badge rounded-1 fw-normal text-dark border px-2" style="font-size: 11px;">{{ '$' . $order->service->price }}</span>
+                        <span class="badge rounded-1 fw-normal text-dark border px-2" style="font-size: 11px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
                     </div>
                     <div class="mt-2 w-100 text-sm-end text-start">
                         @if (Route::is('profile.order') || Route::is('profile.order-pending'))
@@ -156,14 +156,14 @@
         </a>
         <div class="d-flex align-items-center justify-content-between w-100 p-3 border-top">
             <div class="d-flex justify-content-start align-items-center flex-row">
-                <div class="rounded-circle border" id="order-freelancer-profile" style="overflow: hidden;">
+                <div class="rounded-circle border" id="order-freelancer-profile">
                     <img src="{{ $order->freelancer->image !== null ? asset('images/' . $order->freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                 </div>
                 <div class="ms-3 d-flex align-items-start justify-content-center flex-column">
-                    <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>
+                    <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 13px;">{{ $order->service->freelancer->name }}</a>
                 </div>
             </div>
-            <div class="pe-4">
+            <div class="me-md-2 me-0">
                 <i class="mdi mdi-message-reply-text text-dark" style="font-size: 20px;"></i>
             </div>
         </div>
