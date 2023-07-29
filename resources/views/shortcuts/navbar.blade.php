@@ -36,7 +36,7 @@
             <!-- Searchbar Desktop -->
             <form action="{{ route('search') }}" method="get" class="d-md-flex d-none submitSearch position-relative">
                 <div class="btn-group" role="group" id="searchbar">
-                    <input type="text" name="keyword" class="searchbar border px-3 py-2" placeholder="Find Service..." style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
+                    <input type="text" name="keyword" class="searchbar px-3 py-2" placeholder="Find Service..." style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
                     <button type="submit" class="px-3 shadow-0">
                         <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>

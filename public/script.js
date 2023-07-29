@@ -728,6 +728,7 @@ function openFilter(element) {
 function closeFilter() {
     const filter_mobile = $('#filter-mobile-container');
     $(filter_mobile).css('bottom','-500px');
+    $('#filter-search p').text('Filter');
 }
 
 // Notification Menu

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg">
+    <div class="container-xl">
         <div class="row mx-0 position-relative d-flex justify-content-center align-items-top" style="flex-wrap: wrap; column-gap: 20px; height: max-content;">
             <aside class="px-0 col-md-3 col-12 mb-3 d-md-block d-none">
                 <div class="rounded-3 pb-4 border" style="background-color: #fff; position: sticky; top: 100px;">
                     <div class="py-3 border-bottom">
-                        <h1 class="text-dark h5 mb-0 text-center" style="font-size: 16px;">Filter Services</h1>
+                        <h1 class="text-dark h5 mb-0 text-center" style="font-size: 15px;">Filter</h1>
                     </div>
                     <div class="px-4" id="filter-list">
                         <input type="hidden" value="<?php echo $_GET['keyword'] ?>" id="search_value">
@@ -89,7 +89,7 @@
                             <div class="col-sm-6 col-12">
                                 <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
                                     <div class="d-flex align-items-center justify-content-center flex-column">
-                                        <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                        <div class="rounded w-100 position-relative border" style="height: 220px; overflow: hidden;">
                                             @foreach (explode(',', $service->image) as $key => $image)
                                                 @if ($key === 0)
                                                     <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
