@@ -158,7 +158,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-md-4 mt-3 mb-2 pb-4 border-bottom" style="height: max-content;">
+        <div class="mt-md-4 mt-3 mb-2 pb-4 {{ count($similiar) > 0 ? 'border-bottom' : '' }}">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
                     <div class="py-md-3 py-2 px-md-4 px-3 border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
@@ -189,7 +189,16 @@
                     </div>
                     <div class="my-4 px-2" style="word-wrap: break-word;">
                         <h1 class="h6 text-dark">About</h1>
-                        <small class="text-muted">{{ $service->description }}</small>
+                        @if ($service->description != null)
+                            <small class="text-muted">{{ $service->description }}</small>
+                        @else
+                            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <div class="d-flex align-items-center justify-content-center flex-column">
+                                    <i class="mdi mdi-text-box-edit-outline fs-1"></i>
+                                    <small class="mb-0 text-muted">No Description</small>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="">
                         <div class="row mx-0 rounded py-3 ps-sm-1 border ps-0" style="background-color: #fff;">
@@ -224,7 +233,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-3 d-grid" style="row-gap: 6px;">
+                        <div class="mt-3 {{ count($reviews) > 0 ? 'd-grid' : 'd-none' }}" style="row-gap: 6px;">
                             <div class="my-2">
                                 <h1 class="h6 mb-0 text-sm-start text-center text-dark">Reviews</h1>
                             </div>
@@ -262,13 +271,13 @@
                                 </div>
                             @endforeach
                             <div class="mt-2 w-100 text-center">
-                                <a href="{{ route('reviews', $service->slug) }}" class="text-decoration-none fw-bold text-muted {{ count($reviews) < 1 ? 'd-none' : '' }}" style="font-size: 13.5px;">See More <i class="ms-2 fa-solid fa-chevron-right"></i></a>
+                                <a href="{{ route('reviews', $service->slug) }}" class="text-muted {{ count($reviews) < 1 ? 'd-none' : '' }}" style="font-size: 13px;">See More</a>
                             </div>  
                         </div>
                     </div>
                 </div>
                 <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start position-relative">
-                    <div class="border shadow-sm rounded-3 ms-xl-4 ms-lg-3 ms-0" style="height: 450px; position: sticky; top: 100px; width: 100%; background-color: #fff;">
+                    <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="height: 450px; position: sticky; top: 100px; width: 100%; background-color: #fff;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-center">
                             <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
                         </div>
@@ -292,7 +301,7 @@
             </div>
         </div>
         <div class="mt-2 position-relative {{ count($similiar) < 1 ? 'd-none' : 'd-block' }}">
-            <div class="py-4 w-100 text-center">
+            <div class="pb-4 pt-3 w-100 text-center">
                 <small class="mb-0 text-dark">Similiar Services</small>
             </div>
             <div class="owl-carousel owl-theme">
@@ -300,7 +309,7 @@
                     <div class="item h-auto">
                         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                             <div class="d-flex align-items-center justify-content-center flex-column">
-                                <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                <div class="rounded position-relative border" id="similiar_image">
                                     @foreach (explode(',', $service->image) as $key => $image)
                                         @if ($key === 0)
                                             <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -349,7 +358,7 @@
                 @endforeach
                 <div class="item h-auto">
                     <a href="{{ route('category', $service->category) }}" class="text-decoration-none">
-                        <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 220px; background-color: #fff;">
+                        <div class="border w-100 d-flex align-items-center justify-content-center flex-column" style="height: 220px; background-color: #fff;">
                         <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
                         <h1 class="h6 text-muted">More Services</h1>
                         </div>

@@ -622,6 +622,12 @@ select option {
     height: 100%;
 }
 
+#similiar_image {
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;
@@ -766,6 +772,9 @@ select option {
     }
     #card_payment #text_payment {
         width: 70%;
+    }
+    #similiar_image {
+        height: 200px;
     }
 }
 
