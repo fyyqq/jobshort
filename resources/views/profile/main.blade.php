@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="text-end mb-3 me-3">
-                <button type="submit" id="btn-profile-form" class="text-light btn btn-sm px-3" style="font-size: 13.5px;">{{ auth()->user()->roles != '0' ? 'Save Changes' : 'Save' }}</button>
+                <button type="submit" id="btn-profile-form" class="text-light btn btn-sm px-3" style="font-size: 13.5px;">{{ auth()->user()->roles != '0' ? 'Saved' : 'Submit' }}</button>
             </div>
         </form>
     </header>
