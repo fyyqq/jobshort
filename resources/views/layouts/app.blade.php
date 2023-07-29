@@ -35,7 +35,7 @@
             color: #fff;
         }
     </style>
-    <body style="background-color: #f7f7f7;">
+    <body>
         <div id="app" class="position-relative">
             @include('shortcuts.navbar')
             <main class="pb-md-5 pb-3" style="margin-top: 100px;">

@@ -49,8 +49,8 @@
             </div>
         </div>
     </div>
-    <div class="container-xl">
-        <div class="my-4 ps-md-3 ps-1">
+    <div class="container-lg">
+        <div class="mt-4 mb-3 ps-1">
             <h1 class="h4 text-dark d-md-block d-none">{{ $service->title }}</h1>
             <h1 class="h5 text-dark d-md-none d-block">{{ $service->title }}</h1>
             <div class="d-flex align-items-center justify-content-between">
@@ -60,9 +60,9 @@
                     <div class="d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
                         @if (count($service->rating) > 0)
-                            <small class="text-muted ms-1">{{ $service->rating->max('stars') }} out of 5 Star.</small>
+                            <small class="text-muted ms-1">{{ $service->rating->max('stars') }} Stars</small>
                         @else
-                            <small class="text-muted ms-1">No Rating Yet.</small>
+                            <small class="text-muted ms-1">N/A</small>
                         @endif
                     </div>
                 </div>
@@ -128,23 +128,21 @@
                     </div>
                 </div>
             </div>
-            <div class="d-md-block d-none">
-                <div class="position-relative bg-dark d-flex align-items-center justify-content-center" style="height: 400px;">
-                    @foreach (explode(',', $service->image) as $key => $value)
-                        @if ($key === 0)
-                            <a href="{{ asset('images/' . $value) }}" class="w-100 detail-image" style="height: auto; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
-                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover" loading="lazy">
-                            </a>
-                        @endif
-                    @endforeach
-                </div>
+            <div class="position-relative bg-dark d-md-flex d-none align-items-center justify-content-center">
+                @foreach (explode(',', $service->image) as $key => $value)
+                    @if ($key === 0)
+                        <a href="{{ asset('images/' . $value) }}" class="w-100 detail-image" style="height: 100%; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
+                            <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover" loading="lazy">
+                        </a>
+                    @endif
+                @endforeach
             </div>
-            <div class="" style="height 400px;">
+            <div class="d-md-block d-none">
                 <div class="d-md-grid d-none h-100 w-100" id="gallery-img">
                     {{-- Display --}}
                     @foreach (explode(',', $service->image) as $key => $value)
                         @if ($key >= 1 && $key < 5)
-                            <a href="{{ asset('images/' . $value) }}" class="detail-image" style="height: 197px; overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
+                            <a href="{{ asset('images/' . $value) }}" class="detail-image" style="overflow: hidden;" data-fancybox="gallery" data-src="{{ asset('images/' . $value) }}">
                                 <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover" loading="lazy">
                             </a>
                         @endif
@@ -160,10 +158,10 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 mb-2 pb-4 border-bottom" style="height: max-content;">
+        <div class="mt-md-4 mt-3 mb-2 pb-4 border-bottom" style="height: max-content;">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
-                    <div class="py-3 px-md-4 px-3 shadow-sm border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
+                    <div class="py-md-3 py-2 px-md-4 px-3 border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
                                 <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover" loading="lazy">
@@ -190,7 +188,7 @@
                         </div>
                     </div>
                     <div class="my-4 px-2" style="word-wrap: break-word;">
-                        <h1 class="h6 text-dark">About Service</h1>
+                        <h1 class="h6 text-dark">About</h1>
                         <small class="text-muted">{{ $service->description }}</small>
                     </div>
                     <div class="">
@@ -269,8 +267,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-5 ps-lg-3 ps-0 pe-0 d-md-flex d-none justify-content-center align-items-start position-relative">
-                    <div class="border shadow-sm rounded-3" style="height: 450px; position: sticky; top: 100px; width: 90%; background-color: #fff;">
+                <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start position-relative">
+                    <div class="border shadow-sm rounded-3 ms-xl-4 ms-lg-3 ms-0" style="height: 450px; position: sticky; top: 100px; width: 100%; background-color: #fff;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-center">
                             <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
                         </div>

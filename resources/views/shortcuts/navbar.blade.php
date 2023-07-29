@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top py-2" style="border-bottom: 3px solid #2891e1;">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top py-2 border-bottom">
     <div class="container px-md-0 px-4 position-relative py-2">
         <!-- Searchbar Mobile -->
         <form action="{{ route('search') }}" method="get" class="d-md-none d-block submitSearch">
@@ -35,9 +35,9 @@
             <!-- Center Side Of Navbar -->
             <!-- Searchbar Desktop -->
             <form action="{{ route('search') }}" method="get" class="d-md-flex d-none submitSearch position-relative">
-                <div class="btn-group" role="group">
-                    <input type="text" name="keyword" class="searchbar px-3 py-2 text-dark" placeholder="Find Service..." style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
-                    <button type="submit" class="px-3 shadow-0" style="border-top-right-radius: 25px; border-bottom-right-radius: 25px; border: 1px solid rgb(218, 216, 216); background-color: #2891e1;">
+                <div class="btn-group" role="group" id="searchbar">
+                    <input type="text" name="keyword" class="searchbar border px-3 py-2" placeholder="Find Service..." style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; font-size: 14px;" value="<?php echo $_GET['keyword'] ?? '' ?>" autocomplete="off">
+                    <button type="submit" class="px-3 shadow-0">
                         <i class="fa-solid fa-magnifying-glass text-light" style="font-size: 14px;"></i>
                     </button>
                 </div>
@@ -48,9 +48,9 @@
             @auth
                 <li class="nav-item dropdown d-flex align-items-center mt-1">
                     <a href="{{ route('notification') }}" class="text-decoration-none position-relative">
-                        <i class="fa-regular fa-bell text-muted" style="font-size: 18px;"></i>
+                        <i class="fa-regular fa-bell text-muted" style="font-size: 17px;"></i>
                         @if (Auth::check() && count(auth()->user()->notification) != 0)
-                            <span class="badge align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -7px; right: -5px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span>
+                            <span class="badge fw-normal align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -5px; right: -5px; background-color: #2891e1; height: 14.5px; width: 14.5px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span>
                         @endif
                     </a>
                 </li>

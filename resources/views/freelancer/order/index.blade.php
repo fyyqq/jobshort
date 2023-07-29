@@ -48,6 +48,7 @@
                 @else
                     @foreach ($orders as $order)
                         <div class="d-flex align-items-center justify-content-start flex-column border rounded px-md-3 px-1" id="order_container" style="background-color:#fff;">
+                            {{-- Review & Rating --}}
                             <div class="{{ (Route::currentRouteName() == 'freelancer.order-completed') ? 'd-flex' : 'd-none' }} align-items-center justify-content-between w-100 p-3">
                                 <div class="">
                                     <small class="mb-0 text-dark" id="order-time">Order at {{ $order->created_at->diffForHumans() }}</small>
@@ -89,7 +90,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="{{ Route::is('freelancer.order-approved') || Route::is('freelancer.order-rejected') || Route::is('freelancer.order-completed') ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3">
+                            {{-- Pending --}}
+                            <div class="d-flex align-items-center justify-content-between w-100 p-3">
                                 <div class="">
                                     <small class="mb-0 text-dark" id="order-time">Order at {{ $order->created_at->diffForHumans() }}</small>
                                 </div>
@@ -97,6 +99,17 @@
                                     @if (Route::is('freelancer.order') || Route::is('freelancer.order-pending'))
                                         <input type="hidden" id="order_id" value="{{ $order->id }}">
                                         <button class="btn btn-sm btn-success approve-btn" id="order-action">Approved</button>
+                                    @else
+                                        <span class="dropdown" data-bs-toggle="dropdown">
+                                            <i class="mdi mdi-information-slab-circle-outline text-muted fs-5" style="cursor: pointer"></i>
+                                            <ul class="dropdown-menu shadow-sm border px-3">
+                                                @if (Route::is('freelancer.order-approved'))
+                                                    <li class="lh-base" style="width: 150px; font-size: 12.5px;">Waiting for buyer to complete the order.</li>
+                                                @elseif (Route::is('freelancer.order-rejected'))
+                                                    <li class="lh-base" style="width: 150px; font-size: 12.5px;">Order has been rejected by buyer.</li>
+                                                @endif
+                                            </ul>
+                                        </span>
                                     @endif
                                 </div>
                             </div>

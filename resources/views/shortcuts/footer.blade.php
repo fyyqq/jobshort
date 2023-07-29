@@ -1,4 +1,4 @@
-<div class="w-100" style="border-top: 3px solid #2891e1; background-color: #fff;">
+<div class="w-100 border-top">
     <footer class="container-lg pt-5 pb-md-0 pb-5 px-md-0 px-3">
         <div class="d-flex align-items-center justify-content-lg-between justify-content-md-around justify-content-center flex-md-row flex-column py-3 gap-5">
             <div class="d-flex align-items-md-start align-items-center justify-content-center flex-column gap-4">

@@ -162,9 +162,10 @@
                                     <div class="d-flex align-items-center justify-content-between w-100">
                                         <p class="mb-1" id="order-profile-title">{{ Str::limit($order->service->title, 50) }}</p>
                                         <div class="">
-                                            <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>
-                                            <input type="hidden" value="{{ $order->service->id }}">
-                                            <i class="fa-regular fa-heart wishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-none' : 'd-block' }}"></i>
+                                            <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
+                                            <input type="hidden" value="{{ route('wishlist-service', $order->service->id) }}" id="wishlist_path">
+                                            <input type="hidden" value="{{ route('unwishlist-service', $order->service->id) }}" id="unwishlist_path">
+                                            <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $order->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                         </div>
                                     </div>
                                     <?php
@@ -203,9 +204,6 @@
                                     <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 14px;">{{ $order->service->freelancer->name }}</a>
                                 </div>
                             </div>
-                            {{-- <a href="" class="btn btn-sm px-3" id="order-chat-btn" style="background-color: #2891e1;">
-                                <i class="mdi mdi-message-reply-text text-dark" style="font-size: 20px;"></i>
-                            </a> --}}
                             <div class="pe-4">
                                 <i class="mdi mdi-message-reply-text text-dark" style="font-size: 20px;"></i>
                             </div>

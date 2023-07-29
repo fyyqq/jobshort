@@ -116,8 +116,10 @@ $(document).on('keyup', '.searchbar', function(e) {
                         const element = `<li class="ps-3 dropdown-item py-2 autocomplete_link">${value.title}</li>`;
                         $(container).append(element);
                     });
+                    $(container).addClass('border');
                 } else {
                     $(container).empty();
+                    $(container).removeClass('border');
                 }
 
             }, error: function(err) {
@@ -740,7 +742,7 @@ $(document).on('click', '#notification-link', function(e) {
     $(this).children('.nav-item').addClass('fw-bold');
 
     var type = $(this).data('type');
- 
+
     $.ajax({
         url: url,
         method: "GET",

@@ -204,6 +204,7 @@ $(document).ready(function() {
             url: path,
             method: 'get',
             success: function(res) {
+                history.pushState(null, null, path);
                 setTimeout(() => {
                     $(loader).hide();
                     $(parent).html('');
@@ -225,7 +226,6 @@ $(document).ready(function() {
                         $(parent).css('height', 'max-content');
                     }
                 }, 1000);
-                history.pushState(null, null, path);
             }, error: function(err) {
                 console.log(err);
             }
@@ -446,6 +446,7 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'html',
             success: function(res) {
+                history.pushState(null, null, url);
                 setTimeout(() => {
                     $(container).html('');
                     $(loader).hide();
@@ -466,7 +467,6 @@ $(document).ready(function() {
                         $(container).css('height', 'max-content');
                     }
                 }, 1000);
-                history.pushState(null, null, url);
             }
         });
     });

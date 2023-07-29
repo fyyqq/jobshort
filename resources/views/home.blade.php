@@ -2,28 +2,27 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
-
     <div class="mt-4">
         <div class="px-md-4 px-2 owl-carousel owl-theme gap-2">
             @foreach ($categories as $category)
-                <a href="{{ route('category', $category['slug']) }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
-                    <i class="{{ $category['icon'] }} fs-5 text-dark"></i>
-                    <small class="text-dark mb-0" style="font-size: 13px;">{{ $category['name'] }}</small>
+                <a href="{{ route('category', $category['slug']) }}" class="border rounded-3 text-decoration-none d-flex align-items-center justify-content-center flex-column" id="slider_category">
+                    <i class="{{ $category['icon'] }} text-dark"></i>
+                    <small class="text-dark mb-0" style="font-size: 11.8px;">{{ $category['name'] }}</small>
                 </a>
             @endforeach
-            <a href="{{ route('categories') }}" class="border shadow-sm rounded-3 text-decoration-none d-flex align-items-center justify-content-center gap-2" id="slider_category">
-                <i class="mdi mdi-view-dashboard fs-5 text-dark"></i>
-                <small class="text-dark mb-0" style="font-size: 13px;">All Categories</small>
+            <a href="{{ route('categories') }}" class="border rounded-3 text-decoration-none d-flex align-items-center justify-content-center flex-column" id="slider_category">
+                <i class="mdi mdi-view-dashboard-variant text-dark"></i>
+                <small class="text-dark mb-0" style="font-size: 11.8px;">All Categories</small>
             </a>
         </div>
     </div>
-    <div class="container-xl">
-        <div class="row mx-0" style="row-gap: 15px;">
+    <div class="container-md">
+        <div class="row mx-0" style="row-gap: 18px;">
             @foreach ($services as $service)
                 <div class="col-lg-4 col-sm-6 col-12 px-md-3">
                     <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center flex-column">
-                            <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                            <div class="rounded w-100 position-relative border" style="height: 220px; overflow: hidden;">
                                 @foreach (explode(',', $service->image) as $key => $image)
                                     @if ($key === 0)
                                         <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
