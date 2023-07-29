@@ -630,6 +630,14 @@ select option {
     overflow: hidden;
 }
 
+.dropdown-menu .dropdown-item:active {
+    background-color: gainsboro;
+}
+
+.dropdown-menu .dropdown-item:active i {
+    color: #333;
+}
+
 @media (max-width: 1120px) {
     .profile .sidebar {
         width: 27%;

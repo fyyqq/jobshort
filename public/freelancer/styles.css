@@ -262,6 +262,14 @@ input[type=number] {
     cursor: pointer;
 }
 
+.dropdown-menu .dropdown-item:active {
+    background-color: gainsboro;
+}
+
+.dropdown-menu .dropdown-item:active i {
+    color: #333;
+}
+
 @media (max-width: 991.5px) {
     #dashboard-main-detail {
         grid-template-columns: repeat(2, 1fr);

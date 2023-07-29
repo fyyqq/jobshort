@@ -74,7 +74,7 @@
                             </button>
                         @endif
                         <a href="{{ route('freelancer.edit-services', $service->slug) }}" type="button" class="dropdown-item py-2 d-md-none d-block">
-                            <small class="text-dark">Edit</small>
+                            <small class="text-dark" style="font-size: 12.5px;">Edit</small>
                         </a>
                         <input type="hidden" value="{{ $service->slug }}" id="service-slug">
                         <button class="dropdown-item py-2 delete-service-btn" type="button">
