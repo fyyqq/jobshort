@@ -256,10 +256,6 @@ input[type=number] {
     font-size: 13px;
 }
 
-.profile #sidebar-link {
-    border-bottom: 1px solid gainsboro;
-}
-
 .profile #sidebar-link:hover {
     background-color: rgba(238, 238, 238, 0.461);
 }
