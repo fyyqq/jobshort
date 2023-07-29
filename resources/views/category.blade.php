@@ -27,11 +27,17 @@
         background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
+    .owl-carousel .fa-angle-left {
+        left: 0px;
+    }
+    .owl-carousel .fa-angle-right {
+        right: 0px;
+    }
 </style>
     <div class="container-lg">
         <div class="row mx-0">
             <div class="col-md-8 col-12 pe-2">
-                <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm ps-3 pe-4 py-3 position-relative flex-row" style="background-color: #fff;">
+                <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm px-3 border py-3 position-relative flex-row" style="background-color: #fff;">
                     <div id="parent_image_category">
                         <div class="rounded border" id="category_image">
                             <img src="{{ asset('category' .  $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -53,10 +59,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 row mx-0" style="{{ count($services) > 0 ? 'row-gap: 20px;' : 'height: 450px; display: grid; place-items: center;' }}">
+                <div class="mt-3 row" style="{{ count($services) > 0 ? 'row-gap: 20px;' : 'height: 450px; display: grid; place-items: center;' }}">
                 @if (count($services) > 0)
                 <div class="d-flex align-items-center justify-content-between flex-row-reverse w-100 gap-md-2 gap-0">
-                    <div class="col-md-3 col-5 px-md-0 px-1">
+                    <div class="col-lg-3 col-md-4 col-5 px-md-0 px-1">
                         <div class="rounded-3 border" id="select">
                             <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return sortCategoryService(this)">
                                 <option value="normal" selected>Sort By</option>
@@ -76,12 +82,12 @@
                         <small class="text-dark">{{ count($services) }} results</small>
                     </div>
                 </div>
-                <span id="service_container" class="row mx-0" style="row-gap: 20px;">
+                <span id="service_container" class="row mx-0 px-0" style="row-gap: 20px;">
                     @foreach ($services as $key => $service)
                         <div class="col-sm-6 col-12">
                             <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center flex-column">
-                                    <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                                    <div class="rounded w-100 position-relative border" style="height: 220px; overflow: hidden;">
                                         @foreach (explode(',', $service->image) as $key => $image)
                                             @if ($key === 0)
                                                 <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
