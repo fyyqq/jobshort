@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 @if (count($services) > 0)
-                    <div class="row mx-0" id="display_service" style="row-gap: 15px;">
+                    <div class="row mx-0" id="display_service" style="row-gap: 20px;">
                         @foreach ($services as $key => $service)
                             <div class="col-sm-6 col-12">
                                 <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">

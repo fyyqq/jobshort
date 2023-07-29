@@ -9,7 +9,7 @@
             <h6 class="m-0">Wishlist</h6>
         </div>
         <div class="mt-4">
-            <div class="row mx-0 d-flex justify-content-start align-items-center position-relative" style="row-gap: 15px; {{ count($wishlists) < 1 ? 'height: 250px;' : 'height: max-content;' }}">
+            <div class="row mx-0 d-flex justify-content-start align-items-center position-relative" style="row-gap: 20px; {{ count($wishlists) < 1 ? 'height: 250px;' : 'height: max-content;' }}">
                 @if (count($wishlists) < 1)
                     <div class="position-absolute text-center" style="transform: translateY(-20px);">
                         <i class="fa-regular fa-folder-open d-block mb-3" style="font-size: 35px;"></i>

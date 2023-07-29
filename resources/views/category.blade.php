@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 row mx-0" style="{{ count($services) > 0 ? 'row-gap: 15px;' : 'height: 450px; display: grid; place-items: center;' }}">
+                <div class="mt-3 row mx-0" style="{{ count($services) > 0 ? 'row-gap: 20px;' : 'height: 450px; display: grid; place-items: center;' }}">
                 @if (count($services) > 0)
                 <div class="d-flex align-items-center justify-content-between flex-row-reverse w-100 gap-md-2 gap-0">
                     <div class="col-md-3 col-5 px-md-0 px-1">
@@ -76,7 +76,7 @@
                         <small class="text-dark">{{ count($services) }} results</small>
                     </div>
                 </div>
-                <span id="service_container" class="row mx-0" style="row-gap: 15px;">
+                <span id="service_container" class="row mx-0" style="row-gap: 20px;">
                     @foreach ($services as $key => $service)
                         <div class="col-sm-6 col-12">
                             <a href="{{ route('services', $service->slug) }}" class="d-block text-decoration-none">
