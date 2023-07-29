@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
-    <div class="container-lg">
+    <div class="container-xl">
         <div class="row mx-0">
             <div class="col-md-3 left">
                 <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-md-9 right">
-                <div class="box border shadow-sm rounded bg-white mb-3">
+                <div class="box rounded border mb-3">
                     <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Recent</h6>
                     </div>
