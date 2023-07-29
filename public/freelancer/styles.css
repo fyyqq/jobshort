@@ -263,6 +263,9 @@ input[type=number] {
 }
 
 @media (max-width: 991.5px) {
+    #dashboard-main-detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 767px) {
@@ -272,9 +275,6 @@ input[type=number] {
     }
     .container-employer .content {
         width: 100%;
-    }
-    #dashboard-main-detail {
-        grid-template-columns: repeat(2, 1fr);
     }
     #service-order-title {
         font-size: 14px;

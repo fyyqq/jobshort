@@ -15,13 +15,13 @@ class FreelancerController extends Controller
     public function index()
     {
         $freelancer = auth()->user()->freelancer;
-        $order = Order::where('freelancer_id', $freelancer->id);
+        $order = Order::with('service')->where('freelancer_id', $freelancer->id);
 
         return view('freelancer.main', [
             'freelancer' => $freelancer,
             'orders' => $order->get(),
             'services' => Service::where('freelancer_id', $freelancer->id)->latest()->limit(5)->get(),
-            'pendings' => $order->latest()->limit(5)->get(),
+            'pendings' => $order->where('status', 'pending')->latest()->limit(5)->get(),
         ]);
     }
 

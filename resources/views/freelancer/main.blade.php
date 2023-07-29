@@ -8,6 +8,14 @@
             <div class="border rounded py-4 px-4" style="background-color: #fff;">
                 <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Dashboard</h1>
             </div>
+            <?php
+                $allOrder = $orders->where('status', 'completed');
+                $totalPrice = 0;
+                foreach ($allOrder as $order) {
+                    $price = $order->service->price;
+                    $totalPrice += $price;
+                }
+            ?>
             <div class="mt-3 pt-2">
                 <div class="w-100 d-grid gap-2" id="dashboard-main-detail">
                     <span class="shadow-sm border rounded py-3 px-0 d-flex align-items-center justify-content-center" style="background-color: #fff;">
@@ -17,7 +25,7 @@
                         <div class="col-8 d-flex justify-content-start">
                             <div class="">
                                 <p class="mb-0 text-dark" style="font-size: 14.5px;">Earning (annual)</p>
-                                <small class="text-muted fst-normal" style="font-size: 13px;">$ 0</small>
+                                <small class="text-muted fst-normal" style="font-size: 13px;">$ {{ count($allOrder) < 1 ? '0' : $totalPrice }}</small>
                             </div>
                         </div>
                     </span>
@@ -85,7 +93,7 @@
                                         <div class="d-flex align-items-center px-2 py-2">
                                             <div class="col-lg-5 col-12 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
                                                 <a href="{{ route('services', $service->slug) }}" class="d-block">
-                                                    <div class="rounded" style="height: 65px; width: 65px; overflow: hidden;">
+                                                    <div class="rounded border" style="height: 65px; width: 65px; overflow: hidden;">
                                                         @foreach (explode(',', $service->image) as $key => $value)
                                                             @if ($key === 0)
                                                                 <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -147,25 +155,32 @@
                                 <h1 class="h6 mb-0 text-dark">Orders</h1>
                                 <a href="{{ route('freelancer.services') }}" class="btn px-3 btn-sm btn-primary"><i class="mdi mdi-arrow-top-right-thin"></i></a>
                             </div>
-                            <div class="py-2 px-2">
-                                @foreach($pendings as $pending)
-                                    <div class="p-3 d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center justify-content-start gap-3">
-                                            <div class="">
-                                                <div class="rounded-circle border" style="height: 43px; width: 43px; overflow: hidden;">
-                                                    <img src="{{ $pending->user->image != 'null' ? asset('images/' . $pending->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100">
+                            <div class="py-2 px-2 {{ count($pendings) < 1 ? 'd-flex align-items-center justify-content-center' : '' }}" style="{{ count($pendings) >= 3 ? 'height: max-content;' : 'height: 400px;' }}">
+                                @if (count($pendings) < 1)
+                                    <div class="d-flex align-items-center justify-content-center flex-column gap-2">
+                                        <i class="fa-regular fa-folder-open fs-2"></i>
+                                        <small class="mb-0 text-muted">No Pending Orders</small>
+                                    </div>
+                                @else
+                                    @foreach($pendings as $pending)
+                                        <div class="p-3 d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center justify-content-start gap-3">
+                                                <div class="">
+                                                    <div class="rounded-circle border" style="height: 43px; width: 43px; overflow: hidden;">
+                                                        <img src="{{ $pending->user->image != 'null' ? asset('images/' . $pending->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-start justify-content-center flex-column">
+                                                    <small class="text-dark lh-1" style="font-size: 13px;">{{ $pending->user->name }}</small>
+                                                    <small class="text-muted" style="font-size: 12px;">{{ $pending->status }}</small>
                                                 </div>
                                             </div>
-                                            <div class="d-flex align-items-start justify-content-center flex-column">
-                                                <small class="text-dark lh-1" style="font-size: 13px;">{{ $pending->user->name }}</small>
-                                                <small class="text-muted" style="font-size: 12px;">{{ $pending->status }}</small>
-                                            </div>
+                                            <span class="px-2 py-1">
+                                                <i class="mdi mdi-message-text"></i>
+                                            </span>
                                         </div>
-                                        <span class="px-2 py-1">
-                                            <i class="mdi mdi-message-text"></i>
-                                        </span>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
