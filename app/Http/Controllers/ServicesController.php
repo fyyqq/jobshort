@@ -206,13 +206,13 @@ class ServicesController extends Controller
             'images' => ['required', 'min:5', 'max:2048'],
             'images.*' => ['mimes:png,jpg,jpeg'],
         ], [
-            'title.required' => 'Title is required.',
-            'category.required' => 'Category is required.',
-            'price.required' => 'Price is required.',
-            'images.required' => 'Image is required.',
-            'images.max' => 'Upload minimum 5 images.',
-            'images.size' => 'Image file too big.',
-            'images.*.mimes' => 'Invalid image format.',
+            'title.required' => 'Title is required!',
+            'category.required' => 'Category is required!',
+            'price.required' => 'Price is required!',
+            'images.required' => 'Image is required!',
+            'images.max' => 'Upload minimum 5 images!',
+            'images.size' => 'Image file too big!',
+            'images.*.mimes' => 'Invalid image format!',
         ]);
 
         $imagePaths = [];
@@ -287,9 +287,9 @@ class ServicesController extends Controller
             'category' => 'required',
             'price' => 'required',
         ], [
-            'title.required' => 'Title is required.',
-            'category.required' => 'Category is required.',
-            'price.required' => 'Price is required.',
+            'title.required' => 'Title is required!',
+            'category.required' => 'Category is required!',
+            'price.required' => 'Price is required!',
         ]);
 
         function deleteImages($images) {

@@ -21,13 +21,15 @@
                                     <div>
                                         <div class="d-flex align-items-center justify-content-start">
                                             @foreach (explode(',', $service->image) as $key => $value)
-                                                <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" style="height: 180px; width: 250px; overflow: hidden;">
+                                                <div class="me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center" id="serviceImage">
                                                     <i class="mdi mdi-sync position-absolute text-light" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                     <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                     <i class="mdi mdi-image d-none position-absolute" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                     <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
                                                     <input type="hidden" name="oldImages[]" value="{{ $value }}">
-                                                    <i class="destoryImg p-1 fa-solid fa-xmark text-light position-absolute" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImage(this)"></i>
+                                                    <span class="text-light position-absolute destoryImg p-1" id="delete_image" style="top: 0; right: 0;" onclick="return destroyImage(this)">
+                                                        <i class="fa-solid fa-xmark" style="font-size: 11px;"></i>
+                                                    </span>
                                                     <i class="destoryImgContainer p-1 fa-solid fa-xmark text-dark position-absolute d-none" style="font-size: 13px; top: 0; right: 0;" onclick="return destroyImageContainer(this)"></i>
                                                 </div>
                                             @endforeach
@@ -35,7 +37,7 @@
                                     </div>
                                     <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
                                     <div>
-                                        <div id="addImage" class="border border-dark rounded position-relative d-flex align-items-center justify-content-center" style="height: 180px; width: 250px; overflow: hidden; cursor: pointer;">
+                                        <div id="addImage" class="border border-dark rounded position-relative d-flex align-items-center justify-content-center">
                                             <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
                                         </div>
                                     </div>
@@ -67,7 +69,7 @@
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="description" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Description :</label>
-                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="4">{{ old('description', $service->description) }}</textarea>
+                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="9">{{ old('description', $service->description) }}</textarea>
                             @error('description')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>

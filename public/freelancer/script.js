@@ -517,8 +517,7 @@ $(document).ready(function() {
 
         const parent = document.createElement('div');
         parent.className = 'me-2 border border-secondary rounded position-relative d-flex align-items-center justify-content-center serviceImages';
-        parent.id = 'serviceImage'
-        $(parent).css({ "height": "180px", "width": "250px", "overflow": "hidden" });
+        parent.id = 'serviceImage';
 
         // Add Images Detail
         const inputFile = document.createElement('input');
@@ -581,9 +580,15 @@ $(document).ready(function() {
         icon.className = 'mdi mdi-image';
         $(icon).css('font-size', '25px');
 
-        const icon2 = document.createElement('i');
-        icon2.className = 'fa-solid fa-xmark text-light p-1 position-absolute d-none';
-        $(icon2).css({ 'font-size': '13px', 'top': '0', 'right': '0' });
+        const icon2 = document.createElement('span');
+        icon2.className = 'text-light position-absolute p-1 d-none';
+        icon2.id = 'delete_image';
+        $(icon2).css({ 'top': '0', 'right': '0' });
+        
+        const icons = document.createElement('span');
+        icons.className = 'fa-solid fa-xmark';
+        $(icons).css({ 'font-size' : '11px' });
+        $(icon2).append(icons);
 
         const icon3 = document.createElement('i');
         icon3.className = 'fa-solid fa-xmark p-1 position-absolute';
@@ -685,7 +690,7 @@ function destroyImage(event) {
     $(imgElement).addClass('d-none');
     $(imgIcon).removeClass('d-none');
     $(destroyImgContainerIcon).removeClass('d-none');
-    $(event).prev().remove();
+    $(event).remove();
 }
 
 // Destroy Image Container

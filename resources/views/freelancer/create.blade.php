@@ -27,7 +27,9 @@
                                             <i class="mdi mdi-image" style="font-size: 25px;"></i>
                                             <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
                                             {{-- icon remove image --}}
-                                            <i class="p-1 fa-solid fa-xmark text-light  position-absolute d-none" style="font-size: 13px; top: 0; right: 0;"></i>
+                                            <span class="text-light position-absolute p-1 d-none" id="delete_image" style="top: 0; right: 0;">
+                                                <i class="fa-solid fa-xmark" style="font-size: 11px;"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="addImageContainer d-flex align-items-center justify-content-start"></div>
@@ -46,7 +48,7 @@
                                 <div id="emailHelp" class="text-end form-text" style="font-size: 12.5px;"><span id="lengthImg">1</span> | 15</div>
                             </div>
                             @if($errors->has('images'))
-                                <span class="text-start w-100 text-danger mt-1" role="alert">
+                                <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $errors->first('images') }}</small>
                                 </span>
                             @endif
@@ -56,7 +58,6 @@
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Title :</label>
                             <input type="text" class="form-control shadow-none w-10" id="title" name="title" value="{{ old('title') }}">
-                            <div id="emailHelp" class="mt-2 w-100 text-start form-text" style="font-size: 12.5px;">Maximum length of <b>100</b> characters</div>
                             @error('title')
                                 <span class="text-start w-100 text-danger mt-1" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -84,7 +85,7 @@
                                 <i class="fa-solid fa-caret-down position-absolute" style="top: 50%; right: 10px; transform: translateY(-2px);"></i>
                             </div>
                             @error('category')
-                                <span class="text-start w-100 text-danger mt-2" role="alert">
+                                <span class="text-start w-100 text-danger mt-1" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
                                 </span>
                             @enderror
