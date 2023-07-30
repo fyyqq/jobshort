@@ -6,7 +6,10 @@
 
     <div class="login-side d-flex align-items-center justify-content-center">
         <div class="form-login p-4 shadow-sm border">
-            <div class="text-center pb-2 mb-3 border-bottom">
+            <div class="text-center pb-2 mb-3 border-bottom position-relative">
+                <span class="position-absolute d-md-none d-block" style="top: 25%; left: 0; transform: translateY(-50%);" onclick="return window.history.back();">
+                    <i class="fa-solid fa-arrow-left fs-5 text-muted"></i>
+                </span>
                 <h1 class="h5 text-dark">Register</h1>
             </div>
             <div class="content">
