@@ -632,6 +632,7 @@ select option {
 
 .dropdown-menu .dropdown-item:active {
     background-color: gainsboro;
+    color: #333;
 }
 
 .dropdown-menu .dropdown-item:active i {

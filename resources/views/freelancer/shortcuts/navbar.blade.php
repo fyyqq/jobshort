@@ -1,6 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<nav class="navbar navbar-expand bg-light py-3 shadow-sm d-md-none d-flex fixed-top">
+<nav class="navbar navbar-expand py-3 shadow-sm d-md-none d-flex fixed-top border-bottom" style="background-color: #fff;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
@@ -26,11 +26,14 @@
                 <a href="{{ route('freelancer.create-service') }}" class="text-decoration-none">
                     <i class="fa-solid fa-plus text-muted" style="font-size: 15px;"></i>
                 </a>
-                <a href="{{ route('freelancer.notification') }}" class="text-decoration-none">
+                <a href="{{ route('freelancer.notification') }}" class="text-decoration-none position-relative">
                     <i class="fa-regular fa-bell text-muted" style="font-size: 15px;"></i>
+                    {{-- @if (Auth::check() && count(auth()->user()->freelancer->notification) != 0) --}}
+                        {{-- <span class="badge fw-normal align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -7px; right: -5px; background-color: #2891e1; height: 14.5px; width: 14.5px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span> --}}
+                    {{-- @endif --}}
                 </a>
                 <li class="nav-item dropdown d-flex align-items-center">
-                    <div class="rounded-circle border" style="height: 40px; width: 40px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
+                    <div class="rounded-circle border" style="height: 35px; width: 35px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
                         <img src="{{ is_null(auth()->user()->freelancer->image) ? asset('brand/unknown.png') : asset('images/' . auth()->user()->freelancer->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                     </div>
                     <ul class="dropdown-menu border border-1 p-0" style="transform: translate(-120px, 5px); width: 160px;">
