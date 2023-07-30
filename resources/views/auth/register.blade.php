@@ -7,7 +7,7 @@
     <div class="login-side d-flex align-items-center justify-content-center">
         <div class="form-login p-4 shadow-sm border">
             <div class="text-center pb-2 mb-3 border-bottom">
-                <h1 class="h4 text-muted">Register</h1>
+                <h1 class="h5 text-dark">Register</h1>
             </div>
             <div class="content">
                 <img src="{{ asset('brand/unknown.png') }}">

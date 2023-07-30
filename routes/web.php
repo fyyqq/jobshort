@@ -57,12 +57,12 @@ Route::prefix('notifications')->middleware('auth')->group(function() {
 });
 
 // Wishlist
-Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist-service');
-Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->name('unwishlist-service');
+Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->middleware('auth')->name('wishlist-service');
+Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->middleware('auth')->name('unwishlist-service');
 
 // Notification Post
-Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store']);
-Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore']);
+Route::post('/notify/{user:id}/{freelancer:id}', [NotificationController::class, 'store'])->middleware('auth');
+Route::delete('/disnotify/{user:id}/{freelancer:id}', [NotificationController::class, 'unstore'])->middleware('auth');
 
 Route::prefix('orders')->middleware('auth')->group(function() {
     Route::get('/success/{slug}', [PaymentController::class, 'pages'])->name('order.success');

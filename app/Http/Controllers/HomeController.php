@@ -28,7 +28,7 @@ class HomeController extends Controller
         $categories = array_slice($data, 0, 15);
 
         return view('home', [
-            "services" => Service::with(['order', 'rating'])->where('status', 'active')->get(),
+            "services" => Service::with(['order', 'rating'])->where('status', 'active')->latest()->get(),
             "categories" => $categories
         ]);
     }

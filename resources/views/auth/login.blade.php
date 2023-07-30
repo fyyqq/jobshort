@@ -4,7 +4,7 @@
         <div class="login-side d-flex align-items-center justify-content-center">
             <div class="form-login px-4 pt-4 pb-3 shadow-sm border">
                 <div class="text-center pb-2 mb-3 border-bottom">
-                    <h1 class="h4 text-muted">Login</h1>
+                    <h1 class="h5 text-dark">Login</h1>
                 </div>
                 <div class="content">
                     <img src="{{ asset('brand/unknown.png') }}">
@@ -15,22 +15,22 @@
                         <label for="email" class="form-label">Email Address :</label>
                         <input type="email" name="email" class="form-control shadow-none  @error('email') is-invalid @enderror" value="{{ old('email') }}" autocomplete="email" id="email" autofocus >
                         @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <small class="fw-bold" style="font-size: 12.5px;">{{ $message }}</small>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <small class="fw-bold" style="font-size: 12.5px;">{{ $message }}</small>
+                            </span>
                         @enderror
                     </div>
                     <div class="mb-2">
                         <label for="password" class="form-label">Password :</label>
                         <div class="position-relative">
-                            <input type="password" name="password" class="form-control shadow-none " autocomplete="current-password" id="password">
+                            <input type="password" name="password" class="form-control shadow-none" autocomplete="current-password" id="password">
                             <i class="fa-sharp fa-regular fa-eye"></i>
                             <i class="fa-sharp fa-regular fa-eye-slash"></i>
                         </div>    
                         @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <small class="fw-bold" style="font-size: 12.5px;">{{ $message }}</small>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <small class="fw-bold" style="font-size: 12.5px;">{{ $message }}</small>
+                            </span>
                         @enderror
                     </div>
                     <div class="mb-3 ps-0 text-end form-check w-100">
