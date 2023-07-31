@@ -238,7 +238,7 @@
                                 <h1 class="h6 mb-0 text-sm-start text-center text-dark">Reviews</h1>
                             </div>
                             @foreach ($reviews as $review)
-                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded border" style="background-color: #fff;">
+                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded" style="background-color: #fff;">
                                     <div class="mx-3">
                                         <div class="rounded-circle border" style="height: 42px; width: 42px; overflow: hidden;">
                                             <img src="{{ $review->user->image !== null ? asset('images/' . $review->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -258,11 +258,9 @@
                                                 <small class="text-muted d-block ms-2" style="font-size: 13px;">{{ $review->created_at->diffForHumans() }}</small>
                                             </div>
                                             <small class="text-dark my-1">{{ $review->title }}</small>
-                                            @if ($review->image !== null)
-                                                <div class="my-2 rounded border border-dark" style="height: 65px; width: 65px; overflow: hidden;">
-                                                    <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-                                                </div>
-                                            @endif
+                                            <div class="{{ is_null($review->images) ? 'd-none' : '' }} my-2 rounded border" style="height: 65px; width: 65px; overflow: hidden;">
+                                                <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                            </div>
                                             <div class="">
                                                 <small class="text-muted" style="font-size: 13.5px;">{{ Str::limit($review->review, 200) }}</small>
                                             </div>
@@ -270,7 +268,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="mt-2 w-100 text-center">
+                            <div class="mt-2 pt-2 w-100 text-center border-top">
                                 <a href="{{ route('reviews', $service->slug) }}" class="text-muted {{ count($reviews) < 1 ? 'd-none' : '' }}" style="font-size: 13px;">See More</a>
                             </div>  
                         </div>

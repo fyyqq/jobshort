@@ -3,7 +3,7 @@
     <div class="col-sm-6 col-12">
         <a href="{{ route('services', $service->slug) }}" class="text-decoration-none">
             <div class="d-flex align-items-center justify-content-center flex-column">
-                <div class="rounded w-100 position-relative" style="height: 220px; overflow: hidden;">
+                <div class="rounded w-100 position-relative border" style="height: 220px; overflow: hidden;">
                     @foreach (explode(',', $service->image) as $key => $image)
                         @if ($key === 0)
                             <img src="{{ asset('images/' . $image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">

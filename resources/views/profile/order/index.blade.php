@@ -151,7 +151,7 @@
                         </div>
                         <a href="{{ route('services', $order->service->slug) }}" class="w-100 py-3 px-3 text-decoration-none position-relative text-dark">
                             <div class="d-flex align-items-start w-100 justify-content-start">
-                                <div class="rounded" id="order-profile-img" style="overflow: hidden;">
+                                <div class="rounded border" id="order-profile-img" style="overflow: hidden;">
                                     @foreach (explode(',', $order->service->image) as $key => $value)
                                         @if ($key === 0)
                                             <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">

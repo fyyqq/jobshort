@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="mt-2">
                                         <small class="text-dark mb-1">{{ $review->title }}</small>
-                                        <div class="my-2 rounded border" style="height: 75px; width: 75px; overflow: hidden;">
+                                        <div class="my-2 rounded border {{ is_null($review->images) ? 'd-none' : '' }}" style="height: 75px; width: 75px; overflow: hidden;">
                                             <img src="{{ asset('images/' . $review->images) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                         </div>
                                         <small class="text-muted" style="font-size: 13px;">{{ $review->review }}</small>
