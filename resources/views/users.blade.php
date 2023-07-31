@@ -15,6 +15,8 @@
                         </div>
                         <div class="position-absolute" style="top: 0px; right: 0px;">
                             @if (auth()->check())
+                            <input type="hidden" value="{{ Auth::id() }}" id="user_id">
+                            <input type="hidden" value="{{ $freelancer->id }}" id="freelancer_id">
                                 <i class="mdi mdi-bell-outline text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) != 1 ? 'd-block' : 'd-none' }}" id="notify" style="font-size: 16px; cursor: pointer;"></i>
                                 <i class="mdi mdi-bell-ring text-muted {{ count(auth()->user()->notify->where('freelancer_id', $freelancer->id)) == 1 ? 'd-block' : 'd-none' }}" id="disnotify" style="font-size: 16px; cursor: pointer;"></i>
                             @else

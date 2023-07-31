@@ -4,7 +4,6 @@
 */
 
 
-/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
 :root {
@@ -15,12 +14,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: 'Lato', sans-serif; */
     font-family: 'Open Sans', sans-serif;
 }
 
 body {
-    background-color: #fff;
+    background-color: #f7f7f7;
 }
 
 a:hover {
