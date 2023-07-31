@@ -4,7 +4,7 @@
         <div class="login-side d-flex align-items-center justify-content-center">
             <div class="form-login px-4 pt-4 pb-3 shadow-sm border">
                 <div class="text-center pb-2 mb-3 border-bottom position-relative">
-                    <span class="position-absolute d-md-none d-block" style="top: 25%; left: 0; transform: translateY(-50%);" onclick="return window.history.back();">
+                    <span class="position-absolute d-md-none d-block" style="top: 25%; left: 0; transform: translateY(-50%); cursor: pointer;" onclick="return window.history.back();">
                         <i class="fa-solid fa-arrow-left fs-5 text-muted"></i>
                     </span>
                     <h1 class="h5 text-dark">New Password</h1>
