@@ -161,7 +161,7 @@
         <div class="mt-md-4 mt-3 mb-2 pb-4 {{ count($similiar) > 0 ? 'border-bottom' : '' }}">
             <div class="row mx-0">
                 <div class="col-md-7 col-12 px-0">
-                    <div class="py-md-3 py-2 px-md-4 px-3 border rounded d-flex align-items-center justify-content-between" style="background-color: #fff;">
+                    <div class="py-md-3 py-2 px-md-4 px-3 border rounded d-flex align-items-center justify-content-between" >
                         <div class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
                                 <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover" loading="lazy">
@@ -201,7 +201,7 @@
                         @endif
                     </div>
                     <div class="">
-                        <div class="row mx-0 rounded py-3 ps-sm-1 border ps-0" style="background-color: #fff;">
+                        <div class="row mx-0 rounded py-3 ps-sm-1 border ps-0" >
                             <div class="col-sm-4 col-12 d-flex align-items-sm-start mb-sm-0 mb-4 align-items-center justify-content-start flex-column" id="order_rating" style="row-gap: 8px;">
                                 <p class="mb-0 text-dark">Total Orders</p>
                                 <div class="d-flex justify-content-center flex-column">
@@ -238,7 +238,7 @@
                                 <h1 class="h6 mb-0 text-sm-start text-center text-dark">Reviews</h1>
                             </div>
                             @foreach ($reviews as $review)
-                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded" style="background-color: #fff;">
+                                <div class="d-flex align-items-start justify-content-start py-3 px-2 rounded" >
                                     <div class="mx-3">
                                         <div class="rounded-circle border" style="height: 42px; width: 42px; overflow: hidden;">
                                             <img src="{{ $review->user->image !== null ? asset('images/' . $review->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -275,7 +275,7 @@
                     </div>
                 </div>
                 <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start position-relative">
-                    <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="height: 450px; position: sticky; top: 100px; width: 100%; background-color: #fff;">
+                    <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="height: 450px; position: sticky; top: 100px; width: 100%;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-center">
                             <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
                         </div>
@@ -356,7 +356,7 @@
                 @endforeach
                 <div class="item h-auto">
                     <a href="{{ route('category', $service->category) }}" class="text-decoration-none">
-                        <div class="border w-100 d-flex align-items-center justify-content-center flex-column" style="height: 220px; background-color: #fff;">
+                        <div class="border w-100 d-flex align-items-center justify-content-center flex-column" style="height: 220px;">
                         <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
                         <h1 class="h6 text-muted">More Services</h1>
                         </div>

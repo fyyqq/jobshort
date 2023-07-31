@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row mx-0 mt-4">
             <div class="col-lg-9 col-12 mt-3">
-                <div class="shadow-sm border rounded position-relative w-100" style="background-color: #fff;">
+                <div class="shadow-sm border rounded position-relative w-100">
                     <a href="{{ route('services', $service->slug) }}" class="text-decoration-none d-flex align-items-start justify-content-start flex-sm-row flex-column ps-3 pe-4 py-3 flex-row">
                         <div id="parent_image_category">
                             <div class="rounded border" id="category_image">
@@ -40,7 +40,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="row mx-0 border d-flex align-items-center justify-content-between py-4 gap-sm-0 gap-4 my-3 rounded" style="background-color: #fff;">
+                <div class="row mx-0 border d-flex align-items-center justify-content-between py-4 gap-sm-0 gap-4 my-3 rounded">
                     <div class="col-sm-4 col-12 d-flex align-items-center justify-content-center flex-column" style="row-gap: 8px;">
                         <div class="d-flex jusitfy-content-center flex-column">
                             <p class="mb-0 text-muted text-sm-start text-center">Total Orders</p>
@@ -74,8 +74,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="gap-3 card" style="background-color: #fff;">
-                    <div class="card-header" style="background-color: #fff;">
+                <div class="gap-3 card">
+                    <div class="card-header">
                         <p class="mb-0">Reviews</p>
                     </div>
                     <div class="px-3">
@@ -116,7 +116,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="text-center border-top card-header" style="background-color: #fff;">
+                    <div class="text-center border-top card-header">
                         <small class="mb-0">End of Section</small>
                     </div>
                 </div>

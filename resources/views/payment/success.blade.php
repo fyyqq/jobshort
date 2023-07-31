@@ -4,7 +4,7 @@
     <div class="container-md">
         <div class="d-flex justify-content-center align-items-center">
             <div class="card" id="card_payment">
-                <div class="card-header py-3 text-center" style="background-color: #fff;">
+                <div class="card-header py-3 text-center"
                     <h1 class="mb-0 h5">Payment Succeed <i class="ms-1 text-success mdi mdi-checkbox-marked-circle"></i></h1>
                 </div>
                 <div class="card-body d-flex align-items-center justify-content-center flex-column">

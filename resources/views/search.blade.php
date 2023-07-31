@@ -4,7 +4,7 @@
     <div class="container-xl">
         <div class="row mx-0 position-relative d-flex justify-content-center align-items-top" style="flex-wrap: wrap; column-gap: 20px; height: max-content;">
             <aside class="px-0 col-md-3 col-12 mb-3 d-md-block d-none">
-                <div class="rounded-3 pb-4 border" style="background-color: #fff; position: sticky; top: 100px;">
+                <div class="rounded-3 pb-4 border" style="position: sticky; top: 100px;">
                     <div class="py-3 border-bottom">
                         <h1 class="text-dark h5 mb-0 text-center" style="font-size: 15px;">Filter</h1>
                     </div>

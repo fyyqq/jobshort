@@ -1,5 +1,5 @@
 @foreach ($orders as $order)
-    <div class="d-flex align-items-center justify-content-start flex-column border rounded" id="order_container" style="background-color:#fff;">
+    <div class="d-flex align-items-center justify-content-start flex-column border rounded" id="order_container">
         <div class="{{ $order->status === 'rejected' ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3 border-bottom">
             <div class="">
                 <small class="mb-0 text-dark" style="font-size: 13px;">Order at {{ $order->created_at->diffForHumans() }}</small>

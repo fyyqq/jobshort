@@ -5,18 +5,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
     <header class="box pb-3">
-        <div class="box-title border d-md-block d-none border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">
+        <div class="box-title border d-md-block d-none border p-3 mb-2" style="border-top-right-radius: 10px; border-top-left-radius: 10px;>
             <h6 class="m-0">Profile</h6>
         </div>
-        <div class="box-title p-3 mb-2 d-md-none d-block" style="background-color: #fff;">
+        <div class="box-title p-3 mb-2 d-md-none d-block">
             <h6 class="m-0">Profile</h6>
         </div>
     
         @if (auth()->user()->roles != '0')
-            <form action="{{ route('profile.update') }}" method="POST" class="border" enctype="multipart/form-data" style="background-color: #fff;">
+            <form action="{{ route('profile.update') }}" method="POST" class="border" enctype="multipart/form-data">
                 @method('PUT')
         @else
-            <form action="{{ route('profile.registration') }}" method="POST" class="border" enctype="multipart/form-data" style="background-color: #fff;">
+            <form action="{{ route('profile.registration') }}" method="POST" class="border" enctype="multipart/form-data">
         @endif
             @csrf
             <div class="row mx-0 flex-lg-row flex-column-reverse p-3">

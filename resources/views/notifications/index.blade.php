@@ -6,7 +6,7 @@
     <div class="container-xl">
         <div class="row mx-0">
             <div class="col-md-3 left">
-                <div class="py-3 mb-md-0 mb-2 rounded border" style="background-color: #fff;">
+                <div class="py-3 mb-md-0 mb-2 rounded border">
                     <ul class="navbar-nav px-3 flex-md-column flex-row gap-md-0 gap-4">
                         <span data-notification-link="{{ route('notification.inbox') }}" data-type="Inbox" class="text-decoration-none d-flex align-items-center justify-content-start gap-md-3 gap-0" id="notification-link">
                             <i class="mdi mdi-inbox text-dark" data-bs-target="tooltip" title="Inbox"></i>

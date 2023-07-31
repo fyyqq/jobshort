@@ -17,14 +17,13 @@
         font-size: 22px;
         position: absolute;
         top: 50%;
-        transform: translateY(-80%);
+        transform: translateY(-75%);
         color: #333;
         height: 42px;
         width: 42px;
         display: grid;
         place-items: center;
         border-radius: 50%;
-        background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
     .owl-carousel .fa-angle-left {
@@ -37,7 +36,7 @@
     <div class="container-lg">
         <div class="row mx-0">
             <div class="col-md-8 col-12 pe-2">
-                <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm px-3 border py-3 position-relative flex-row" style="background-color: #fff;">
+                <div class="d-flex align-items-start justify-content-start flex-sm-row flex-column gap-3 shadow-sm px-3 border py-3 position-relative flex-row">
                     <div id="parent_image_category">
                         <div class="rounded border" id="category_image">
                             <img src="{{ asset('category' .  $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
@@ -152,14 +151,14 @@
                 <div class="d-md-grid d-none" style="row-gap: 10px;">
                     @foreach ($categories as $value)
                         <a href="{{ route('category', $value['slug']) }}" class="text-decoration-none">
-                            <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                            <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px;">
                                 <i class="{{ $value['icon'] }} fs-1 text-dark"></i>
                                 <h1 class="h6 text-muted">{{ $value['name'] }}</h1>
                             </div>
                         </a>
                     @endforeach
                     <a href="{{ route('categories') }}" class="text-decoration-none">
-                        <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                        <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px;">
                         <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
                         <h1 class="h6 text-muted">More Categories</h1>
                         </div>
@@ -170,7 +169,7 @@
                         @foreach ($categories as $value)
                             <div class="item h-100">
                                 <a href="{{ route('category', $value['slug']) }}" class="text-decoration-none">
-                                    <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                                    <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px;">
                                         <i class="{{ $value['icon'] }} fs-1 text-dark"></i>
                                         <h1 class="h6 text-muted">{{ $value['name'] }}</h1>
                                     </div>
@@ -179,7 +178,7 @@
                         @endforeach
                         <div class="item h-100">
                             <a href="{{ route('categories') }}" class="text-decoration-none">
-                                <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px; background-color: #fff;">
+                                <div class="border shadow-sm w-100 d-flex align-items-center justify-content-center flex-column" style="height: 200px;">
                                 <i class="mdi mdi-view-dashboard fs-1 text-dark"></i>
                                 <h1 class="h6 text-muted">More Categories</h1>
                                 </div>

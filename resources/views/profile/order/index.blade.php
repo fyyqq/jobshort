@@ -2,10 +2,10 @@
 
 @section('profile')
     <header class="pb-4">
-        <div class="box-title border p-3" style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: #fff;">
+        <div class="box-title border p-3" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
             <h6 class="m-0">Orders</h6>
         </div>
-        <div class="border my-2" id="parent-order-menu-link" style="background-color: #fff;">
+        <div class="border my-2" id="parent-order-menu-link">
             <ul class="navbar-nav px-3">
                 <div class="d-flex align-items-center justify-content-start">
                     <li data-order-link="{{ route('profile.order-pending') }}" data-type="Pending" class="position-relative order-menu-link {{ Route::is('profile.order' ) || Route::is('profile.order-pending') ? 'border-bottom border-2 border-primary' : '' }}">
@@ -43,7 +43,7 @@
                 </div>
             @else
                 @foreach ($orders as $order)
-                    <div class="d-flex align-items-center justify-content-start flex-column border rounded" id="order_container" style="background-color:#fff;">
+                    <div class="d-flex align-items-center justify-content-start flex-column border rounded" id="order_container">
                         <div class="{{ $order->status === 'rejected' ? 'd-none' : 'd-flex' }} align-items-center justify-content-between w-100 p-3 border-bottom">
                             <div class="">
                                 <small class="mb-0 text-dark" style="font-size: 13px;">Order at {{ $order->created_at->diffForHumans() }}</small>
