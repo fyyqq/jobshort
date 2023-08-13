@@ -35,7 +35,8 @@
                                             </form>
                                         @else
                                             <i class="fa-solid fa-heart position-absolute unwishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-block' : 'd-none' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
-                                            <input type="hidden" value="{{ $wishlist->service->id }}">
+                                            <input type="hidden" value="{{ route('wishlist-service', $wishlist->service->id) }}" id="wishlist_path">
+                                            <input type="hidden" value="{{ route('unwishlist-service', $wishlist->service->id) }}" id="unwishlist_path">
                                             <i class="fa-regular fa-heart position-absolute wishlist {{ count(auth()->user()->wishlist->where('service_id', $wishlist->service->id)) == 1 ? 'd-none' : 'd-block' }}" style="font-size: 18px; right: 15px; top: 10px;"></i>
                                         @endif
                                     </div>
@@ -70,5 +71,13 @@
             </div>
         </div>
     </header>
-
+    <script>
+        const unwishlists = document.querySelectorAll('.unwishlist');
+        unwishlists.forEach(unwishlist => {
+            unwishlist.addEventListener('click', e => {
+                e.preventDefault();
+                e.currentTarget.parentElement.parentElement.parentElement.remove();
+            });
+        });
+    </script>
 @endsection
