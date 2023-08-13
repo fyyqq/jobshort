@@ -94,7 +94,7 @@
                             <label for="price" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Price :</label>
                             <div class="d-flex align-items-center justify-content-start">
                                 <div class="position-relative">
-                                    <span class="currency mb-0 text-dark px-2">RM</span>
+                                    <span class="currency mb-0 text-dark px-2">USD</span>
                                     <input type="number" class="ps-5 form-control shadow-none w-100" name="price" value="{{ old('price') }}">
                                 </div>
                             </div>

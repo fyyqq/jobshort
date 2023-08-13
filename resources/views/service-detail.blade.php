@@ -163,7 +163,7 @@
                 <div class="col-md-7 col-12 px-0">
                     <div class="py-md-3 py-2 px-md-4 px-3 border rounded d-flex align-items-center justify-content-between" >
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 45px; width: 45px; overflow: hidden;">
+                            <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none border rounded-circle" style="height: 38px; width: 38px; overflow: hidden;">
                                 <img src="{{ $service->freelancer->image !== null ? asset('images/' . $service->freelancer->image) : asset('brand/unknown.png') }}" alt="" class="w-100 h-100" style="object-fit: cover" loading="lazy">
                             </a>
                             <a href="{{ route('users', strtolower($service->freelancer->name)) }}" class="text-decoration-none d-flex align-items-start justify-content-center flex-column">
