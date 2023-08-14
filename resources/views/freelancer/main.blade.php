@@ -88,63 +88,70 @@
                                         <small class="mb-0" style="font-size: 13px;">Status</small>
                                     </div>
                                 </div>
-                                <div class="px-4 w-100 row mx-0" id="parent-show-services" style="row-gap: 5px;">
-                                    @foreach ($services as $index => $service)
-                                        <div class="d-flex align-items-center px-2 py-2">
-                                            <div class="col-lg-5 col-12 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
-                                                <a href="{{ route('services', $service->slug) }}" class="d-block">
-                                                    <div class="rounded border" style="height: 65px; width: 65px; overflow: hidden;">
-                                                        @foreach (explode(',', $service->image) as $key => $value)
-                                                            @if ($key === 0)
-                                                                <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-                                                </a>
-                                                <?php
-                                                    $category_name = $service->category;
-                                                    $pathCategories = file_get_contents(public_path('json/category.json'));
-                                                    $data = json_decode($pathCategories, true);
-                                                    
-                                                    $filter = array_filter($data, function($category) use($category_name) {
-                                                        return $category['slug'] === $category_name;
-                                                    });
-                                                ?>
-                                                <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
-                                                    <small class="text-dark d-block text-break lh-sm" style="font-size: 13px;">{{ Str::limit($service->title, 30) }}</small>
-                                                    <small class="mb-0 text-muted" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
-                                                    <div class="d-lg-none d-flex align-items-center justify-content-between mt-2 w-100">
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <small class="mb-0 text-dark">{{ '$' . $service->price }}</small>
-                                                            <div class="d-flex align-items-center justify-content-center gap-1 ps-2 ms-2 border-start">
-                                                                <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
-                                                                <small class="text-muted">{{ $service->order->where('status', 'completed')->count() }}</small>
-                                                            </div>
+                                <div class="px-4 w-100 row mx-0" id="parent-show-services" style="{{ count($services) < 1 ? 'height: 350px;' : '' }} row-gap: 5px;">
+                                    @if (count($services) < 1)
+                                    <div class="d-flex align-items-center justify-content-center flex-column gap-2">
+                                        <i class="fa-regular fa-folder-open fs-2"></i>
+                                        <small class="mb-0 text-muted">No Services Yet.</small>
+                                    </div>
+                                    @else
+                                        @foreach ($services as $index => $service)
+                                            <div class="d-flex align-items-center px-2 py-2">
+                                                <div class="col-lg-5 col-12 d-flex align-items-start justify-content-start gap-3 ms-sm-0 ms-2">
+                                                    <a href="{{ route('services', $service->slug) }}" class="d-block">
+                                                        <div class="rounded border" style="height: 65px; width: 65px; overflow: hidden;">
+                                                            @foreach (explode(',', $service->image) as $key => $value)
+                                                                @if ($key === 0)
+                                                                    <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+                                                                @endif
+                                                            @endforeach
                                                         </div>
-                                                        <div class="d-lg-none d-flex flex-row-reverse">
-                                                            <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
-                                                                <i class="fa-solid fa-circle text-success" style="font-size: 12.5px;"></i>
-                                                                <small class="text-muted">{{ $service->status }}</small>
+                                                    </a>
+                                                    <?php
+                                                        $category_name = $service->category;
+                                                        $pathCategories = file_get_contents(public_path('json/category.json'));
+                                                        $data = json_decode($pathCategories, true);
+                                                        
+                                                        $filter = array_filter($data, function($category) use($category_name) {
+                                                            return $category['slug'] === $category_name;
+                                                        });
+                                                    ?>
+                                                    <div class="d-flex align-items-start justify-content-start flex-column mt-1 pe-4 w-100">
+                                                        <small class="text-dark d-block text-break lh-sm" style="font-size: 13px;">{{ Str::limit($service->title, 30) }}</small>
+                                                        <small class="mb-0 text-muted" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
+                                                        <div class="d-lg-none d-flex align-items-center justify-content-between mt-2 w-100">
+                                                            <div class="d-flex align-items-center justify-content-center">
+                                                                <small class="mb-0 text-dark">{{ '$' . $service->price }}</small>
+                                                                <div class="d-flex align-items-center justify-content-center gap-1 ps-2 ms-2 border-start">
+                                                                    <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
+                                                                    <small class="text-muted">{{ $service->order->where('status', 'completed')->count() }}</small>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-lg-none d-flex flex-row-reverse">
+                                                                <div class="d-flex align-items-center justify-content-center gap-1 ps-1">
+                                                                    <i class="fa-solid fa-circle text-success" style="font-size: 12.5px;"></i>
+                                                                    <small class="text-muted">{{ $service->status }}</small>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                                                <small class="" style="font-size: 13px;">{{ '$' . $service->price }}</small>
-                                            </div>
-                                            <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center gap-1">
-                                                <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
-                                                <small class="mb-1" style="font-size: 13px;">{{ count($service->order->where('status', 'completed')) }}</small>
-                                            </div>
-                                            <div class="col-lg-3 col-0 d-lg-flex d-none align-items-center justify-content-center">
-                                                <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
-                                                    <i class="fa-solid fa-circle {{ $service->status != 'active' ? 'text-muted' : 'text-success' }}" style="font-size: 13px;"></i>
-                                                    <small class="pb-1" style="font-size: 13px;">{{ $service->status }}</small>
+                                                <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center">
+                                                    <small class="" style="font-size: 13px;">{{ '$' . $service->price }}</small>
+                                                </div>
+                                                <div class="col-lg-2 col-0 d-lg-flex d-none align-items-center justify-content-center gap-1">
+                                                    <i class="mdi mdi-text-box-check-outline" style="font-size: 15px;"></i>
+                                                    <small class="mb-1" style="font-size: 13px;">{{ count($service->order->where('status', 'completed')) }}</small>
+                                                </div>
+                                                <div class="col-lg-3 col-0 d-lg-flex d-none align-items-center justify-content-center">
+                                                    <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
+                                                        <i class="fa-solid fa-circle {{ $service->status != 'active' ? 'text-muted' : 'text-success' }}" style="font-size: 13px;"></i>
+                                                        <small class="pb-1" style="font-size: 13px;">{{ $service->status }}</small>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
