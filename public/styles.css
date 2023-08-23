@@ -781,6 +781,9 @@ select option {
     #similiar_image {
         height: 200px;
     }
+    .owl-carousel .owl-nav {
+        opacity: 0;
+    }
 }
 
 @media (max-width: 576px) {
