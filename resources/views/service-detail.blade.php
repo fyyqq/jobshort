@@ -274,12 +274,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start position-relative">
-                    <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="height: 450px; position: sticky; top: 100px; width: 100%;">
-                        <div class="p-4 border-bottom d-flex justify-content-start align-items-center">
+                <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start">
+                    <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="position: sticky; top: 100px; width: 100%;">
+                        <div class="p-4 border-bottom d-flex justify-content-start align-items-end">
                             <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
+                            <small class="ms-1 text-muted">per service</small>
                         </div>
-                        <div class="px-3 position-absolute w-100" style="bottom: 15px; left: 50%; transform: translateX(-50%);">
+                        <div class="order-detail px-4 pt-4 pb-3 h-100 w-100">
+                            <div class="d-grid border-bottom pb-4 gap-4 w-100">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small class="text-muted">Subtotal</small>
+                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark"></i></small>
+                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                </div>
+                            </div>
+                            <div class="d-grid pt-4 gap-4 w-100">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small class="text-muted">Total</small>
+                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small class="text-muted">Delivery Time</small>
+                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 w-100">
                             <div class="d-flex align-items-center justify-content-center gap-1" style="flex-flow: 1;">
                             <button class="btn btn-dark">
                                 <i class="mdi mdi-message-text"></i>
