@@ -288,7 +288,7 @@
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark"></i></small>
-                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                    <small class="text-dark" style="font-size: 14.5px;">10%</small>
                                 </div>
                             </div>
                             <div class="d-grid pt-4 gap-4 w-100">

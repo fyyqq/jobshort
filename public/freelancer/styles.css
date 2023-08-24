@@ -218,6 +218,7 @@ input[type=number] {
     width: 70%;
     bottom: -70px;
     right: 0;
+    z-index: 998;
 }
 
 .row .form-control:focus {

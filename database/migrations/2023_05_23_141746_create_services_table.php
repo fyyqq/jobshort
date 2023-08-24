@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('slug');
             $table->text('description')->nullable();
             $table->string('category');
-            $table->integer('price');
+            $table->string('price');
             $table->timestamps();
         });
     }

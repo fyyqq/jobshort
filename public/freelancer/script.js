@@ -496,12 +496,15 @@ $(document).ready(function() {
     // Create & Update
 
     // Information Price
-    $(".info_price").on( "mouseenter", function() {
-        $('.info_price_text').show();
-    });
-
-    $(".info_price").on( "mouseleave", function() {
-        $('.info_price_text').hide();
+    $(".info_price").on( "click", function() {
+        const info = $('.info_price_text');
+        if (!$(this).hasClass('active')) {
+            $(this).addClass('active')
+            $(info).show();
+        } else {
+            $(this).removeClass('active');
+            $(info).hide();   
+        }
     });
 
     // Filter Price
@@ -516,7 +519,7 @@ $(document).ready(function() {
                 $(info).show();
                 $(loader).hide();
                 let price = parseInt(values);
-                let totalPrice = price + (price * 0.10);
+                let totalPrice = price + (price * 0.05);
                 $(this).val(totalPrice);
             }, 1500);
         } else {
