@@ -60,7 +60,7 @@
                     <div class="col-lg-8 col-12 row mx-0">
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="title" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Title :</label>
-                            <input type="text" class="form-control shadow-none w-100" id="title" name="title" value="{{ old('title', $service->title) }}">
+                            <input type="text" class="form-control shadow-none w-100" id="title" name="title" value="{{ old('title', $service->title) }}" placeholder="Service Title">
                             @error('title')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label for="description" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Description :</label>
-                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="9">{{ old('description', $service->description) }}</textarea>
+                            <textarea name="description" id="description" class="form-control w-100 shadow-none" rows="9" placeholder="Service Description">{{ old('description', $service->description) }}</textarea>
                             @error('description')
                                 <span class="text-start w-100 text-danger" role="alert">
                                     <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
@@ -93,13 +93,14 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-4 ps-0 d-flex align-items-start justify-content-start flex-column">
+                        <div class="mb-2 ps-0 d-flex align-items-start justify-content-start flex-column">
                             <label for="price" class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Price Per Service :</label>
-                            <div class="d-flex align-items-center justify-content-start">
-                                <div class="position-relative" id="lower_price">
-                                    <div class="currency mb-0 text-dark">USD</div>
-                                    <input type="number" class="ps-5 form-control shadow-none w-100" placeholder="How much you charge ?" name="price" value="{{ old('price', $service->price) }}">
-                                </div>
+                            <div class="input-group mb-3 position-relative">
+                                <span class="input-group-text" data-bs-target="tooltip" title="Only USD currency is accepted in the payment system*">$</span>
+                                <input type="number" step="any" class="form-control shadow-none" name="price" value="{{ old('price', $service->price) }}" style="transform: translateY(0px);" placeholder="How much you charge ?">
+                                <i class="mdi mdi-information-outline position-absolute info_price" style="top: 50%; right: 10px; transform: translateY(-50%);"></i>
+                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
+                                <div id="price_loader"></div>
                             </div>
                             @error('price')
                                 <span class="text-start w-100 text-danger" role="alert">

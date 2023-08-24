@@ -183,10 +183,41 @@ input[type=number] {
     color: #333;
     letter-spacing: .2px;
     transition: all .2s ease-in-out;
+    transform: translateY(3px);
 }
 
-.row .form-control {
-    transform: translateY(3px);
+.row .info_price {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.row #price_loader {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: 
+    radial-gradient(farthest-side,#1e1e1f 94%,#0000) top/4px 4px no-repeat,
+      conic-gradient(#0000 30%,#474747);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 4px),#000 0);
+    animation:price 1s infinite linear;
+    display: none;
+}
+
+@keyframes price { 
+    100%{transform: rotate(1turn)}
+}
+
+.row .info_price_text {
+    background-color: #fff;
+    font-size: 13.5px;
+    display: none;
+    position: absolute;
+    width: 70%;
+    bottom: -70px;
+    right: 0;
 }
 
 .row .form-control:focus {
@@ -232,14 +263,14 @@ input[type=number] {
     font-size: 13.5px;
 }
 
-#create-jobs .currency {
+/* #create-jobs .currency {
     padding: 4px 6px;
     border-right: 1px solid gainsboro;
     position: absolute;
     bottom: 0;
     left: 0;
     font-size: 12px;
-}
+} */
 
 #dashboard-main-detail {
     grid-template-columns: repeat(4, 1fr);

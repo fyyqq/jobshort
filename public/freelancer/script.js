@@ -495,6 +495,35 @@ $(document).ready(function() {
     
     // Create & Update
 
+    // Information Price
+    $(".info_price").on( "mouseenter", function() {
+        $('.info_price_text').show();
+    });
+
+    $(".info_price").on( "mouseleave", function() {
+        $('.info_price_text').hide();
+    });
+
+    // Filter Price
+    $("input[name='price']").on('keyup', function() {
+        const values = $(this).val();
+        const info = $('.info_price');
+        const loader = $('#price_loader');
+        if (values.trim()) {
+            $(info).hide();
+            $(loader).show();
+            setTimeout(() => {
+                $(info).show();
+                $(loader).hide();
+                let price = parseInt(values);
+                let totalPrice = price + (price * 0.10);
+                $(this).val(totalPrice);
+            }, 1500);
+        } else {
+            $(this).val('');
+        }
+    });
+
     // Filter Title Add Create
     $('#title').on('input', function(e) {
         var value = e.target.value;
@@ -1121,13 +1150,6 @@ function selectCountry(element) {
         $(listContainer).hide();
     });
 }
-
-
-
-
-
-
-
 
 
 
