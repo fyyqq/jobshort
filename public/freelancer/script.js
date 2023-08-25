@@ -519,12 +519,28 @@ $(document).ready(function() {
                 $(info).show();
                 $(loader).hide();
                 let price = parseInt(values);
-                let totalPrice = price + (price * 0.05);
+                let totalPrice = price + (price * 0.10);
                 $(this).val(totalPrice);
             }, 1500);
         } else {
             $(this).val('');
         }
+    });
+
+    $('.clear_price').on('click', function(e) {
+        e.preventDefault();
+        $(this).siblings("input[name='price']").val('');
+    });
+
+    // Filter Delivery
+    const delivery = document.querySelectorAll('#delivery_input');
+    $(delivery).each(function(index, element) {
+        $(element).on('keyup', function() {
+            const values = $(this).val().trim();
+            if (values === '') {
+                $(this).val('');
+            }
+        });
     });
 
     // Filter Title Add Create

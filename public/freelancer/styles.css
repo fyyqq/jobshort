@@ -216,9 +216,14 @@ input[type=number] {
     display: none;
     position: absolute;
     width: 70%;
-    bottom: -70px;
+    top: 40px;
     right: 0;
+    user-select: none;
     z-index: 998;
+}
+
+.row .clear_price {
+    cursor: pointer;
 }
 
 .row .form-control:focus {

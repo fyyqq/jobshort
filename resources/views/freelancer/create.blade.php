@@ -95,8 +95,9 @@
                             <div class="input-group mb-3 position-relative">
                                 <span class="input-group-text" data-bs-target="tooltip" title="Only USD currency is accepted in the payment system*">$</span>
                                 <input type="number" step="any" class="form-control shadow-none" name="price" value="{{ old('price') }}" style="transform: translateY(0px);" placeholder="How much you charge ?">
+                                <i class="mdi mdi-close position-absolute clear_price" style="top: 50%; right: 45px; transform: translateY(-50%);"></i>
                                 <i class="mdi mdi-information-outline position-absolute info_price" style="top: 50%; right: 10px; transform: translateY(-50%);"></i>
-                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>5%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
+                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
                                 <div id="price_loader"></div>
                             </div>
                             @error('price')
@@ -108,9 +109,9 @@
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Delivery Time (day) :</label>
                             <div class="d-flex align-items-center justify-content-start w-100 gap-3">
-                                <input type="number" class="form-control shadow-none w-10" id="min_day" name="min_day" value="{{ old('min_day') }}" placeholder="Min Day">
+                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_delivery" name="min_delivery" value="{{ old('min_delivery') }}" placeholder="Min Day">
                                 <i class="mdi mdi-swap-horizontal"></i>
-                                <input type="number" class="form-control shadow-none w-10" id="max_day" name="max_day" value="{{ old('max_day') }}" placeholder="Max Day">
+                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery') }}" placeholder="Max Day">
                             </div>
                         </div>
                     </div>

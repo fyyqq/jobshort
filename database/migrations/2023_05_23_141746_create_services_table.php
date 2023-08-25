@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('category');
             $table->string('price');
+            $table->integer('min_delivery');
+            $table->integer('max_delivery');
             $table->timestamps();
         });
     }

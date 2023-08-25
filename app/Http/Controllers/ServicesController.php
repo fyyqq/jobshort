@@ -237,6 +237,8 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateStore['category'];
         $service->price = $validateStore['price'];
+        $service->min_delivery = $request->input('min_delivery');
+        $service->max_delivery = $request->input('max_delivery');
         $saved = $service->save();
 
         if ($saved) {

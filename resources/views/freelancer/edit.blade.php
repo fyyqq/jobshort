@@ -98,8 +98,9 @@
                             <div class="input-group mb-3 position-relative">
                                 <span class="input-group-text" data-bs-target="tooltip" title="Only USD currency is accepted in the payment system*">$</span>
                                 <input type="number" step="any" class="form-control shadow-none" name="price" value="{{ old('price', $service->price) }}" style="transform: translateY(0px);" placeholder="How much you charge ?">
+                                <i class="mdi mdi-close position-absolute clear_price" style="top: 50%; right: 45px; transform: translateY(-50%);"></i>
                                 <i class="mdi mdi-information-outline position-absolute info_price" style="top: 50%; right: 10px; transform: translateY(-50%);"></i>
-                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>5%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
+                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
                                 <div id="price_loader"></div>
                             </div>
                             @error('price')
