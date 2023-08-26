@@ -37,7 +37,10 @@
                         <i class="mdi mdi-message-text" style="font-size: 20px;"></i>
                     </div>  
                     <div class="d-flex align-items-center justify-content-center gap-3">
-                        <h1 class="h6 mb-0 text-dark">{{ '$' . $service->price_after_fee }}</h1>
+                        <div class="d-flex align-items-start justify-content-center flex-column">
+                            <h1 class="h6 mb-0 text-dark">{{ '$' . $service->price_after_fee }}</h1>
+                            <small class="text-muted" style="font-size: 12px">{{ $service->min_delivery . ' - ' . $service->max_delivery }} days</small>
+                        </div>
                         <form action="{{ route('session', $service->slug) }}" method="post">
                             @csrf
                             <input type="hidden" name="service_id" value="{{ $service->id }}">
@@ -68,8 +71,48 @@
                 </div>
                 <div class="d-flex align-items-center gap-3 me-3">
                     <div class="d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 13.5px; cursor: pointer;"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square" data-bs-toggle="modal" data-bs-target="#shareService" style="font-size: 13.5px; cursor: pointer;"></i>
                     </div>
+                    {{--  --}}
+                    <div class="modal fade" id="shareService">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-6" id="exampleModalLabel">Share Service</h1>
+                                    <button type="button" class="btn-close shadow-none" style="font-size: 13px;" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <small class="text-dark">Share this service via</small>
+                                    <div class="d-flex align-items-center justify-content-start gap-3 mt-2 mb-4">
+                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Facebook" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-facebook"></i>
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Instagram" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-instagram"></i>
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-success d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Whatsapp" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-whatsapp"></i>
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Twitter" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-twitter"></i>
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-success d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="WeChat" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-wechat"></i>
+                                        </a>
+                                    </div>
+                                    <small class="text-dark">Copy link</small>
+                                    <div class="input-group my-2 position-relative">
+                                        <input type="text" class="form-control shadow-none text-muted" value="{{ route('services', $service->slug) }}" readonly>
+                                        <button class="input-group-text btn btn-primary shadow-none" onclick="copyLink(this)">
+                                            <small>Copy</small>
+                                            <div class="button-loader d-none"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--  --}}
                     <div class="d-flex align-items-center justify-content-center">
                         @if (auth()->check())
                             <i class="fa-solid fa-heart unwishlist {{ count(auth()->user()->wishlist->where('service_id', $service->id)) == 1 ? 'd-block' : 'd-none' }}"></i>

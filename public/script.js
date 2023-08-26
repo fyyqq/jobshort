@@ -833,3 +833,17 @@ function notifyFee(event) {
         info.classList.add('d-none');
     }
 }
+
+function copyLink(event) {
+    const link = event.previousElementSibling;
+    const text = event.querySelector('small');
+    const loader = event.querySelector('.button-loader');
+    text.innerHTML = '';
+    loader.classList.remove('d-none');
+    setTimeout(() => {
+        link.select();
+        document.execCommand("copy");
+        text.innerHTML = 'Copied';
+        loader.classList.add('d-none');
+    }, 1500);
+}

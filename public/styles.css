@@ -67,6 +67,33 @@ a:hover {
     }
 }
 
+.button-loader {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    animation: s4 4s infinite;
+}
+
+.button-loader::before,
+.button-loader::after {    
+    content:"";
+    grid-area: 1/1;
+    border:3px solid;
+    border-radius: 50%;
+    border-color:#FFFFFF #FFFFFF #0000 #0000;
+    mix-blend-mode: darken;
+    animation: s4 1s infinite linear;
+}
+
+.button-loader::after {
+    border-color:#0000 #0000 #FFF #FFF;
+    animation-direction: reverse;
+}
+
+@keyframes s4{ 
+    100%{transform: rotate(1turn)}
+}
+
 #notification-link {
     cursor: pointer;
 }
