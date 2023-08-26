@@ -203,8 +203,8 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => ['required'],
             'price' => ['required'],
-            'min_delivery' => ['required'],
-            'max_delivery' => ['required'],
+            'min_delivery' => ['required', 'numeric', 'integer'],
+            'max_delivery' => ['required', 'numeric', 'integer'],
             'images' => ['required', 'min:5', 'max:2048'],
             'images.*' => ['mimes:png,jpg,jpeg'],
         ], [
@@ -292,8 +292,8 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => 'required',
             'price' => 'required',
-            'min_delivery' => ['required'],
-            'max_delivery' => ['required'],
+            'min_delivery' => ['required', 'numeric', 'integer'],
+            'max_delivery' => ['required', 'numeric', 'integer'],
         ], [
             'title.required' => 'Title is required!',
             'category.required' => 'Category is required!',
