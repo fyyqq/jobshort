@@ -82,4 +82,9 @@ class PaymentController extends Controller
             'service' => $service
         ]);
     }
+
+    public function cancel() {
+        $service = session('session_service');
+        return redirect()->route('services', $service->slug);
+    }
 }
