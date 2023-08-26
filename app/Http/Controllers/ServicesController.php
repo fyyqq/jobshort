@@ -201,8 +201,9 @@ class ServicesController extends Controller
 
         $validateStore = $request->validate([
             'title' => ['required', 'max:100'],
-            'category' => ['required'],
-            'price' => ['required'],
+            'category' => 'required',
+            'price' => 'required',
+            'price_after_fee' => 'required',
             'min_delivery' => ['required', 'numeric', 'integer'],
             'max_delivery' => ['required', 'numeric', 'integer'],
             'images' => ['required', 'min:5', 'max:2048'],
@@ -241,7 +242,7 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateStore['category'];
         $service->price = $validateStore['price'];
-        $service->price_after_fee = $request->input('price_after_fee');
+        $service->price_after_fee = $validateStore['price_after_fee'];
         $service->min_delivery = $validateStore['min_delivery'];
         $service->max_delivery = $validateStore['max_delivery'];
         $saved = $service->save();
@@ -292,6 +293,7 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => 'required',
             'price' => 'required',
+            'price_after_fee' => 'required',
             'min_delivery' => ['required', 'numeric', 'integer'],
             'max_delivery' => ['required', 'numeric', 'integer'],
         ], [
@@ -349,7 +351,7 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateUpdate['category'];
         $service->price = $validateUpdate['price'];
-        $service->price_after_fee = $request->input('price_after_fee');
+        $service->price_after_fee = $validateUpdate['price_after_fee'];
         $service->image = implode(',', $images);
         $service->min_delivery = $validateUpdate['min_delivery'];
         $service->max_delivery = $validateUpdate['max_delivery'];

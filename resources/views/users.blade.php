@@ -178,7 +178,7 @@
                                                 ?>
                                                 <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                                                 <div class="mt-2 d-flex align-items-center justify-content-between">
-                                                    <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                                    <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price_after_fee }}</small>
                                                     <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
                                                 </div>
                                             </div>

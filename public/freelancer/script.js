@@ -518,6 +518,7 @@ $(document).ready(function() {
         if (values.trim()) {
             let price = parseInt(values);
             let totalPrice = price + (price * 0.10);
+            totalPrice = totalPrice.toFixed(2);
             
             $(info).hide();
             $(loader).show();
@@ -527,8 +528,8 @@ $(document).ready(function() {
                 priceAfterFee.text(`$ ${totalPrice}`);
                 $(text).removeClass('d-none');
                 $(text).addClass('d-flex');
+                $(text).children('input').val(totalPrice);
             }, 1000);
-            $(text).children('input').val(totalPrice);
         } else {
             $(this).val('');
             setTimeout(() => {
@@ -1190,8 +1191,6 @@ function selectCountry(element) {
         $(listContainer).hide();
     });
 }
-
-
 
 
 

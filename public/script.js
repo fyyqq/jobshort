@@ -820,5 +820,3 @@ $(document).on('click', '.order-menu-link', function(e) {
         }
     });
 });
-
-

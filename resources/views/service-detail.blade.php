@@ -37,11 +37,11 @@
                         <i class="mdi mdi-message-text" style="font-size: 20px;"></i>
                     </div>  
                     <div class="d-flex align-items-center justify-content-center gap-3">
-                        <h1 class="h6 mb-0 text-dark">{{ '$' . $service->price }}</h1>
+                        <h1 class="h6 mb-0 text-dark">{{ '$' . $service->price_after_fee }}</h1>
                         <form action="{{ route('session', $service->slug) }}" method="post">
                             @csrf
                             <input type="hidden" name="service_id" value="{{ $service->id }}">
-                            <input type="hidden" name="price" value="{{ $service->price }}">
+                            <input type="hidden" name="price" value="{{ $service->price_after_fee }}">
                             <button type="submit" class="btn text-light w-100 py-2" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                         </form>
                     </div>
@@ -277,7 +277,7 @@
                 <div class="col-5 pe-0 d-md-flex d-none justify-content-end align-items-start">
                     <div class="border shadow-sm rounded-3 mx-xl-4 mx-lg-3 mx-0" style="position: sticky; top: 100px; width: 100%;">
                         <div class="p-4 border-bottom d-flex justify-content-start align-items-end">
-                            <h1 class="h5 mb-0 text-dark">{{'$' . $service->price }}</h1>
+                            <h1 class="h5 mb-0 text-dark">{{'$' . $service->price_after_fee }}</h1>
                             <small class="ms-1 text-muted">per service</small>
                         </div>
                         <div class="order-detail px-4 pt-4 pb-3 h-100 w-100">
@@ -287,18 +287,18 @@
                                     <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark"></i></small>
+                                    <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark" style="cursor: pointer;"></i></small>
                                     <small class="text-dark" style="font-size: 14.5px;">10%</small>
                                 </div>
                             </div>
                             <div class="d-grid pt-4 gap-4 w-100">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <small class="text-muted">Total</small>
-                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                    <small class="text-muted fw-bold">Total</small>
+                                    <small class="text-dark fw-bold" style="font-size: 14.5px;">{{ '$' . $service->price_after_fee }}</small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <small class="text-muted">Delivery Time</small>
-                                    <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                    <small class="text-dark" style="font-size: 14.5px;">{{ $service->min_delivery . ' - ' . $service->max_delivery }} days</small>
                                 </div>
                             </div>
                         </div>
@@ -311,7 +311,7 @@
                                     <form action="{{ route('session', $service->slug) }}" method="post">
                                         @csrf
                                         <input type="hidden" name="service_id" value="{{ $service->id }}">
-                                        <input type="hidden" name="price" value="{{ $service->price }}">
+                                        <input type="hidden" name="price" value="{{ $service->price_after_fee }}">
                                         <button type="submit" class="btn text-light w-100 py-2" style="background-color: #2891e1; font-size: 14px;">Place Order</button>
                                     </form>
                                 </div>
@@ -369,7 +369,7 @@
                                     ?>
                                     <small class="text-muted d-block" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                                     <div class="mt-2 d-flex align-items-center justify-content-between">
-                                        <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
+                                        <small class="mb-0 text-dark" style="font-size: 14.5px;">{{ '$' . $service->price_after_fee }}</small>
                                         <small class="mb-0 text-dark"><i class="me-1 mdi mdi-text-box-check-outline"></i>{{ count($service->order->where('status', 'completed')) }}</small>
                                     </div>
                                 </div>

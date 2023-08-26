@@ -178,7 +178,7 @@
                                         });
                                     ?>
                                     <div class="d-flex align-items-center justify-content-start" style="column-gap: 5px;">
-                                        <span class="badge text-dark fw-normal rounded-1 border px-2" style="font-size: 11px;">{{ '$' . $order->service->price }}</span>
+                                        <span class="badge text-dark fw-normal rounded-1 border px-2" style="font-size: 11px;">{{ '$' . $order->service->price_after_fee  }}</span>
                                         <span class="badge text-dark fw-normal rounded-1 border px-2" style="font-size: 11px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</span>
                                     </div>
                                     <div class="mt-2 w-100 text-sm-end text-start">

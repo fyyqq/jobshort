@@ -36,7 +36,7 @@
                             <small class="d-block lh-base text-muted" style="font-size: 12px;">{{ !empty($filter) ? array_column($filter, 'name')[0] : 'null' }}</small>
                         </div>
                         <div class="mt-2 position-absolute bottom-0 end-0 p-3">
-                            <h1 class="mb-0 text-dark h5">${{ $service->price }}</h1>
+                            <h1 class="mb-0 text-dark h5">${{ $service->price_after_fee }}</h1>
                         </div>
                     </a>
                 </div>

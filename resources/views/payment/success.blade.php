@@ -47,7 +47,7 @@
                                 <small class="text-dark">Amount :</small>
                             </div>
                             <div class="col-8 d-flex align-items-center justify-content-end">
-                                <small class="text-dark">${{ $service->price }}</small>
+                                <small class="text-dark">${{ $service->price_after_fee  }}</small>
                             </div>
                         </div>
                     </div>
