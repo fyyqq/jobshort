@@ -543,7 +543,21 @@ $(document).ready(function() {
     $(delivery).each(function(index, element) {
         $(element).on('keyup', function() {
             const values = $(this).val().trim();
-            if (values === '') {
+            const attr = $(this).attr('name');
+            const duration_text = $(this).parent().siblings('#delivery');
+            const text = $(duration_text).children('div').children('#delivery_duration');
+
+            let min_delivery = $('[name="min_delivery"]').val().trim();
+            let max_delivery = $('[name="max_delivery"]').val().trim();
+            if (values !== '') {
+                if (attr === 'min_delivery') {
+                    min_delivery = values;
+                } else if (attr === 'max_delivery') {
+                    max_delivery = values;
+                }
+                $(duration_text).removeClass('d-none');
+                $(text).text(`${min_delivery} - ${max_delivery}`);
+            } else {
                 $(this).val('');
             }
         });

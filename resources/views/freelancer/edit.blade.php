@@ -119,11 +119,15 @@
                             @enderror
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
-                            <label class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Delivery Time (day) :</label>
+                            <label class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Delivery Duration (day) :</label>
                             <div class="d-flex align-items-center justify-content-start w-100 gap-3">
                                 <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_delivery" name="min_delivery" value="{{ old('min_delivery', $service->min_delivery) }}" placeholder="Min Day">
                                 <i class="mdi mdi-swap-horizontal"></i>
                                 <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery', $service->max_delivery) }}" placeholder="Max Day">
+                            </div>
+                            <div class="d-flex d-none align-items-center justify-content-start ps-1 mt-1 w-100 gap-1" id="delivery">
+                                <i class="mdi mdi-check-bold text-success" style="transform: translateY(2px);"></i>
+                                <div class="form-text text-success" style="font-size: 13px;">Delivery : <span id="delivery_duration"></span> days</div>
                             </div>
                         </div>
                     </div>
