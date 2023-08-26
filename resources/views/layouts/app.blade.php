@@ -48,24 +48,36 @@
                 <div class="" id="mobile-navbar">
                     <div class="row mx-0 d-flex align-items-center justify-content-around" id="main">
                         <a href="{{ route('home') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-house text-muted" style="font-size: 19px;"></i>
+                            @if (Route::is('home'))
+                                <i class="mdi mdi-home text-muted" id="home_icon"></i>
+                            @else 
+                                <i class="mdi mdi-home-outline text-muted" id="home_icon"></i>
+                            @endif
                         </a>
                         <a href="{{ route('profile.saved-services') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                            <i class="fa-regular text-muted fa-heart" style="font-size: 19px;"></i>
+                            @if (Route::is('profile.saved-services'))
+                                <i class="mdi text-muted mdi-heart" id="wishlist_icon"></i>
+                            @else
+                                <i class="mdi text-muted mdi-heart-outline" id="wishlist_icon"></i>
+                            @endif
                         </a>
                         <a href="{{ route('notification') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <div class="position-relative">
                                 @if (Auth::check())
                                     <span class="badge rounded-circle position-absolute {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }} align-items-center justify-content-center m-0" style="top: -9px; right: -9px; font-size: 10px; background-color: #2891e1;">{{ count(auth()->user()->notification) === 'null' ? '' : count(auth()->user()->notification->where('read_at', null)) }}</span>
                                 @endif
-                                <i class="fa-regular text-muted fa-bell" style="font-size: 19px;"></i>
+                                @if (Route::is('notification'))
+                                    <i class="mdi text-muted mdi-bell" id="bell_icon"></i>
+                                @else
+                                    <i class="mdi text-muted mdi-bell-outline" id="bell_icon"></i>
+                                @endif
                             </div>
                         </a>
                         <a href="{{ route('profile.main') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
-                            @if (Route::currentRouteName() === 'profile.main')
-                                <i class="fa-solid fa-user text-dark" style="font-size: 19px;"></i>
+                            @if (Route::is('profile.main'))
+                                <i class="mdi mdi-account-circle text-dark" id="profile_icon"></i>
                             @else
-                                <i class="fa-regular fa-user text-muted" style="font-size: 19px;"></i>
+                                <i class="mdi mdi-account-circle-outline text-muted" id="profile_icon"></i>
                             @endif
                         </a>
                     </div>

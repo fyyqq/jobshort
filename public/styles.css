@@ -152,6 +152,22 @@ a:hover {
     display: none;
 }
 
+#mobile-navbar #home_icon {
+    font-size: 27px;
+}
+
+#mobile-navbar #wishlist_icon {
+    font-size: 21px;
+}
+
+#mobile-navbar #bell_icon {
+    font-size: 20px;
+}
+
+#mobile-navbar #profile_icon {
+    font-size: 23px;
+}
+
 #chat {
     position: fixed; 
     bottom: 30px;
