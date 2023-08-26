@@ -544,7 +544,7 @@ $(document).ready(function() {
         $(element).on('keyup', function() {
             const values = $(this).val().trim();
             const attr = $(this).attr('name');
-            const duration_text = $(this).parent().siblings('#delivery');
+            const duration_text = $(this).parents().eq(1).siblings('#delivery');
             const text = $(duration_text).children('div').children('#delivery_duration');
 
             let min_delivery = $('[name="min_delivery"]').val().trim();
@@ -556,6 +556,7 @@ $(document).ready(function() {
                     max_delivery = values;
                 }
                 $(duration_text).removeClass('d-none');
+                $(duration_text).addClass('d-flex');
                 $(text).text(`${min_delivery} - ${max_delivery}`);
             } else {
                 $(this).val('');

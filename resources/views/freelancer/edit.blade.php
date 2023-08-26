@@ -121,9 +121,23 @@
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Delivery Duration (day) :</label>
                             <div class="d-flex align-items-center justify-content-start w-100 gap-3">
-                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_delivery" name="min_delivery" value="{{ old('min_delivery', $service->min_delivery) }}" placeholder="Min Day">
+                                <div class="d-flex align-items-start justify-content-center flex-column w-100">
+                                    <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_delivery" name="min_delivery" value="{{ old('min_delivery', $service->min_delivery) }}" placeholder="Minimum Day">
+                                    @error('min_delivery')
+                                        <span class="text-start w-100 text-danger" role="alert">
+                                            <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <i class="mdi mdi-swap-horizontal"></i>
-                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery', $service->max_delivery) }}" placeholder="Max Day">
+                                <div class="d-flex align-items-start justify-content-center flex-column w-100">
+                                    <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery', $service->max_delivery) }}" placeholder="Maximum Day">
+                                    @error('max_delivery')
+                                        <span class="text-start w-100 text-danger" role="alert">
+                                            <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <?php $check_delivery = !is_null($service->min_delivery && $service->min_delivery) ?>
                             <div class="{{ $check_delivery ? 'd-flex' : 'd-none' }} align-items-center justify-content-start ps-1 mt-1 w-100 gap-1" id="delivery">

@@ -203,12 +203,16 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => ['required'],
             'price' => ['required'],
+            'min_delivery' => ['required'],
+            'max_delivery' => ['required'],
             'images' => ['required', 'min:5', 'max:2048'],
             'images.*' => ['mimes:png,jpg,jpeg'],
         ], [
             'title.required' => 'Title is required!',
             'category.required' => 'Category is required!',
             'price.required' => 'Price is required!',
+            'min_delivery.required' => 'Minimum day is required!',
+            'max_delivery.required' => 'Maximum day is required!',
             'images.required' => 'Image is required!',
             'images.max' => 'Upload minimum 5 images!',
             'images.size' => 'Image file too big!',
@@ -238,8 +242,8 @@ class ServicesController extends Controller
         $service->category = $validateStore['category'];
         $service->price = $validateStore['price'];
         $service->price_after_fee = $request->input('price_after_fee');
-        $service->min_delivery = $request->input('min_delivery');
-        $service->max_delivery = $request->input('max_delivery');
+        $service->min_delivery = $validateStore['min_delivery'];
+        $service->max_delivery = $validateStore['max_delivery'];
         $saved = $service->save();
 
         if ($saved) {
@@ -288,10 +292,14 @@ class ServicesController extends Controller
             'title' => ['required', 'max:100'],
             'category' => 'required',
             'price' => 'required',
+            'min_delivery' => ['required'],
+            'max_delivery' => ['required'],
         ], [
             'title.required' => 'Title is required!',
             'category.required' => 'Category is required!',
             'price.required' => 'Price is required!',
+            'min_delivery.required' => 'Minimum day is required!',
+            'max_delivery.required' => 'Maximum day is required!',
         ]);
 
         function deleteImages($images) {
@@ -343,8 +351,8 @@ class ServicesController extends Controller
         $service->price = $validateUpdate['price'];
         $service->price_after_fee = $request->input('price_after_fee');
         $service->image = implode(',', $images);
-        $service->min_delivery = $request->input('min_delivery');
-        $service->max_delivery = $request->input('max_delivery');
+        $service->min_delivery = $validateUpdate['min_delivery'];
+        $service->max_delivery = $validateUpdate['max_delivery'];
         $confirmUpdate = $service->save();
 
         $countImages = count($images);
