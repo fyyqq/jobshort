@@ -90,20 +90,25 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-2 ps-0 d-flex align-items-start justify-content-start flex-column">
+                        <div class="mb-3 ps-0 d-flex align-items-start justify-content-start flex-column">
                             <label for="price" class="form-label w-100 mb-2 text-start" style="font-size: 13.5px;">Price :</label>
-                            <div class="input-group mb-3 position-relative">
-                                <span class="input-group-text" data-bs-target="tooltip" title="Only USD currency is accepted in the payment system*">$</span>
-                                <input type="number" step="any" class="form-control shadow-none" name="price" value="{{ old('price') }}" style="transform: translateY(0px);" placeholder="How much you charge ?">
-                                <i class="mdi mdi-close position-absolute clear_price" style="top: 50%; right: 45px; transform: translateY(-50%);"></i>
-                                <i class="mdi mdi-information-outline position-absolute info_price" style="top: 50%; right: 10px; transform: translateY(-50%);"></i>
-                                <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
-                                <div id="price_loader"></div>
+                            <div class="w-100">
+                                <div class="input-group position-relative">
+                                    <span class="input-group-text" data-bs-target="tooltip" title="Only USD currency is accepted in the payment system*">$</span>
+                                    <input type="number" step="any" class="form-control shadow-none" name="price" value="{{ old('price') }}" style="transform: translateY(0px);" placeholder="How much you charge ?">
+                                    <i class="mdi mdi-information-outline position-absolute info_price" style="top: 50%; right: 10px; transform: translateY(-50%);"></i>
+                                    <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
+                                    <div id="price_loader"></div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-start gap-1 ps-1 d-none" id="fees">
+                                    <i class="mdi mdi-check-bold text-success" style="transform: translateY(2px);"></i>
+                                    <div class="form-text text-success" style="font-size: 13px;">Include fees : <span id="price_fee"></span></div>
+                                </div>
                             </div>
                             @error('price')
-                            <span class="text-start w-100 text-danger" role="alert">
-                                <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
-                            </span>
+                                <span class="text-start w-100 text-danger" role="alert">
+                                    <small class="fw-bold" style="font-size: 12px;">{{ $message }}</small>
+                                </span>
                             @enderror
                         </div>
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">

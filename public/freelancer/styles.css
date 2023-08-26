@@ -222,10 +222,6 @@ input[type=number] {
     z-index: 998;
 }
 
-.row .clear_price {
-    cursor: pointer;
-}
-
 .row .form-control:focus {
     border-bottom: 2px solid #2891e1;
     background-color: transparent;

@@ -512,24 +512,27 @@ $(document).ready(function() {
         const values = $(this).val();
         const info = $('.info_price');
         const loader = $('#price_loader');
+        const text = $(this).parent().siblings('#fees');
+        const priceAfterFee = $(this).parent().siblings('#fees').children('div').children('#price_fee');
+        priceAfterFee.text('');
         if (values.trim()) {
+            let price = parseInt(values);
+            let totalPrice = price + (price * 0.10);
+            
             $(info).hide();
             $(loader).show();
             setTimeout(() => {
                 $(info).show();
                 $(loader).hide();
-                let price = parseInt(values);
-                let totalPrice = price + (price * 0.10);
-                $(this).val(totalPrice);
-            }, 1500);
+                priceAfterFee.text(`$ ${totalPrice}`);
+                $(text).removeClass('d-none');
+            }, 1000);
         } else {
             $(this).val('');
+            setTimeout(() => {
+                $(text).addClass('d-none');
+            }, 1000);
         }
-    });
-
-    $('.clear_price').on('click', function(e) {
-        e.preventDefault();
-        $(this).siblings("input[name='price']").val('');
     });
 
     // Filter Delivery
