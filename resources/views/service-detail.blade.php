@@ -83,26 +83,28 @@
                                 </div>
                                 <div class="modal-body">
                                     <small class="text-dark">Share this service via</small>
+                                    <?php $url = route('services', $service->slug) ?>
                                     <div class="d-flex align-items-center justify-content-start gap-3 mt-2 mb-4">
-                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Facebook" style="height: 42px; width: 42px;">
+                                        <input type="hidden" id="urls" value="{{ $url }}">
+                                        <button class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Facebook" style="height: 42px; width: 42px;">
                                             <i class="fs-5 mdi mdi-facebook"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Instagram" style="height: 42px; width: 42px;">
+                                        </button>
+                                        <button class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Instagram" style="height: 42px; width: 42px;">
                                             <i class="fs-5 mdi mdi-instagram"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-success d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Whatsapp" style="height: 42px; width: 42px;">
+                                        </button>
+                                        <button class="btn btn-outline-success d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Whatsapp" style="height: 42px; width: 42px;">
                                             <i class="fs-5 mdi mdi-whatsapp"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Twitter" style="height: 42px; width: 42px;">
+                                        </button>
+                                        <button class="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="Twitter" style="height: 42px; width: 42px;">
                                             <i class="fs-5 mdi mdi-twitter"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?phone=628123456789&text=Halo,%20saya%20tertarik%20dengan%20produk%20Anda" class="btn btn-outline-success d-flex align-items-center justify-content-center rounded-circle" data-bs-target="tooltip" title="WeChat" style="height: 42px; width: 42px;">
-                                            <i class="fs-5 mdi mdi-wechat"></i>
-                                        </a>
+                                        </button>
+                                        <button class="btn btn-secondary d-flex align-items-center justify-content-center rounded-circle" style="height: 42px; width: 42px;">
+                                            <i class="fs-5 mdi mdi-dots-vertical"></i>
+                                        </button>
                                     </div>
                                     <small class="text-dark">Copy link</small>
                                     <div class="input-group my-2 position-relative">
-                                        <input type="text" class="form-control shadow-none text-muted" value="{{ route('services', $service->slug) }}" readonly>
+                                        <input type="text" class="form-control shadow-none text-muted" value="{{ $url }}" readonly>
                                         <button class="input-group-text btn btn-primary shadow-none" onclick="copyLink(this)">
                                             <small>Copy</small>
                                             <div class="button-loader d-none"></div>

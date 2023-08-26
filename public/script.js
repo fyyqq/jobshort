@@ -822,22 +822,22 @@ $(document).on('click', '.order-menu-link', function(e) {
 });
 
 
-function notifyFee(event) {
-    const info = event.parentElement.nextElementSibling;
+function notifyFee(element) {
+    const info = element.parentElement.nextElementSibling;
     
-    if (!event.classList.contains('active')) {
-        event.classList.add('active');
+    if (!element.classList.contains('active')) {
+        element.classList.add('active');
         info.classList.remove('d-none');
     } else {
-        event.classList.remove('active');
+        element.classList.remove('active');
         info.classList.add('d-none');
     }
 }
 
-function copyLink(event) {
-    const link = event.previousElementSibling;
-    const text = event.querySelector('small');
-    const loader = event.querySelector('.button-loader');
+function copyLink(element) {
+    const link = element.previousElementSibling;
+    const text = element.querySelector('small');
+    const loader = element.querySelector('.button-loader');
     text.innerHTML = '';
     loader.classList.remove('d-none');
     setTimeout(() => {
