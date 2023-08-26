@@ -125,9 +125,10 @@
                                 <i class="mdi mdi-swap-horizontal"></i>
                                 <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery', $service->max_delivery) }}" placeholder="Max Day">
                             </div>
-                            <div class="d-flex d-none align-items-center justify-content-start ps-1 mt-1 w-100 gap-1" id="delivery">
+                            <?php $check_delivery = !is_null($service->min_delivery && $service->min_delivery) ?>
+                            <div class="{{ $check_delivery ? 'd-flex' : 'd-none' }} align-items-center justify-content-start ps-1 mt-1 w-100 gap-1" id="delivery">
                                 <i class="mdi mdi-check-bold text-success" style="transform: translateY(2px);"></i>
-                                <div class="form-text text-success" style="font-size: 13px;">Delivery : <span id="delivery_duration"></span> days</div>
+                                <div class="form-text text-success" style="font-size: 13px;">Delivery : <span id="delivery_duration">{{ $check_delivery ? old('min_delivery', $service->min_delivery) . ' - ' . old('max_delivery', $service->max_delivery) : '' }}</span> days</div>
                             </div>
                         </div>
                     </div>
