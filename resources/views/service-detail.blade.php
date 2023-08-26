@@ -287,7 +287,10 @@
                                     <small class="text-dark" style="font-size: 14.5px;">{{ '$' . $service->price }}</small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark" style="cursor: pointer;"></i></small>
+                                    <div class="position-relative w-100">
+                                        <small class="text-muted">Service Fee <i class="mdi mdi-information-outline text-dark" onclick="notifyFee(this)" style="cursor: pointer;"></i></small>
+                                        <small class="px-3 d-none py-2 border rounded text-dark position-absolute" style="background-color: #fff; font-size: 12.5px; transform: translateX(5px);">"We would like to inform you that the price of our products has been increased by <b>10%</b> due to increased costs. We hope you can still enjoy our products with the same quality. Thank you for your understanding.”</small>
+                                    </div>
                                     <small class="text-dark" style="font-size: 14.5px;">10%</small>
                                 </div>
                             </div>

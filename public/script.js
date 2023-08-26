@@ -820,3 +820,16 @@ $(document).on('click', '.order-menu-link', function(e) {
         }
     });
 });
+
+
+function notifyFee(event) {
+    const info = event.parentElement.nextElementSibling;
+    
+    if (!event.classList.contains('active')) {
+        event.classList.add('active');
+        info.classList.remove('d-none');
+    } else {
+        event.classList.remove('active');
+        info.classList.add('d-none');
+    }
+}
