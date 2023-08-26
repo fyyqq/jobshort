@@ -103,9 +103,13 @@
                                     <div class="px-3 py-2 info_price_text rounded-3 border shadow-sm">we will increase the service fee by <b>10%</b> for each product you post on our platform. This increase aims to improve the quality and safety of our services for you and the buyers.</div>
                                     <div id="price_loader"></div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-start gap-1 ps-1 d-none" id="fees">
+                                <?php 
+                                    $price_fee = old('price_after_fee', $service->price_after_fee)
+                                ?>
+                                <div class="{{ !is_null($service->price_after_fee) ? 'd-flex' : 'd-none' }} align-items-center justify-content-start gap-1 ps-1" id="fees">
                                     <i class="mdi mdi-check-bold text-success" style="transform: translateY(2px);"></i>
-                                    <div class="form-text text-success" style="font-size: 13px;">Include fees : <span id="price_fee"></span></div>
+                                    <div class="form-text text-success" style="font-size: 13px;">Include fees : <span id="price_fee">{{ !is_null($service->price_after_fee) ? $price_fee : '' }}</span></div>
+                                    <input type="hidden" name="price_after_fee" value="{{ $price_fee }}">
                                 </div>
                             </div>
                             @error('price')
@@ -117,9 +121,9 @@
                         <div class="mb-4 ps-0 d-flex align-items-center justify-content-start flex-column">
                             <label class="form-label w-100 mb-1 text-start" style="font-size: 13.5px;">Delivery Time (day) :</label>
                             <div class="d-flex align-items-center justify-content-start w-100 gap-3">
-                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_day" name="min_day" value="{{ old('min_day') }}" placeholder="Min Day">
+                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="min_delivery" name="min_delivery" value="{{ old('min_delivery', $service->min_delivery) }}" placeholder="Min Day">
                                 <i class="mdi mdi-swap-horizontal"></i>
-                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_day" name="max_day" value="{{ old('max_day') }}" placeholder="Max Day">
+                                <input type="number" id="delivery_input" class="form-control shadow-none w-10" id="max_delivery" name="max_delivery" value="{{ old('max_delivery', $service->max_delivery) }}" placeholder="Max Day">
                             </div>
                         </div>
                     </div>

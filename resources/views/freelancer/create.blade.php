@@ -103,6 +103,7 @@
                                 <div class="d-flex align-items-center justify-content-start gap-1 ps-1 d-none" id="fees">
                                     <i class="mdi mdi-check-bold text-success" style="transform: translateY(2px);"></i>
                                     <div class="form-text text-success" style="font-size: 13px;">Include fees : <span id="price_fee"></span></div>
+                                    <input type="hidden" name="price_after_fee">
                                 </div>
                             </div>
                             @error('price')

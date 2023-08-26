@@ -237,6 +237,7 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateStore['category'];
         $service->price = $validateStore['price'];
+        $service->price_after_fee = $request->input('price_after_fee');
         $service->min_delivery = $request->input('min_delivery');
         $service->max_delivery = $request->input('max_delivery');
         $saved = $service->save();
@@ -252,7 +253,6 @@ class ServicesController extends Controller
         } else {
             return redirect()->back()->with('error', 'Failed to upload');
         }
-
     }
 
     /**
@@ -341,7 +341,10 @@ class ServicesController extends Controller
         $service->description = $request->input('description');
         $service->category = $validateUpdate['category'];
         $service->price = $validateUpdate['price'];
+        $service->price_after_fee = $request->input('price_after_fee');
         $service->image = implode(',', $images);
+        $service->min_delivery = $request->input('min_delivery');
+        $service->max_delivery = $request->input('max_delivery');
         $confirmUpdate = $service->save();
 
         $countImages = count($images);

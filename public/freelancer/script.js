@@ -526,11 +526,14 @@ $(document).ready(function() {
                 $(loader).hide();
                 priceAfterFee.text(`$ ${totalPrice}`);
                 $(text).removeClass('d-none');
+                $(text).addClass('d-flex');
             }, 1000);
+            $(text).children('input').val(totalPrice);
         } else {
             $(this).val('');
             setTimeout(() => {
                 $(text).addClass('d-none');
+                $(text).children('input').val('');
             }, 1000);
         }
     });
