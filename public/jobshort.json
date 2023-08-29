@@ -651,49 +651,7 @@
                 },
                 "responses": {
                     "200": {
-                      "description": "Successful response",
-                      "content": {
-                            "application/json": {
-                                "example": {
-                                    "services": [
-                                        {
-                                            "id": 1,
-                                            "freelancer_id": 1,
-                                            "image": "64d913f7e4113.jpg,64d913f7e5b3a.png,64d913f7e7325.png,64d913f7e880a.png,64d913f7e9dd0.jpg",
-                                            "title": "Mobile Developer",
-                                            "slug": "164d913f7eaeef",
-                                            "description": null,
-                                            "category": "developer",
-                                            "price": "22",
-                                            "price_after_fee": "24.20",
-                                            "min_delivery": 25,
-                                            "max_delivery": 30,
-                                            "status": "active",
-                                            "created_at": "2023-08-13T17:33:43.000000Z",
-                                            "updated_at": "2023-08-26T05:42:27.000000Z",
-                                            "rating": [ ]
-                                        },
-                                        {
-                                            "id": 2,
-                                            "freelancer_id": 5,
-                                            "image": "64d9164f726f3.jpg,64d9164f73f09.png,64d9164f750f6.png,64d9164f78662.png,64d9164f794ef.jpg",
-                                            "title": "Illustator Professional",
-                                            "slug": "164d9164f7a7fd",
-                                            "description": null,
-                                            "category": "illustrator",
-                                            "price": "18",
-                                            "price_after_fee": "19.80",
-                                            "min_delivery": 10,
-                                            "max_delivery": 15,
-                                            "status": "active",
-                                            "created_at": "2023-08-13T17:43:43.000000Z",
-                                            "updated_at": "2023-08-26T05:42:11.000000Z",
-                                            "rating": [ ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
+                      "description": "Successfully get services by searching"
                     },
                     "400": {
                         "description": "Bad request"
@@ -708,38 +666,9 @@
             "get" : {
                 "summary": "Show Autocomplete Service Name",
                 "tags": ["services"],
-                "requestBody": {
-                    "description": "Search service by keyword",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "keyword": {
-                                    "type": "string"
-                                    }
-                                }
-                            },
-                            "example": {
-                                "keyword": "Web developer"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
-                      "description": "Successful response",
-                      "content": {
-                            "application/json": {
-                                "example": {
-                                    "suggestions": [
-                                        "Web Developer",
-                                        "Web Developer Services"
-                                    ]
-                                }
-                            }
-                        }
+                      "description": "Successfully displaying autocomplete searching"
                     },
                     "400": {
                         "description": "Bad request"
@@ -831,32 +760,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "service" : [
-                                        {
-                                            "id": 5,
-                                            "freelancer_id": 1,
-                                            "image": "64d917846f4d7.jpeg,64d917847053c.png,64d9178471487.png,64d917847220b.png,64d917847401a.jpg",
-                                            "title": "Professional Designer",
-                                            "slug": "164d9178474f4e",
-                                            "description": "The new Bing Chat is a powerful and innovative feature that lets you interact with Bing in a natural and conversational way. You can ask Bing Chat any question and get a complete answer, not just a list of links. You can also follow up with more questions to get more information or refine your search. Bing Chat can also help you with creative tasks, such as writing poems, stories, code, essays, songs, or even generating images. You can also play games with Bing Chat, such as trivia, hangman, or tic-tac-toe. Bing Chat is your AI-powered copilot for the web, helping you find or create what you need. 😊 To access Bing Chat, you can either go to Bing.com/chat or click on the Bing icon in the upper right of your Edge toolbar1. You need to sign in with your Microsoft account to use Bing Chat. You can also turn on Page context to allow Bing Chat to perform searches and answers in relation to the page you’re viewing1. For example, you can ask Bing Chat what wine to pair with a recipe or compare products on different websites. Bing Chat is powered by OpenAI’s GPT-4 AI model, which is one of the most advanced language models in the world. It can generate coherent and relevant texts based on your input and context. However, Bing Chat is not perfect and may sometimes make mistakes or give inaccurate answers. You can always give feedback to Bing Chat by clicking on the thumbs up or thumbs down icons at the bottom of each response. This will help Bing Chat improve over time and provide better service to you. I hope this gives you an overview of what Bing Chat can do for you. If you want to learn more, you can check out some tips and tricks or read some reviews of Bing Chat. You can also try out some examples of what Bing Chat can do by typing them in the chat box below. Here are some suggestions:",
-                                            "category": "designer",
-                                            "price": "8",
-                                            "price_after_fee": "8.80",
-                                            "min_delivery": 5,
-                                            "max_delivery": 8,
-                                            "status": "active",
-                                            "created_at": "2023-08-13T17:48:52.000000Z",
-                                            "updated_at": "2023-08-26T05:43:38.000000Z",
-                                            "rating": [ ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
+                        "description": "Successfully displaying service information"
                     },
                     "404": {
                         "description": "Page not found"
