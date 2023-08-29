@@ -1,0 +1,1542 @@
+{
+        "openapi" : "3.0.3",
+        "info" : {
+        "title" : "Jobshort RESTful API",
+        "version": "1",
+        "description": "OpenApi For Jobshort RESTful API",
+        "termsOfService": "https://jobshort.xyz",
+        "contact": {
+            "name": "Muhamad Afiq Hakimi",
+            "email": "afiqakimy123@gmail.com",
+            "url": "https://jobshort.xyz"
+        },
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "servers" : [
+        {
+            "description": "OpenApi For Jobshort RESTful API",
+            "url": "https://{environment}.jobshort.xyz/api/v1",
+            "variables": {
+                "environment" : {
+                    "description": "Servicer Environment",
+                    "default": "dev",
+                    "enum": [
+                        "dev",
+                        "qa",
+                        "prod"
+                    ]
+                }
+            }
+        }
+    ],
+    "externalDocs": {
+        "description": "Github",
+        "url": "https://github.com/fyyqq"
+    },
+    "paths" : {
+        "/" : {
+            "get" : {
+                "summary": "Homepage",
+                "description": "Back to home page",
+                "responses": {
+                    "201": {
+                        "description": "Successfully, get newest services"
+                    }, 
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/user/{name}" : {
+            "get" : {
+                "summary": "Go to the freelancer profile page",
+                "description": "Get the name of the freelancer and go to their profile page to see what services they publish",
+                "tags": ["user"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of freelancer",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/user/{name}/filter-category/{service}" : {
+            "get" : {
+                "summary": "Get freelancer name and filter by category",
+                "description": "Filter categories on each service that freelancers publish",
+                "tags": ["user"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of freelancer",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "service",
+                        "in": "path",
+                        "description": "Category of the service",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/user/{name}/sort-by/{type}" : {
+            "get" : {
+                "summary": "Get Freelancer name and filter sort by service",
+                "description": "Filter sort by on each service that freelancers publish",
+                "tags": ["user"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of freelancer",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Option to filter sort by service",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "400": {
+                      "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/categories/" : {
+            "get" : {
+                "summary": "Get All Categories",
+                "description": "Get All Categories Name",
+                "tags": ["categories"],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/categories/{slug}/" : {
+            "get" : {
+                "summary": "Get category by slug",
+                "description": "Get all services published in the same category",
+                "tags": ["categories"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Name of category",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/categories/{slug}/sort-by/{type}" : {
+            "get" : {
+                "summary": "Get category by slug & sort by",
+                "description": "Get all services published in the same category & Sort by services",
+                "tags": ["categories"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Name of category",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Filter Type of category",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "400": {
+                      "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/notifications/" : {
+            "get" : {
+                "summary": "Get All Notification",
+                "description": "Get notifications from admin or freelancers",
+                "tags": ["notifications"],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/notifications/inbox/" : {
+            "get" : {
+                "summary": "Get All Notification",
+                "description": "Get notifications from admin or freelancers in single page application feature",
+                "tags": ["notifications"],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/notifications/read/" : {
+            "get" : {
+                "summary": "Get All Read Notification",
+                "description": "Get read notifications from admin or freelancers in single page application feature",
+                "tags": ["notifications"],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/notifications/unread/" : {
+            "get" : {
+                "summary": "Get All Unread Notification",
+                "description": "Get unread notifications from admin or freelancers in single page application feature",
+                "tags": ["notifications"],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "404": {
+                      "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/notifications/read/{id}" : {
+            "post" : {
+                "summary": "Mark As Read",
+                "description": "Create an action for the notification selected as read",
+                "tags": ["notifications"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Column data in table",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Notification mark as read"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Notification not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notifications/unread/{id}" : {
+            "post" : {
+                "summary": "Mark As Unread",
+                "description": "Create an action for the notification selected as unread",
+                "tags": ["notifications"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Column data in table",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Notification mark as unread"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Notification not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notifications/delete/{id}" : {
+            "delete" : {
+                "summary": "Delete Notification",
+                "description": "Create an action for the notification selected for deleted",
+                "tags": ["notifications"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Column data in table",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Notification deleted successfully"
+                    },
+                    "404": {
+                        "description": "Notification not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/wishlist/{id}" : {
+            "post" : {
+                "summary": "Wishlist Service",
+                "description": "Create an action for the service selected as wishlist",
+                "tags": ["wishlist"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Service id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Service add to wishlist"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/unwishlist/{id}" : {
+            "delete" : {
+                "summary": "Unwishlist Service",
+                "description": "Create an action for the service selected as unwishlist",
+                "tags": ["unwishlist"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Service id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Service remove from wishlist"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/notify/{user}/{freelancer}" : {
+            "post" : {
+                "summary": "Notify Services By Freelancer",
+                "description": "Create an action to get notifications from freelancers if there are any new posting services",
+                "tags": ["notify"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "freelancer",
+                        "in": "path",
+                        "description": "Freelancer name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Freelancer notified"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Freelancer not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/disnotify/{user}/{freelancer}" : {
+            "delete" : {
+                "summary": "Disnotify Services By Freelancer",
+                "description": "Create an action to not get notifications from freelancers if there are any new posting services",
+                "tags": ["disnotify"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "freelancer",
+                        "in": "path",
+                        "description": "Freelancer name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Freelancer disnotified"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Freelancer not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/orders/session/{slug}" : {
+            "post": {
+                "summary": "Create a Stripe Checkout session for an order",
+                "tags": ["orders"],
+                "parameters": [
+                  {
+                    "name": "slug",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    },
+                    "description": "Slug of the service"
+                  }
+                ],
+                "requestBody": {
+                    "description": "Order data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "service_id": {
+                                    "type": "integer"
+                                },
+                                "price": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "example": {
+                            "service_id": 123,
+                            "price": 50.00
+                        }
+                        }
+                    }
+                },
+                "responses": {
+                    "302": {
+                        "description": "Redirect to Stripe Checkout"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/orders/success/{slug}" : {
+            "get" : {
+                "summary": "Order Information By User",
+                "description": "Get order information after make an payment as user or buyer",
+                "tags": ["orders"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/orders/cancel/{slug}" : {
+            "get" : {
+                "summary": "Redirect if user cancel payment",
+                "tags": ["orders"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/search/" : {
+            "get" : {
+                "summary": "Searching Services",
+                "tags": ["services"],
+                "requestBody": {
+                    "description": "Search service by keyword",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "keyword": {
+                                    "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "keyword": "Web developer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                      "description": "Successful response",
+                      "content": {
+                            "application/json": {
+                                "example": {
+                                    "services": [
+                                        {
+                                            "id": 1,
+                                            "freelancer_id": 1,
+                                            "image": "64d913f7e4113.jpg,64d913f7e5b3a.png,64d913f7e7325.png,64d913f7e880a.png,64d913f7e9dd0.jpg",
+                                            "title": "Mobile Developer",
+                                            "slug": "164d913f7eaeef",
+                                            "description": null,
+                                            "category": "developer",
+                                            "price": "22",
+                                            "price_after_fee": "24.20",
+                                            "min_delivery": 25,
+                                            "max_delivery": 30,
+                                            "status": "active",
+                                            "created_at": "2023-08-13T17:33:43.000000Z",
+                                            "updated_at": "2023-08-26T05:42:27.000000Z",
+                                            "rating": [ ]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "freelancer_id": 5,
+                                            "image": "64d9164f726f3.jpg,64d9164f73f09.png,64d9164f750f6.png,64d9164f78662.png,64d9164f794ef.jpg",
+                                            "title": "Illustator Professional",
+                                            "slug": "164d9164f7a7fd",
+                                            "description": null,
+                                            "category": "illustrator",
+                                            "price": "18",
+                                            "price_after_fee": "19.80",
+                                            "min_delivery": 10,
+                                            "max_delivery": 15,
+                                            "status": "active",
+                                            "created_at": "2023-08-13T17:43:43.000000Z",
+                                            "updated_at": "2023-08-26T05:42:11.000000Z",
+                                            "rating": [ ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/search/autocomplete" : {
+            "get" : {
+                "summary": "Show Autocomplete Service Name",
+                "tags": ["services"],
+                "requestBody": {
+                    "description": "Search service by keyword",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "keyword": {
+                                    "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "keyword": "Web developer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                      "description": "Successful response",
+                      "content": {
+                            "application/json": {
+                                "example": {
+                                    "suggestions": [
+                                        "Web Developer",
+                                        "Web Developer Services"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/services/search/{value}/sort-by/{type}" : {
+            "get" : {
+                "summary": "Sort By Searching Result",
+                "tags": ["services"],
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "Searching keyword",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Option to sort by services",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/services/search/reset/{value}" : {
+            "get" : {
+                "summary": "Reset Sort By",
+                "description": "Reset result sort by back to normal",
+                "tags": ["services"],
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "Searching keyword",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/services/{slug}" : {
+            "get" : {
+                "summary": "Show Service Information",
+                "description": "Displays service information from the selected service",
+                "tags": ["services"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "service" : [
+                                        {
+                                            "id": 5,
+                                            "freelancer_id": 1,
+                                            "image": "64d917846f4d7.jpeg,64d917847053c.png,64d9178471487.png,64d917847220b.png,64d917847401a.jpg",
+                                            "title": "Professional Designer",
+                                            "slug": "164d9178474f4e",
+                                            "description": "The new Bing Chat is a powerful and innovative feature that lets you interact with Bing in a natural and conversational way. You can ask Bing Chat any question and get a complete answer, not just a list of links. You can also follow up with more questions to get more information or refine your search. Bing Chat can also help you with creative tasks, such as writing poems, stories, code, essays, songs, or even generating images. You can also play games with Bing Chat, such as trivia, hangman, or tic-tac-toe. Bing Chat is your AI-powered copilot for the web, helping you find or create what you need. 😊 To access Bing Chat, you can either go to Bing.com/chat or click on the Bing icon in the upper right of your Edge toolbar1. You need to sign in with your Microsoft account to use Bing Chat. You can also turn on Page context to allow Bing Chat to perform searches and answers in relation to the page you’re viewing1. For example, you can ask Bing Chat what wine to pair with a recipe or compare products on different websites. Bing Chat is powered by OpenAI’s GPT-4 AI model, which is one of the most advanced language models in the world. It can generate coherent and relevant texts based on your input and context. However, Bing Chat is not perfect and may sometimes make mistakes or give inaccurate answers. You can always give feedback to Bing Chat by clicking on the thumbs up or thumbs down icons at the bottom of each response. This will help Bing Chat improve over time and provide better service to you. I hope this gives you an overview of what Bing Chat can do for you. If you want to learn more, you can check out some tips and tricks or read some reviews of Bing Chat. You can also try out some examples of what Bing Chat can do by typing them in the chat box below. Here are some suggestions:",
+                                            "category": "designer",
+                                            "price": "8",
+                                            "price_after_fee": "8.80",
+                                            "min_delivery": 5,
+                                            "max_delivery": 8,
+                                            "status": "active",
+                                            "created_at": "2023-08-13T17:48:52.000000Z",
+                                            "updated_at": "2023-08-26T05:43:38.000000Z",
+                                            "rating": [ ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/services/reviews/{slug}" : {
+            "get" : {
+                "summary": "Show Reviews from Service",
+                "description": "Displays All Review from the selected service",
+                "tags": ["services"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Display reviews from the service"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/account/profile/" : {
+            "get" : {
+                "summary": "Go to your profile page",
+                "description": "Display data from the user",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully go to profile page"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/account/profile/registration/" : {
+            "post" : {
+                "summary": "Registration profile",
+                "description": "Fill information for use feature & our services",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully registration"
+                    }
+                }
+            }
+        },
+        "/account/profile/update/" : {
+            "put" : {
+                "summary": "Update profile information",
+                "description": "Edit & update profile information",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update your profile"
+                    }
+                }
+            }
+        },
+        "/account/profile/wishlist/" : {
+            "get" : {
+                "summary": "Get all your wishlist services",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display wishlist"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/" : {
+            "get" : {
+                "summary": "Get pending order services",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display pending order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/pending" : {
+            "get" : {
+                "summary": "Get pending order services",
+                "description": "Get pending order services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display pending order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/approved" : {
+            "get" : {
+                "summary": "Get approved order services",
+                "description": "Get approved order services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display approved order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/rejected" : {
+            "get" : {
+                "summary": "Get rejected order services",
+                "description": "Get rejected order services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display rejected order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/reject/{id}" : {
+            "post" : {
+                "summary": "Reject your order",
+                "description": "Action for reject your single order",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully rejected order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/completed" : {
+            "get" : {
+                "summary": "Get completed order services",
+                "description": "Get completed order services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully display completed order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/complete/{id}" : {
+            "post" : {
+                "summary": "Complete your order",
+                "description": "Action for complete your single order",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully completed order"
+                    }
+                }
+            }
+        },
+        "/account/profile/orders/complete/rating" : {
+            "post" : {
+                "summary": "Give review & rating for your order",
+                "description": "Action for review & rating after your order status is completed",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully rating order"
+                    }
+                }
+            }
+        },
+        "/freelancer_registration/" : {
+            "get" : {
+                "summary": "Display form registration freelancer",
+                "tags": ["freelancer_registration"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying freelancer form registration"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store freelancer information",
+                "tags": ["freelancer_registration"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully storing freelancer information"
+                    }
+                }
+            }
+        },
+        "/account/freelancer" : {
+            "get" : {
+                "summary": "Switch to freelancer account",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying freelancer account"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services" : {
+            "get" : {
+                "summary": "Get active publish services",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying active services"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/all" : {
+            "get" : {
+                "summary": "Get active publish services",
+                "description": "Get active publish services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying active services"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/archive" : {
+            "get" : {
+                "summary": "Get archive publish services",
+                "description": "Get archive publish services on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying archive services"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/edit/{slug}" : {
+            "get" : {
+                "summary": "Get selected service to edit",
+                "description": "Get selected service & displaying detail information about service to edit",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Get service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying service information"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/update/{slug}" : {
+            "put" : {
+                "summary": "Update selected service",
+                "description": "Update service detail information",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Get service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update service information"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/active/{slug}" : {
+            "put" : {
+                "summary": "Active status on service",
+                "description": "Update single service status to active",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Get service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update service status to active"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/archive/{slug}" : {
+            "put" : {
+                "summary": "Archive status on service",
+                "description": "Update single service status to archive",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Get service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update service status to archive"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/active-items" : {
+            "post" : {
+                "summary": "Active selected status on service",
+                "description": "Update one or more selected service status to active",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update selected services status to active"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/archive-items" : {
+            "post" : {
+                "summary": "Archive selected status on service",
+                "description": "Update one or more selected service status to archive",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update selected services status to archive"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/delete/{slug}" : {
+            "delete" : {
+                "summary": "Deleted service",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Service slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully deleted service"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/delete-items" : {
+            "post" : {
+                "summary": "Deleted selected service",
+                "description": "Delete one or more selected service",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully deleted selected services"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-normal-price" : {
+            "get" : {
+                "summary": "Filtering service normal price",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to normal price"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-high-price" : {
+            "get" : {
+                "summary": "Filtering service high price",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to higher price"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-low-price" : {
+            "get" : {
+                "summary": "Filtering service low price",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to lower price"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-oldest" : {
+            "get" : {
+                "summary": "Filtering service by oldest",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to oldest"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-top-order" : {
+            "get" : {
+                "summary": "Filtering service by top order",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to top order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/sort-by-top-rating" : {
+            "get" : {
+                "summary": "Filtering service by top rating",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully sort services to top rating"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/services/search" : {
+            "get" : {
+                "summary": "Searching services",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully searching services"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/notifications" : {
+            "get" : {
+                "summary": "Get notifications freelancer",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying notifications freelancer"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/notifications/inbox" : {
+            "get" : {
+                "summary": "Get notifications freelancer",
+                "description": "Get notifications freelancer on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying notifications freelancer"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/notifications/orders" : {
+            "get" : {
+                "summary": "Get order notifications freelancer",
+                "description": "Get order notifications freelancer on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying notifications freelancer"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/notifications/ratings" : {
+            "get" : {
+                "summary": "Get rating notifications freelancer",
+                "description": "Get rating notifications freelancer on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying ratings notifications freelancer"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/profile" : {
+            "get" : {
+                "summary": "Display freelancer profile",
+                "description": "Display freelancer profile & displaying freelancer information",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying freelancer information"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/profile/{id}" : {
+            "put" : {
+                "summary": "Update freelancer profile",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Freelancer id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully update freelancer information"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/add-service" : {
+            "get" : {
+                "summary": "Display form add service",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying add service page"
+                    }
+                }
+            },
+            "post" : {
+                "summary": "Store service",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully store service"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders" : {
+            "get" : {
+                "summary": "Display pending order service",
+                "description": "Display order service by buyer for status pending",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying pending service order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders/pending" : {
+            "get" : {
+                "summary": "Display pending order service",
+                "description": "Display order service by buyer for status pending on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying pending service order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders/approved" : {
+            "get" : {
+                "summary": "Display approved order service",
+                "description": "Display order service by buyer for status approved on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying approved service order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders/approve/{id}" : {
+            "post" : {
+                "summary": "Approve order",
+                "description": "Action for approve order service form buyer",
+                "tags": ["account"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully action approved for service order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders/rejected" : {
+            "get" : {
+                "summary": "Display rejected order service",
+                "description": "Display order service by buyer for status rejected on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying rejected service order"
+                    }
+                }
+            }
+        },
+        "/account/freelancer/orders/completed" : {
+            "get" : {
+                "summary": "Display completed order service",
+                "description": "Display order service by buyer for status completed on single page application",
+                "tags": ["account"],
+                "responses": {
+                    "201": {
+                        "description": "Successfully displaying completed service order"
+                    }
+                }
+            }
+        }
+    }
+}

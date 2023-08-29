@@ -332,7 +332,7 @@ $(document).ready(function() {
         var formData = new FormData(this);
 
         $.ajax({
-            url: '/account/profile/orders/rating',
+            url: '/account/profile/orders/complete/rating',
             method: 'POST',
             data: formData,
             processData: false,
