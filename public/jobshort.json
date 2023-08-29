@@ -69,7 +69,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successful Display Freelancer Page"
                     },
                     "404": {
                       "description": "Page not found"
@@ -104,7 +104,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully filter service"
                     },
                     "404": {
                       "description": "Page not found"
@@ -139,7 +139,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successful sort service"
                     },
                     "400": {
                       "description": "Bad request"
@@ -154,7 +154,7 @@
                 "tags": ["categories"],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successful "
                     },
                     "404": {
                       "description": "Page not found"
@@ -180,7 +180,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully display all categories"
                     },
                     "404": {
                       "description": "Page not found"
@@ -215,7 +215,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully sort services category"
                     },
                     "400": {
                       "description": "Bad request"
@@ -230,7 +230,7 @@
                 "tags": ["notifications"],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully display all notifications"
                     },
                     "404": {
                       "description": "Page not found"
@@ -245,7 +245,7 @@
                 "tags": ["notifications"],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successful display all notifications"
                     },
                     "404": {
                       "description": "Page not found"
@@ -260,7 +260,7 @@
                 "tags": ["notifications"],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully display all read notifications"
                     },
                     "404": {
                       "description": "Page not found"
@@ -275,7 +275,7 @@
                 "tags": ["notifications"],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully display all unread notifications"
                     },
                     "404": {
                       "description": "Page not found"
@@ -708,7 +708,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully sort services"
                     },
                     "400": {
                         "description": "Bad request"
@@ -734,7 +734,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "Successfully reset filtering"
                     },
                     "400": {
                         "description": "Bad request"
