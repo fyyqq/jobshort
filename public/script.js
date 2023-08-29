@@ -389,7 +389,7 @@ $(document).ready(function() {
         var freelancer_id = $(this).siblings('#freelancer_id').val();
 
         $.ajax({
-            url: `/disnotify/${user_id}/${freelancer_id}`,
+            url: `/notify/${user_id}/${freelancer_id}`,
             method: 'DELETE',
             success: function(res) {
                 iziToast.success({

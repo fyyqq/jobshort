@@ -70,19 +70,21 @@ Route::prefix('notifications')->middleware('auth')->group(function() {
 });
 
 // Wishlist
-// Action Wishlist On Service
-Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->middleware('auth')->name('wishlist-service');
-// Action Unwishlist On Service
-Route::delete('/unwishlist/{id}', [WishlistController::class, 'unstore'])->middleware('auth')->name('unwishlist-service');
+Route::prefix('wishlist')->group(function() {
+    // Action Wishlist On Service
+    Route::post('/{id}', [WishlistController::class, 'store'])->middleware('auth')->name('wishlist-service');
+    // Action Unwishlist On Service
+    Route::delete('/{id}', [WishlistController::class, 'unstore'])->middleware('auth')->name('unwishlist-service');
+});
 
 // Notification Post
-// Action Notify On Freelancer
-Route::post('/notify/{user}/{freelancer}', [NotificationController::class, 'store'])->middleware('auth');
-// Action Disnotify On Freelancer
-Route::delete('/disnotify/{user}/{freelancer}', [NotificationController::class, 'unstore'])->middleware('auth');
+Route::prefix('notify')->group(function() {
+    // Action Notify On Freelancer
+    Route::post('/{user}/{freelancer}', [NotificationController::class, 'store'])->middleware('auth');
+    // Action Disnotify On Freelancer
+    Route::delete('/{user}/{freelancer}', [NotificationController::class, 'unstore'])->middleware('auth');
+});
 
-// Order Service
-Route::get('/orders/success/{slug}', [PaymentController::class, 'pages'])->middleware('auth')->name('order.success');
 
 // Services
 Route::prefix('services')->group(function() {
@@ -103,6 +105,8 @@ Route::prefix('services')->group(function() {
     Route::post('/session/{slug}', [PaymentController::class, 'session'])->middleware('auth')->name('session');
     // Success Payment 
     Route::get('/success/{slug}', [PaymentController::class, 'success'])->middleware('auth')->name('success');
+    // Order Service
+    Route::get('/orders/success/{slug}', [PaymentController::class, 'pages'])->middleware('auth')->name('order.success');
     // Cancel Payment Action 
     Route::get('/cancel/{slug}', [PaymentController::class, 'cancel'])->middleware('auth')->name('cancel');
     // Show Service Review

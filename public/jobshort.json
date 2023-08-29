@@ -406,13 +406,11 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/unwishlist/{id}" : {
+            },
             "delete" : {
                 "summary": "Unwishlist Service",
                 "description": "Create an action for the service selected as unwishlist",
-                "tags": ["unwishlist"],
+                "tags": ["wishlist"],
                 "parameters": [
                     {
                         "name": "id",
@@ -479,13 +477,11 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/disnotify/{user}/{freelancer}" : {
+            },
             "delete" : {
                 "summary": "Disnotify Services By Freelancer",
                 "description": "Create an action to not get notifications from freelancers if there are any new posting services",
-                "tags": ["disnotify"],
+                "tags": ["notify"],
                 "parameters": [
                     {
                         "name": "user",
@@ -522,10 +518,10 @@
                 }
             }
         },
-        "/orders/session/{slug}" : {
+        "/services/orders/session/{slug}" : {
             "post": {
                 "summary": "Create a Stripe Checkout session for an order",
-                "tags": ["orders"],
+                "tags": ["services"],
                 "parameters": [
                   {
                     "name": "slug",
@@ -573,11 +569,11 @@
                 }
             }
         },
-        "/orders/success/{slug}" : {
+        "/services/orders/success/{slug}" : {
             "get" : {
                 "summary": "Order Information By User",
                 "description": "Get order information after make an payment as user or buyer",
-                "tags": ["orders"],
+                "tags": ["services"],
                 "parameters": [
                     {
                         "name": "slug",
@@ -602,10 +598,10 @@
                 }
             }
         },
-        "/orders/cancel/{slug}" : {
+        "/services/orders/cancel/{slug}" : {
             "get" : {
                 "summary": "Redirect if user cancel payment",
-                "tags": ["orders"],
+                "tags": ["services"],
                 "parameters": [
                     {
                         "name": "slug",
