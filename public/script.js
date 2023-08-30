@@ -619,6 +619,7 @@ $(document).on('click', 'input[name="filter"]', function(e) {
             $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
+            console.log(res.data);
         }, 1500);
     }).catch(err => {
         console.error(err);

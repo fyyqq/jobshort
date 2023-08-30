@@ -11,8 +11,11 @@ class SearchController extends Controller
     public function index(Request $request) {
         $search = $request->input('keyword');
 
-        $result = Service::with('rating')->where('title', 'LIKE', '%' . $search . '%')
-        ->orWhere('category', 'LIKE', '%' . $search . '%')->where('status', 'active')->get();
+        $result = Service::with('rating')->where('status', 'active')
+        ->where(function($query) use ($search) {
+            $query->where('title', 'LIKE', '%' . $search . '%')
+            ->orWhere('category', 'LIKE', '%' . $search . '%');
+        })->get();
 
         return view('search', [
             "services" => $result
@@ -29,8 +32,11 @@ class SearchController extends Controller
     // Filter
 
     public function filterSearch(string $value, string $type) {
-        $services = Service::with('rating', 'order')->where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->where('status', 'active');
+        $services = Service::with('rating', 'order')
+        ->where(function($query) use ($value) {
+            $query->where('title', 'LIKE', '%' . $value . '%')
+            ->orWhere('category', 'LIKE', '%' . $value . '%');
+        })->where('status', 'active');
 
         switch ($type) {
             case 'latest_service':
@@ -62,10 +68,10 @@ class SearchController extends Controller
                 ->orWhere('category', 'LIKE', '%' . $value . '%')->get();
                 break;
             case 'highest_price':
-                $filter = $services->orderBy('price', 'desc')->get();
+                $filter = $services->orderBy('price_after_fee', 'desc')->get();
                 break;
             case 'lowest_price':
-                $filter = $services->orderBy('price', 'asc')->get();
+                $filter = $services->orderBy('price_after_fee', 'asc')->get();
                 break;
         }
 
@@ -77,8 +83,10 @@ class SearchController extends Controller
     }
     
     public function reset(string $value) {
-        $filter = Service::where('title', 'LIKE', '%' . $value . '%')
-        ->orWhere('category', 'LIKE', '%' . $value . '%')->where('status', 'active')->get();
+        $filter = Service::where(function($query) use ($value) {
+            $query->where('title', 'LIKE', '%' . $value . '%')
+            ->orWhere('category', 'LIKE', '%' . $value . '%');
+        })->where('status', 'active')->get();
 
         if (request()->ajax()) {
             return view('action', ["services" => $filter]);

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('slug');
             $table->text('description')->nullable();
             $table->string('category');
-            $table->string('price');
-            $table->string('price_after_fee');
+            $table->double('price');
+            $table->double('price_after_fee');
             $table->integer('min_delivery');
             $table->integer('max_delivery');
             $table->timestamps();

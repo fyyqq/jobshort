@@ -13,6 +13,8 @@ use App\Notifications\ServiceNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
+use function PHPSTORM_META\type;
+
 class ServicesController extends Controller
 {
     /**
@@ -121,7 +123,7 @@ class ServicesController extends Controller
 
     public function sortByHighPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'desc')->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price_after_fee', 'desc')->get();
         
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $services]);
@@ -132,7 +134,7 @@ class ServicesController extends Controller
 
     public function sortByLowPrice() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price', 'asc')->get();
+        $services = Service::with('order', 'rating')->where('freelancer_id', $freelancer->id)->orderBy('price_after_fee', 'asc')->get();
         
         if (request()->ajax()) {
             return view('freelancer.service.action', ["services" => $services]);
