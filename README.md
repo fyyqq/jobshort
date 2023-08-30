@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Welcome to the Jobshort Application!
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The Jobshort application is an innovative platform designed to connect creative professionals with clients who need their services. With a focus on diverse expertise, Jobshort helps connect developers, designers, writers, and various other experts with clients looking for the best solutions.
 
-## About Laravel
+## Why Choose Jobshort?
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Best Choice for Creativity**: With Jobshort, you can explore various creative talents from all over the world. Find the best service that suits your project needs.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Flexibility and Freedom**: Whether you are a freelancer looking for new opportunities or a client in need of quality service, Jobshort provides the flexibility and freedom to customize projects according to your preferences.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Better User Experience**: An easy-to-use interface, rating system, and responsive customer service make the experience on Jobshort pleasant and efficient.
 
-## Learning Laravel
+- **Peace and Trust**: The security of data and transactions is our priority. Jobshort ensures that every transaction is done safely and gives trust to all users.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technology In Used
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Jquery
+- PHP
+- Laravel
+- MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Main Feature
 
-## Laravel Sponsors
+- **Purchase Notifications and Incoming Orders**: Get real-time notifications when there are new purchases or incoming orders. Stay up-to-date with your project activities.
+- **Easy Order System**: A smooth and intuitive ordering process to ensure users get the desired service quickly and efficiently.
+- **Payment with Stripe**: Support for secure and easy payments using Stripe. Always have a comfortable and reliable payment option.
+- **Service Search**: Find the right service quickly using the advanced search feature. Filter based on category, price, and others.
+- **Rating System**: Give ratings and comments to professionals after working together. Help other users choose services that suit your experience.
+- **Wishlist Service**: Save services that appeal to you in the Wishlist list. Keep an eye out and consider ordering the service in the future.
+- **Efficient Service Management**: Manage your service easily through a dashboard. Add, update, or remove services with a few clicks.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Installation and Use
 
-### Premium Partners
+### Prerequisites
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Before you start, make sure you have:
 
-## Contributing
+- Laravel (version: 10)
+- Database Jobshort (MySQL)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Langkah Instalasi
 
-## Code of Conduct
+1. Copy this repository to your local directory:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+git clone https://github.com/[username]/[project_name].git
+cd [project_name]
+```
 
-## Security Vulnerabilities
+2. Install required dependencies:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+npm install
+```
+
+3. Environment configuration:
+
+Create an .env file in the root of the project directory and configure the environment:
+
+```
+DB_HOST=127.0.0.1
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Be sure to replace the DB_HOST, DB_USERNAME, and DB_PASSWORD values according to your database configuration.
+
+4. Run the server:
+
+``` 
+npm start
+```
+
+The server will run on http://127.0.0.1:8000/.
+
+## Contribution
+
+We really appreciate the contributions from the community! If you want to contribute, please follow these steps:
+
+- Fork this repository.
+- Create a new branch: git checkout -b feature-new.
+- Make the necessary changes.
+- Submit a pull request to the main branch.
+- Make sure you follow the Contribution Guidelines for more information on how to contribute.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
+
+## Contact
+
+- Email Address: **afiqakimy123@gmail.com**
+- Telegram: **@Afiqakimy**
+
+## Link
+
+- [API Documentation](https://www.jobshort.xyz)
+- [Application URL](https://www.jobshort.xyz)
