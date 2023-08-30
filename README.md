@@ -98,5 +98,5 @@ This project is licensed under the MIT License.
 
 ## Link
 
-- [API Documentation](https://www.jobshort.xyz)
+- [API Documentation](https://fyyqq.github.io/jobshort-api/jobshort.json)
 - [Application URL](https://www.jobshort.xyz)
