@@ -61,10 +61,13 @@
                                 <i class="mdi text-muted mdi-heart-outline" id="wishlist_icon"></i>
                             @endif
                         </a>
+                        <?php
+                            $countNotificationUnread = count(auth()->user()->notification->where('notifiable_type', 'App\Models\User')->where('read_at', null));
+                        ?>
                         <a href="{{ route('notification') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <div class="position-relative">
-                                @if (Auth::check())
-                                    <span class="badge rounded-circle position-absolute {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }} align-items-center justify-content-center m-0" style="top: -9px; right: -9px; font-size: 10px; background-color: #2891e1;">{{ count(auth()->user()->notification) === 'null' ? '' : count(auth()->user()->notification->where('read_at', null)) }}</span>
+                                @if (Auth::check() && $countNotificationUnread > 0)
+                                    <span class="badge d-flex align-items-center justify-content-center rounded-circle position-absolute m-0 p-0" style="top: -2.5px; right: -3px; background-color: #2891e1; height: 15px; width: 15px; font-size: 10px;">{{ $countNotificationUnread }}</span>
                                 @endif
                                 @if (Route::is('notification'))
                                     <i class="mdi text-muted mdi-bell" id="bell_icon"></i>

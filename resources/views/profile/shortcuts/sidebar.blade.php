@@ -46,13 +46,23 @@
                 </a>
             </li>
         @endif
+        <?php
+            $countPendingOrders = count(auth()->user()->order->where('status', 'pending'));
+        ?>
         <li class="nav-item w-100">
-            <a href="{{ route('profile.order') }}" class="{{ Route::is('profile.order*') ? 'text-dark' : 'text-muted' }} ps-md-4 ps-0 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="orders">
+            <a href="{{ route('profile.order') }}" class="{{ Route::is('profile.order*') ? 'text-dark' : 'text-muted' }} ps-md-4 ps-0 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center position-relative" id="sidebar-link" data-bs-toggle="tooltip" title="orders">
+                @if (Auth::check() && $countPendingOrders > 0)
+                    <span class="badge fw-normal d-md-none d-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute m-0 p-0" style="top: 3px; right: 3px; height: 14.5px; width: 14.5px; font-size: 9.5px;">{{ $countPendingOrders }}</span>
+                @endif
                 <div class="col-md-2 col-none">
                     <i class="fa-solid fa-briefcase" id="sidebar-icon"></i>
                 </div>
                 <div class="col-md-9 d-md-flex d-none">
-                    <small class="" style="font-size: 13.5px;">Orders</small>
+                    <small class="position-relative" style="font-size: 13.5px;">Orders 
+                        @if (Auth::check() && $countPendingOrders > 0)
+                            <span class="badge fw-normal d-md-flex d-none align-items-center justify-content-center bg-primary rounded-circle position-absolute m-0 p-0" style="top: -5px; right: -25px; height: 14.5px; width: 14.5px; font-size: 9.5px;">{{ $countPendingOrders }}</span>
+                        @endif
+                    </small>
                 </div>
             </a>
         </li>
