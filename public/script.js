@@ -613,13 +613,17 @@ $(document).on('click', 'input[name="filter"]', function(e) {
 
     const container = $('#display_service');
     closeFilter();
-
+    const filter_text = $('#filter_result');
+    var customText = path.replace(/_/g, ' ');
+    $(filter_text).children('small').text('');
+    
     axios.get(url).then(res => {
         setTimeout(() => {
             $(loader).hide();
             $(container).html('');
             $(container).html(res.data);
-            console.log(res.data);
+            $(filter_text).removeClass('d-none');
+            $(filter_text).children('small').text(customText);
         }, 1500);
     }).catch(err => {
         console.error(err);

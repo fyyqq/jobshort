@@ -76,11 +76,16 @@
                     </div>
                 </div>
             </aside>
+            <?php $color = '#2891e1;'; ?>
             <section class="rounded-3 col-md-8 col-12 px-0" style="height: max-content;">
-                <div class="mb-3 mt-2 px-2 d-flex align-items-center jusitfy-content-md-start justify-content-between">
+                <div class="mb-3 mt-2 ps-2 pe-3 d-flex align-items-center jusitfy-content-md-start justify-content-between">
                     <div class="d-flex align-items-center justify-content-start gap-3">
                         <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 14px;"></i>
                         <small class="mb-0 text-dark">{{ count($services) }} result "<span class="fw-bold"><?php echo $_GET['keyword'] ?></span>"</small>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end gap-1 d-none" id="filter_result">
+                        <i class="mdi mdi-filter" style="color: <?php echo $color ?>"></i>
+                        <small class="text-muted" style="font-size: 13px;"></small>
                     </div>
                 </div>
                 @if (count($services) > 0)
