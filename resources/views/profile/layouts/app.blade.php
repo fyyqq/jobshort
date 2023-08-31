@@ -8,12 +8,6 @@
         <div class="profile-content h-100 px-0">
             @yield('profile')
         </div>
-        <div class="w-100 d-md-none d-block pb-5">
-            <button class="btn btn-light px-3 w-100 py-2 border rounded-pill" style="background-color: #fff;" onclick="event.preventDefault(); return logout()">Logout</button>
-        </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
     </div>
 @endsection
 

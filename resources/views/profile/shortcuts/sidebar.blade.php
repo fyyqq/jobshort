@@ -1,18 +1,22 @@
 <div class="sidebar px-lg-2 px-md-0 px-3" style="height: max-content;">
-    <div class="row mx-0 py-xl-3 pt-3 pb-4 w-100 border-bottom">
-        <div class="col-md-2 col-1">
-            <div class="profile-picture border rounded-3" style="height: 45px; width: 45px; overflow: hidden;">
-                <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-            </div>
+    <div class="py-xl-3 px-md-3 px-2 pt-3 pb-4 w-100 border-bottom d-flex align-items-center justify-content-start gap-3 position-relative">
+        <div class="border rounded-3" style="height: 45px; width: 45px; overflow: hidden;">
+            <img src="{{ (auth()->user()->image != null) ? asset('images/' . auth()->user()->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU' }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
         </div>
-        <div class="col-md-10 col-11 ps-xl-2 ps-3 profile-info d-flex align-items-center justify-content-start">
-            <div class="ms-md-3 ms-sm-2 ms-4">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="">
                 <p class="mb-0 me-1 lh-sm" style="font-size: 13px;">{{ auth()->user()->name }}</p>
                 <small class="text-muted" style="font-size: 11.5px;">{{ auth()->user()->email }}</small>
             </div>
         </div>
+        <div class="d-md-none d-block position-absolute" style="right: 10px; cursor: pointer;">
+            <i class="mdi mdi-logout" data-bs-target="tooltip" title="Logout" onclick="event.preventDefault(); return logout()"></i>
+        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
     </div>
-    <ul class="mt-md-0 mt-2 navbar-nav justify-content-center align-items-center flex-md-column flex-row w-100 py-2" style="column-gap: 10px;">
+    <ul class="mt-md-0 my-md-0 my-2 navbar-nav justify-content-center align-items-center flex-md-column flex-row w-100 py-2" style="column-gap: 10px;">
         <li class="nav-item w-100">
             <a href="{{ route('profile.main') }}" class="{{ Route::is('profile.main') ? 'text-dark' : 'text-muted' }} ps-md-4 ps-0 py-md-3 py-md-2 py-3 text-decoration-none d-flex align-items-center justify-content-center" id="sidebar-link" data-bs-toggle="tooltip" title="profile">
                 <div class="col-md-2 col-none">
