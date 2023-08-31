@@ -7,8 +7,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('freelancer.main') }}" style="font-size: 13.8px;">Home</a>
                 </li>
+                <?php
+                    $countPendingOrder = count(auth()->user()->freelancer->order->where('status', 'pending'));
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('freelancer.order') }}" style="font-size: 13.8px;">Order</a>
+                    <a class="nav-link position-relative" href="{{ route('freelancer.order') }}" style="font-size: 13.8px;">Order
+                        @if (Auth::check() && $countPendingOrder > 0)
+                            <span class="badge fw-normal d-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute m-0 p-0" style="top: -1px; right: -2px; height: 14.5px; width: 14.5px; font-size: 9.5px;">{{ $countPendingOrder }}</span>
+                        @endif
+                    </a>
                 </li>
                 <li class="nav-item dropdown" style="cursor: pointer;">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"style="font-size: 13.8px;">Service</a>
@@ -26,11 +33,14 @@
                 <a href="{{ route('freelancer.create-service') }}" class="text-decoration-none">
                     <i class="fa-solid fa-plus text-muted" style="font-size: 15px;"></i>
                 </a>
+                <?php 
+                    $countNotificationUnread = count(auth()->user()->freelancer->notification->where('notifiable_type', 'App\Models\Freelancer')->where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', null));
+                ?>
                 <a href="{{ route('freelancer.notification') }}" class="text-decoration-none position-relative">
                     <i class="fa-regular fa-bell text-muted" style="font-size: 15px;"></i>
-                    {{-- @if (Auth::check() && count(auth()->user()->freelancer->notification) != 0) --}}
-                        {{-- <span class="badge fw-normal align-items-center justify-content-center rounded-circle position-absolute m-0 p-0 {{ count(auth()->user()->notification->where('read_at', null)) > 0 ? 'd-flex' : 'd-none' }}" style="top: -7px; right: -5px; background-color: #2891e1; height: 14.5px; width: 14.5px; font-size: 10px;">{{ count(auth()->user()->notification->where('read_at', null)) }}</span> --}}
-                    {{-- @endif --}}
+                    @if (Auth::check() && $countNotificationUnread > 0)
+                        <span class="badge fw-normal d-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute m-0 p-0" style="top: -5px; right: -6px; height: 14.5px; width: 14.5px; font-size: 9.5px;">{{ $countNotificationUnread }}</span>
+                    @endif
                 </a>
                 <li class="nav-item dropdown d-flex align-items-center">
                     <div class="rounded-circle border" style="height: 35px; width: 35px; overflow: hidden; cursor: pointer;" data-bs-toggle="dropdown">
