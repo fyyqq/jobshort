@@ -20,7 +20,7 @@
                             <div class="d-flex align-items-center justify-content-between lh-sm">
                                 <h1 class="h5 mb-0 text-dark">{{ $service->title }}</h1>
                                 <div class="d-flex align-items-center justify-content-end gap-1">
-                                    <small class="text-dark">{{ $service->rating->max('stars') }}</small>
+                                    <small class="text-dark">{{ $service->rating->max('stars') . '.0' }}</small>
                                     <i class="fa-solid fa-star text-warning" style="font-size: 13px;"></i>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="col-sm-4 col-2">
                                     <div class="d-flex align-items-center justify-content-start gap-3">
                                         <div class="">
-                                            <div class="rounded-circle rounded-md" style="height: 42px; width: 42px; overflow: hidden;">
+                                            <div class="rounded-circle rounded-md border" style="height: 38px; width: 38px; overflow: hidden;">
                                                 <img src="{{ asset('images/' . $review->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                             </div>
                                         </div>
@@ -115,9 +115,6 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
-                    <div class="text-center border-top card-header">
-                        <small class="mb-0">End of Section</small>
                     </div>
                 </div>
             </div>
