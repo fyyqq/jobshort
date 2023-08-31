@@ -40,12 +40,13 @@ class FreelancerController extends Controller
     public function notification() 
     {
         return view('freelancer.notifications.index', [
-            "notifications" => Notification::where('notifiable_id', auth()->user()->freelancer->id)->latest()->get()
+            "notifications" => Notification::where('notifiable_type', 'App\Models\Freelancer')
+            ->where('notifiable_id', auth()->user()->freelancer->id)->latest()->get()
         ]);
     }
     
     public function inboxNotification() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)->latest()->get();
+        $notifications = Notification::where('notifiable_type', 'App\Models\Freelancer')->where('notifiable_id', auth()->user()->freelancer->id)->latest()->get();
         
         if (request()->ajax()) {
             return view('freelancer.notifications.action', [
@@ -59,7 +60,7 @@ class FreelancerController extends Controller
     }
     
     public function orderNotification() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)
+        $notifications = Notification::where('notifiable_type', 'App\Models\Freelancer')->where('notifiable_id', auth()->user()->freelancer->id)
         ->where('type', 'App\Notifications\OrderNotification')->latest()->get();
         
         if (request()->ajax()) {
@@ -74,7 +75,7 @@ class FreelancerController extends Controller
     }
     
     public function reviewNotification() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->freelancer->id)
+        $notifications = Notification::where('notifiable_type', 'App\Models\Freelancer')->where('notifiable_id', auth()->user()->freelancer->id)
         ->where('type', 'App\Notifications\ReviewNotification')->latest()->get();
 
         if (request()->ajax()) {

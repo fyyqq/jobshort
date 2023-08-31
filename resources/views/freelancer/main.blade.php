@@ -174,7 +174,7 @@
                                             <div class="d-flex align-items-center justify-content-start gap-3">
                                                 <div class="">
                                                     <div class="rounded-circle border" style="height: 43px; width: 43px; overflow: hidden;">
-                                                        <img src="{{ $pending->user->image != 'null' ? asset('images/' . $pending->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100">
+                                                        <img src="{{ $pending->user->image != 'null' ? asset('images/' . $pending->user->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;">
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-start justify-content-center flex-column">

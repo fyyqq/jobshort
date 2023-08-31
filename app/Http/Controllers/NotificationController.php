@@ -8,7 +8,7 @@ use App\Models\Notify;
 class NotificationController extends Controller
 {
     public function index() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->id)->latest()->get();
+        $notifications = Notification::where('notifiable_type', 'App\Models\User')->where('notifiable_id', auth()->user()->id)->latest()->get();
 
         return view('notifications.index', [
             "notifications" => $notifications
@@ -16,7 +16,7 @@ class NotificationController extends Controller
     }
     
     public function inbox() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->id)->latest()->get();
+        $notifications = Notification::where('notifiable_type', 'App\Models\User')->where('notifiable_id', auth()->user()->id)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);
@@ -26,7 +26,7 @@ class NotificationController extends Controller
     }
     
     public function read() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->id)->where('read_at', '!=', null)->latest()->get();
+        $notifications = Notification::where('notifiable_type', 'App\Models\User')->where('notifiable_id', auth()->user()->id)->where('read_at', '!=', null)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);
@@ -36,7 +36,7 @@ class NotificationController extends Controller
     }
 
     public function unread() {
-        $notifications = Notification::where('notifiable_id', auth()->user()->id)->where('read_at', null)->latest()->get();
+        $notifications = Notification::where('notifiable_type', 'App\Models\User')->where('notifiable_id', auth()->user()->id)->where('read_at', null)->latest()->get();
 
         if (request()->ajax()) {
             return view('notifications.action', ["notifications" => $notifications]);

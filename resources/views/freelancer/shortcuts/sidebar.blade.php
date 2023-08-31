@@ -52,7 +52,7 @@
                         <span class="material-symbols-outlined" style="font-size: 21px;">clinical_notes</span>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <p class="mb-0" style="font-size: 14.5px;">Orders</p>
+                        <p class="mb-0" style="font-size: 14.5px;">Orders <span class="bg-primary rounded-circle badge text-light" style="font-size: 8px; transform: translate(3px, -5px);">{{ count(auth()->user()->freelancer->order->where('status', 'pending')) }}</span></p>
                     </div>
                 </a>
             </li>
@@ -62,7 +62,7 @@
                         <span class="material-symbols-outlined" style="font-size: 21px;">notifications</span>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <p class="mb-0" style="font-size: 14.5px;">Notification</p>
+                        <p class="mb-0" style="font-size: 14.5px;">Notification<span class="bg-primary rounded-circle badge text-light" style="font-size: 8px; transform: translate(5px, -5px);">{{ count(auth()->user()->freelancer->notification->where('notifiable_type', 'App\Models\Freelancer')->where('notifiable_id', auth()->user()->freelancer->id)->where('read_at', null)) }}</span></p>
                     </div>
                 </a>
             </li>
