@@ -116,7 +116,7 @@
                                 <div class="rounded-3 border" id="select">
                                     <select name="" class="ps-3 w-100 text-dark h-100" style="font-size: 13px;" onchange="return filterCategories(this)">
                                         <option value="all">Categories</option>
-                                            @foreach ($freelancer->service->pluck('category')->unique() as $value)
+                                            @foreach ($freelancer->service->where('status', 'active')->pluck('category')->unique() as $value)
                                                 <?php
                                                     $category_name = $value;
                                                     $pathCategories = file_get_contents(public_path('json/category.json'));

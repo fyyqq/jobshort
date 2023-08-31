@@ -42,10 +42,10 @@
                             <img src="{{ asset('category' .  $category['image']) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                         </div>
                     </div>
-                    <div class="pt-md-2 pb-md-2 pt-1 pb-5">
+                    <div class="pt-md-2 pt-1">
                         <h1 class="h5 mb-2 text-dark"><i class="{{ $category['icon'] }} me-2"></i>{{ $category['name'] }}</h1>
-                        <small class="d-block lh-sm text-muted" style="font-size: 13px;">{{ $category['about'] }}</small>
-                        <div class="position-absolute bottom-0 d-flex align-items-center justify-content-between pb-3">
+                        <small class="d-block lh-sm text-muted mb-ms-0 mb-5" style="font-size: 13px;">{{ $category['about'] }}</small>
+                        <div class="position-absolute bottom-0 d-flex align-items-center justify-content-center pb-3">
                             <div class="d-flex align-items-center justify-content-start gap-1">
                                 <i class="mdi mdi-text-box-check-outline" style="font-size: 17px;"></i>
                                 <small class="text-muted" style="font-size: 14px;">{{ empty($count->order) ? '0' : $count->order->where('status', 'completed')->count() }}</small>
