@@ -107,7 +107,7 @@ input[type=number] {
     top: 0px;
     left: 0px;
     user-select: none;
-    }
+}
 
 .sidebar .sidebar-logo {
     column-gap: 8px;
@@ -170,6 +170,10 @@ input[type=number] {
     width: calc(100% - 235px);
     transition: width .3s ease;
     height: max-content;
+}
+
+.container-freelancer .content.active {
+    width: calc(100% - 85px);
 }
 
 /* Profile */
@@ -325,6 +329,9 @@ input[type=number] {
         justify-content: flex-end;
     }
     .container-freelancer .content {
+        width: 100%;
+    }
+    .container-freelancer .content.active {
         width: 100%;
     }
     #service-order-title {

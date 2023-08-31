@@ -15,7 +15,7 @@ const loader = document.querySelector('.custom-loader');
 // Sidebar Opan & Close
 open_close_btn.addEventListener('click', e => {
     e.preventDefault();
-    const sidebarCloseSize = 85; 
+    const sidebarCloseSize = 85;
     const sidebarOpenSize = 235; 
 
     contentFreelancer.classList.add('active');
@@ -41,7 +41,7 @@ open_close_btn.addEventListener('click', e => {
         linkListIcon.forEach(e => {
             e.style.transform = 'translateX(13px)';
         });
-        contentFreelancer.style.width = `calc(100% - ${sidebarCloseSize}px)`;
+        contentFreelancer.classList.add('active');
     } else {
         open_close_btn.style.right = '-23px';
         open_close_btn.style.transform = 'translateY(-50%) rotate(180deg)';
@@ -60,7 +60,7 @@ open_close_btn.addEventListener('click', e => {
         linkListText.forEach(e => {
             e.classList.remove('d-none');
         });
-        contentFreelancer.style.width = `calc(100% - ${sidebarOpenSize}px)`;
+        contentFreelancer.classList.remove('active');
     }
 });
 
