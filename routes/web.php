@@ -136,12 +136,10 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             Route::get('/completed', [ProfileController::class, 'completed'])->name('profile.order-completed');
             // Action As Reject Order
             Route::post('/reject/{id}', [OrdersController::class, 'reject']);
-            Route::prefix('complete')->group(function() {
-                // Action As Complete Order
-                Route::post('/{id}', [OrdersController::class, 'complete']);
-                // Rating For Completed Order
-                Route::post('/rating', [RatingController::class, 'store'])->name('profile.rating');
-            });
+            // Action As Complete Order
+            Route::post('/complete/{id}', [OrdersController::class, 'complete']);
+            // Rating For Completed Order
+            Route::post('/completed/rating', [RatingController::class, 'store'])->name('profile.rating');
         });
     });
     Route::prefix('freelancer')->middleware(['freelancer'])->group(function() {

@@ -95,12 +95,12 @@ function closeSearchbar() {
     searchbar_mobile.style.display = 'none';
 }
 
+const autocompleteContainer = $('.autocomplete-container ');
 // Show Searchbar Autocomplete
 $(document).on('keyup', '.searchbar', function(e) {
     var keyword = $(this).val();
 
-    const container = $('.autocomplete-container ');
-    $(container).css('display', 'block');
+    $(autocompleteContainer).css('display', 'block');
 
     if (keyword.trim() != '') {
         $.ajax({
@@ -109,17 +109,17 @@ $(document).on('keyup', '.searchbar', function(e) {
             data: { keyword: keyword },
             success: function(res) {
                 
-                $(container).empty();
+                $(autocompleteContainer).empty();
 
                 if (res.length > 0) {
                     $(res).each(function(index, value) {
                         const element = `<li class="ps-3 dropdown-item py-2 autocomplete_link">${value.title}</li>`;
-                        $(container).append(element);
+                        $(autocompleteContainer).append(element);
                     });
-                    $(container).addClass('border');
+                    $(autocompleteContainer).addClass('border');
                 } else {
-                    $(container).empty();
-                    $(container).removeClass('border');
+                    $(autocompleteContainer).empty();
+                    $(autocompleteContainer).removeClass('border');
                 }
 
             }, error: function(err) {
@@ -127,8 +127,12 @@ $(document).on('keyup', '.searchbar', function(e) {
             }
         });
     } else {
-        $(container).css('display', 'none');
+        $(autocompleteContainer).css('display', 'none');
     }
+});
+
+$(document).on('blur', '.searchbar', function(e) {
+    $(autocompleteContainer).css('display', 'none');
 });
 
 // Click Autocomplete 
@@ -228,36 +232,29 @@ fetch('https://restcountries.com/v3.1/all')
     allCountries(data);
 });
 
-
-const fileImage = document.getElementById('profile-img');
-const inputText = document.getElementById('file_text');
-const img = document.getElementById('seller_img');
-
-// insert Image
-if (fileImage) {
-    fileImage.addEventListener('change', () => {
-        if (fileImage.files.length > 0) {
-            const fileName =  fileImage.files[0];
-            inputText.value =  fileImage.files[0].name;
-            const imageUrl = URL.createObjectURL(fileName);
-            img.removeAttribute('src');
-            img.src = imageUrl;
-        } else {
-            inputText.value = 'Choose a file...';
-        }
-    });
+// Insert Profile Image
+function insertProfileImage(element) {
+    if (element.files.length > 0) {
+        const fileName = element.files[0];
+        const imageUrl = URL.createObjectURL(fileName);
+        const imgElement = $(element).parent().prev().children('img');
+        $(imgElement).attr('src', imageUrl);
+        $(element).siblings('#file_text').val(fileName.name);
+    } else {
+        $(element).siblings('#file_text').val('Choose a file...');
+    }
 }
 
-// Delete Image
-if (inputText && inputText.nextElementSibling) {
-    const deleteImgIcon = inputText.nextElementSibling;
-    deleteImgIcon.addEventListener('click', e => {
-        e.preventDefault();
-    
-        img.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU";
-        inputText.value = 'Choose a file...';
-        fileImage.value = '';
-    });
+// Delete Profile Image
+function removeProfileImage(e) {
+    e.preventDefault();
+    const element = e.currentTarget;
+
+    const imgElement = $(element).parent().prev().children('img');
+    $(imgElement).attr("src","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&usqp=CAU");
+    $(element).siblings('#profile-img').val('');
+
+    $(element).siblings('#file_text').val('Choose a file...');
 }
 
 $(document).ready(function() {
@@ -332,7 +329,7 @@ $(document).ready(function() {
         var formData = new FormData(this);
 
         $.ajax({
-            url: '/account/profile/orders/complete/rating',
+            url: '/account/profile/orders/completed/rating',
             method: 'POST',
             data: formData,
             processData: false,

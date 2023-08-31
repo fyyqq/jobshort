@@ -135,7 +135,6 @@ class ProfileController extends Controller
             'identification_number' => ['required'],
             'image' => ['image', 'mimes:png,jpg,jpeg', 'max:5048'],
         ]);
-
         
         if ($request->hasFile('image')) {
             $imagePath = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
@@ -148,7 +147,7 @@ class ProfileController extends Controller
                 } catch (\Exception $e) {}
             }
         } else {
-            $imagePath = auth()->user()->image;
+                $imagePath = auth()->user()->image;
         }
 
         $user = User::where('id', auth()->user()->id)->first();
