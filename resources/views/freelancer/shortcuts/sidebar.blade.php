@@ -17,7 +17,7 @@
     <div class="link-list">
         <ul class="navbar-nav">
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.main') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() === 'freelancer.main' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.main') }}" class="text-decoration-none d-flex row mx-0 {{ Route::is( 'freelancer.main' )? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">space_dashboard</span>
                     </div>
@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.create-service') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.create-service' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.create-service') }}" class="text-decoration-none d-flex row mx-0 {{ Route::is('freelancer.create-service*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">add</span>
                     </div>
@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.order') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.order' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.order') }}" class="text-decoration-none d-flex row mx-0 {{ Route::is('freelancer.order*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">clinical_notes</span>
                     </div>
@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.notification') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.notification' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.notification') }}" class="text-decoration-none d-flex row mx-0 {{ Route::is('freelancer.notification*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">notifications</span>
                     </div>
@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li class="dropdown-item">
-                <a href="{{ route('freelancer.profile') }}" class="text-decoration-none d-flex row mx-0 {{ Route::currentRouteName() == 'freelancer.profile' ? 'active' : '' }}">
+                <a href="{{ route('freelancer.profile') }}" class="text-decoration-none d-flex row mx-0 {{ Route::is('freelancer.profile*') ? 'active' : '' }}">
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <span class="material-symbols-outlined" style="font-size: 21px;">account_circle</span>
                     </div>

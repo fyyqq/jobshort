@@ -210,20 +210,22 @@ $(document).ready(function() {
                     $(parent).html('');
                     $(parent).html(res);
 
+                    const centerClass = 'd-flex align-items-center justify-content-center';
+
                     if (res === '') {
-                        $(parent).css('height', '400px');
+                        $(parent).css('height', '400px').addClass(centerClass);
                         const div = document.createElement('div');
-                        div.className = 'd-flex align-items-center justify-content-center flex-column gap-3';
+                        $(div).addClass('d-flex align-items-center justify-content-center flex-column-reverse gap-3');
                         const p = document.createElement('p');
                         p.className = 'mb-0 text-muted';
                         p.innerHTML = `Empty ${type} Notifications`;
                         const icon = document.createElement('i');
                         icon.className = 'fa-regular fa-folder-open';
                         icon.style.fontSize = '35px';
-                        $(div).append(p, icon);
+                        div.append(p, icon);
                         $(parent).html(div);
                     } else {
-                        $(parent).css('height', 'max-content');
+                        $(parent).css('height', 'max-content').removeClass(centerClass);
                     }
                 }, 1000);
             }, error: function(err) {
