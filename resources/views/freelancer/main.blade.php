@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" crossorigin="anonymous">
 
-    <div class="container-employer pt-4 px-4">
+    <div class="container-freelancer pt-4 px-4">
         <div class="content">
             <div class="border rounded py-4 px-4" style="background-color: #fff;">
                 <h1 class="h4 text-dark mb-0" style="font-size: 17px;">Dashboard</h1>

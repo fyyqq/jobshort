@@ -161,12 +161,12 @@ input[type=number] {
 }
 
 /* Content */
-.container-employer {
+.container-freelancer {
     display: flex;
     justify-content: flex-end;
 }
 
-.container-employer .content {
+.container-freelancer .content {
     width: calc(100% - 235px);
     transition: width .3s ease;
     height: max-content;
@@ -320,11 +320,11 @@ input[type=number] {
 }
 
 @media (max-width: 767px) {
-    .container-employer {
+    .container-freelancer {
         display: flex;
         justify-content: flex-end;
     }
-    .container-employer .content {
+    .container-freelancer .content {
         width: 100%;
     }
     #service-order-title {

@@ -61,9 +61,11 @@
                                 <i class="mdi text-muted mdi-heart-outline" id="wishlist_icon"></i>
                             @endif
                         </a>
-                        <?php
-                            $countNotificationUnread = count(auth()->user()->notification->where('notifiable_type', 'App\Models\User')->where('read_at', null));
-                        ?>
+                        @auth
+                            <?php
+                                $countNotificationUnread = count(auth()->user()->notification->where('notifiable_type', 'App\Models\User')->where('read_at', null));
+                            ?>
+                        @endauth
                         <a href="{{ route('notification') }}" class="text-decoration-none col-2 h-100 d-flex align-items-center justify-content-center">
                             <div class="position-relative">
                                 @if (Auth::check() && $countNotificationUnread > 0)

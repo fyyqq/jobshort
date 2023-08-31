@@ -1,7 +1,7 @@
 @extends('freelancer.layouts.app')
 
 @section('content')
-    <div class="container-employer pt-4 px-lg-4 px-2">
+    <div class="container-freelancer pt-4 px-lg-4 px-2">
         <div class="content">
             <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">

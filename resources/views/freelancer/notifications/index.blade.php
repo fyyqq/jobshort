@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
-    <div class="container-employer pt-4 px-lg-4 px-2">
+    <div class="container-freelancer pt-4 px-lg-4 px-2">
         <div class="content">
             <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">

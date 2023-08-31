@@ -4,7 +4,7 @@
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     
-    <div class="container-employer pt-4 px-lg-4 px-2">
+    <div class="container-freelancer pt-4 px-lg-4 px-2">
         <div class="content">
             <div class="border rounded py-md-4 py-3 px-md-4 px-3 d-flex align-items-center justify-content-start gap-3" style="background-color: #fff;">
                 <div class="py-1 px-2" style="cursor: pointer;" onclick="return goToPreviousPage()">

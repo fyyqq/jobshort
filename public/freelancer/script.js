@@ -8,7 +8,7 @@ const linkListParent = document.querySelectorAll('.link-list .navbar-nav .dropdo
 const lastChild = document.querySelectorAll('.link-list .navbar-nav .dropdown-item a')[6];
 const linkListText = document.querySelectorAll('.link-list .navbar-nav .dropdown-item a .col-8');
 const linkListIcon = document.querySelectorAll('.link-list .navbar-nav .dropdown-item a.active span');
-const contentEmployer = document.querySelector('.container-employer .content');
+const contentFreelancer = document.querySelector('.container-freelancer .content');
 
 const loader = document.querySelector('.custom-loader');
 
@@ -18,6 +18,7 @@ open_close_btn.addEventListener('click', e => {
     const sidebarCloseSize = 85; 
     const sidebarOpenSize = 235; 
 
+    contentFreelancer.classList.add('active');
     
     if (sidebar.style.width != `${sidebarCloseSize}px`) {
         open_close_btn.style.right = '-13px';
@@ -40,7 +41,7 @@ open_close_btn.addEventListener('click', e => {
         linkListIcon.forEach(e => {
             e.style.transform = 'translateX(13px)';
         });
-        contentEmployer.style.width = `calc(100% - ${sidebarCloseSize}px)`;
+        contentFreelancer.style.width = `calc(100% - ${sidebarCloseSize}px)`;
     } else {
         open_close_btn.style.right = '-23px';
         open_close_btn.style.transform = 'translateY(-50%) rotate(180deg)';
@@ -59,7 +60,7 @@ open_close_btn.addEventListener('click', e => {
         linkListText.forEach(e => {
             e.classList.remove('d-none');
         });
-        contentEmployer.style.width = `calc(100% - ${sidebarOpenSize}px)`;
+        contentFreelancer.style.width = `calc(100% - ${sidebarOpenSize}px)`;
     }
 });
 
