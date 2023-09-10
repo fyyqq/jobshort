@@ -24,7 +24,7 @@
             <main class="">
                 <div class="auth-container">
                     <div class="img-side">
-                        <span class="text-muted" onclick="return goToPreviousPage()">
+                        <span class="text-muted d-md-block d-none" onclick="return goToPreviousPage()">
                             <i class="fa-solid fa-arrow-left"></i>
                         </span>
                         <img src="{{ asset('brand/wave-blue.png') }}">

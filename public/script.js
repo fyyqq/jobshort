@@ -131,10 +131,6 @@ $(document).on('keyup', '.searchbar', function(e) {
     }
 });
 
-$(document).on('blur', '.searchbar', function(e) {
-    $(autocompleteContainer).css('display', 'none');
-});
-
 // Click Autocomplete 
 $(document).on('click', '.autocomplete_link', function(e) {
     e.preventDefault();

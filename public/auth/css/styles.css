@@ -153,6 +153,7 @@ input[type="password"] , #password {
         .auth-container .login-side .form-login form label {
             font-size: 13.5px;
         }
+        .auth-container .login-side .form-login {
+            height: 100%;
     }
-
-@media (max-width: 400px) {}
+}
