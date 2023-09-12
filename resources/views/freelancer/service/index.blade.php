@@ -147,7 +147,7 @@
                                             <i class="mdi mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                                            @if (Route::is('freelancer.services') || Route::is('freelancer.services-all'))
+                                            @if (Route::is('freelancer.services') || Route::is('freelancer.services-active'))
                                                 <button class="dropdown-item py-2 archive-service-btn" type="button">
                                                     <small class="text-dark" style="font-size: 12.5px;">Archive</small>
                                                 </button>
@@ -171,7 +171,7 @@
                     @endforeach
                 </div>
                 <div class="w-100 d-flex align-items-center mt-3 justify-content-end gap-2 {{ count($services) < 1 ? 'd-none' : 'd-flex' }}">
-                    <button class="btn btn-sm btn-dark px-3 {{ Route::is('freelancer.services') || Route::is('freelancer.services-all') ? '' : 'd-none' }}" id="archive_btn" onclick="return archiveSelectedItems()">Archive</button>
+                    <button class="btn btn-sm btn-dark px-3 {{ Route::is('freelancer.services') || Route::is('freelancer.services-active') ? '' : 'd-none' }}" id="archive_btn" onclick="return archiveSelectedItems()">Archive</button>
                     <button class="btn btn-sm btn-success px-3 {{ Route::is('freelancer.services-archive') ? '' : 'd-none' }}" id="active_btn" onclick="return activeSelectedItems()">Active</button>
                     <button class="btn btn-sm btn-danger px-3" onclick="return deleteSelectedItems()">Delete</button>
                 </div>

@@ -64,7 +64,7 @@
                         <i class="mdi mdi-dots-vertical"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-left py-0" style="overflow: hidden;">
-                        @if (Route::is('freelancer.services') || Route::is('freelancer.services-all'))
+                        @if (Route::is('freelancer.services') || Route::is('freelancer.services-active'))
                             <button class="dropdown-item py-2 archive-service-btn" type="button">
                                 <small class="text-dark" style="font-size: 12.5px;">Archive</small>
                             </button>

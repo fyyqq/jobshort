@@ -237,7 +237,7 @@ $(document).ready(function() {
 
     // Services Page
 
-    // change service page [all, active, archive]
+    // change service page [active, archive]
     $(document).on('click', '.service-link', function(e) {
         e.preventDefault();
 
@@ -250,10 +250,10 @@ $(document).ready(function() {
 
         const type = $(this).text();
 
-        const archiveBtn = ($('#archive_btn'));
-        const activeBtn = ($('#active_btn'));
+        const archiveBtn = $('#archive_btn');
+        const activeBtn = $('#active_btn');
 
-        const buttonParent = ($(activeBtn).parent());
+        const buttonParent = $(activeBtn).parent();
         
         $.ajax({
             url: url,
@@ -268,7 +268,7 @@ $(document).ready(function() {
 
                     document.getElementById('select-all-services').checked = false;
                     
-                    if (type === 'All') {
+                    if (type === 'Active') {
                         $(archiveBtn).removeClass('d-none');
                         $(activeBtn).addClass('d-none')
                     } else if (type === 'Archive') {
