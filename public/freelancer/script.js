@@ -166,18 +166,19 @@ $(document).ready(function() {
         e.preventDefault();
 
         var id = $(this).siblings('#notification-id').val();
+        const parent = $(this).closest('.parent-notification');
 
         $.ajax({
             url: `/notifications/delete/${id}`,
             method: 'DELETE',
             success: function(res) {
-                $(this).parent().parent().remove();
                 if (res) {
                     iziToast.success({
                         title: 'Success',
                         message: 'Deleted',
                         position: 'bottomLeft'
                     });
+                    $(parent).remove();
                 }
             }, error: function(err) {
                 console.log(err.responseText);
