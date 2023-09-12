@@ -157,9 +157,9 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-between w-100 px-3 py-3">
                                 <div class="d-flex justify-content-start align-items-center flex-row">
-                                    <a href="{{ route('users', strtolower($order->user->name)) }}" id="order-img" class="rounded-circle text-decoration-none" style="overflow: hidden;">
+                                    <span id="order-img" class="rounded-circle text-decoration-none border" style="overflow: hidden;">
                                         <img src="{{ asset('images/' . $order->user->image) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-                                    </a>
+                                    </span>
                                     <div class="ms-3 d-flex align-items-center justify-content-center">
                                         <small class="mb-0 text-dark" style="font-size: 14px;">{{ $order->user->name }}</small>
                                     </div>
