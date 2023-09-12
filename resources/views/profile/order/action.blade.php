@@ -155,14 +155,14 @@
             </div>
         </a>
         <div class="d-flex align-items-center justify-content-between w-100 p-3 border-top">
-            <div class="d-flex justify-content-start align-items-center flex-row">
+            <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none d-flex justify-content-start align-items-center flex-row">
                 <div class="rounded-circle border" id="order-freelancer-profile">
                     <img src="{{ $order->freelancer->image !== null ? asset('images/' . $order->freelancer->image) : asset('brand/unknown.png') }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                 </div>
                 <div class="ms-3 d-flex align-items-start justify-content-center flex-column">
-                    <a href="{{ route('users', strtolower($order->service->freelancer->name)) }}" class="text-decoration-none mb-0 text-dark" style="font-size: 13px;">{{ $order->service->freelancer->name }}</a>
+                    <span class="mb-0 text-dark" style="font-size: 13px;">{{ $order->service->freelancer->name }}</span>
                 </div>
-            </div>
+            </a>
             <div class="me-md-2 me-0">
                 <i class="mdi mdi-message-reply-text text-dark" style="font-size: 20px;"></i>
             </div>
