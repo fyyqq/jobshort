@@ -146,7 +146,7 @@
                                                 <div class="col-lg-3 col-0 d-lg-flex d-none align-items-center justify-content-center">
                                                     <div class="mb-0 d-flex align-items-center justify-content-center gap-2">
                                                         <i class="fa-solid fa-circle {{ $service->status != 'active' ? 'text-muted' : 'text-success' }}" style="font-size: 13px;"></i>
-                                                        <small class="pb-1" style="font-size: 13px;">{{ $service->status }}</small>
+                                                        <small class="" style="font-size: 13px;">{{ $service->status }}</small>
                                                     </div>
                                                 </div>
                                             </div>
