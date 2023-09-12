@@ -149,7 +149,7 @@ Route::prefix('account')->middleware(['auth'])->group(function() {
             // Service Active Page
             Route::get('/', [ServicesController::class, 'index'])->name('freelancer.services');
             // Service Active Page
-            Route::get('/all', [ServicesController::class, 'all'])->name('freelancer.services-all');
+            Route::get('/active', [ServicesController::class, 'active'])->name('freelancer.services-active');
             // Service Archive Page
             Route::get('/archive', [ServicesController::class, 'archive'])->name('freelancer.services-archive');
             // Service Edit Page

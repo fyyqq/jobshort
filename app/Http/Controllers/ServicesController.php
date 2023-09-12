@@ -30,7 +30,7 @@ class ServicesController extends Controller
         ]);
     }
     
-    public function all() {
+    public function active() {
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         $services = Service::with(['order', 'rating'])->where('freelancer_id', $freelancer->id)->where('status', 'active')->latest()->get();
 

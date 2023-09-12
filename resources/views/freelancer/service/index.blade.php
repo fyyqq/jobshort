@@ -53,7 +53,7 @@
                 </div>
                 <ul class="nav nav-tabs mt-3">
                     <li class="nav-item">
-                        <span class="nav-link text-dark px-4 service-link {{ Route::is('freelancer.services') || Route::is('freelancer.services-all') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-all') }}" style="font-size: 14.5px;">All</span>
+                        <span class="nav-link text-dark px-4 service-link {{ Route::is('freelancer.services') || Route::is('freelancer.services-active') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-active') }}" style="font-size: 14.5px;">Active</span>
                     </li>
                     <li class="nav-item">
                         <span class="nav-link text-dark service-link {{ Route::is('freelancer.services-archive') ? 'active' : '' }}" data-service-link="{{ route('freelancer.services-archive') }}" style="font-size: 14.5px;">Archive</span>
