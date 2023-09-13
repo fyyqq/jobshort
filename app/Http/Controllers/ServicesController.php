@@ -306,6 +306,10 @@ class ServicesController extends Controller
             'max_delivery.required' => 'Maximum day is required!',
         ]);
 
+        $existingImages = explode(',', $service->image);
+        $oldImages = $request->input('oldImages');
+
+        // Delete Action
         function deleteImages($images) {
             foreach ($images as $image) {
                 if (file_exists(public_path('images/' . $image))) {
@@ -314,18 +318,16 @@ class ServicesController extends Controller
             }
         }
 
-        $existingImages = explode(',', $service->image);
-        $oldImages = $request->input('oldImages');
-
         // if new image Added
         if ($request->hasFile('images')) {
-
-            $imgArray = [];
-
+            
+            // new images
+            $newImages = [];
+            
             foreach ($request->file('images') as $image) {
                 $modifiedPath = uniqid() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images'), $modifiedPath);
-                array_push($imgArray, $modifiedPath);
+                array_push($newImages, $modifiedPath);
             }
             
             if (!empty($oldImages)) {
@@ -333,17 +335,17 @@ class ServicesController extends Controller
                 $diffImages = array_diff($existingImages, $oldImages);
                 deleteImages($diffImages);
                 
-                $images = array_merge($oldImages, $imgArray);
+                $images = array_merge($oldImages, $newImages);
             } else {
                 // If oldImages doesn't exists
                 deleteImages($existingImages);
-                $images = $imgArray;
+                $images = $newImages;
             }
         } else {
-            // If there's no new images added             
+            // If there's no new images added
             $diffImages = array_diff($existingImages, $oldImages);
             deleteImages($diffImages);
-
+            
             $images = $oldImages;
         }
 
@@ -357,10 +359,10 @@ class ServicesController extends Controller
         $service->image = implode(',', $images);
         $service->min_delivery = $validateUpdate['min_delivery'];
         $service->max_delivery = $validateUpdate['max_delivery'];
-        $confirmUpdate = $service->save();
-
+        $updatedServices = $service->save();
+        
         $countImages = count($images);
-        if ($countImages >= 5 && $confirmUpdate)  {
+        if ($countImages >= 5 && $updatedServices)  {
             return redirect()->route('freelancer.services')->with('success', 'My service has been updated!'); 
         } else {
             return redirect()->back()->withErrors(['images' => 'Upload minimum 5 images.']);

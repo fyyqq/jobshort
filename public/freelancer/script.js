@@ -764,6 +764,7 @@ function destroyImage(event) {
     $(imgElement).addClass('d-none');
     $(imgIcon).removeClass('d-none');
     $(destroyImgContainerIcon).removeClass('d-none');
+    $(event).siblings("#data_img").remove();
     $(event).remove();
 }
 

@@ -26,7 +26,7 @@
                                                     <img src="{{ asset('images/' . $value) }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
                                                     <i class="mdi mdi-image d-none position-absolute" style="font-size: 25px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
                                                     <input type="file" name="images[]" id="profile-img" accept=".png, .jpg, .jpeg" onchange="return insertImage(this)">
-                                                    <input type="hidden" name="oldImages[]" value="{{ $value }}">
+                                                    <input type="hidden" name="oldImages[]" value="{{ $value }}" id="data_img">
                                                     <span class="text-light position-absolute destoryImg p-1" id="delete_image" style="top: 0; right: 0;" onclick="return destroyImage(this)">
                                                         <i class="fa-solid fa-xmark" style="font-size: 11px;"></i>
                                                     </span>
