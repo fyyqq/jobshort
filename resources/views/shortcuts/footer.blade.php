@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center justify-content-lg-between justify-content-md-around justify-content-center flex-md-row flex-column py-3 gap-5">
             <div class="d-flex align-items-md-start align-items-center justify-content-center flex-column gap-4">
                 <a href="{{ route('home') }}" class="">
-                    <img src="{{ asset('brand/jobshort.png') }}" alt="" style="width: 110px;" loading="lazy">
+                    <img src="{{ asset('brand/jobshort.png') }}" data-dark-src="{{ asset('brand/jobshort_logo_white.png') }}" alt="" style="width: 110px;" loading="lazy">
                 </a>
                 <div class="d-flex align-items-center justify-content-center gap-2">
                     @guest

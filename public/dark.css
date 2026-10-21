@@ -177,11 +177,6 @@ html[data-theme="dark"] .auth-container .login-side .form-login form .form-contr
     color: var(--dm-text);
 }
 
-/* Logo is a dark image: lift it so it stays visible */
-html[data-theme="dark"] .navbar-brand img {
-    filter: brightness(0) invert(1);
-}
-
 /* SweetAlert */
 html[data-theme="dark"] .swal2-popup {
     background: var(--dm-surface);

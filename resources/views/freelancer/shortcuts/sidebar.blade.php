@@ -1,6 +1,6 @@
 <div class="sidebar shadow-sm d-md-block d-none">
     <a href="{{ route('home') }}" class="text-decoration-none sidebar-logo py-4 border-bottom d-flex align-items-center justify-content-center position-relative">
-        <img src="{{ asset('brand/jobshort.png') }}" style="width: 82px;" loading="lazy">
+        <img src="{{ asset('brand/jobshort.png') }}" data-dark-src="{{ asset('brand/jobshort_logo_white.png') }}" style="width: 82px;" loading="lazy">
         <span class="material-symbols-outlined rounded-circle border" id="btn_open_close">arrow_right</span>
     </a>
     <a href="{{ route('freelancer.profile') }}" id="side-profile" class="text-decoration-none profile d-flex align-items-center justify-content-start border-bottom px-4 py-3 position-relative">

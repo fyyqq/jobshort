@@ -17,7 +17,7 @@
             <ul class="autocomplete-container ps-0 position-absolute border shadow-sm" style="width: 90%;"></ul>
         </form>
         <a class="navbar-brand d-md-block d-none" href="{{ route('home') }}">
-            <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" loading="lazy">
+            <img src="{{ asset('brand/jobshort.png') }}" data-dark-src="{{ asset('brand/jobshort_logo_white.png') }}" style="width: 80px;" loading="lazy">
         </a>
         @if (Route::currentRouteName() != 'home')
             <a class="navbar-brand d-md-none d-block py-2 px-3" style="cursor: pointer;" onclick="return goToPreviousPage()">
@@ -25,7 +25,7 @@
             </a>
         @else
             <a class="navbar-brand d-md-none d-block" href="{{ route('home') }}">
-                <img src="{{ asset('brand/jobshort.png') }}" style="width: 80px;" id="logo-company" loading="lazy">
+                <img src="{{ asset('brand/jobshort.png') }}" data-dark-src="{{ asset('brand/jobshort_logo_white.png') }}" style="width: 80px;" id="logo-company" loading="lazy">
                 <!-- <i class="mdi mdi-close-circle-outline d-none" style="font-size: 20px;"></i> -->
             </a>
         @endif

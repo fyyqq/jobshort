@@ -19,6 +19,14 @@
         document.querySelectorAll('#darkmode').forEach(function (el) {
             el.checked = dark;
         });
+        swapLogos(dark);
+    }
+
+    function swapLogos(dark) {
+        document.querySelectorAll('img[data-dark-src]').forEach(function (img) {
+            if (!img.dataset.lightSrc) img.dataset.lightSrc = img.getAttribute('src');
+            img.setAttribute('src', dark ? img.dataset.darkSrc : img.dataset.lightSrc);
+        });
     }
 
     document.querySelectorAll('#darkmode').forEach(function (el) {
@@ -28,5 +36,8 @@
         });
     });
 
-    if (isDark()) root.setAttribute('data-bs-theme', 'dark');
+    if (isDark()) {
+        root.setAttribute('data-bs-theme', 'dark');
+        swapLogos(true);
+    }
 })();
