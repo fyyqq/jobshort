@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-between py-4 mt-4 border-top">
-            <p class="text-dark" style="font-size: 13.5px;">&copy; 2023 Jobshort Inc.</p>
+            <p class="text-dark" style="font-size: 13.5px;">&copy; {{ date('Y') }} Jobshort Inc.</p>
             <p class="text-dark" style="font-size: 13.5px;">Terms Of Service</p>
         </div>
     </footer>
