@@ -28,8 +28,8 @@
                         <label for="password" class="form-label">Password :</label>
                         <div class="position-relative">
                             <input type="password" name="password" class="form-control shadow-none @error('password') is-invalid @enderror" autocomplete="new-password" id="password" autofocus>
-                            <i class="fa-sharp fa-regular fa-eye"></i>
-                            <i class="fa-sharp fa-regular fa-eye-slash"></i>
+                            <i class="fa-regular fa-eye"></i>
+                            <i class="fa-regular fa-eye-slash"></i>
                         </div>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -41,8 +41,8 @@
                         <label for="password-confirm" class="form-label">Confirm Password :</label>
                         <div class="position-relative">
                             <input type="password" name="password_confirmation" class="form-control shadow-none" autocomplete="new-password" id="password-confirm">
-                            <i class="fa-sharp fa-regular fa-eye"></i>
-                            <i class="fa-sharp fa-regular fa-eye-slash"></i>
+                            <i class="fa-regular fa-eye"></i>
+                            <i class="fa-regular fa-eye-slash"></i>
                         </div>
                     </div>
                     <div class="w-100 d-flex align-items-center justify-content-center">
